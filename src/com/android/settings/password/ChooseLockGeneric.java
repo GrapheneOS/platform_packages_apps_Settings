@@ -174,7 +174,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
             mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mKeyStore = KeyStore.getInstance();
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
+            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity(), this);
             mLockPatternUtils = new LockPatternUtils(getActivity());
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
                     || ACTION_SET_NEW_PASSWORD.equals(chooseLockAction);
