@@ -387,7 +387,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     mLockPatternUtils.getRequestedPasswordQuality(mUserId));
 
             loadDpmPasswordRequirements();
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity(), this);
 
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
