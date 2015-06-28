@@ -341,7 +341,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             processPasswordRequirements(intent);
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
+            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity(), this);
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
             if (intent.getBooleanExtra(
