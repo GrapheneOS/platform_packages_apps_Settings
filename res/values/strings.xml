@@ -7506,4 +7506,9 @@
     <string name="pax_soft_mode_title">PaX soft mode</string>
     <string name="pax_soft_mode_summary">Disable PaX userspace hardening features</string>
 
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
+    <string name="pax_status">PaX status</string>
+    <string name="pax_status_active">Active</string>
+    <string name="pax_status_inactive">Inactive</string>
+
 </resources>

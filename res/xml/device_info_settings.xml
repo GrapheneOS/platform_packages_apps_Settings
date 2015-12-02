@@ -123,4 +123,10 @@
                 android:title="@string/selinux_status"
                 android:summary="@string/selinux_status_enforcing"/>
 
+        <!-- PaX status information -->
+        <Preference android:key="pax_status"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/pax_status"
+                android:summary="@string/pax_status_inactive"/>
+
 </PreferenceScreen>

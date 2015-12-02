@@ -44,6 +44,9 @@ import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,6 +66,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_BUILD_NUMBER = "build_number";
     private static final String KEY_DEVICE_MODEL = "device_model";
     private static final String KEY_SELINUX_STATUS = "selinux_status";
+    private static final String KEY_PAX_STATUS = "pax_status";
+    private static final String PROPERTY_PAX_SOFT_MODE = "persist.security.pax_soft_mode";
     private static final String KEY_BASEBAND_VERSION = "baseband_version";
     private static final String KEY_FIRMWARE_VERSION = "firmware_version";
     private static final String KEY_SECURITY_PATCH = "security_patch";
@@ -131,6 +136,32 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // Remove selinux information if property is not present
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SELINUX_STATUS,
                 PROPERTY_SELINUX_STATUS);
+
+        boolean pax_available = false;
+        try (FileReader fr = new FileReader("/proc/self/status")) {
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("PaX:")) {
+                    pax_available = true;
+                    String pax_soft_mode = SystemProperties.get(PROPERTY_PAX_SOFT_MODE);
+                    if (pax_soft_mode.isEmpty() || pax_soft_mode.equals("0")) {
+                        String status = getResources().getString(R.string.pax_status_active);
+                        setStringSummary(KEY_PAX_STATUS, status);
+                    }
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "failed to read /proc/self/status", e);
+        }
+
+        if (!pax_available) {
+            Preference pref = findPreference(KEY_PAX_STATUS);
+            if (pref != null) {
+                getPreferenceScreen().removePreference(pref);
+            }
+        }
 
         // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
         removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_SAFETY_LEGAL,
