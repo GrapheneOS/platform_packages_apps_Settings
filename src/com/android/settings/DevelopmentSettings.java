@@ -215,6 +215,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int REQUEST_CODE_ENABLE_OEM_UNLOCK = 0;
 
+    private static final String PAX_SOFT_MODE_KEY = "pax_soft_mode";
+    private static final String PAX_SOFT_MODE_PERSIST_PROP = "persist.security.pax_soft_mode";
+
     private static final int[] MOCK_LOCATION_APP_OPS = new int[] {AppOpsManager.OP_MOCK_LOCATION};
 
     private IWindowManager mWindowManager;
@@ -238,6 +241,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private RestrictedSwitchPreference mKeepScreenOn;
     private SwitchPreference mBtHciSnoopLog;
     private SwitchPreference mEnableOemUnlock;
+    private SwitchPreference mPaxSoftMode;
     private SwitchPreference mDebugViewAttributes;
     private SwitchPreference mForceAllowOnExternal;
 
@@ -374,6 +378,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             removePreference(mEnableOemUnlock);
             mEnableOemUnlock = null;
         }
+        mPaxSoftMode = findAndInitSwitchPref(PAX_SOFT_MODE_KEY);
 
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
         mForceAllowOnExternal = findAndInitSwitchPref(FORCE_ALLOW_ON_EXTERNAL_KEY);
@@ -385,6 +390,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
+            disableForUser(mPaxSoftMode);
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -701,6 +707,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateWebViewMultiprocessOptions();
         updateWebViewProviderOptions();
         updateOemUnlockOptions();
+        updatePaxSoftModeOptions();
         if (mColorTemperaturePreference != null) {
             updateColorTemperature();
         }
@@ -1682,6 +1689,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
     }
 
+    private void updatePaxSoftModeOptions() {
+        updateSwitchPreference(mPaxSoftMode,
+                SystemProperties.getBoolean(PAX_SOFT_MODE_PERSIST_PROP,
+                false));
+    }
+
+    private void writePaxSoftModeOptions() {
+        SystemProperties.set(PAX_SOFT_MODE_PERSIST_PROP,
+                mPaxSoftMode.isChecked() ? "1" : "0");
+        pokeSystemProperties();
+    }
+
     private void confirmEnableOemUnlock() {
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -1899,6 +1918,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeWebViewMultiprocessOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             confirmResetShortcutManagerThrottling();
+        } else if (preference == mPaxSoftMode) {
+            writePaxSoftModeOptions();
         } else {
             return super.onPreferenceTreeClick(preference);
         }

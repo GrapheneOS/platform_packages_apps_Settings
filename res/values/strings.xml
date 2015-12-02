@@ -7499,4 +7499,11 @@
 
     <!-- Message for telling the user the kind of BT device being displayed in list. -->
     <string name="bluetooth_talkback_bluetooth">Bluetooth</string>
+
+<!-- Copperhead OS Additions -->
+
+    <!-- PaX soft mode -->
+    <string name="pax_soft_mode_title">PaX soft mode</string>
+    <string name="pax_soft_mode_summary">Disable PaX userspace hardening features</string>
+
 </resources>

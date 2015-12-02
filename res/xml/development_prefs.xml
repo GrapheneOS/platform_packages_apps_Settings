@@ -56,6 +56,12 @@
         android:title="@string/oem_unlock_enable"
         android:summary="@string/oem_unlock_enable_summary"/>
 
+    <SwitchPreference
+        android:key="pax_soft_mode"
+        android:title="@string/pax_soft_mode_title"
+        android:persistent="false"
+        android:summary="@string/pax_soft_mode_summary" />
+
     <PreferenceScreen
         android:key="running_apps"
         android:title="@string/runningservices_settings_title"
