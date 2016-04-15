@@ -1038,4 +1038,20 @@
         <item>never</item>
     </string-array>
 
+    <!-- Security Settings -->
+    <string-array name="deny_new_usb_entries">
+        <item>Disallow new USB peripherals</item>
+        <item>Allow new USB peripherals when unlocked</item>
+        <item>Allow new USB peripherals</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="deny_new_usb_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>enabled</item>
+        <!-- Do not translate. -->
+        <item>dynamic</item>
+        <!-- Do not translate. -->
+        <item>disabled</item>
+    </string-array>
 </resources>
