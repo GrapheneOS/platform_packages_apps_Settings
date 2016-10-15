@@ -82,4 +82,9 @@
             android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
     </Preference>
 
+    <SwitchPreference android:key="background_clipboard"
+            android:title="@string/background_clipboard_title"
+            android:summary="@string/background_clipboard_summary"
+            android:persistent="false" />
+
 </PreferenceScreen>
