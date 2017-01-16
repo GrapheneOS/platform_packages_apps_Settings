@@ -4076,6 +4076,10 @@
     <string name="show_password">Show passwords</string>
     <!-- On Security & location settings screen. This is a short summary text describing what "Show passwords" setting does -->
     <string name="show_password_summary">Display characters briefly as you type</string>
+    <!-- Scramble PIN layout -->
+    <string name="scramble_pin_layout">Scramble PIN layout</string>
+    <!-- Scramble PIN summary -->
+    <string name="scramble_pin_layout_summary">Scramble layout of the numeric PIN entry</string>
     <!-- Warning message about security implications of enabling a spell checker, displayed as a dialog
          message when the user selects to enable a spell checker. -->
     <string name="spellchecker_security_warning">This spell checker may be able to collect
