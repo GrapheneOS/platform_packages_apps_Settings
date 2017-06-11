@@ -237,8 +237,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
-    private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
-
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
@@ -551,22 +549,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (hdcpChecking != null) {
             mAllPrefs.add(hdcpChecking);
             removePreferenceForProduction(hdcpChecking);
-        }
-
-        Preference convertFbePreference = findPreference(KEY_CONVERT_FBE);
-
-        try {
-            IBinder service = ServiceManager.getService("mount");
-            IStorageManager storageManager = IStorageManager.Stub.asInterface(service);
-            if (!storageManager.isConvertibleToFBE()) {
-                removePreference(KEY_CONVERT_FBE);
-            } else if ("file".equals(SystemProperties.get("ro.crypto.type", "none"))) {
-                convertFbePreference.setEnabled(false);
-                convertFbePreference.setSummary(getResources()
-                        .getString(R.string.convert_to_file_encryption_done));
-            }
-        } catch (RemoteException e) {
-            removePreference(KEY_CONVERT_FBE);
         }
 
         mColorModePreference = (ColorModePreference) findPreference(KEY_COLOR_MODE);
