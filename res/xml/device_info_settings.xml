@@ -97,6 +97,12 @@
                 android:title="@string/baseband_version"
                 android:summary="@string/summary_placeholder"/>
 
+        <!-- Device Bootloader version -->
+        <Preference
+                android:key="bootloader_version"
+                android:title="@string/bootloader_version"
+                android:summary="@string/device_info_default"/>
+
         <!-- Device Kernel version -->
         <Preference
                 android:key="kernel_version"
