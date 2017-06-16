@@ -127,4 +127,10 @@
                 android:title="@string/verified_boot_status"
                 android:summary="@string/verified_boot_status_disabled"/>
 
+        <!-- Anti-theft protection status information -->
+        <Preference
+                android:key="anti_theft_protection_status"
+                android:title="@string/anti_theft_protection_status"
+                android:summary="@string/anti_theft_protection_status_enforcing"/>
+
 </PreferenceScreen>
