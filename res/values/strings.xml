@@ -2643,6 +2643,8 @@
     <string name="build_number">Build number</string>
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="selinux_status">SELinux status</string>
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
+    <string name="verified_boot_status">Verified boot status</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
@@ -5992,6 +5994,9 @@
     <string name="selinux_status_disabled">Disabled</string>
     <string name="selinux_status_permissive">Permissive</string>
     <string name="selinux_status_enforcing">Enforcing</string>
+
+    <string name="verified_boot_status_disabled">Disabled</string>
+    <string name="verified_boot_status_enforcing">Enforcing</string>
 
     <!-- Notification of installed CA Certs --> <skip/>
 

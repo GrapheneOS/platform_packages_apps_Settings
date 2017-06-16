@@ -121,4 +121,10 @@
                 android:title="@string/selinux_status"
                 android:summary="@string/selinux_status_enforcing"/>
 
+        <!-- Verified boot status information -->
+        <Preference
+                android:key="verified_boot_status"
+                android:title="@string/verified_boot_status"
+                android:summary="@string/verified_boot_status_disabled"/>
+
 </PreferenceScreen>
