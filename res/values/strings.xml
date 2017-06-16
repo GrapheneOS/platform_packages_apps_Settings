@@ -2645,6 +2645,8 @@
     <string name="selinux_status">SELinux status</string>
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="verified_boot_status">Verified boot status</string>
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
+    <string name="anti_theft_protection_status">Anti-theft protection status</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
@@ -5997,6 +5999,10 @@
 
     <string name="verified_boot_status_disabled">Disabled</string>
     <string name="verified_boot_status_enforcing">Enforcing</string>
+
+    <string name="anti_theft_protection_status_disabled">Disabled</string>
+    <string name="anti_theft_protection_status_enforcing">Enforcing</string>
+    <string name="anti_theft_protection_status_not_available">Not available for this device</string>
 
     <!-- Notification of installed CA Certs --> <skip/>
 
