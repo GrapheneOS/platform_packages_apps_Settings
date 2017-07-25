@@ -9061,4 +9061,7 @@
 
     <string name="deny_new_usb_title">USB accessories</string>
     <string name="deny_new_usb_summary">Control support for USB peripherals such as input (mice, keyboards, joysticks) and storage devices.</string>
+
+    <string name="keyguard_camera_title">Camera on lockscreen</string>
+    <string name="keyguard_camera_summary">Allow using the default camera app from the lockscreen</string>
 </resources>

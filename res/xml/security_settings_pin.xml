@@ -40,6 +40,11 @@
             android:entries="@array/deny_new_usb_entries"
             android:entryValues="@array/deny_new_usb_values" />
 
+        <SwitchPreference android:key="keyguard_camera"
+                android:title="@string/keyguard_camera_title"
+                android:summary="@string/keyguard_camera_summary"
+                android:persistent="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
