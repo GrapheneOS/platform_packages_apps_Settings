@@ -2623,6 +2623,8 @@
     <string name="firmware_version">Android version</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
     <string name="security_patch">Android security patch level</string>
+    <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
+    <string name="security_patch_extra">Extra security patches</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_info">Model</string>
     <!-- About phone screen, dialog title for showing hardware information such as model, serial number, etc.[CHAR LIMIT=60] -->
@@ -2650,6 +2652,12 @@
     <string name="device_status_summary" product="tablet">Status of the battery, network, and other information</string>
     <!-- About phone screen, summary of the item to go into the phone status screen -->
     <string name="device_status_summary" product="default">Phone number, signal, etc.</string>
+    <!-- About phone screen, summary of the item to go into the phone status screen
+        AndroidID-36232423: priv_app domain apps on A/B devices can downgrade the OS to previous releases, unlike non-A/B devices
+        CVE-2017-1000370: PIE ASLR base
+        CVE-2017-1000371: PIE ASLR base
+    -->
+    <string name="security_patch_extra_summary">AndroidID-36232423\nCVE-2017-1000370\nCVE-2017-1000371</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
     <!-- Main settings screen item's title to go into the storage & USB settings screen [CHAR LIMIT=25] -->
