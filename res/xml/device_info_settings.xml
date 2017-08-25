@@ -79,6 +79,12 @@
                         android:data="https://source.android.com/security/bulletin/" />
         </Preference>
 
+        <!-- Security patch level -->
+        <Preference android:key="security_patch_extra"
+                android:title="@string/security_patch_extra"
+                android:summary="@string/security_patch_extra_summary">
+        </Preference>
+
         <!-- Device FCC equipment id -->
         <Preference
                 android:key="fcc_equipment_id"
