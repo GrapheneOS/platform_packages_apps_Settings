@@ -246,6 +246,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
         // system cert and any launcher app in the system.
         if (mHomePackages.contains(appEntry.info.packageName)
                 || appEntry.info.packageName.equals("com.android.inputmethod.latin")
+                || appEntry.info.packageName.equals("org.chromium.chrome")
                 || Utils.isSystemPackage(mContext.getResources(), mPm, packageInfo)) {
             // Disable button for core system applications.
             mActionButtons
