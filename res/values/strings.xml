@@ -9096,4 +9096,7 @@
 
     <string name="native_debug_title">Enable native code debugging</string>
     <string name="native_debug_summary">Generate useful logs / bug reports from crashes and permit debugging native code.</string>
+
+    <string name="randomize_mac_title">Randomize MAC address</string>
+    <string name="randomize_mac_summary">Assign a new random MAC address when Wi-Fi is brought up. Scanning MAC randomization is still used with this disabled.</string>
 </resources>
