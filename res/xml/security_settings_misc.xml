@@ -87,6 +87,11 @@
             android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
     </Preference>
 
+    <Preference android:key="background_access"
+        android:title="@string/background_access_title"
+        android:fragment="com.android.settings.applications.BackgroundAccessSettings">
+    </Preference>
+
     <SwitchPreference android:key="native_debug"
             android:title="@string/native_debug_title"
             android:summary="@string/native_debug_summary"
