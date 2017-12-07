@@ -9102,4 +9102,7 @@
     <string name="read_clipboard_background">Access clipboard in the background</string>
     <string name="read_clipboard_background_empty_text">No installed apps have requested clipboard access.</string>
 
+    <string name="record_audio_background">Record audio in the background</string>
+    <string name="record_audio_background_empty_text">No installed apps have requested microphone access.</string>
+
 </resources>
