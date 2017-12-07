@@ -147,16 +147,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_KEYGUARD_CAMERA = "keyguard_camera";
     private static final String KEYGUARD_CAMERA_PERSIST_PROP = "persist.keyguard.camera";
 
-    private static final String KEY_BACKGROUND_CLIPBOARD = "background_clipboard";
-    private static final String BACKGROUND_CLIPBOARD_PERSIST_PROP = "persist.security.bg_clipboard";
-
     private static final String KEY_NATIVE_DEBUG = "native_debug";
     private static final String NATIVE_DEBUG_PERSIST_PROP = "persist.security.native_debug";
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
             KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE, KEY_DENY_NEW_USB,
-            KEY_KEYGUARD_CAMERA, KEY_BACKGROUND_CLIPBOARD, KEY_SCRAMBLE_PIN_LAYOUT, KEY_NATIVE_DEBUG
+            KEY_KEYGUARD_CAMERA, KEY_SCRAMBLE_PIN_LAYOUT, KEY_NATIVE_DEBUG
     };
 
     // Only allow one trust agent on the platform.
@@ -189,7 +186,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private ListPreference mDenyNewUsb;
     private SwitchPreference mKeyguardCamera;
-    private SwitchPreference mBackgroundClipboard;
     private SwitchPreference mNativeDebug;
 
     private String mCurrentDevicePassword;
@@ -415,10 +411,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         initTrustAgentPreference(root, numberOfTrustAgent);
 
         if (mIsAdmin) {
-            mBackgroundClipboard = (SwitchPreference) findPreference(KEY_BACKGROUND_CLIPBOARD);
             mNativeDebug = (SwitchPreference) findPreference(KEY_NATIVE_DEBUG);
         } else {
-            root.removePreference(root.findPreference(KEY_BACKGROUND_CLIPBOARD));
             root.removePreference(root.findPreference(KEY_NATIVE_DEBUG));
         }
 
@@ -685,10 +679,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mKeyguardCamera.setChecked(SystemProperties.getBoolean(KEYGUARD_CAMERA_PERSIST_PROP, true));
         }
 
-        if (mBackgroundClipboard != null) {
-            mBackgroundClipboard.setChecked(SystemProperties.getBoolean(BACKGROUND_CLIPBOARD_PERSIST_PROP, false));
-        }
-
         if (mNativeDebug != null) {
             mNativeDebug.setChecked(SystemProperties.getBoolean(NATIVE_DEBUG_PERSIST_PROP, true));
         }
@@ -890,8 +880,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         } else if (KEY_KEYGUARD_CAMERA.equals(key)) {
             SystemProperties.set(KEYGUARD_CAMERA_PERSIST_PROP, (Boolean) value ? "1" : "0");
-        } else if (KEY_BACKGROUND_CLIPBOARD.equals(key)) {
-            SystemProperties.set(BACKGROUND_CLIPBOARD_PERSIST_PROP, (Boolean) value ? "1" : "0");
         } else if (KEY_NATIVE_DEBUG.equals(key)) {
             SystemProperties.set(NATIVE_DEBUG_PERSIST_PROP, (Boolean) value ? "1" : "0");
         }
