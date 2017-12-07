@@ -9090,10 +9090,6 @@
     <string name="keyguard_camera_title">Camera on lockscreen</string>
     <string name="keyguard_camera_summary">Allow using the default camera app from the lockscreen</string>
 
-    <!-- background clipboard access -->
-    <string name="background_clipboard_title">Allow background clipboard access</string>
-    <string name="background_clipboard_summary">Enable access to the clipboard by applications in the background.</string>
-
     <string name="native_debug_title">Enable native code debugging</string>
     <string name="native_debug_summary">Generate useful logs / bug reports from crashes and permit debugging native code.</string>
 

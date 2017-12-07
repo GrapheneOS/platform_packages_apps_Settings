@@ -87,11 +87,6 @@
             android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
     </Preference>
 
-    <SwitchPreference android:key="background_clipboard"
-            android:title="@string/background_clipboard_title"
-            android:summary="@string/background_clipboard_summary"
-            android:persistent="false" />
-
     <SwitchPreference android:key="native_debug"
             android:title="@string/native_debug_title"
             android:summary="@string/native_debug_summary"
