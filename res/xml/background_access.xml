@@ -19,4 +19,9 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/background_access">
 
+    <Preference
+        android:key="read_clipboard_background"
+        android:title="@string/read_clipboard_background"
+        android:fragment="com.android.settings.applications.ReadClipboardBackgroundActivity" />
+
 </PreferenceScreen>

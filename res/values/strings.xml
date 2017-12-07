@@ -9099,4 +9099,7 @@
     <string name="background_access_title">Apps with background access</string>
     <string name="background_access">Background access</string>
 
+    <string name="read_clipboard_background">Access clipboard in the background</string>
+    <string name="read_clipboard_background_empty_text">No installed apps have requested clipboard access.</string>
+
 </resources>
