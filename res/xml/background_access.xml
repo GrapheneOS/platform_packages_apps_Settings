@@ -24,4 +24,9 @@
         android:title="@string/read_clipboard_background"
         android:fragment="com.android.settings.applications.ReadClipboardBackgroundActivity" />
 
+    <Preference
+        android:key="record_audio_background"
+        android:title="@string/record_audio_background"
+        android:fragment="com.android.settings.applications.RecordAudioBackgroundActivity" />
+
 </PreferenceScreen>
