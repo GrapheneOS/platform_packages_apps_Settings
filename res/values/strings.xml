@@ -9105,4 +9105,7 @@
     <string name="record_audio_background">Record audio in the background</string>
     <string name="record_audio_background_empty_text">No installed apps have requested microphone access.</string>
 
+    <string name="other_sensors_background">Access sensors in the background</string>
+    <string name="other_sensors_background_empty_text">No installed apps have requested sensors access.</string>
+
 </resources>

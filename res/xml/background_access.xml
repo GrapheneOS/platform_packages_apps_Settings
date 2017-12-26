@@ -29,4 +29,9 @@
         android:title="@string/record_audio_background"
         android:fragment="com.android.settings.applications.RecordAudioBackgroundActivity" />
 
+    <Preference
+        android:key="other_sensors_background"
+        android:title="@string/other_sensors_background"
+        android:fragment="com.android.settings.applications.OtherSensorsBackgroundActivity" />
+
 </PreferenceScreen>
