@@ -9108,4 +9108,7 @@
     <string name="other_sensors_background">Access sensors in the background</string>
     <string name="other_sensors_background_empty_text">No installed apps have requested sensors access.</string>
 
+    <string name="access_location_background">Access location in the background</string>
+    <string name="access_location_background_empty_text">No installed apps have requested location access.</string>
+
 </resources>
