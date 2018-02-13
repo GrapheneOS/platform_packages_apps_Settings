@@ -106,7 +106,16 @@ public class OtherSensorsBackgroundActivity extends SettingsPreferenceFragment {
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
 
-        for (ApplicationInfo app : mPackageManager.getInstalledApplications(0)) {
+
+        final ArrayList<ApplicationInfo> apps = new ArrayList<>();
+        final List<ApplicationInfo> installed = mPackageManager.getInstalledApplications(0);
+        if (installed != null) {
+            for (ApplicationInfo app : installed) {
+                apps.add(app);
+            }
+        }
+        Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPackageManager));
+        for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPackageManager);
             final SwitchPreference pref = new SwitchPreference(getPrefContext());
