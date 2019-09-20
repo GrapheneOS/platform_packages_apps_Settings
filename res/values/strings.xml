@@ -3069,7 +3069,7 @@
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="build_number">Build number</string>
     <!-- About phone screen, tapping this button will take user to a seperate UI to check Google Play system update [CHAR LIMIT=60] -->
-    <string name="module_version">Google Play system update</string>
+    <string name="module_version">Mainline system update</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
@@ -4037,7 +4037,7 @@
     <string name="license_title">License</string>
     <!-- Note: this may be replaced by a more-specific title of the activity that will get launched --> <skip />
     <!-- About phone settings screen, setting option name to see licensing info for Google Play system updates [CHAR LIMIT=50] -->
-    <string name="module_license_title">Google Play system update licenses</string>
+    <string name="module_license_title">Mainline system update licenses</string>
     <!-- Note: this may be replaced by a more-specific title of the activity that will get launched --> <skip />
     <!-- About phone settings screen, setting option name to see terms and conditions -->
     <string name="terms_title">Terms and conditions</string>
