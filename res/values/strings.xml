@@ -11314,4 +11314,6 @@
     <string name="work_policy_privacy_settings">Your work policy info</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
     <string name="work_policy_privacy_settings_summary">Settings managed by your IT admin</string>
+    <string name="randomize_mac_title">Randomize MAC address</string>
+    <string name="randomize_mac_summary">Assign a new random MAC address when Wi-Fi is brought up. Scanning MAC randomization is still used with this disabled.</string>
 </resources>
