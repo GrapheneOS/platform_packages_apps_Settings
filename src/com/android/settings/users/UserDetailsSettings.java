@@ -49,6 +49,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_DISALLOW_AUDIO_RECORDING = "disallow_audio_recording";
+    private static final String KEY_DISALLOW_INSTALL_APPS = "disallow_install_apps";
     private static final String KEY_REMOVE_USER = "remove_user";
 
     /** Integer extra containing the userId to manage */
@@ -63,6 +64,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private UserManager mUserManager;
     private SwitchPreference mPhonePref;
     private SwitchPreference mAudioPref;
+    private SwitchPreference mInstallAppsPref;
     private Preference mRemoveUserPref;
 
     private UserInfo mUserInfo;
@@ -84,6 +86,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.user_details_settings);
         mPhonePref = (SwitchPreference) findPreference(KEY_ENABLE_TELEPHONY);
         mAudioPref = (SwitchPreference) findPreference(KEY_DISALLOW_AUDIO_RECORDING);
+        mInstallAppsPref = (SwitchPreference) findPreference(KEY_DISALLOW_INSTALL_APPS);
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
 
         mGuestUser = getArguments().getBoolean(EXTRA_USER_GUEST, false);
@@ -99,6 +102,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
             mAudioPref.setChecked(mUserManager.hasUserRestriction(
                     UserManager.DISALLOW_UNMUTE_MICROPHONE, new UserHandle(userId)));
+            mInstallAppsPref.setChecked(mUserManager.hasUserRestriction(
+                    UserManager.DISALLOW_INSTALL_APPS, new UserHandle(userId)));
             mRemoveUserPref.setOnPreferenceClickListener(this);
         } else {
             // These are not for an existing user, just general Guest settings.
@@ -110,6 +115,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
             mAudioPref.setChecked(
                     mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_UNMUTE_MICROPHONE));
+            mInstallAppsPref.setChecked(
+                    mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_INSTALL_APPS));
         }
         if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
@@ -117,6 +124,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         }
         mPhonePref.setOnPreferenceChangeListener(this);
         mAudioPref.setOnPreferenceChangeListener(this);
+        mInstallAppsPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -161,6 +169,29 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             } else {
                 UserHandle userHandle = UserHandle.of(mUserInfo.id);
                 mUserManager.setUserRestriction(UserManager.DISALLOW_UNMUTE_MICROPHONE, (Boolean) newValue,
+                        userHandle);
+            }
+        } else if (preference == mInstallAppsPref) {
+            if (mGuestUser) {
+                mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_INSTALL_APPS, (Boolean) newValue);
+                mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+
+                // Update the guest's restrictions, if there is a guest
+                // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
+                // on any existing guest rather than do it here with multiple Binder calls.
+                List<UserInfo> users = mUserManager.getUsers(true);
+                for (UserInfo user: users) {
+                    if (user.isGuest()) {
+                        UserHandle userHandle = UserHandle.of(user.id);
+                        for (String key : mDefaultGuestRestrictions.keySet()) {
+                            mUserManager.setUserRestriction(
+                                    key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
+                        }
+                    }
+                }
+            } else {
+                UserHandle userHandle = UserHandle.of(mUserInfo.id);
+                mUserManager.setUserRestriction(UserManager.DISALLOW_INSTALL_APPS, (Boolean) newValue,
                         userHandle);
             }
         }
