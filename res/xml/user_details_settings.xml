@@ -23,6 +23,9 @@
     <SwitchPreference
             android:key="disallow_audio_recording"
             android:title="@string/user_disallow_audio_recording" />
+    <SwitchPreference
+            android:key="disallow_install_apps"
+            android:title="@string/user_disallow_install_apps" />
     <com.android.settingslib.RestrictedPreference
             android:key="remove_user"
             android:title="@string/user_remove_user"
