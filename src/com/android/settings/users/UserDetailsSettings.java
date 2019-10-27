@@ -48,6 +48,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String TAG = UserDetailsSettings.class.getSimpleName();
 
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
+    private static final String KEY_DISALLOW_AUDIO_RECORDING = "disallow_audio_recording";
     private static final String KEY_REMOVE_USER = "remove_user";
 
     /** Integer extra containing the userId to manage */
@@ -61,6 +62,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private UserManager mUserManager;
     private SwitchPreference mPhonePref;
+    private SwitchPreference mAudioPref;
     private Preference mRemoveUserPref;
 
     private UserInfo mUserInfo;
@@ -81,6 +83,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.user_details_settings);
         mPhonePref = (SwitchPreference) findPreference(KEY_ENABLE_TELEPHONY);
+        mAudioPref = (SwitchPreference) findPreference(KEY_DISALLOW_AUDIO_RECORDING);
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
 
         mGuestUser = getArguments().getBoolean(EXTRA_USER_GUEST, false);
@@ -94,6 +97,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mUserInfo = mUserManager.getUserInfo(userId);
             mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                     UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
+            mAudioPref.setChecked(mUserManager.hasUserRestriction(
+                    UserManager.DISALLOW_UNMUTE_MICROPHONE, new UserHandle(userId)));
             mRemoveUserPref.setOnPreferenceClickListener(this);
         } else {
             // These are not for an existing user, just general Guest settings.
@@ -103,12 +108,15 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
             mPhonePref.setChecked(
                     !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
+            mAudioPref.setChecked(
+                    mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_UNMUTE_MICROPHONE));
         }
         if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
             removePreference(KEY_REMOVE_USER);
         }
         mPhonePref.setOnPreferenceChangeListener(this);
+        mAudioPref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -125,12 +133,37 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (Boolean.TRUE.equals(newValue)) {
-            showDialog(mGuestUser ? DIALOG_CONFIRM_ENABLE_CALLING
-                    : DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
-            return false;
+        if (preference == mPhonePref) {
+            if (Boolean.TRUE.equals(newValue)) {
+                showDialog(mGuestUser ? DIALOG_CONFIRM_ENABLE_CALLING
+                        : DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS);
+                return false;
+            }
+            enableCallsAndSms(false);
+        } else if (preference == mAudioPref) {
+            if (mGuestUser) {
+                mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_UNMUTE_MICROPHONE, (Boolean) newValue);
+                mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+
+                // Update the guest's restrictions, if there is a guest
+                // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
+                // on any existing guest rather than do it here with multiple Binder calls.
+                List<UserInfo> users = mUserManager.getUsers(true);
+                for (UserInfo user: users) {
+                    if (user.isGuest()) {
+                        UserHandle userHandle = UserHandle.of(user.id);
+                        for (String key : mDefaultGuestRestrictions.keySet()) {
+                            mUserManager.setUserRestriction(
+                                    key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
+                        }
+                    }
+                }
+            } else {
+                UserHandle userHandle = UserHandle.of(mUserInfo.id);
+                mUserManager.setUserRestriction(UserManager.DISALLOW_UNMUTE_MICROPHONE, (Boolean) newValue,
+                        userHandle);
+            }
         }
-        enableCallsAndSms(false);
         return true;
     }
 
