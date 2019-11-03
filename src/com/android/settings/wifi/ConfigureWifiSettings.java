@@ -80,7 +80,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
                 getSettingsLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
         controllers.add(mWifiWakeupPreferenceController);
         controllers.add(new NotifyOpenNetworksPreferenceController(context,
                 getSettingsLifecycle()));
