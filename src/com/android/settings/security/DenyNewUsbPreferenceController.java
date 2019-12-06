@@ -77,8 +77,6 @@ public class DenyNewUsbPreferenceController extends AbstractPreferenceController
         updateAvailability();
 
         if (mDenyNewUsb != null) {
-            mDenyNewUsb.setValue(SystemProperties.get(DENY_NEW_USB_PERSIST_PROP, "disabled"));
-
             String mode = mDenyNewUsb.getValue();
             if (mode.equals("dynamic") || mode.equals("disabled")) {
                 SystemProperties.set(DENY_NEW_USB_PROP, "0");
