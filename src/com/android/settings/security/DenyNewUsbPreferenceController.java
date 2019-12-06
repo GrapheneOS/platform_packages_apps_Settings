@@ -45,7 +45,7 @@ public class DenyNewUsbPreferenceController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mSecurityCategory = screen.findPreference(PREF_KEY_SECURITY_CATEGORY);
-        updateAvailability();
+        updatePreferenceState();
     }
 
     @Override
@@ -60,13 +60,14 @@ public class DenyNewUsbPreferenceController extends AbstractPreferenceController
     }
 
     // TODO: should we use onCreatePreferences() instead?
-    private void updateAvailability() {
+    private void updatePreferenceState() {
         if (mSecurityCategory == null) {
             return;
         }
 
         if (mIsAdmin) {
             mDenyNewUsb = (ListPreference) mSecurityCategory.findPreference(KEY_DENY_NEW_USB);
+            mDenyNewUsb.setValue(SystemProperties.get(DENY_NEW_USB_PERSIST_PROP, "disabled"));
         } else {
                 mSecurityCategory.removePreference(mSecurityCategory.findPreference(KEY_DENY_NEW_USB));
         }
@@ -74,9 +75,10 @@ public class DenyNewUsbPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onResume() {
-        updateAvailability();
+        updatePreferenceState();
 
         if (mDenyNewUsb != null) {
+
             String mode = mDenyNewUsb.getValue();
             if (mode.equals("dynamic") || mode.equals("disabled")) {
                 SystemProperties.set(DENY_NEW_USB_PROP, "0");
