@@ -742,7 +742,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         mMacAddressPref.setVisible(true);
 
-        mMacAddressPref.setTitle((mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC)
+        mMacAddressPref.setTitle((mWifiEntry.getPrivacy() != WifiEntry.PRIVACY_DEVICE_MAC)
                 ? R.string.wifi_advanced_randomized_mac_address_title
                 : R.string.wifi_advanced_device_mac_address_title);
 
