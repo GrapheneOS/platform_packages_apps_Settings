@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="security_dashboard_page"
     android:title="@string/security_settings_title"
-    settings:initialExpandedChildrenCount="10">
+    settings:initialExpandedChildrenCount="11">
 
     <!-- security_settings_status.xml -->
     <PreferenceCategory
@@ -57,12 +57,21 @@
             settings:keywords="@string/keywords_face_settings" />
 
         <ListPreference
+            android:key="deny_new_usb"
+            android:title="@string/deny_new_usb_title"
+            android:summary="@string/deny_new_usb_summary"
+            android:persistent="false"
+            android:entries="@array/deny_new_usb_entries"
+            android:entryValues="@array/deny_new_usb_values" />
+
+        <ListPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
             android:summary="@string/scramble_pin_summary"
             android:persistent="false"
             android:entries="@array/scramble_pin_entries"
             android:entryValues="@array/scramble_pin_values" />
+
     </PreferenceCategory>
 
     <!-- work profile security section -->

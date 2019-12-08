@@ -124,6 +124,23 @@
         <item>30 minutes</item>
     </string-array>
 
+    <!-- Security Settings -->
+    <string-array name="deny_new_usb_entries">
+        <item>Deny new USB peripherals</item>
+        <item>Allow new USB peripherals when unlocked</item>
+        <item>Allow new USB peripherals</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="deny_new_usb_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>enabled</item>
+        <!-- Do not translate. -->
+        <item>dynamic</item>
+        <!-- Do not translate. -->
+        <item>disabled</item>
+    </string-array>
+
     <string-array name="scramble_pin_entries">
         <item>Scramble PIN</item>
         <item>No PIN scrambling</item>
