@@ -697,8 +697,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         // return randomized MAC address
         if (mWifiConfig != null &&
-                mWifiConfig.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
-            return mWifiConfig.getRandomizedMacAddress().toString();
+                (mWifiConfig.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT
+                 || mWifiConfig.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_ALWAYS)) {
+            return mWifiConfig.getOrCreateRandomizedMacAddress().toString();
         }
 
         // return device MAC address
