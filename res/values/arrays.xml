@@ -1132,7 +1132,8 @@
     </string-array>
 
     <string-array name="wifi_privacy_entries">
-        <item>Use randomized MAC (default)</item>
+        <item>Use randomized MAC always (default)</item>
+        <item>Use randomized MAC persistent</item>
         <item>Use device MAC</item>
     </string-array>
 
@@ -1148,8 +1149,9 @@
     </string-array>
 
     <string-array name="wifi_privacy_values" translatable="false">
-        <item>1</item>
         <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <!-- Titles for ui dark mode preference. -->
