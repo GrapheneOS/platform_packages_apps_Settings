@@ -476,10 +476,6 @@
     <item msgid="8745603368609022803">"Трафик саналсын"</item>
     <item msgid="2266114985518865625">"Трафик саналмасын"</item>
   </string-array>
-  <string-array name="wifi_privacy_entries">
-    <item msgid="4393731261966785418">"Кездейсоқ MAC мекенжайын пайдалану (әдепкі)"</item>
-    <item msgid="3237870460973179943">"Құрылғының MAC мекенжайын пайдалану"</item>
-  </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="234221371123852300">"Жоқ"</item>
     <item msgid="3863157480502955888">"Иә"</item>

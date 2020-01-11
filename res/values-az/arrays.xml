@@ -476,10 +476,6 @@
     <item msgid="8745603368609022803">"Limitli olaraq qəbul edin"</item>
     <item msgid="2266114985518865625">"Limitisiz olaraq qəbul edin"</item>
   </string-array>
-  <string-array name="wifi_privacy_entries">
-    <item msgid="4393731261966785418">"İxtiyari MAC (defolt) istifadə edin"</item>
-    <item msgid="3237870460973179943">"MAC cihazından istifadə edin"</item>
-  </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="234221371123852300">"Xeyr"</item>
     <item msgid="3863157480502955888">"Bəli"</item>

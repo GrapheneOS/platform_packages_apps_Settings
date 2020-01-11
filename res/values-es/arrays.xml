@@ -476,10 +476,6 @@
     <item msgid="8745603368609022803">"Tratar como red de uso medido"</item>
     <item msgid="2266114985518865625">"Tratar como red de uso no medido"</item>
   </string-array>
-  <string-array name="wifi_privacy_entries">
-    <item msgid="4393731261966785418">"Usar dirección MAC aleatoria (predeterminado)"</item>
-    <item msgid="3237870460973179943">"Usar dirección MAC del dispositivo"</item>
-  </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="234221371123852300">"No"</item>
     <item msgid="3863157480502955888">"Sí"</item>
