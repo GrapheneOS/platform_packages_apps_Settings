@@ -55,6 +55,14 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
 
+        <ListPreference
+            android:key="scramble_pin_layout"
+            android:title="@string/scramble_pin_title"
+            android:summary="@string/scramble_pin_summary"
+            android:persistent="false"
+            android:entries="@array/scramble_pin_entries"
+            android:entryValues="@array/scramble_pin_values" />
+
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
