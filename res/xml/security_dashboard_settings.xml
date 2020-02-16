@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="security_dashboard_page"
     android:title="@string/security_settings_title"
-    settings:initialExpandedChildrenCount="11">
+    settings:initialExpandedChildrenCount="12">
 
     <!-- security_settings_status.xml -->
     <PreferenceCategory
@@ -71,6 +71,12 @@
             android:persistent="false"
             android:entries="@array/scramble_pin_entries"
             android:entryValues="@array/scramble_pin_values" />
+
+        <CheckBoxPreference
+            android:key="keyguard_camera"
+            android:title="@string/keyguard_camera_title"
+            android:summary="@string/keyguard_camera_summary"
+            android:persistent="false" />
 
     </PreferenceCategory>
 
