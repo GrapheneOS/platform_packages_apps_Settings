@@ -1264,6 +1264,9 @@
         <item>4</item> <!-- AutofillManager.FLAG_ADD_CLIENT_VERBOSE -->
     </string-array>
 
+    <!-- Note: The LTE only option is added in code, not here. Also, these enabled_networks_choices
+         and enabled_networks_4g_choices string arrays are just placeholders for
+         mobile_network_settings.xml -->
     <string-array name="enabled_networks_choices" translatable="false">
         <item>@string/network_lte</item>
         <item>@string/network_3G</item>
@@ -1353,7 +1356,7 @@
         <item>CDMA + LTE/EvDo</item>
         <item>GSM/WCDMA/LTE</item>
         <item>Global</item>
-        <item>LTE</item>
+        <item>LTE only</item>
         <item>LTE / WCDMA</item>
         <item>TDSCDMA only</item>
         <item>TDSCDMA/WCDMA</item>
