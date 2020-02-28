@@ -438,7 +438,6 @@ public class EnabledNetworkModePreferenceController extends
                             R.string.preferred_network_mode_lte_gsm_umts_summary);
                     break;
                 }
-            case TelephonyManager.NETWORK_MODE_LTE_ONLY:
             case TelephonyManager.NETWORK_MODE_LTE_WCDMA:
                 if (!mIsGlobalCdma) {
                     preference.setValue(
@@ -451,6 +450,12 @@ public class EnabledNetworkModePreferenceController extends
                                     .NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
                     preference.setSummary(R.string.network_global);
                 }
+                break;
+            case TelephonyManager.NETWORK_MODE_LTE_ONLY:
+                preference.setValue(
+                        Integer.toString(TelephonyManager.NETWORK_MODE_LTE_ONLY));
+                preference.setSummary(
+                        mShow4GForLTE ? R.string.network_4G_only : R.string.network_lte_only);
                 break;
             case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO:
                 if (MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
