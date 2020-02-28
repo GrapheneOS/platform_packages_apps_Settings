@@ -143,7 +143,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA:
                 return R.string.preferred_network_mode_lte_tdscdma_summary;
             case TelephonyManager.NETWORK_MODE_LTE_ONLY:
-                return R.string.preferred_network_mode_lte_summary;
+                return R.string.preferred_network_mode_lte_only_summary;
             case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM:
                 return R.string.preferred_network_mode_lte_tdscdma_gsm_summary;
             case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
