@@ -1266,22 +1266,26 @@
 
     <string-array name="enabled_networks_choices" translatable="false">
         <item>@string/network_lte</item>
+        <item>@string/network_lte_only</item>
         <item>@string/network_3G</item>
         <item>@string/network_2G</item>
     </string-array>
     <string-array name="enabled_networks_4g_choices" translatable="false">
         <item>@string/network_4G</item>
+        <item>@string/network_4G_only</item>
         <item>@string/network_3G</item>
         <item>@string/network_2G</item>
     </string-array>
     <string-array name="enabled_networks_values" translatable="false">
         <item>"9"</item>
+        <item>"11"</item>
         <item>"0"</item>
         <item>"1"</item>
     </string-array>
 
     <string-array name="enabled_networks_except_gsm_values" translatable="false">
         <item>"9"</item>
+        <item>"11"</item>
         <item>"0"</item>
     </string-array>
 
@@ -1296,6 +1300,7 @@
 
     <string-array name="enabled_networks_cdma_values" translatable="false">
         <item>"8"</item>
+        <item>"11"</item>
         <item>"4"</item>
         <item>"5"</item>
         <item>"10"</item>
@@ -1308,11 +1313,13 @@
 
     <string-array name="enabled_networks_cdma_only_lte_values" translatable="false">
         <item>"8"</item>
+        <item>"11"</item>
         <item>"10"</item>
     </string-array>
 
     <string-array name="enabled_networks_tdscdma_values" translatable="false">
         <item>"22"</item>
+        <item>"11"</item>
         <item>"18"</item>
         <item>"1"</item>
     </string-array>
@@ -1353,7 +1360,7 @@
         <item>CDMA + LTE/EvDo</item>
         <item>GSM/WCDMA/LTE</item>
         <item>Global</item>
-        <item>LTE</item>
+        <item>LTE only</item>
         <item>LTE / WCDMA</item>
         <item>TDSCDMA only</item>
         <item>TDSCDMA/WCDMA</item>
