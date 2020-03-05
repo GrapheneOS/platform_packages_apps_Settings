@@ -55,7 +55,7 @@ public class PinScramblePreferenceController extends AbstractPreferenceControlle
             return;
         }
         mScramblePin = (ListPreference) mSecurityCategory.findPreference(KEY_SCRAMBLE_PIN_LAYOUT);
-        mScramblePin.setValue(Boolean.toString(Settings.System.getInt(mContext.getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT, 0) != 0));
+        mScramblePin.setValue(Boolean.toString(Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, 0) != 0));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class PinScramblePreferenceController extends AbstractPreferenceControlle
         updatePreferenceState();
         if (mScramblePin != null) {
             boolean mode = Boolean.parseBoolean(mScramblePin.getValue());
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT, (mode) ? 0 : 1);
+            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, (mode) ? 0 : 1);
         }
     }
 
@@ -72,7 +72,7 @@ public class PinScramblePreferenceController extends AbstractPreferenceControlle
         final String key = preference.getKey();
         if (KEY_SCRAMBLE_PIN_LAYOUT.equals(key)) {
             boolean mode = Boolean.parseBoolean((String) value);
-            Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT, (mode) ? 1 : 0);
+            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, (mode) ? 1 : 0);
         }
         return true;
     }
