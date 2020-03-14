@@ -110,9 +110,9 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
     @VisibleForTesting
     int getRandomizationValue() {
         if (mWifiConfiguration != null) {
-            return mWifiConfiguration.macRandomizationSetting;
+            return translateMacRandomizedValueToPrefValue(mWifiConfiguration.macRandomizationSetting);
         }
-        return WifiConfiguration.RANDOMIZATION_ALWAYS;
+        return translateMacRandomizedValueToPrefValue(WifiConfiguration.RANDOMIZATION_ALWAYS);
     }
 
     private static final int PREF_RANDOMIZATION_ALWAYS = 0;
@@ -146,14 +146,14 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
      */
     public static int translatePrefValueToMacRandomizedValue(int prefMacRandomized) {
         switch (prefMacRandomized) {
-            case WifiConfiguration.RANDOMIZATION_ALWAYS:
-                return PREF_RANDOMIZATION_ALWAYS;
-            case WifiConfiguration.RANDOMIZATION_PERSISTENT:
-                return PREF_RANDOMIZATION_PERSISTENT;
-            case WifiConfiguration.RANDOMIZATION_NONE:
-                return PREF_RANDOMIZATION_NONE;
+            case PREF_RANDOMIZATION_ALWAYS:
+                return WifiConfiguration.RANDOMIZATION_ALWAYS;
+            case PREF_RANDOMIZATION_PERSISTENT:
+                return WifiConfiguration.RANDOMIZATION_PERSISTENT;
+            case PREF_RANDOMIZATION_NONE:
+                return WifiConfiguration.RANDOMIZATION_NONE;
             default:
-                return PREF_RANDOMIZATION_ALWAYS;
+                return WifiConfiguration.RANDOMIZATION_ALWAYS;
         }
     }
 
