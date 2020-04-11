@@ -66,8 +66,13 @@ public class VpnUtils {
             return true;
         }
         return getConnectivityManager(context).getAlwaysOnVpnPackageForUser(userId) != null
-                && Settings.Secure.getIntForUser(context.getContentResolver(),
-                        Settings.Secure.ALWAYS_ON_VPN_LOCKDOWN, /* default */ 0, userId) != 0;
+                && isVpnLockdownEnabled(context);
+    }
+
+    public static boolean isVpnLockdownEnabled(Context context) {
+        final int userId = context.getUserId();
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.ALWAYS_ON_VPN_LOCKDOWN, /* default */ 1, userId) != 0;
     }
 
     public static boolean isVpnActive(Context context) throws RemoteException {
