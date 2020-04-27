@@ -12232,4 +12232,7 @@
     <string name="keyguard_camera_summary">Allow camera access when the device is locked</string>
     <string name="native_debug_title">Enable native code debugging</string>
     <string name="native_debug_summary">Generate useful logs / bug reports from crashes and permit debugging native code.</string>
+    <string name="security_settings_fingerprint_settings_screen_lock_category">Screen lock</string>
+    <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_title">Allow fingerprint unlocking</string>
+    <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary">Allow fingerprints to unlock the screen lock. If this is disabled, fingerprints can still be used in apps.</string>
 </resources>
