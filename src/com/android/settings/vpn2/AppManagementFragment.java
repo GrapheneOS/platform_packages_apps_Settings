@@ -88,7 +88,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         public void onForget() {
             // Unset always-on-vpn when forgetting the VPN
             if (isVpnAlwaysOn()) {
-                setAlwaysOnVpn(false, mPreferenceLockdown.isChecked());
+                setAlwaysOnVpn(false, false);
             }
             // Also dismiss and go back to VPN list
             finish();
@@ -231,7 +231,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private void updateUI() {
         if (isAdded()) {
             final boolean alwaysOn = isVpnAlwaysOn();
-            final boolean lockdown = VpnUtils.isVpnLockdownEnabled(getActivity());
+            final boolean lockdown = alwaysOn
+                    && VpnUtils.isAnyLockdownActive(getActivity());
 
             mPreferenceAlwaysOn.setChecked(alwaysOn);
             mPreferenceLockdown.setChecked(lockdown);
