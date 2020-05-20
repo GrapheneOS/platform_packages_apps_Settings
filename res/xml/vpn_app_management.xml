@@ -34,7 +34,7 @@
         <com.android.settingslib.RestrictedSwitchPreference
                 android:key="lockdown_vpn"
                 android:title="@string/vpn_require_connection"
-                android:defaultValue="true"
+                android:defaultValue="false"
                 android:dependency="always_on_vpn"
                 settings:userRestriction="no_config_vpn"
                 settings:useAdditionalSummary="true"
