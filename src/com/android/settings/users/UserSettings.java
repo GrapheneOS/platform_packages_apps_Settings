@@ -111,6 +111,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
+    private static final String KEY_LIMIT_NUMBER_RUNNING_USERS =
+            "user_settings_limit_number_active_users";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -166,6 +168,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private MultiUserSwitchBarController mSwitchBarController;
     private EditUserInfoController mEditUserInfoController = new EditUserInfoController();
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
+    private LimitNumberOfRunningUsersPreferenceController mLimitNumberOfRunningUsersPreferenceController;
     private MultiUserFooterPreferenceController mMultiUserFooterPreferenceController;
 
     // A place to cache the generated default avatar
@@ -233,15 +236,21 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
+        mLimitNumberOfRunningUsersPreferenceController =
+                new LimitNumberOfRunningUsersPreferenceController(
+                        activity, KEY_LIMIT_NUMBER_RUNNING_USERS);
         mMultiUserFooterPreferenceController = new MultiUserFooterPreferenceController(activity)
                 .setFooterMixin(mFooterPreferenceMixin);
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
+        mLimitNumberOfRunningUsersPreferenceController.displayPreference(screen);
         mMultiUserFooterPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
+        screen.findPreference(mLimitNumberOfRunningUsersPreferenceController.getPreferenceKey())
+                .setOnPreferenceChangeListener(mLimitNumberOfRunningUsersPreferenceController);
 
         if (icicle != null) {
             if (icicle.containsKey(SAVE_ADDING_USER)) {
@@ -295,6 +304,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
+        mLimitNumberOfRunningUsersPreferenceController.updateState(screen.findPreference(
+                mLimitNumberOfRunningUsersPreferenceController.getPreferenceKey()));
 
         if (mShouldUpdateUserList) {
             updateUI();
@@ -957,7 +968,11 @@ public class UserSettings extends SettingsPreferenceFragment
         // If multi-user is disabled, just show footer and return.
         final Preference addUserOnLockScreen = getPreferenceScreen().findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
+        final Preference limitBackgroundUsers = getPreferenceScreen().findPreference(
+                mLimitNumberOfRunningUsersPreferenceController.getPreferenceKey());
+
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
+        mLimitNumberOfRunningUsersPreferenceController.updateState(limitBackgroundUsers);
         mMultiUserFooterPreferenceController.updateState(null /* preference */);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
 
@@ -1247,6 +1262,8 @@ public class UserSettings extends SettingsPreferenceFragment
                             suppressAllPage);
                     new AddUserWhenLockedPreferenceController(context, KEY_ADD_USER_WHEN_LOCKED)
                             .updateNonIndexableKeys(niks);
+                    new LimitNumberOfRunningUsersPreferenceController(context,
+                            KEY_LIMIT_NUMBER_RUNNING_USERS).updateNonIndexableKeys(niks);
                     new AutoSyncDataPreferenceController(context, null /* parent */)
                             .updateNonIndexableKeys(niks);
                     new AutoSyncPersonalDataPreferenceController(context, null /* parent */)

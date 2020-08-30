@@ -6843,6 +6843,7 @@
     <string name="user_lockscreen_settings">Lock screen settings</string>
     <!-- User settings item to allow creating new users from locks screen [CHAR LIMIT=50] -->
     <string name="user_add_on_lockscreen_menu">Add users from lock screen</string>
+
     <!-- User details new user name [CHAR LIMIT=30] -->
     <string name="user_new_user_name">New user</string>
     <!-- User details new restricted profile name [CHAR LIMIT=30] -->
@@ -11444,4 +11445,10 @@
     <string name="scramble_pin_summary">Controls PIN scrambling option when inputting PIN on screen lock.</string>
     <string name="keyguard_camera_title">Screenlock camera access toggle</string>
     <string name="keyguard_camera_summary">When checked, camera access is available while the device is locked.</string>
+    <!-- User settings item to enable a limit on active users [CHAR LIMIT=50] -->
+    <string name="user_settings_limit_number_active_users">Limit active users</string>
+    <!-- User settings item to enable a limit on active users summary for setting on  -->
+    <string name="user_settings_limit_number_active_users_summary">Limits the number of active users to <xliff:g id="count">%1$d</xliff:g> by stopping the least recently switched-to users when over the limit. Turning this off may degrade performance. The admin user is never stopped.</string>
+    <!-- User settings toast that appears when enabling the setting [CHAR LIMIT=50] -->
+    <string name="user_settings_limit_number_active_users_toast">The limit will be enforced when switching users.</string>
 </resources>

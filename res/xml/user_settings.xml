@@ -33,11 +33,23 @@
         android:icon="@drawable/ic_add_24dp"
         android:order="20"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="user_settings_add_users_when_locked"
-        android:title="@string/user_add_on_lockscreen_menu"
-        android:singleLineTitle="false"
+    <PreferenceCategory
         android:order="105"
-        settings:allowDividerAbove="true"/>
+        android:key="user_settings_option_for_users"
+        android:layout="@layout/preference_category_no_label">
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="user_settings_add_users_when_locked"
+            android:title="@string/user_add_on_lockscreen_menu"
+            android:singleLineTitle="false"
+            android:order="105"/>
+
+        <SwitchPreference
+            android:key="user_settings_limit_number_active_users"
+            android:title="@string/user_settings_limit_number_active_users"
+            android:summary="@string/user_settings_limit_number_active_users_summary"
+            android:order="106"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
