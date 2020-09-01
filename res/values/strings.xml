@@ -11451,4 +11451,5 @@
     <string name="user_settings_limit_number_active_users_summary">Limits the number of active users to <xliff:g id="count">%1$d</xliff:g> by stopping the least recently switched-to users when over the limit. Turning this off may degrade performance. The admin user is never stopped.</string>
     <!-- User settings toast that appears when enabling the setting [CHAR LIMIT=50] -->
     <string name="user_settings_limit_number_active_users_toast">The limit will be enforced when switching users.</string>
+    <string name="user_summary_active">Active</string>
 </resources>

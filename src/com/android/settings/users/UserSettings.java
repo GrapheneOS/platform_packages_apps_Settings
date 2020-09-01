@@ -146,6 +146,7 @@ public class UserSettings extends SettingsPreferenceFragment
     static {
         USER_REMOVED_INTENT_FILTER = new IntentFilter(Intent.ACTION_USER_REMOVED);
         USER_REMOVED_INTENT_FILTER.addAction(Intent.ACTION_USER_INFO_CHANGED);
+        USER_REMOVED_INTENT_FILTER.addAction(Intent.ACTION_SHUTDOWN);
     }
 
     @VisibleForTesting
@@ -201,6 +202,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (userHandle != -1) {
                     mUserIcons.remove(userHandle);
                 }
+            } else if (intent.getAction().equals(Intent.ACTION_SHUTDOWN)) {
+                Log.d(TAG, "mUserChangeReceiver: ACTION_SHUTDOWN");
             }
             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
         }
@@ -891,6 +894,33 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 // Icon not available yet, print a placeholder
                 pref.setIcon(getEncircledDefaultIcon());
+            }
+
+            if (mUserCaps.mIsAdmin) {
+                // Show the Active status only if admin is viewing it
+                boolean isUserRunning;
+                try {
+                    isUserRunning = ActivityManager.getService().isUserRunning(user.id, 0);
+                } catch (RemoteException re) {
+                    // Assume not running
+                    isUserRunning = false;
+                }
+
+                if (!isUserRunning) {
+                    continue;
+                }
+
+                final CharSequence originalSummary = pref.getSummary();
+                final String active = getString(R.string.user_summary_active);
+                final boolean alreadyAdded = originalSummary != null
+                        && (originalSummary.toString().endsWith(" - " + active)
+                            || originalSummary.toString().equals(active));
+
+                if (originalSummary == null || originalSummary.length() == 0) {
+                    pref.setSummary(active);
+                } else if (!alreadyAdded) {
+                    pref.setSummary(originalSummary.toString() + " - " + active);
+                }
             }
         }
 
