@@ -229,16 +229,16 @@ public class EnabledNetworkModePreferenceController extends
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_cdma_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 5) {
+                    if (entryValuesInt.length < 4) {
                         throw new IllegalArgumentException(
                                 "ENABLED_NETWORKS_CDMA_CHOICES index error.");
                     }
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
-                    addLteOnlyEntry(entryValuesInt[1]);
-                    add3gEntry(entryValuesInt[2]);
-                    add1xEntry(entryValuesInt[3]);
-                    addGlobalEntry(entryValuesInt[4]);
+                    addLteOnlyEntry();
+                    add3gEntry(entryValuesInt[1]);
+                    add1xEntry(entryValuesInt[2]);
+                    addGlobalEntry(entryValuesInt[3]);
                     break;
                 case ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES:
                     entryValues = mContext.getResources().getStringArray(
@@ -255,27 +255,27 @@ public class EnabledNetworkModePreferenceController extends
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_cdma_only_lte_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
+                    if (entryValuesInt.length < 2) {
                         throw new IllegalArgumentException(
                                 "ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES index error.");
                     }
                     addLteEntry(entryValuesInt[0]);
-                    addLteOnlyEntry(entryValuesInt[1]);
-                    addGlobalEntry(entryValuesInt[2]);
+                    addLteOnlyEntry();
+                    addGlobalEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_TDSCDMA_CHOICES:
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_tdscdma_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 4) {
+                    if (entryValuesInt.length < 3) {
                         throw new IllegalArgumentException(
                                 "ENABLED_NETWORKS_TDSCDMA_CHOICES index error.");
                     }
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
-                    addLteOnlyEntry(entryValuesInt[1]);
-                    add3gEntry(entryValuesInt[2]);
-                    add2gEntry(entryValuesInt[3]);
+                    addLteOnlyEntry();
+                    add3gEntry(entryValuesInt[1]);
+                    add2gEntry(entryValuesInt[2]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES:
                     entryValues = mContext.getResources().getStringArray(
@@ -291,27 +291,27 @@ public class EnabledNetworkModePreferenceController extends
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_except_gsm_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
+                    if (entryValuesInt.length < 2) {
                         throw new IllegalArgumentException(
                                 "ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES index error.");
                     }
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     add4gEntry(entryValuesInt[0]);
-                    add4gOnlyEntry(entryValuesInt[1]);
-                    add3gEntry(entryValuesInt[2]);
+                    add4gOnlyEntry();
+                    add3gEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_CHOICES:
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_except_gsm_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
+                    if (entryValuesInt.length < 2) {
                         throw new IllegalArgumentException(
                                 "ENABLED_NETWORKS_EXCEPT_GSM_CHOICES index error.");
                     }
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
-                    addLteOnlyEntry(entryValuesInt[1]);
-                    add3gEntry(entryValuesInt[2]);
+                    addLteOnlyEntry();
+                    add3gEntry(entryValuesInt[1]);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_LTE_CHOICES:
                     entryValues = mContext.getResources().getStringArray(
@@ -328,29 +328,29 @@ public class EnabledNetworkModePreferenceController extends
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 4) {
+                    if (entryValuesInt.length < 3) {
                         throw new IllegalArgumentException(
                                 "ENABLED_NETWORKS_4G_CHOICES index error.");
                     }
                     add5gEntry(addNrToLteNetworkType(
                             entryValuesInt[0]));
                     add4gEntry(entryValuesInt[0]);
-                    add4gOnlyEntry(entryValuesInt[1]);
-                    add3gEntry(entryValuesInt[2]);
-                    add2gEntry(entryValuesInt[3]);
+                    add4gOnlyEntry();
+                    add3gEntry(entryValuesInt[1]);
+                    add2gEntry(entryValuesInt[2]);
                     break;
                 case ENABLED_NETWORKS_CHOICES:
                     entryValues = mContext.getResources().getStringArray(
                             R.array.enabled_networks_values);
                     entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 4) {
+                    if (entryValuesInt.length < 3) {
                         throw new IllegalArgumentException("ENABLED_NETWORKS_CHOICES index error.");
                     }
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
-                    addLteOnlyEntry(entryValuesInt[1]);
-                    add3gEntry(entryValuesInt[2]);
-                    add2gEntry(entryValuesInt[3]);
+                    addLteOnlyEntry();
+                    add3gEntry(entryValuesInt[1]);
+                    add2gEntry(entryValuesInt[2]);
                     break;
                 case PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE:
                     entryValues = mContext.getResources().getStringArray(
@@ -731,17 +731,17 @@ public class EnabledNetworkModePreferenceController extends
         /**
          * Add LTE only entry.
          */
-        private void addLteOnlyEntry(int value) {
+        private void addLteOnlyEntry() {
             mEntries.add(mContext.getString(R.string.network_lte_only));
-            mEntriesValue.add(value);
+            mEntriesValue.add(TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY);
         }
 
         /**
          * Add 4G only entry
          */
-        private void add4gOnlyEntry(int value) {
+        private void add4gOnlyEntry() {
             mEntries.add(mContext.getString(R.string.network_4G_only));
-            mEntriesValue.add(value);
+            mEntriesValue.add(TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY);
         }
 
         /**
