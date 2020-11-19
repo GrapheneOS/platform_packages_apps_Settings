@@ -115,10 +115,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
 
         mMode = getModeFromSettings(context.getContentResolver());
 
-        mEditText = view.findViewById(R.id.private_dns_mode_provider_hostname);
-        mEditText.addTextChangedListener(this);
-        mEditText.setText(getHostnameFromSettings(contentResolver));
-
         mRadioGroup = view.findViewById(R.id.private_dns_radio_group);
         mRadioGroup.setOnCheckedChangeListener(this);
         mRadioGroup.check(CONNECTIVITY_CHECK_MAP.getOrDefault(mMode, R.id.private_dns_mode_opportunistic));
