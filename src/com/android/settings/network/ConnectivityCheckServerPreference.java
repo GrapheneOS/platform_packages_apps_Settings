@@ -107,20 +107,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
-            ANNOTATION_URL, (widget) -> {
-        final Context context = widget.getContext();
-        final Intent intent = HelpUtils.getHelpIntent(context,
-                context.getString(R.string.help_uri_private_dns),
-                context.getClass().getName());
-        if (intent != null) {
-            try {
-                widget.startActivityForResult(intent, 0);
-            } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Activity was not found for intent, " + intent.toString());
-            }
-        }
-    });
 
     @Override
     protected void onBindDialogView(View view) {
@@ -160,6 +146,7 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
             mMode = PRIVATE_DNS_MODE_OFF;
         } else if (checkedId == R.id.private_dns_mode_opportunistic) {
             mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
+	}
     }
 
     @Override
@@ -168,6 +155,7 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
+    // TODO: where is this used
     private Button getSaveButton() {
         final AlertDialog dialog = (AlertDialog) getDialog();
         if (dialog == null) {
