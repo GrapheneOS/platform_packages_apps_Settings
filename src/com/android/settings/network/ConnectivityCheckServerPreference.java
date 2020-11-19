@@ -129,7 +129,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
         final RadioButton opportunisticRadioButton =
                 view.findViewById(R.id.private_dns_mode_opportunistic);
         opportunisticRadioButton.setText(R.string.private_dns_mode_opportunistic);
-        }
     }
 
     @Override
