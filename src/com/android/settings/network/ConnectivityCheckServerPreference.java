@@ -60,11 +60,10 @@ import java.util.Map;
 /**
  * Dialog to set the Private DNS
  */
-public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat implements
+public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCompat implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
 
     private static final String TAG = "ConnectivityCheckServerPrefs";
-    // DNS_MODE -> RadioButton id
     private static final Map<String, Integer> CONNECTIVITY_CHECK_MAP;
 
     static {
@@ -73,10 +72,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         CONNECTIVITY_CHECK_MAP.put(CAPTIVE_PORTAL_MODE_GRAPHENE, R.id.select_connectivity_check_graphene);
     }
 
-    @VisibleForTesting
     static final String MODE_KEY = Settings.Global.CAPTIVE_PORTAL_HTTPS_URL;
-    @VisibleForTesting
-    static final String HOSTNAME_KEY = Settings.Global.PRIVATE_DNS_SPECIFIER;
 
     public static String getModeFromSettings(ContentResolver cr) {
         String mode = Settings.Global.getString(cr, MODE_KEY);
@@ -133,30 +129,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         }
     });
 
-    private void initialize() {
-        // Add the "Restricted" icon resource so that if the preference is disabled by the
-        // admin, an information button will be shown.
-        setWidgetLayoutResource(R.layout.restricted_icon);
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        if (isDisabledByAdmin()) {
-            // If the preference is disabled by the admin, set the inner item as enabled so
-            // it could act as a click target. The preference itself will have been disabled
-            // by the controller.
-            holder.itemView.setEnabled(true);
-        }
-
-        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
-        if (restrictedIcon != null) {
-            // Show the "Restricted" icon if, and only if, the preference was disabled by
-            // the admin.
-            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
-        }
-    }
-
     @Override
     protected void onBindDialogView(View view) {
         final Context context = getContext();
@@ -178,19 +150,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final RadioButton opportunisticRadioButton =
                 view.findViewById(R.id.private_dns_mode_opportunistic);
         opportunisticRadioButton.setText(R.string.private_dns_mode_opportunistic);
-        final RadioButton providerRadioButton = view.findViewById(R.id.private_dns_mode_provider);
-        providerRadioButton.setText(R.string.private_dns_mode_provider);
-
-        final TextView helpTextView = view.findViewById(R.id.private_dns_help_info);
-        helpTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        final Intent helpIntent = HelpUtils.getHelpIntent(context,
-                context.getString(R.string.help_uri_private_dns),
-                context.getClass().getName());
-        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(context,
-                ANNOTATION_URL, helpIntent);
-        if (linkInfo.isActionable()) {
-            helpTextView.setText(AnnotationSpan.linkify(
-                    context.getText(R.string.private_dns_help_message), linkInfo));
         }
     }
 
@@ -219,43 +178,16 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         } else if (checkedId == R.id.private_dns_mode_provider) {
             mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
         }
-        updateDialogInfo();
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-    }
+    public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
     @Override
-    public void afterTextChanged(Editable s) {
-        updateDialogInfo();
-    }
-
-    @Override
-    public void performClick() {
-        EnforcedAdmin enforcedAdmin = getEnforcedAdmin();
-
-        if (enforcedAdmin == null) {
-            // If the restriction is not restricted by admin, continue as usual.
-            super.performClick();
-        } else {
-            // Show a dialog explaining to the user why they cannot change the preference.
-            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), enforcedAdmin);
-        }
-    }
-
-    private EnforcedAdmin getEnforcedAdmin() {
-        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                getContext(), UserManager.DISALLOW_CONFIG_PRIVATE_DNS, UserHandle.myUserId());
-    }
-
-    private boolean isDisabledByAdmin() {
-        return getEnforcedAdmin() != null;
-    }
+    public void afterTextChanged(Editable s) {}
 
     private Button getSaveButton() {
         final AlertDialog dialog = (AlertDialog) getDialog();
@@ -263,18 +195,5 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
             return null;
         }
         return dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-    }
-
-    private void updateDialogInfo() {
-        final boolean modeProvider = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME.equals(mMode);
-        if (mEditText != null) {
-            mEditText.setEnabled(modeProvider);
-        }
-        final Button saveButton = getSaveButton();
-        if (saveButton != null) {
-            saveButton.setEnabled(modeProvider
-                    ? NetworkUtils.isWeaklyValidatedHostname(mEditText.getText().toString())
-                    : true);
-        }
     }
 }
