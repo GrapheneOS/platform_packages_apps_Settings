@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_and_internet_screen"
     android:title="@string/network_dashboard_title"
-    settings:initialExpandedChildrenCount="5">
+    settings:initialExpandedChildrenCount="6">
 
     <PreferenceCategory
         android:key="multi_network_header"
@@ -115,6 +115,15 @@
         android:order="20"
         android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
         android:dialogLayout="@layout/private_dns_mode_dialog"
+        android:positiveButtonText="@string/save"
+        android:negativeButtonText="@android:string/cancel" />
+
+    <com.android.settings.network.ConnectivityCheckServerPreference
+        android:key="connectivity_check_settings"
+        android:title="@string/select_connectivity_check_configuration_title"
+        android:order="100"
+        android:dialogTitle="@string/select_private_dns_configuration_dialog_title"
+        android:dialogLayout="@layout/captive_portal_mode_dialog"
         android:positiveButtonText="@string/save"
         android:negativeButtonText="@android:string/cancel" />
 
