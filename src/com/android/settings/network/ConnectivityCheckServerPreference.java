@@ -15,7 +15,8 @@
  */
 package com.android.settings.network;
 
-import static android.net.ConnectivityManager.PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
+import static android.net.ConnectivityManager.CAPTIVE_PORTAL_MODE_GOOGLE;
+import static android.net.ConnectivityManager.CAPTIVE_PORTAL_MODE_GRAPHENE;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
