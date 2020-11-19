@@ -151,6 +151,16 @@
         <item>false</item>
     </string-array>
 
+    <string-array name="connectivity_check_entries" translatable="false">
+        <item>Graphene OS</item>
+        <item>Standard</item>
+    </string-array>
+
+    <string-array name="connectivity_check_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <!-- Do not translate. -->
     <string-array name="lock_after_timeout_values" translatable="false">
         <!-- Do not translate. -->
@@ -1531,6 +1541,12 @@
         <item>@string/rtt_settings_visible_during_call</item>
         <!-- 3:  Always visible -->
         <item>@string/rtt_settings_always_visible</item>
+    </string-array>
+
+    <string-array name="connectivity_checks_options" translatable="false">
+        <item>GrapheneOS HTTPS (default) </item>
+        <item>GrapheneOS HTTP </item>
+        <item>Google HTTP </item>
     </string-array>
 
 </resources>
