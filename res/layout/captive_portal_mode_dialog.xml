@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/developer_option_dialog_margin_start">
 
             <include
-                android:id="@+id/select_conectivity_check_confuration_google"
+                android:id="@+id/select_conectivity_check_configuration_google"
                 layout="@layout/preference_widget_dialog_radiobutton"/>
 
             <include
