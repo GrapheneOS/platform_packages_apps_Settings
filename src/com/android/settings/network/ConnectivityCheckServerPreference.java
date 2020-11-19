@@ -90,19 +90,19 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
     RadioGroup mRadioGroup;
     String mMode;
 
-    public PrivateDnsModeDialogPreference(Context context) {
+    public ConnectivityCheckServerPreference(Context context) {
         super(context);
     }
 
-    public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs) {
+    public ConnectivityCheckServerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ConnectivityCheckServerPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
+    public ConnectivityCheckServerPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
