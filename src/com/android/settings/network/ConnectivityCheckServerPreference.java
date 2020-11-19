@@ -86,32 +86,25 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
         return Settings.Global.getString(cr, HOSTNAME_KEY);
     }
 
-    @VisibleForTesting
     EditText mEditText;
-    @VisibleForTesting
     RadioGroup mRadioGroup;
-    @VisibleForTesting
     String mMode;
 
     public PrivateDnsModeDialogPreference(Context context) {
         super(context);
-        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initialize();
     }
 
     public PrivateDnsModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initialize();
     }
 
     private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
@@ -157,14 +150,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             final Context context = getContext();
-            if (mMode.equals(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME)) {
-                // Only clickable if hostname is valid, so we could save it safely
-                Settings.Global.putString(context.getContentResolver(), HOSTNAME_KEY,
-                        mEditText.getText().toString());
-            }
-
-            FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
-                    SettingsEnums.ACTION_PRIVATE_DNS_MODE, mMode);
             Settings.Global.putString(context.getContentResolver(), MODE_KEY, mMode);
         }
     }
@@ -175,9 +160,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
             mMode = PRIVATE_DNS_MODE_OFF;
         } else if (checkedId == R.id.private_dns_mode_opportunistic) {
             mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
-        } else if (checkedId == R.id.private_dns_mode_provider) {
-            mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-        }
     }
 
     @Override
