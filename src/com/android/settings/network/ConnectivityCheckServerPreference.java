@@ -78,19 +78,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
     RadioGroup mRadioGroup;
     String mMode;
 
-    public static String getModeFromSettings(ContentResolver cr) {
-        String mode = Settings.Global.getString(cr, MODE_KEY);
-        if (!CONNECTIVITY_CHECK_MAP.containsKey(mode)) {
-            mode = Settings.Global.getString(cr, Settings.Global.PRIVATE_DNS_DEFAULT_MODE);
-        }
-        return CONNECTIVITY_CHECK_MAP.containsKey(mode) ? mode : PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
-    }
-
-    public static String getHostnameFromSettings(ContentResolver cr) {
-        return Settings.Global.getString(cr, HOSTNAME_KEY);
-    }
-
-
     public ConnectivityCheckServerPreference(Context context) {
         super(context);
     }
@@ -107,6 +94,20 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
+    public static String getModeFromSettings(ContentResolver cr) {
+        String mode = Settings.Global.getString(cr, MODE_KEY);
+        if (!CONNECTIVITY_CHECK_MAP.containsKey(mode)) {
+            mode = Settings.Global.getString(cr, Settings.Global.PRIVATE_DNS_DEFAULT_MODE);
+        }
+        return CONNECTIVITY_CHECK_MAP.containsKey(mode) ? mode : PRIVATE_DNS_DEFAULT_MODE_FALLBACK;
+    }
+
+    public static String getHostnameFromSettings(ContentResolver cr) {
+        return Settings.Global.getString(cr, HOSTNAME_KEY);
+    }
+
+
 
 
     @Override
