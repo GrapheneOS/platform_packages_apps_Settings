@@ -152,12 +152,4 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-    // TODO: where is this used
-    private Button getSaveButton() {
-        final AlertDialog dialog = (AlertDialog) getDialog();
-        if (dialog == null) {
-            return null;
-        }
-        return dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-    }
 }
