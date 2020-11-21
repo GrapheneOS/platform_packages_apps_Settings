@@ -74,6 +74,10 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
 
     static final String MODE_KEY = Settings.Global.CAPTIVE_PORTAL_HTTPS_URL;
 
+    EditText mEditText;
+    RadioGroup mRadioGroup;
+    String mMode;
+
     public static String getModeFromSettings(ContentResolver cr) {
         String mode = Settings.Global.getString(cr, MODE_KEY);
         if (!CONNECTIVITY_CHECK_MAP.containsKey(mode)) {
@@ -86,9 +90,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
         return Settings.Global.getString(cr, HOSTNAME_KEY);
     }
 
-    EditText mEditText;
-    RadioGroup mRadioGroup;
-    String mMode;
 
     public ConnectivityCheckServerPreference(Context context) {
         super(context);
