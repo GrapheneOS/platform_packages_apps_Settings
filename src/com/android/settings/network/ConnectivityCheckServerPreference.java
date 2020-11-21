@@ -65,14 +65,13 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
 
     private static final String TAG = "ConnectivityCheckServerPrefs";
     private static final Map<String, Integer> CONNECTIVITY_CHECK_MAP;
+    static final String MODE_KEY = Settings.Global.CAPTIVE_PORTAL_HTTPS_URL;
 
     static {
         CONNECTIVITY_CHECK_MAP = new HashMap<>();
         CONNECTIVITY_CHECK_MAP.put(CAPTIVE_PORTAL_MODE_GOOGLE, R.id.select_connectivity_check_google);
         CONNECTIVITY_CHECK_MAP.put(CAPTIVE_PORTAL_MODE_GRAPHENE, R.id.select_connectivity_check_graphene);
     }
-
-    static final String MODE_KEY = Settings.Global.CAPTIVE_PORTAL_HTTPS_URL;
 
     EditText mEditText;
     RadioGroup mRadioGroup;
@@ -94,10 +93,6 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
-
-
-
 
     @Override
     protected void onBindDialogView(View view) {
@@ -152,5 +147,4 @@ public class ConnectivityCheckServerPreference extends CustomDialogPreferenceCom
     public static String getHostnameFromSettings(ContentResolver cr) {
         return Settings.Global.getString(cr, HOSTNAME_KEY);
     }
-
 }
