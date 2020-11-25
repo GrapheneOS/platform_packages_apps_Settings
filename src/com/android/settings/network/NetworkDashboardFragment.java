@@ -103,6 +103,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =
                 new PrivateDnsPreferenceController(context);
+        final ConnectivityCheckPreferenceController connectivityCheckPreferenceController =
+                new ConnectivityCheckPreferenceController(context);
 
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
@@ -120,6 +122,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(mobilePlanPreferenceController);
         controllers.add(wifiPreferenceController);
         controllers.add(privateDnsPreferenceController);
+        controllers.add(connectivityCheckPreferenceController);
         return controllers;
     }
 
