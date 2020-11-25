@@ -125,4 +125,13 @@
         android:summary="@string/summary_placeholder"
         android:order="25"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
+
+    <ListPreference
+        android:key="connectivity_check_settings"
+        android:title="@string/connectivity_check_title"
+        android:summary="@string/connectivity_check_summary"
+        android:entries="@array/connectivity_check_entries"
+        android:entryValues="@array/connectivity_check_values"
+        android:order="30"/>
+
 </PreferenceScreen>
