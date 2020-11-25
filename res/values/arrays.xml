@@ -151,6 +151,16 @@
         <item>false</item>
     </string-array>
 
+    <string-array name="connectivity_check_entries">
+        <item>GrapheneOS</item>
+        <item>Standard (Google)</item>
+    </string-array>
+
+    <string-array name="connectivity_check_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <!-- Do not translate. -->
     <string-array name="lock_after_timeout_values" translatable="false">
         <!-- Do not translate. -->
