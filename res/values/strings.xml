@@ -12156,6 +12156,8 @@
 
     <string name="scramble_pin_title">PIN scrambling</string>
     <string name="scramble_pin_summary">Controls PIN scrambling option when inputting PIN on screen lock.</string>
+    <string name="connectivity_check_title">Internet Connectivity Check</string>
+    <string name="connectivity_check_summary">HTTP endpoint to use when performing internet connectivity check.</string>
     <string name="deny_new_usb_title">USB accessories</string>
     <string name="deny_new_usb_summary">Control support for USB peripherals such as input (mice, keyboards, joysticks) and storage devices.</string>
     <string name="keyguard_camera_title">Screen lock camera access</string>
