@@ -76,7 +76,11 @@ public class ConnectivityCheckPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return BasePreferenceController.AVAILABLE;
+        if (!isDisabledByAdmin()) {
+            return BasePreferenceController.AVAILABLE;
+        } else {
+            return BasePreferenceController.DISABLED_FOR_USER;
+        }
     }
 
     @Override
@@ -162,4 +166,12 @@ public class ConnectivityCheckPreferenceController
             return false;
         }
     }
+
+    private EnforcedAdmin getEnforcedAdmin() {
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_PRIVATE_DNS,
+                UserHandle.myUserId());
+    }
+
+    private boolean isDisabledByAdmin() { return getEnforcedAdmin() != null; }
 }
