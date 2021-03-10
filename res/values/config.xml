@@ -78,6 +78,7 @@
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
         -->
+        <item>com.google.android.accessibility.talkback/com.google.android.marvin.talkback.TalkBackService</item>
     </string-array>
 
     <!-- List containing the component names of pre-installed audio and captioning services. -->
@@ -102,6 +103,7 @@
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
         -->
+        <item>com.google.android.accessibility.talkback/com.android.switchaccess.SwitchAccessService</item>
     </string-array>
 
     <!-- List containing the order of services in screen reader category by componentname.
