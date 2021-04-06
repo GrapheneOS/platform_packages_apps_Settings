@@ -64,6 +64,12 @@
             android:entries="@array/deny_new_usb_entries"
             android:entryValues="@array/deny_new_usb_values" />
 
+        <SwitchPreference
+            android:key="native_debug"
+            android:title="@string/native_debug_title"
+            android:summary="@string/native_debug_summary"
+            android:persistent="false" />
+
         <ListPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
