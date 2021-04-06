@@ -12224,4 +12224,6 @@
     <string name="deny_new_usb_summary">Control support for USB peripherals such as input (mice, keyboards, joysticks) and storage devices.</string>
     <string name="keyguard_camera_title">Screen lock camera access</string>
     <string name="keyguard_camera_summary">Allow camera access when the device is locked</string>
+    <string name="native_debug_title">Enable native code debugging</string>
+    <string name="native_debug_summary">Generate useful logs / bug reports from crashes and permit debugging native code.</string>
 </resources>
