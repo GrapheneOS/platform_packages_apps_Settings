@@ -39,10 +39,10 @@
     <bool name="config_show_camera_laser_sensor">false</bool>
 
     <!-- Package name and fully-qualified class name for the wallpaper picker activity. -->
-    <string name="config_wallpaper_picker_package" translatable="false">com.android.settings</string>
-    <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
+    <string name="config_wallpaper_picker_package" translatable="false">com.android.wallpaper</string>
+    <string name="config_wallpaper_picker_class" translatable="false">com.android.wallpaper.picker.CategoryPickerActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
-    <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <string name="config_styles_and_wallpaper_picker_class" translatable="false">com.android.customization.picker.CustomizationPickerActivity</string>
     <!-- Action name for the wallpaper picker activity. -->
     <string name="config_wallpaper_picker_action" translatable="false">android.intent.action.MAIN</string>
     <!-- Action name for the styles & wallpaper picker activity. -->
