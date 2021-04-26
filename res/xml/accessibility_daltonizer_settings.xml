@@ -33,6 +33,12 @@
         android:key="daltonizer_mode_category" >
 
         <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_monochromacy"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_monochromacy_summary"
+            android:title="@string/daltonizer_mode_monochromacy_title" />
+
+        <com.android.settingslib.widget.RadioButtonPreference
             android:key="daltonizer_mode_deuteranomaly"
             android:persistent="false"
             android:summary="@string/daltonizer_mode_deuteranomaly_summary"
