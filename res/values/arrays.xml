@@ -1098,6 +1098,7 @@
 
     <!-- Summary for color space adjustment modes for accessibility -->
     <string-array name="daltonizer_mode_summaries" translatable="false">
+        <item>@string/daltonizer_mode_monochromacy</item>
         <item>@string/daltonizer_mode_deuteranomaly</item>
         <item>@string/daltonizer_mode_protanomaly</item>
         <item>@string/daltonizer_mode_tritanomaly</item>
@@ -1105,6 +1106,7 @@
 
     <!-- Keys for color space adjustment modes for accessibility -->
     <string-array name="daltonizer_mode_keys" translatable="false">
+        <item>daltonizer_mode_monochromacy</item>
         <item>daltonizer_mode_deuteranomaly</item>
         <item>daltonizer_mode_protanomaly</item>
         <item>daltonizer_mode_tritanomaly</item>
@@ -1112,6 +1114,7 @@
 
     <!-- Values for display color space adjustment modes for accessibility -->
     <integer-array name="daltonizer_type_values" translatable="false">
+        <item>0</item>
         <item>12</item>
         <item>11</item>
         <item>13</item>
