@@ -48,9 +48,9 @@ public class ConnectivityCheckPreferenceController
     private static final String GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL =
             "http://connectivitycheck.grapheneos.network/generate_204";
     private static final String GRAPHENEOS_CAPTIVE_PORTAL_FALLBACK_URL =
-            "http://grapheneos.network/gen_204";
+            "http://grapheneos.online/gen_204";
     private static final String GRAPHENEOS_CAPTIVE_PORTAL_OTHER_FALLBACK_URL =
-            "http://grapheneos.network/generate_204";
+            "http://grapheneos.online/generate_204";
 
     // imported defaults from AOSP NetworkStack
     private static final String STANDARD_HTTPS_URL =
