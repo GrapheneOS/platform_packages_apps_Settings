@@ -12246,6 +12246,8 @@
     <string name="connectivity_check_title">Internet connectivity check</string>
     <string name="connectivity_check_summary">HTTP endpoints to use for performing internet connectivity checks.</string>
     <string name="deny_new_usb_title">USB accessories</string>
+    <string name="auto_reboot_title">Auto reboot</string>
+    <string name="auto_reboot_summary">Automatically reboot the device, if the phone hasn't been unlocked within the selected number of hours.</string>
     <string name="deny_new_usb_summary">Control support for USB peripherals such as input (mice, keyboards, joysticks) and storage devices.</string>
     <string name="keyguard_camera_title">Screen lock camera access</string>
     <string name="keyguard_camera_summary">Allow camera access when the device is locked</string>
