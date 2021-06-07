@@ -124,6 +124,33 @@
         <item>30 minutes</item>
     </string-array>
 
+    <!-- Auto reboot settings -->
+    <string-array name="auto_reboot_entries">
+        <item>Off</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>4 hours</item>
+        <item>8 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+        <item>36 hours</item>
+        <item>48 hours</item>
+        <item>72 hours</item>
+    </string-array>
+
+    <string-array name="auto_reboot_values" translatable="false">
+        <item>0</item>  <!-- Disabled -->
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+        <item>28800000</item>
+        <item>43200000</item>
+        <item>86400000</item>
+        <item>129600000</item>
+        <item>172800000</item>
+        <item>259200000</item>
+    </string-array>
+
     <!-- Security Settings -->
     <string-array name="deny_new_usb_entries">
         <item>Deny new USB peripherals</item>
