@@ -14,6 +14,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import java.util.concurrent.TimeUnit;
+
 public class AutoRebootPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnResume, Preference.OnPreferenceChangeListener {
 
@@ -80,22 +82,22 @@ public class AutoRebootPreferenceController extends AbstractPreferenceController
         log("onPreferenceChange key : " + key + " value : " + value + " isString? : " + (value instanceof  String) + " isAdminUser? : " + mUm.isAdminUser());
         if (KEY_AUTO_REBOOT.equals(key) && value instanceof String && mIsAdmin) {
             int timeout = Integer.parseInt((String) value);
-            Settings.Global.putLong(mContext.getContentResolver(), VALUE_STORE_KEY, hoursToMilli(timeout));
+            Settings.Global.putInt(mContext.getContentResolver(), VALUE_STORE_KEY, hoursToMilli(timeout));
         }
         return true;
     }
 
     private String currentValueInHours() {
-        int value = Settings.Global.getLong(mContext.getContentResolver(), VALUE_STORE_KEY, 0);
+        int value = Settings.Global.getInt(mContext.getContentResolver(), VALUE_STORE_KEY, 0);
         return String.valueOf(milliToHours(value));
     }
 
-    private long milliToHours(long milli){
-        return TimeUnit.MILLISECONDS.toHours(milli);
+    private int milliToHours(long milli){
+        return (int) TimeUnit.MILLISECONDS.toHours(milli);
     }
 
-    private long hoursToMilli(long hour){
-        return TimeUnit.HOURS.toMillis(hour);
+    private int hoursToMilli(long hour){
+        return (int) TimeUnit.HOURS.toMillis(hour);
     }
 
     private void log(String log) {
