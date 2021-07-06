@@ -37,6 +37,13 @@
         settings:allowDividerAbove="true"
         android:fragment="com.android.settings.wifi.ConfigureWifiSettings"/>
 
+    <androidx.preference.ListPreference
+        android:key="wifi_auto_timeout"
+        android:title="@string/wifi_auto_off_title"
+        android:summary="@string/summary_placeholder"
+        android:entries="@array/wifi_timeout_entries"
+        android:entryValues="@array/wifi_timeout_values"/>
+
     <Preference
         android:key="saved_networks"
         android:title="@string/wifi_saved_access_points_label"
