@@ -52,6 +52,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -121,6 +122,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
+    private static final String PREF_KEY_WIFI_AUTO_TIMEOUT = "wifi_auto_timeout";
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "wifi_data_usage";
 
@@ -190,6 +192,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private PreferenceCategory mConnectedWifiEntryPreferenceCategory;
     private PreferenceCategory mWifiEntryPreferenceCategory;
+    private ListPreference timeoutPreference;
     @VisibleForTesting
     AddWifiNetworkPreference mAddWifiNetworkPreference;
     @VisibleForTesting
@@ -199,6 +202,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @VisibleForTesting
     DataUsagePreference mDataUsagePreference;
     private LinkablePreference mStatusMessagePreference;
+    private WiFiTimeoutPreferenceController mTimeoutPreferenceController;
 
     /**
      * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
@@ -235,6 +239,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         addPreferences();
 
         mIsRestricted = isUiRestricted();
+        mTimeoutPreferenceController = new WiFiTimeoutPreferenceController(getContext());
     }
 
     private void addPreferences() {
@@ -251,6 +256,15 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         mDataUsagePreference.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(),
                 0 /*subId*/,
                 null /*service*/);
+
+        timeoutPreference  =
+                (ListPreference) findPreference(PREF_KEY_WIFI_AUTO_TIMEOUT);
+        timeoutPreference.setVisible(true);
+        timeoutPreference.setOnPreferenceChangeListener(
+                (preference, o) -> {
+                    mTimeoutPreferenceController.preferenceChange(preference, o);
+                    return false;
+                });
     }
 
     @Override
@@ -391,6 +405,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
 
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
+        mTimeoutPreferenceController.updateState(timeoutPreference);
     }
 
     @Override
