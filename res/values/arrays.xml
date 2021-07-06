@@ -168,6 +168,30 @@
         <item>30 minutes</item>
     </string-array>
 
+    <!-- WiFi Auto turn off settings -->
+    <string-array name="wifi_timeout_entries" >
+        <item>Off</item>
+        <item>1 minute</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>5 hours</item>
+        <item>10 hours</item>
+        <item>24 hours</item>
+    </string-array>
+    <string-array name="wifi_timeout_values" translatable="false">
+        <item>0</item>
+        <item>60000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>18000000</item>
+        <item>36000000</item>
+        <item>87840000</item>
+    </string-array>
+
     <!-- Auto reboot settings -->
     <string-array name="auto_reboot_entries">
         <item>Off</item>
