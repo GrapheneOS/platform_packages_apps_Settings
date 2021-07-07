@@ -122,6 +122,12 @@
             settings:controller="com.android.settings.display.PeakRefreshRatePreferenceController"/>
 
         <SwitchPreference
+            android:key="touch_sensitivity"
+            android:title="@string/touch_sensitivity_title"
+            android:summary="@string/touch_sensitivity_summary"
+            settings:controller="com.android.settings.display.TouchSensitivityPreferenceController" />
+
+        <SwitchPreference
             android:key="show_operator_name"
             android:title="@string/show_operator_name_title"
             android:summary="@string/show_operator_name_summary"/>
