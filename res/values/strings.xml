@@ -2395,6 +2395,10 @@
     <string name="auto_rotate_summary_no_permission">Camera access is required for Face Detection. Tap to manage permissions for Device Personalization Services</string>
     <!-- auto_rotate settings screen, text for the camera permission button [CHAR LIMIT=NONE]-->
     <string name="auto_rotate_manage_permission_button">Manage permissions</string>
+    <!-- Display settings screen, increased touch sensitivity settings title [CHAR LIMIT=30] -->
+    <string name="touch_sensitivity_title">Increase touch sensitivity</string>
+    <!-- Display settings screen, increased touch sensitivity settings summary [CHAR LIMIT=NONE] -->
+    <string name="touch_sensitivity_summary">Improves touch when using screen protectors</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
