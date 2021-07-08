@@ -15,9 +15,16 @@
  */
 package com.android.settings.core;
 
+import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
+import static android.app.StatusBarManager.DISABLE_HOME;
+import static android.app.StatusBarManager.DISABLE_NONE;
+import static android.app.StatusBarManager.DISABLE_NOTIFICATION_ALERTS;
+import static android.app.StatusBarManager.DISABLE_RECENT;
+import static android.app.StatusBarManager.DISABLE_SEARCH;
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
+import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -63,6 +71,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
     private final List<CategoryListener> mCategoryListeners = new ArrayList<>();
     private int mCategoriesUpdateTaskCount;
+    private boolean isNavLocked;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +106,25 @@ public class SettingsBaseActivity extends FragmentActivity {
         }
     }
 
+    private void disableOrEnableNavOptions() {
+        StatusBarManager statusBarManager = getSystemService(StatusBarManager.class);
+        if(statusBarManager == null) return;
+        if(!isUserSetupCompleted()) {
+            statusBarManager.disable(
+                    DISABLE_NOTIFICATION_ALERTS | DISABLE_SEARCH |
+                            DISABLE_RECENT | DISABLE_HOME |
+                            DISABLE2_QUICK_SETTINGS);
+            isNavLocked = true;
+        }else if(isNavLocked) {
+            statusBarManager.disable(DISABLE_NONE);
+            isNavLocked = false;
+        }
+    }
+
+    private boolean isUserSetupCompleted() {
+        return Settings.Secure.getInt(getContentResolver(), "user_setup_complete" , 0) == 1;
+    }
+
     @Override
     public boolean onNavigateUp() {
         if (!super.onNavigateUp()) {
@@ -116,11 +144,13 @@ public class SettingsBaseActivity extends FragmentActivity {
         registerReceiver(mPackageReceiver, filter);
 
         updateCategories();
+        disableOrEnableNavOptions();
     }
 
     @Override
     protected void onPause() {
         unregisterReceiver(mPackageReceiver);
+        disableOrEnableNavOptions();
         super.onPause();
     }
 
