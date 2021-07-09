@@ -20,7 +20,7 @@ public class AutoRebootPreferenceController extends AbstractPreferenceController
 
     private static final String KEY_AUTO_REBOOT = "auto_reboot";
     private static final String PREF_KEY_SECURITY_CATEGORY = "security_category";
-    private static final String GLOBAL_SETTINGS_KEY = "settings_reboot_after_timeout";
+
 
     private PreferenceCategory mSecurityCategory;
     private boolean mIsAdmin;
@@ -59,7 +59,7 @@ public class AutoRebootPreferenceController extends AbstractPreferenceController
             ListPreference autoReboot =
                     (ListPreference) mSecurityCategory.findPreference(KEY_AUTO_REBOOT);
             autoReboot.setValue(Integer.toString(Settings.Global.getInt(
-                    mContext.getContentResolver(), GLOBAL_SETTINGS_KEY, 0)));
+                    mContext.getContentResolver(), Settings.Global.SETTINGS_REBOOT_AFTER_TIMEOUT, 0)));
         } else {
             mSecurityCategory.removePreference(
                     mSecurityCategory.findPreference(KEY_AUTO_REBOOT));
@@ -76,7 +76,7 @@ public class AutoRebootPreferenceController extends AbstractPreferenceController
         final String key = preference.getKey();
         if (KEY_AUTO_REBOOT.equals(key) && value instanceof String && mIsAdmin) {
             int timeout = Integer.parseInt((String) value);
-            Settings.Global.putInt(mContext.getContentResolver(), GLOBAL_SETTINGS_KEY, timeout);
+            Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.SETTINGS_REBOOT_AFTER_TIMEOUT, timeout);
         }
         return true;
     }
