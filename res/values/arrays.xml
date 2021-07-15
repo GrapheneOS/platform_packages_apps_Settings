@@ -215,6 +215,8 @@
     <!-- Auto reboot settings -->
     <string-array name="auto_reboot_entries">
         <item>Off</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
         <item>1 hour</item>
         <item>2 hours</item>
         <item>4 hours</item>
@@ -228,6 +230,8 @@
 
     <string-array name="auto_reboot_values" translatable="false">
         <item>0</item>  <!-- Disabled -->
+        <item>600000</item>
+        <item>1800000</item>
         <item>3600000</item>
         <item>7200000</item>
         <item>14400000</item>
