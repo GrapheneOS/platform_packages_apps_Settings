@@ -73,6 +73,7 @@ public class ChooseLockGenericControllerTest {
         mController = createController(PASSWORD_COMPLEXITY_NONE);
         SettingsShadowResources.overrideResource(R.bool.config_hide_none_security_option, false);
         SettingsShadowResources.overrideResource(R.bool.config_hide_swipe_security_option, false);
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, false);
     }
 
     @After
@@ -90,9 +91,12 @@ public class ChooseLockGenericControllerTest {
 
         SettingsShadowResources.overrideResource(R.bool.config_hide_none_security_option, true);
         SettingsShadowResources.overrideResource(R.bool.config_hide_swipe_security_option, true);
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, true);
         assertThat(mController.isScreenLockVisible(ScreenLockType.NONE)).named("NONE visible")
                 .isFalse();
         assertThat(mController.isScreenLockVisible(ScreenLockType.SWIPE)).named("SWIPE visible")
+                .isFalse();
+        assertThat(mController.isScreenLockVisible(ScreenLockType.PATTERN)).named("PATTERN visible")
                 .isFalse();
     }
 

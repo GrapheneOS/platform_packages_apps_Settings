@@ -114,6 +114,7 @@ public class ChooseLockGenericController {
                 return mManagedPasswordProvider.isManagedPasswordChoosable();
             case PIN:
             case PATTERN:
+                return !mContext.getResources().getBoolean(R.bool.config_hide_pattern_security_option);
             case PASSWORD:
                 // Hide the secure lock screen options if the device doesn't support the secure lock
                 // screen feature.
