@@ -112,8 +112,9 @@ public class ChooseLockGenericController {
                     && !managedProfile; // Swipe doesn't make sense for profiles.
             case MANAGED:
                 return mManagedPasswordProvider.isManagedPasswordChoosable();
-            case PIN:
             case PATTERN:
+                return false;
+            case PIN:
             case PASSWORD:
                 // Hide the secure lock screen options if the device doesn't support the secure lock
                 // screen feature.
