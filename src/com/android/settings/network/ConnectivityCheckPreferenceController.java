@@ -64,6 +64,7 @@ public class ConnectivityCheckPreferenceController
 
     private static final int GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL_INTVAL = 0;
     private static final int STANDARD_CAPTIVE_PORTAL_HTTP_URL_INTVAL = 1;
+    private static final int DISABLED_CAPTIVE_PORTAL_INTVAL = 2;
 
     private static final String KEY_CONNECTIVITY_CHECK_SETTINGS =
             "connectivity_check_settings";
@@ -96,20 +97,18 @@ public class ConnectivityCheckPreferenceController
     }
 
     private void updatePreferenceState() {
+        if (Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.CAPTIVE_PORTAL_MODE, Settings.Global.CAPTIVE_PORTAL_MODE_PROMPT)
+                == Settings.Global.CAPTIVE_PORTAL_MODE_IGNORE) {
+            mConnectivityPreference.setValueIndex(DISABLED_CAPTIVE_PORTAL_INTVAL);
+            return;
+        }
+
         String pref = Settings.Global.getString(
                 mContext.getContentResolver(), Settings.Global.CAPTIVE_PORTAL_HTTP_URL);
-        if (pref != null) {
-            switch (pref) {
-            case STANDARD_HTTP_URL:
-                mConnectivityPreference.setValueIndex(
-                        STANDARD_CAPTIVE_PORTAL_HTTP_URL_INTVAL);
-                break;
-            // intentional fallthrough
-            case GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL:
-            default:
-                mConnectivityPreference.setValueIndex(
-                        GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL_INTVAL);
-            }
+        if (STANDARD_HTTP_URL.equals(pref)) {
+            mConnectivityPreference.setValueIndex(
+                    STANDARD_CAPTIVE_PORTAL_HTTP_URL_INTVAL);
         } else {
             mConnectivityPreference.setValueIndex(
                     GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL_INTVAL);
@@ -138,10 +137,10 @@ public class ConnectivityCheckPreferenceController
             Settings.Global.putString(
                     cr, Settings.Global.CAPTIVE_PORTAL_OTHER_FALLBACK_URLS,
                     STANDARD_OTHER_FALLBACK_URLS);
+            Settings.Global.putInt(cr, Settings.Global.CAPTIVE_PORTAL_MODE,
+                    Settings.Global.CAPTIVE_PORTAL_MODE_PROMPT);
             break;
-        // intentional fallthrough
         case GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL_INTVAL:
-        default:
             Settings.Global.putString(cr, Settings.Global.CAPTIVE_PORTAL_HTTP_URL,
                                                                 GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL);
             Settings.Global.putString(cr, Settings.Global.CAPTIVE_PORTAL_HTTPS_URL,
@@ -151,6 +150,22 @@ public class ConnectivityCheckPreferenceController
             Settings.Global.putString(
                     cr, Settings.Global.CAPTIVE_PORTAL_OTHER_FALLBACK_URLS,
                     GRAPHENEOS_CAPTIVE_PORTAL_OTHER_FALLBACK_URL);
+            Settings.Global.putInt(cr, Settings.Global.CAPTIVE_PORTAL_MODE,
+                    Settings.Global.CAPTIVE_PORTAL_MODE_PROMPT);
+            break;
+        default:
+            // GrapheneOS URLs as placeholder
+            Settings.Global.putString(cr, Settings.Global.CAPTIVE_PORTAL_HTTP_URL,
+                    GRAPHENEOS_CAPTIVE_PORTAL_HTTP_URL);
+            Settings.Global.putString(cr, Settings.Global.CAPTIVE_PORTAL_HTTPS_URL,
+                    GRAPHENEOS_CAPTIVE_PORTAL_HTTPS_URL);
+            Settings.Global.putString(cr, Settings.Global.CAPTIVE_PORTAL_FALLBACK_URL,
+                    GRAPHENEOS_CAPTIVE_PORTAL_FALLBACK_URL);
+            Settings.Global.putString(
+                    cr, Settings.Global.CAPTIVE_PORTAL_OTHER_FALLBACK_URLS,
+                    GRAPHENEOS_CAPTIVE_PORTAL_OTHER_FALLBACK_URL);
+            Settings.Global.putInt(cr, Settings.Global.CAPTIVE_PORTAL_MODE,
+                    Settings.Global.CAPTIVE_PORTAL_MODE_IGNORE);
         }
     }
 
