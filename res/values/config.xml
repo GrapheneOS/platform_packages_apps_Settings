@@ -497,7 +497,7 @@
     <bool name="config_disable_uninstall_update">false</bool>
 
     <!-- Slice Uri to query nearby devices. -->
-    <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
+    <string name="config_nearby_devices_slice_uri" translatable="false"></string>
 
     <!-- BT Slice intent action. To support Settings 2 panel, BT slice can't use PendingIntent.send(). Therefore, here defines the Slice intent action. -->
     <string name="config_bt_slice_intent_action" translatable="false"></string>
