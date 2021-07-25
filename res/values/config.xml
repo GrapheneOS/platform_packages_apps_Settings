@@ -455,7 +455,7 @@
     <bool name="config_enable_extra_screen_zoom_preview">true</bool>
 
     <!-- Slice Uri to query nearby devices. -->
-    <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
+    <string name="config_nearby_devices_slice_uri" translatable="false"></string>
 
     <!-- Grayscale settings intent -->
     <string name="config_grayscale_settings_intent" translatable="false"></string>
