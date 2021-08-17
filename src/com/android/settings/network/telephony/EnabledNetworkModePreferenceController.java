@@ -360,6 +360,7 @@ public class EnabledNetworkModePreferenceController extends
                         throw new IllegalArgumentException(
                                 "PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE index error.");
                     }
+                    addLteOnlyEntry();
                     addGlobalEntry(entryValuesInt[0]);
                     addCustomEntry(mContext.getString(R.string.network_world_mode_cdma_lte),
                             entryValuesInt[1]);
