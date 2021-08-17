@@ -142,8 +142,7 @@ public class EditUserInfoController {
 
         final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
 
-        boolean canChangePhoto = mUserManager != null &&
-                canChangePhoto(activity, mUserManager.getUserInfo(user.getIdentifier()));
+        boolean canChangePhoto = mUserManager != null;
         if (!canChangePhoto) {
             // some users can't change their photos so we need to remove suggestive
             // background from the photoView
