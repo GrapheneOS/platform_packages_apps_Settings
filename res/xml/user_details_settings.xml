@@ -25,6 +25,9 @@
             android:key="enable_calling"
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />
+    <SwitchPreference
+            android:key="disallow_audio_recording"
+            android:title="@string/user_disallow_audio_recording" />
     <com.android.settingslib.RestrictedPreference
             android:key="app_and_content_access"
             android:icon="@drawable/ic_lock_closed"

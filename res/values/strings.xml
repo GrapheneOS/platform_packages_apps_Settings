@@ -7087,6 +7087,8 @@
     <string name="user_enable_calling">Turn on phone calls</string>
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
+    <!-- Title of preference to disallow audio recording [CHAR LIMIT=45] -->
+    <string name="user_disallow_audio_recording">Disallow audio recording</string>
     <!-- Title of preference to disallow installing apps [CHAR LIMIT=45] -->
     <string name="user_disallow_install_apps">Disallow installing apps</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
