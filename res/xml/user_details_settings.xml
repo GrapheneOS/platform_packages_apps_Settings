@@ -29,6 +29,10 @@
             android:key="app_and_content_access"
             android:icon="@drawable/ic_lock_closed"
             android:title="@string/user_restrictions_title" />
+    <SwitchPreference
+            android:icon="@drawable/ic_settings_install"
+            android:key="disallow_install_apps"
+            android:title="@string/user_disallow_install_apps" />
     <com.android.settingslib.RestrictedPreference
             android:key="app_copying"
             android:icon="@drawable/ic_apps"
