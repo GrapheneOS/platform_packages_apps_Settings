@@ -69,7 +69,7 @@
         android:key="privacy"
         android:icon="@drawable/ic_wifi_privacy_24dp"
         android:title="@string/wifi_privacy_settings"
-        android:entries="@array/wifi_privacy_entries"
+        android:entries="@array/wifi_privacy_entries_extended"
         android:entryValues="@array/wifi_privacy_values"/>
 
     <Preference
