@@ -675,7 +675,7 @@
                      android:layout_height="wrap_content"
                      style="@style/wifi_item_spinner"
                      android:prompt="@string/wifi_privacy_settings"
-                     android:entries="@array/wifi_privacy_entries"/>
+                     android:entries="@array/wifi_privacy_entries_extended"/>
         </LinearLayout>
 
         <LinearLayout
