@@ -42,6 +42,10 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     private WifiEntry mWifiEntry;
     private Preference mPreference;
 
+    private static final int PREF_RANDOMIZATION_ALWAYS = 0;
+    private static final int PREF_RANDOMIZATION_PERSISTENT = 1;
+    private static final int PREF_RANDOMIZATION_NONE = 2;
+
     public WifiPrivacyPreferenceController2(Context context) {
         super(context, KEY_WIFI_PRIVACY);
 
@@ -99,8 +103,6 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
         return mWifiEntry.getPrivacy();
     }
 
-    private static final int PREF_RANDOMIZATION_PERSISTENT = 0;
-    private static final int PREF_RANDOMIZATION_NONE = 1;
 
     /**
      * Returns preference index value.
@@ -109,8 +111,14 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
      * @return index value of preference
      */
     public static int translateMacRandomizedValueToPrefValue(int macRandomized) {
-        return (macRandomized == WifiEntry.PRIVACY_RANDOMIZED_MAC)
-            ? PREF_RANDOMIZATION_PERSISTENT : PREF_RANDOMIZATION_NONE;
+        switch (macRandomized) {
+            case WifiConfiguration.RANDOMIZATION_PERSISTENT:
+                return PREF_RANDOMIZATION_PERSISTENT;
+            case WifiConfiguration.RANDOMIZATION_NONE:
+                return PREF_RANDOMIZATION_NONE;
+            default:
+                return PREF_RANDOMIZATION_ALWAYS;
+        }
     }
 
     /**
@@ -120,8 +128,14 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
      * @return mac randomized value
      */
     public static int translatePrefValueToMacRandomizedValue(int prefMacRandomized) {
-        return (prefMacRandomized == PREF_RANDOMIZATION_PERSISTENT)
-            ? WifiEntry.PRIVACY_RANDOMIZED_MAC : WifiEntry.PRIVACY_DEVICE_MAC;
+        switch (prefMacRandomized) {
+            case PREF_RANDOMIZATION_PERSISTENT:
+                return WifiConfiguration.RANDOMIZATION_PERSISTENT;
+            case PREF_RANDOMIZATION_NONE:
+                return WifiConfiguration.RANDOMIZATION_NONE;
+            default:
+                return WifiConfiguration.RANDOMIZATION_ALWAYS;
+        }
     }
 
     private void updateSummary(DropDownPreference preference, int macRandomized) {
@@ -151,6 +165,8 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
                 return WifiEntry.PRIVACY_DEVICE_MAC;
             case WifiConfiguration.RANDOMIZATION_PERSISTENT:
                 return WifiEntry.PRIVACY_RANDOMIZED_MAC;
+            case WifiConfiguration.RANDOMIZATION_ALWAYS:
+                return WifiEntry.PRIVACY_RANDOMIZATION_ALWAYS;
             default:
                 return WifiEntry.PRIVACY_UNKNOWN;
         }
