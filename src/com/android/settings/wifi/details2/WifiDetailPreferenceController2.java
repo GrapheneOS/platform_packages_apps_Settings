@@ -787,7 +787,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private int getMacAddressTitle() {
-        if (mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC) {
+        if (mWifiEntry.getPrivacy() != WifiEntry.PRIVACY_DEVICE_MAC) {
             return mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
                     ? R.string.wifi_advanced_randomized_mac_address_title
                     : R.string.wifi_advanced_randomized_mac_address_disconnected_title;
