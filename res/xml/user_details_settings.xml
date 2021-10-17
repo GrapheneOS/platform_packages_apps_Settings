@@ -25,6 +25,10 @@
             android:key="enable_calling"
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />
+    <SwitchPreference
+        android:icon="@drawable/ic_settings_install"
+        android:key="disallow_install_apps"
+        android:title="@string/user_disallow_install_apps" />
     <com.android.settingslib.RestrictedPreference
             android:key="app_and_content_access"
             android:icon="@drawable/ic_lock_closed"
