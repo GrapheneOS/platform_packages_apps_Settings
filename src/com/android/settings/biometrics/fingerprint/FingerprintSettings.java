@@ -41,6 +41,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -153,7 +154,7 @@ public class FingerprintSettings extends SubSettings {
         private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
         private static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
-                "fingerprint_enable_keyguard_toggle";
+                "security_settings_fingerprint_keyguard";
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
         private static final String KEY_HAS_FIRST_ENROLLED = "has_first_enrolled";
         private static final String KEY_IS_ENROLLING = "is_enrolled";
@@ -247,9 +248,7 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                     private void updateDialog() {
-                        if (isSfps()) {
-                            setRequireScreenOnToAuthVisibility();
-                        }
+                        updateFingerprintUnlockCategory();
                         RenameDialog renameDialog = (RenameDialog) getFragmentManager().
                                 findFragmentByTag(RenameDialog.class.getName());
                         if (renameDialog != null) {
@@ -522,19 +521,36 @@ public class FingerprintSettings extends SubSettings {
                     });
             mFingerprintUnlockCategory.setVisible(false);
             if (isSfps()) {
-                setRequireScreenOnToAuthVisibility();
+                updateFingerprintUnlockCategory();
             }
             setPreferenceScreen(root);
+
+            // Don't show keyguard preferences for work profile settings.
+            if (UserManager.get(getContext()).isManagedProfile(mUserId)) {
+                removePreference(KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
+            } else {
+                SwitchPreference lockScreenFingerprintPreference =
+                        (SwitchPreference) findPreference(KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
+
+                lockScreenFingerprintPreference.setChecked(Settings.Secure.getInt(
+                        getContext().getContentResolver(),
+                        Settings.Secure.BIOMETRIC_KEYGUARD_ENABLED, 1) == 1);
+                lockScreenFingerprintPreference.setOnPreferenceChangeListener(this);
+
+                updateFingerprintUnlockCategory();
+            }
+
             return root;
         }
 
-        private void setRequireScreenOnToAuthVisibility() {
+        private void updateFingerprintUnlockCategory() {
             int fingerprintsEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
             final boolean removalInProgress = mRemovalSidecar.inProgress();
             // Removing last remaining fingerprint
             if (fingerprintsEnrolled == 0 && removalInProgress) {
                 mFingerprintUnlockCategory.setVisible(false);
             } else {
+                mRequireScreenOnToAuthPreference.setVisible(isSfps());
                 mFingerprintUnlockCategory.setVisible(true);
             }
         }
@@ -753,7 +769,10 @@ public class FingerprintSettings extends SubSettings {
             boolean result = true;
             final String key = preference.getKey();
             if (KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE.equals(key)) {
-                // TODO
+                boolean enableFingerprintUnlock = (boolean) value;
+                Settings.Secure.putInt(getContext().getContentResolver(),
+                        Settings.Secure.BIOMETRIC_KEYGUARD_ENABLED,
+                        (enableFingerprintUnlock) ? 1 : 0);
             } else {
                 Log.v(TAG, "Unknown key:" + key);
             }
