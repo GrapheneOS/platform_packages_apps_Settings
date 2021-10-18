@@ -32,4 +32,15 @@
             settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/security_settings_fingerprint_settings_screen_lock_category"
+        android:order="10"
+        android:key="security_settings_fingerprint_unlock_category">
+
+        <SwitchPreference
+            android:key="security_settings_fingerprint_keyguard"
+            android:title="@string/security_settings_fingerprint_settings_use_fingerprint_unlock_phone_title"
+            android:summary="@string/security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
