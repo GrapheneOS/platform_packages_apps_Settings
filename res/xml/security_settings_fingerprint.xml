@@ -30,6 +30,11 @@
             android:summary="@string/security_settings_require_screen_on_to_auth_description"
             settings:keywords="@string/security_settings_require_screen_on_to_auth_keywords"
             settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController" />
+
+        <SwitchPreference
+            android:key="security_settings_fingerprint_keyguard"
+            android:title="@string/security_settings_fingerprint_settings_use_fingerprint_unlock_phone_title"
+            android:summary="@string/security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary" />
     </PreferenceCategory>
 
 </PreferenceScreen>
