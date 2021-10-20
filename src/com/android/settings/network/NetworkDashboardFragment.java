@@ -142,6 +142,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         if (Utils.isProviderModelEnabled(context)) {
             controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
         }
+        ConnectivityCheckPreferenceController connectivityCheck =
+                new ConnectivityCheckPreferenceController(context);
+        controllers.add(connectivityCheck);
         return controllers;
     }
 
