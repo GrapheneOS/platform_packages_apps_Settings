@@ -14514,4 +14514,6 @@
     <string name="native_debug_summary">Generate useful logs / bug reports from crashes and permit debugging native code.</string>
     <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_title">Allow fingerprint unlocking</string>
     <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary">Allow fingerprints to unlock the screen lock. If this is disabled, fingerprints can still be used in apps.</string>
+    <string name="connectivity_check_title">Internet connectivity check</string>
+    <string name="connectivity_check_summary">HTTP endpoints to use for performing internet connectivity checks.</string>
 </resources>
