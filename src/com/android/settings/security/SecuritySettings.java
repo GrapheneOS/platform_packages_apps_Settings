@@ -127,6 +127,7 @@ public class SecuritySettings extends DashboardFragment {
         securityPreferenceControllers.add(new DenyNewUsbPreferenceController(context));
         securityPreferenceControllers.add(new KeyguardCameraPreferenceController(context));
         securityPreferenceControllers.add(new NativeDebugPreferenceController(context));
+        securityPreferenceControllers.add(new EnableRandomTcpIsnsPreferenceController(context));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
         controllers.addAll(securityPreferenceControllers);

@@ -77,6 +77,12 @@
             android:summary="@string/native_debug_summary"
             android:persistent="false" />
 
+        <SwitchPreference
+            android:key="tcp_random_isns"
+            android:title="@string/tcp_random_isns_title"
+            android:summary="@string/tcp_random_isns_summary"
+            android:persistent="false" />
+
         <ListPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
