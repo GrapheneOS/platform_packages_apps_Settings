@@ -77,6 +77,12 @@
             android:summary="@string/native_debug_summary"
             android:persistent="false" />
 
+        <SwitchPreference
+            android:key="tcp_timestamp_disable"
+            android:title="@string/tcp_timestamp_disable_title"
+            android:summary="@string/tcp_timestamp_disable_summary"
+            android:persistent="false" />
+
         <ListPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
