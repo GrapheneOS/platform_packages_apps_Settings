@@ -1426,7 +1426,7 @@
     </string-array>
 
     <string-array name="wifi_privacy_entries_extended">
-        <item>Use fully randomized MAC (default)</item>
+        <item>Use per-connection randomized MAC (default)</item>
         <item>Use per-network randomized MAC</item>
         <item>Use device MAC</item>
     </string-array>
