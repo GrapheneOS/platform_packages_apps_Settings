@@ -189,7 +189,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         setEmptyView(mEmptyView);
         final Resources res = getResourcesForSubId();
         final String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
-                res.getString(R.string.wifi_calling_off_explanation_2));
+                res.getString(R.string.wifi_calling_off_explanation_2)) + res.getString(R.string.wifi_calling_emergency_disclaimer);
         mEmptyView.setText(emptyViewText);
 
         mSwitchBar = getView().findViewById(R.id.switch_bar);

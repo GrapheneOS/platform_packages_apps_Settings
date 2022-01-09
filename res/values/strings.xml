@@ -2868,6 +2868,8 @@
     <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.<xliff:g id="additional_text" example="Learn More">%1$s</xliff:g></string>
     <!-- Wi-Fi Calling settings. Additional text displayed when Wi-Fi Calling is off. Default empty. [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_off_explanation_2"></string>
+    <!-- Wi-Fi Calling emergency disclaimer -->
+    <string name="wifi_calling_emergency_disclaimer">When making emergency calls over Wi-Fi on GrapheneOS, emergency services may not be able to obtain reliable location information.</string>
     <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
     <string name="emergency_address_title">Emergency Address</string>
     <!-- Summary of Update Emergency Address preference, explaining usage of emergency address [CHAR LIMIT=NONE] -->
