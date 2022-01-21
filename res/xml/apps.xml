@@ -91,4 +91,13 @@
         android:order="20"
         settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
 
+    <Preference
+        android:title="@string/sandboxed_google_play"
+        android:order="-995">
+        <intent
+            android:action="app.grapheneos.gmscompat.SETTINGS_LINK"
+            android:targetPackage="app.grapheneos.gmscompat"
+        />
+    </Preference>
+
 </PreferenceScreen>
