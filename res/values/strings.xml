@@ -12135,4 +12135,9 @@
 
     <!-- Warning message when we try to dock an app not supporting multiple instances split into multiple sides [CHAR LIMIT=NONE] -->
     <string name="dock_multi_instances_not_supported_text">"This app can only be opened in 1 window"</string>
+    <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_title">Allow fingerprint unlocking</string>
+    <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary">Allow fingerprints to unlock the screen lock. If this is disabled, fingerprints can still be used in apps.</string>
+
+    <string name="sandboxed_google_play">Sandboxed Google Play</string>
+    <string name="sandboxed_google_play_work_profile">Sandboxed Google Play (work profile)</string>
 </resources>
