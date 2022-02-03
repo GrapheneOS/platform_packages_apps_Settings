@@ -589,6 +589,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || mAppEntry.info.packageName.equals("com.android.inputmethod.latin")
                 || mAppEntry.info.packageName.equals("app.vanadium.webview")
+                || mAppEntry.info.packageName.equals("app.grapheneos.gmscompat")
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
             mButtonsPref.setButton2Text(R.string.disable_text)
