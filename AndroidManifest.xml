@@ -136,7 +136,8 @@
     <application
             android:name=".SettingsApplication"
             android:label="@string/settings_label"
-            android:icon="@drawable/ic_launcher_settings"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
