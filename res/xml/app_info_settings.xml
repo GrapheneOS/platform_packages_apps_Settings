@@ -200,7 +200,7 @@
     <Preference
         android:key="app_version"
         android:selectable="false"
-        android:order="9998"
+        android:order="9997"
         settings:controller="com.android.settings.applications.appinfo.AppVersionPreferenceController"
         settings:allowDividerAbove="true"
         settings:enableCopying="true"/>
@@ -208,8 +208,15 @@
     <Preference
         android:key="app_package_name"
         android:selectable="false"
-        android:order="9999"
+        android:order="9998"
         settings:controller="com.android.settings.applications.appinfo.AppPackageNamePreferenceController"
+        settings:enableCopying="true"/>
+
+    <Preference
+        android:key="app_signatures"
+        android:selectable="false"
+        android:order="9999"
+        settings:controller="com.android.settings.applications.appinfo.AppSignaturesPreferenceController"
         settings:enableCopying="true"/>
 
 </PreferenceScreen>
