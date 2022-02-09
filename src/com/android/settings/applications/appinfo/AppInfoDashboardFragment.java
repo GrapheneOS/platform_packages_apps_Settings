@@ -608,7 +608,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                         mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS |
                                 PackageManager.MATCH_ANY_USER |
-                                PackageManager.GET_SIGNATURES |
+                                PackageManager.GET_SIGNING_CERTIFICATES |
                                 PackageManager.GET_PERMISSIONS);
             } catch (NameNotFoundException e) {
                 Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
