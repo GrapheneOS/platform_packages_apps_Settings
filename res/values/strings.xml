@@ -3611,6 +3611,8 @@
     <string name="device_status_summary" product="tablet">Status of the battery, network, and other information</string>
     <!-- About phone screen, summary of the item to go into the phone status screen -->
     <string name="device_status_summary" product="default">Phone number, signal, etc.</string>
+    <!-- Do not translate. About phone, status item title -->
+    <string name="hardware_sku">Hardware SKU</string>
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings" >Storage</string>
     <!-- Settings title that shows user how much storage and cache space an App is taking [CHAR LIMIT=50] -->
