@@ -43,11 +43,16 @@
         android:icon="@drawable/ic_add_40dp"
         android:order="20"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="user_settings_add_users_when_locked"
-        android:title="@string/user_add_on_lockscreen_menu"
-        android:singleLineTitle="false"
-        android:order="105"
-        settings:allowDividerAbove="true"/>
+    <PreferenceCategory
+        android:key="user_settings_option_for_users"
+        android:layout="@layout/preference_category_no_label"
+        android:order="105">
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="user_settings_add_users_when_locked"
+            android:title="@string/user_add_on_lockscreen_menu"
+            android:singleLineTitle="false"
+            android:order="105"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>
