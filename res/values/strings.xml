@@ -14539,6 +14539,8 @@
     <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary">Allow fingerprints to unlock the screen lock. If this is disabled, fingerprints can still be used in apps.</string>
     <string name="connectivity_check_title">Internet connectivity check</string>
     <string name="connectivity_check_summary">HTTP endpoints to use for performing internet connectivity checks.</string>
+    <string name="user_settings_send_censored_notifications_to_current">Send notifications to current user</string>
+    <string name="user_settings_send_censored_notifications_to_current_summary">Your lock screen notifications will be forwarded to the current user if you are active in the background. Only the user\'s name, the app\'s name, and the time received will be shown.</string>
 
     <string name="attest_provisioning_title">Attestation key provisioning server</string>
     <string name="attest_provisioning_summary">Server used for provisioning hardware-based attestation keys</string>
