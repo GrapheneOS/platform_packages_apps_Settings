@@ -53,6 +53,12 @@
             android:title="@string/user_add_on_lockscreen_menu"
             android:singleLineTitle="false"
             android:order="105"/>
+        
+        <SwitchPreference
+            android:key="user_settings_send_censored_notifications_to_current"
+            android:title="@string/user_settings_send_censored_notifications_to_current"
+            android:summary="@string/user_settings_send_censored_notifications_to_current_summary"
+            android:order="106"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
