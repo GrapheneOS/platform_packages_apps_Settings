@@ -8,11 +8,11 @@ import android.os.SystemProperties;
 
 import android.provider.Settings;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -26,7 +26,7 @@ public class PinScramblePreferenceController extends AbstractPreferenceControlle
     private static final String PREF_KEY_SECURITY_CATEGORY = "security_category";
 
     private PreferenceCategory mSecurityCategory;
-    private ListPreference mScramblePin;
+    private SwitchPreference mScramblePin;
 
     public PinScramblePreferenceController(Context context) {
         super(context);
@@ -54,15 +54,15 @@ public class PinScramblePreferenceController extends AbstractPreferenceControlle
         if (mSecurityCategory == null) {
             return;
         }
-        mScramblePin = (ListPreference) mSecurityCategory.findPreference(KEY_SCRAMBLE_PIN_LAYOUT);
-        mScramblePin.setValue(Boolean.toString(Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, 0) != 0));
+        mScramblePin = (SwitchPreference) mSecurityCategory.findPreference(KEY_SCRAMBLE_PIN_LAYOUT);
+        mScramblePin.setChecked(Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, 0) != 0);
     }
 
     @Override
     public void onResume() {
         updatePreferenceState();
         if (mScramblePin != null) {
-            boolean mode = Boolean.parseBoolean(mScramblePin.getValue());
+            boolean mode = mScramblePin.isChecked();
             Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, (mode) ? 0 : 1);
         }
     }
@@ -71,7 +71,7 @@ public class PinScramblePreferenceController extends AbstractPreferenceControlle
     public boolean onPreferenceChange(Preference preference, Object value) {
         final String key = preference.getKey();
         if (KEY_SCRAMBLE_PIN_LAYOUT.equals(key)) {
-            boolean mode = Boolean.parseBoolean((String) value);
+            boolean mode = !mScramblePin.isChecked();
             Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.SCRAMBLE_PIN_LAYOUT, (mode) ? 1 : 0);
         }
         return true;
