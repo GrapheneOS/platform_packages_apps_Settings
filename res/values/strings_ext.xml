@@ -27,4 +27,7 @@
 
     <string name="scramble_pin_title">Scramble PIN input layout</string>
 
+    <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
+    <string name="privileged_euicc_management_summary">Requires sandboxed Google Play installation</string>
+
 </resources>
