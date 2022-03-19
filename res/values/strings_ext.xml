@@ -28,4 +28,10 @@
 
     <string name="scramble_pin_title">Scramble PIN input layout</string>
 
+    <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
+    <string name="privileged_euicc_management_summary">Requires sandboxed Google Play installation</string>
+    <string name="privileged_euicc_management_restart_to_disable_dialog">Device restart is required to disable this setting.</string>
+    <string name="privileged_euicc_management_restart_button">Restart</string>
+    <string name="privileged_euicc_management_restart_due_to_first_boot">Device restart is required to allow enabling this setting.</string>
+
 </resources>
