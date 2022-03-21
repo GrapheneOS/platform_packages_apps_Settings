@@ -4,6 +4,7 @@ import android.app.compat.gms.GmsCompat;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Process;
 
 import com.android.internal.gmscompat.GmsInfo;
 import com.android.settings.R;
@@ -38,6 +39,11 @@ public class EuiccCompatController extends TogglePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
+        if (!Process.myUserHandle().isSystem()) {
+            // eUICC compat packages have a <install-in user-type="SYSTEM" /> directive
+            return DISABLED_FOR_USER;
+        }
+
         return checkDependencies() ?
             AVAILABLE :
             DISABLED_DEPENDENT_SETTING;
