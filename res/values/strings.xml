@@ -13709,6 +13709,9 @@
     <string name="connectivity_check_title">Internet connectivity check</string>
     <string name="connectivity_check_summary">HTTP endpoints to use for performing internet connectivity checks.</string>
 
+    <string name="attest_rotation_title">Attestation Key Rotation Server</string>
+    <string name="attest_rotation_summary">Servers used for rotating attestation keys</string>
+
     <string name="sandboxed_google_play">Sandboxed Google Play</string>
     <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
     <string name="privileged_euicc_management_summary">Requires Sandboxed Google Play installation</string>
