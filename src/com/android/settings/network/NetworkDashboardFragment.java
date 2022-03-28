@@ -122,6 +122,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         ConnectivityCheckPreferenceController connectivityCheck =
                 new ConnectivityCheckPreferenceController(context);
         controllers.add(connectivityCheck);
+        AttestRotationPreferenceController attestRotation =
+                new AttestRotationPreferenceController(context);
+        controllers.add(attestRotation);
         return controllers;
     }
 
