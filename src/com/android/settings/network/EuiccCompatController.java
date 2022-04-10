@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Process;
+import android.os.UserHandle;
 
 import com.android.internal.gmscompat.GmsInfo;
 import com.android.settings.R;
@@ -67,14 +68,8 @@ public class EuiccCompatController extends TogglePreferenceController {
 
     private boolean checkDependencies() {
         for (String pkg : GmsInfo.DEPENDENCIES_OF_EUICC_PACKAGES) {
-            PackageInfo pkgInfo;
-            try {
-                pkgInfo = packageManager.getPackageInfo(pkg, PackageManager.GET_SIGNING_CERTIFICATES);
-            } catch (PackageManager.NameNotFoundException e) {
-                return false;
-            }
-            // check certificate, all dependencies are a part of the GMS suite
-            if (GmsCompat.isGmsApp(pkgInfo) && pkgInfo.applicationInfo.enabled) {
+            // all dependencies are a part of the GMS suite
+            if (GmsCompat.isGmsApp(pkg, UserHandle.USER_SYSTEM)) {
                 continue;
             }
             return false;
