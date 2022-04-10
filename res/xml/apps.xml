@@ -92,12 +92,16 @@
         settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
 
     <Preference
+        android:key="sandboxed_google_play"
         android:title="@string/sandboxed_google_play"
-        android:order="-995">
-        <intent
-            android:action="app.grapheneos.gmscompat.SETTINGS_LINK"
-            android:targetPackage="app.grapheneos.gmscompat"
-        />
-    </Preference>
+        android:order="-980"
+        settings:controller="com.android.settings.applications.GmsCompatAppController"/>
+
+    <Preference
+        android:key="sandboxed_google_play_work_profile"
+        android:title="@string/sandboxed_google_play_work_profile"
+        android:order="-979"
+        settings:forWork="true"
+        settings:controller="com.android.settings.applications.GmsCompatAppController"/>
 
 </PreferenceScreen>
