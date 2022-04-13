@@ -303,7 +303,7 @@
     <!-- Whether to show a preference item for the manual in About phone -->
     <bool name="config_show_manual">false</bool>
     <!-- Whether to show a preference item for regulatory information in About phone -->
-    <bool name="config_show_regulatory_info">false</bool>
+    <bool name="config_show_regulatory_info">true</bool>
 
     <!-- Whether to show a preference item for mobile plan -->
     <bool name="config_show_mobile_plan">true</bool>
