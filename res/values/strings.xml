@@ -14528,6 +14528,9 @@
     <string name="attest_provisioning_title">Attestation key provisioning server</string>
     <string name="attest_provisioning_summary">Server used for provisioning hardware-based attestation keys</string>
 
+    <string name="psds_server_title">PSDS server</string>
+    <string name="psds_server_summary">Server used for providing satellite information to assist location</string>
+
     <string name="sandboxed_google_play">Sandboxed Google Play</string>
     <string name="sandboxed_google_play_work_profile">Sandboxed Google Play (work profile)</string>
 
