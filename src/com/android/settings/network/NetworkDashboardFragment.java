@@ -125,6 +125,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         AttestProvisioningPreferenceController attestProvisioning =
                 new AttestProvisioningPreferenceController(context);
         controllers.add(attestProvisioning);
+        BroadcomGnssServerPreferenceController broadcomGnssServer =
+                new BroadcomGnssServerPreferenceController(context);
+        controllers.add(broadcomGnssServer);
         return controllers;
     }
 
