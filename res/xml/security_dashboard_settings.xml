@@ -84,6 +84,12 @@
             android:persistent="false" />
 
         <SwitchPreference
+            android:key="screenshot_timestamp_exif"
+            android:title="@string/screenshot_timestamp_exif_title"
+            android:summary="@string/screenshot_timestamp_exif_summary"
+            android:persistent="false" />
+
+        <SwitchPreference
             android:key="keyguard_camera"
             android:title="@string/keyguard_camera_title"
             android:summary="@string/keyguard_camera_summary"

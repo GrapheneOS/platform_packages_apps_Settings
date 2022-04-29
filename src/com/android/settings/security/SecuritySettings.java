@@ -128,6 +128,7 @@ public class SecuritySettings extends DashboardFragment {
         securityPreferenceControllers.add(new KeyguardCameraPreferenceController(context));
         securityPreferenceControllers.add(new ExecSpawnPreferenceController(context));
         securityPreferenceControllers.add(new NativeDebugPreferenceController(context));
+        securityPreferenceControllers.add(new ScreenshotTimestampExifPreferenceController(context));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
         controllers.addAll(securityPreferenceControllers);

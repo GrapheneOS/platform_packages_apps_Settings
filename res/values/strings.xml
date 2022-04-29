@@ -13719,4 +13719,7 @@
     <string name="sandboxed_google_play_work_profile">Sandboxed Google Play (work profile)</string>
     <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
     <string name="privileged_euicc_management_summary">Requires Sandboxed Google Play installation</string>
+
+    <string name="screenshot_timestamp_exif_title">Disable screenshot timestamp EXIF</string>
+    <string name="screenshot_timestamp_exif_summary">Disable adding a date and timestamp to screenshot EXIF metadata</string>
 </resources>
