@@ -29,7 +29,7 @@
     <ListPreference
         android:key="wifi_timeout"
         android:title="@string/wifi_timeout"
-        android:summary="@string/wifi_timeout_summary"
+        android:summary="@string/wifi_timeout_static_summary"
         android:entries="@array/wifi_timeout_entries"
         android:entryValues="@array/wifi_timeout_values"
         settings:controller="com.android.settings.wifi.WifiTimeoutPreferenceController"/>
