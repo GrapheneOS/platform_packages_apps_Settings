@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/BiometricEnrollIntroTitle"
-                android:text="@string/security_settings_face_enroll_introduction_info_title" />
+                android:text="@string/security_settings_face_enroll_introduction_info_title_en" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/BiometricEnrollIntroTitle"
-                android:text="@string/security_settings_face_enroll_introduction_how_title" />
+                android:text="@string/security_settings_face_enroll_introduction_how_title_en" />
 
             <TextView
                 android:id="@+id/how_message"
