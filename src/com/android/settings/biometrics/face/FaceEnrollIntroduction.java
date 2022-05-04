@@ -357,32 +357,32 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     protected int getInfoMessageGlasses() {
-        return R.string.security_settings_face_enroll_introduction_info_glasses;
+        return R.string.security_settings_face_enroll_introduction_info_glasses_en;
     }
 
     @StringRes
     protected int getInfoMessageLooking() {
-        return R.string.security_settings_face_enroll_introduction_info_looking;
+        return R.string.security_settings_face_enroll_introduction_info_looking_en;
     }
 
     @StringRes
     protected int getInfoMessageRequireEyes() {
-        return R.string.security_settings_face_enroll_introduction_info_gaze;
+        return R.string.security_settings_face_enroll_introduction_info_gaze_en;
     }
 
     @StringRes
     protected int getHowMessage() {
-        return R.string.security_settings_face_enroll_introduction_how_message;
+        return R.string.security_settings_face_enroll_introduction_how_message_en;
     }
 
     @StringRes
     protected int getInControlTitle() {
-        return R.string.security_settings_face_enroll_introduction_control_title;
+        return R.string.security_settings_face_enroll_introduction_control_title_en;
     }
 
     @StringRes
     protected int getInControlMessage() {
-        return R.string.security_settings_face_enroll_introduction_control_message;
+        return R.string.security_settings_face_enroll_introduction_control_message_en;
     }
 
     @StringRes
