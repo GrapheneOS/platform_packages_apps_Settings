@@ -676,6 +676,18 @@
     <!-- Introduction detail message shown in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_setup">Use your face to unlock your phone, authorize purchases, or sign in to apps</string>
     <!-- Title of a section on the face enrollment introduction page that provides additional information. [CHAR LIMIT=40] -->
+
+    <string name="security_settings_face_enroll_introduction_info_title_en">Keep in mind</string>
+    <string name="security_settings_face_enroll_introduction_how_title_en">How it works</string>
+
+    <string name="security_settings_face_enroll_introduction_info_glasses_en">Glasses or lightly tinted sunglasses are OK.</string>
+    <string name="security_settings_face_enroll_introduction_info_looking_en">Looking at the phone can unlock it even when you don’t intend to. Your phone can also be unlocked by someone who looks a lot like you, like an identical sibling, or if someone holds it up to your face.</string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure_en">Using a face to unlock the phone may be less secure than a strong pattern or PIN.</string>
+    <string name="security_settings_face_enroll_introduction_info_gaze_en">Face Unlock can require your eyes to be open to unlock the phone or verify it’s you. You can turn this option on at any time in Settings.</string>
+    <string name="security_settings_face_enroll_introduction_how_message_en">Face Unlock creates a unique model of your face to verify it’s you. To create this face model during setup, you will take images of your face from different angles.\n\nWhen you use Face Unlock, images are used to update your face model. Images used to create your face model are not stored, but the face model is stored securely on your phone and never leaves the phone. All processing occurs securely on your phone.</string>
+    <string name="security_settings_face_enroll_introduction_control_title_en">You’re in control</string>
+    <string name="security_settings_face_enroll_introduction_control_message_en">You can delete your face model or turn off Face Unlock at any time in Settings. Face models are stored on the phone until you delete them.\n\nLearn more at g.co/pixel/faceunlock.</string>
+
     <string name="security_settings_face_enroll_introduction_info_title"></string>
     <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_glasses"></string>
