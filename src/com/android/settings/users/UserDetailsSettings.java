@@ -344,7 +344,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 if (mGuestUserAutoCreated) {
                     mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
                 }
-                mRemoveUserPref.setTitle(R.string.user_exit_guest_title);
                 removePreference(KEY_DISALLOW_INSTALL_APPS);
                 removePreference(KEY_DISALLOW_INSTALL_APPS_NON_GOS);
             } else {
