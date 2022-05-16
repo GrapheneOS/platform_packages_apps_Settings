@@ -13748,4 +13748,7 @@
 
     <string name="battery_share_description">Charge other devices by placing them on the back of your phone</string>
     <string name="battery_share">Battery share</string>
+
+    <string name="backup_app_toggle_title">Enable Backup App</string>
+    <string name="backup_app_toggle_summary">Enables the backup app used in a user profile</string>
 </resources>

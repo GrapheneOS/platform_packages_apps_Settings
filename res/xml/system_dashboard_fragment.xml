@@ -43,6 +43,14 @@
         android:fragment="com.android.settings.datetime.DateTimeSettings"
         settings:controller="com.android.settings.datetime.DateTimePreferenceController"/>
 
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="backup_app_toggle"
+        android:title="@string/backup_app_toggle_title"
+        android:summary="@string/backup_app_toggle_summary"
+        android:icon="@drawable/ic_settings_backup"
+        android:order="-61"
+        settings:controller="com.android.settings.backup.EnableBackupAppPreferenceController"/>
+
     <!-- System updates -->
     <Preference
         android:key="additional_system_update_settings"
