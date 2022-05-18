@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+
 import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY;
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
@@ -60,6 +62,8 @@ import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.OnActivityResultListener;
+import com.android.settings.backup.BackupSettingsHelper;
+import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
@@ -186,6 +190,21 @@ public class SettingsActivity extends SettingsBaseActivity
                     mBatteryPresent = batteryPresent;
                     updateTilesList();
                 }
+            }
+        }
+    };
+
+    private final BackupSettingsHelper backupHelper = new BackupSettingsHelper(this);
+
+    private BroadcastReceiver mBackupAppChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            final String pkgName = intent.getData().getSchemeSpecificPart();
+            String backupPkg = backupHelper.getIntentForBackupSettings().getComponent().getPackageName();
+            Log.d(LOG_TAG, "Broadcast received for " + pkgName + ", does it match " + backupPkg + "?");
+            if (Intent.ACTION_PACKAGE_CHANGED.equals(action) && backupPkg.equals(pkgName)) {
+                updateTilesList();
             }
         }
     };
@@ -600,7 +619,7 @@ public class SettingsActivity extends SettingsBaseActivity
                 new IntentFilter(DevelopmentSettingsEnabler.DEVELOPMENT_SETTINGS_CHANGED_ACTION));
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-
+        registerReceiver(mBackupAppChangeReceiver, new IntentFilter(Intent.ACTION_PACKAGE_CHANGED));
         updateTilesList();
     }
 
@@ -610,6 +629,7 @@ public class SettingsActivity extends SettingsBaseActivity
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mDevelopmentSettingsListener);
         mDevelopmentSettingsListener = null;
         unregisterReceiver(mBatteryInfoReceiver);
+        unregisterReceiver(mBackupAppChangeReceiver);
     }
 
     @Override
@@ -726,6 +746,16 @@ public class SettingsActivity extends SettingsBaseActivity
         boolean somethingChanged = false;
         final String packageName = getPackageName();
         final StringBuilder changedList = new StringBuilder();
+
+        try {
+            final String pkgNameToChange = backupHelper.getIntentForBackupSettings()
+                .getComponent().getPackageName();
+            final int state = pm.getApplicationEnabledSetting(pkgNameToChange);
+            final boolean isEnabled = state == COMPONENT_ENABLED_STATE_ENABLED;
+            somethingChanged = setTileEnabled(changedList,
+                    new ComponentName(packageName, UserBackupSettingsActivity.class.getName()),
+                    isEnabled, isAdmin) || somethingChanged;
+        } catch (IllegalArgumentException ignored) { Log.d(LOG_TAG, "Failed to change package name"); }
         somethingChanged = setTileEnabled(changedList,
                 new ComponentName(packageName, WifiSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin) || somethingChanged;
