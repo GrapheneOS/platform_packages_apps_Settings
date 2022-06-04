@@ -205,7 +205,8 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case KEY_ALWAYS_ON_VPN:
-                return onAlwaysOnVpnClick((Boolean) newValue, mPreferenceLockdown.isChecked());
+                boolean isToggledOn = (Boolean) newValue;
+                return onAlwaysOnVpnClick(isToggledOn, mPreferenceLockdown.isChecked() || isToggledOn);
             case KEY_LOCKDOWN_VPN:
                 return onAlwaysOnVpnClick(mPreferenceAlwaysOn.isChecked(), (Boolean) newValue);
             default:
@@ -232,7 +233,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     private boolean onAlwaysOnVpnClick(final boolean alwaysOnSetting, final boolean lockdown) {
         final boolean replacing = isAnotherVpnActive();
         final boolean wasLockdown = VpnUtils.isAnyLockdownActive(getActivity());
-        if (ConfirmLockdownFragment.shouldShow(replacing, wasLockdown, lockdown)) {
+        if (ConfirmLockdownFragment.shouldShow(replacing, wasLockdown, lockdown) && isVpnAlwaysOn()) {
             // Place a dialog to confirm that traffic should be locked down.
             final Bundle options = null;
             ConfirmLockdownFragment.show(
