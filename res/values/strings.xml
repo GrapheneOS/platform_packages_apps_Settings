@@ -14554,4 +14554,7 @@
 
     <string name="screenshot_timestamp_exif_title">Save screenshot timestamp to EXIF</string>
     <string name="screenshot_timestamp_exif_summary">Enables adding a timestamp to screenshot EXIF metadata</string>
+
+    <string name="battery_share_description">Charge other devices by placing them on the back of your phone</string>
+    <string name="battery_share">Battery share</string>
 </resources>
