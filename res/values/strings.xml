@@ -12177,4 +12177,7 @@
 
     <string name="app_info_install_time">Installed: %1$s</string>
     <string name="app_info_update_time">Updated: %1$s</string>
+
+    <string name="battery_share_description">Charge other devices by placing them on the back of your phone</string>
+    <string name="battery_share">Battery share</string>
 </resources>
