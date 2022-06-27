@@ -36,6 +36,13 @@
         settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
         android:summary="@string/nfc_secure_toggle_summary"/>
 
+    <com.android.settingslib.RestrictedPreference
+        android:key="nfc_timeout"
+        android:title="@string/nfc_timeout"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.connecteddevice.NfcTimeoutSettings"
+        settings:controller="com.android.settings.connecteddevice.NfcTimeoutPreferenceController"/>
+
     <Preference
         android:key="default_payment_app"
         android:title="@string/nfc_payment_settings_title"

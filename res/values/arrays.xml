@@ -1773,4 +1773,34 @@
         <item>2</item>
         <item>4</item>
     </string-array>
+
+    <string-array name="nfc_timeout_values" >
+        <item>0</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+        <item>28800000</item>
+    </string-array>
+
+    <string-array name="nfc_timeout_entries">
+        <item>@string/nfc_timeout_summary_never</item>
+        <item>@string/nfc_timeout_summary_15secs</item>
+        <item>@string/nfc_timeout_summary_30secs</item>
+        <item>@string/nfc_timeout_summary_1min</item>
+        <item>@string/nfc_timeout_summary_2mins</item>
+        <item>@string/nfc_timeout_summary_5mins</item>
+        <item>@string/nfc_timeout_summary_10mins</item>
+        <item>@string/nfc_timeout_summary_30mins</item>
+        <item>@string/nfc_timeout_summary_1hour</item>
+        <item>@string/nfc_timeout_summary_2hours</item>
+        <item>@string/nfc_timeout_summary_4hours</item>
+        <item>@string/nfc_timeout_summary_8hours</item>
+    </string-array>
 </resources>

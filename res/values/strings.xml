@@ -13748,4 +13748,21 @@
 
     <string name="battery_share_description">Charge other devices by placing them on the back of your phone</string>
     <string name="battery_share">Battery share</string>
+
+    <string name="nfc_timeout">NFC timeout</string>
+    <string name="nfc_timeout_summary">NFC will turn off if it is not used in last <xliff:g id="timeout_description">%1$s</xliff:g>  </string>
+    <string name="nfc_timeout_summary_off">Do not automatically turn off NFC</string>
+    <string name="nfc_timeout_summary_never">Never</string>
+    <string name="nfc_timeout_summary_15secs">15 seconds</string>
+    <string name="nfc_timeout_summary_30secs">30 seconds</string>
+    <string name="nfc_timeout_summary_1min">1 minute</string>
+    <string name="nfc_timeout_summary_2mins">2 minutes</string>
+    <string name="nfc_timeout_summary_5mins">5 minutes</string>
+    <string name="nfc_timeout_summary_10mins">10 minutes</string>
+    <string name="nfc_timeout_summary_30mins">30 minutes</string>
+    <string name="nfc_timeout_summary_1hour">1 hour</string>
+    <string name="nfc_timeout_summary_2hours">2 hours</string>
+    <string name="nfc_timeout_summary_4hours">4 hours</string>
+    <string name="nfc_timeout_summary_8hours">8 hours</string>
+
 </resources>
