@@ -60,6 +60,11 @@
         settings:controller="com.android.settings.applications.appinfo.AppPermissionPreferenceController" />
 
     <Preference
+        android:key="storage_scopes"
+        android:title="@string/storage_scopes"
+        settings:controller="com.android.settings.applications.appinfo.AppStorageScopesPreferenceController" />
+
+    <Preference
         android:key="storage_settings"
         android:title="@string/storage_settings_for_app"
         android:summary="@string/summary_placeholder"
