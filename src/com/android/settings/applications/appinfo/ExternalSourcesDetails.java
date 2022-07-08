@@ -21,9 +21,11 @@ import static android.app.Activity.RESULT_OK;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.GosPackageState;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -133,6 +135,9 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             return true;
         }
         mSwitchPref.setChecked(mInstallAppsState.canInstallApps());
+
+        setupObbToggle();
+
         return true;
     }
 
@@ -144,5 +149,62 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
+    }
+
+    private RestrictedSwitchPreference mObbPref;
+
+    private void setupObbToggle() {
+        RestrictedSwitchPreference p = mObbPref;
+        if (p == null) {
+            if (!GosPackageState.attachableToPackage(mPackageName)) {
+                return;
+            }
+            p = createObbToggle();
+            mSwitchPref.getParent().addPreference(p);
+            mObbPref = p;
+        }
+
+        boolean canInstallApps = mInstallAppsState.canInstallApps();
+
+        if (!canInstallApps) {
+            p.setChecked(false);
+            p.callChangeListener(Boolean.FALSE);
+        } else {
+            GosPackageState ps = GosPackageState.get(mPackageName);
+            p.setChecked(ps != null && ps.hasFlag(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY));
+        }
+
+        p.setEnabled(canInstallApps);
+    }
+
+    private RestrictedSwitchPreference createObbToggle() {
+        RestrictedSwitchPreference p = new RestrictedSwitchPreference(mSwitchPref.getContext());
+        p.setTitle(R.string.allow_access_to_obb_directory_title);
+        p.setSummary(R.string.allow_access_to_obb_directory_summary);
+
+        p.setOnPreferenceChangeListener((preference, checkedB) -> {
+            boolean checked = ((Boolean) checkedB).booleanValue();
+
+            final int flag = GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY;
+
+            GosPackageState curPs = GosPackageState.get(mPackageName);
+
+            // restart the app in all cases, because storage mount modes can't be updated dynamically
+            if (curPs != null) {
+                int newFlags = checked ? curPs.flags | flag : curPs.flags & (~flag);
+
+                if (newFlags == curPs.flags) {
+                    return true;
+                }
+
+                GosPackageState.set(mPackageName, newFlags, curPs.storageScopes, true);
+            } else {
+                GosPackageState.set(mPackageName, checked ? flag : 0, null, true);
+            }
+
+            return true;
+        });
+
+        return p;
     }
 }
