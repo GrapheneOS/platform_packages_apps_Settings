@@ -21,6 +21,7 @@ import static android.app.Activity.RESULT_OK;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.GosPackageState;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -133,6 +134,9 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
             return true;
         }
         mSwitchPref.setChecked(mInstallAppsState.canInstallApps());
+
+        setupObbToggle();
+
         return true;
     }
 
@@ -144,5 +148,56 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
+    }
+
+    private RestrictedSwitchPreference mObbPref;
+
+    private void setupObbToggle() {
+        RestrictedSwitchPreference p = mObbPref;
+        if (p == null) {
+            if (!GosPackageState.attachableToPackage(mPackageName)) {
+                return;
+            }
+            p = createObbToggle();
+            mSwitchPref.getParent().addPreference(p);
+            mObbPref = p;
+        }
+
+        boolean canInstallApps = mInstallAppsState.canInstallApps();
+
+        if (!canInstallApps) {
+            p.setChecked(false);
+            p.callChangeListener(Boolean.FALSE);
+        } else {
+            GosPackageState ps = GosPackageState.get(mPackageName);
+            p.setChecked(ps != null && ps.hasFlag(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY));
+        }
+
+        p.setEnabled(canInstallApps);
+    }
+
+    private RestrictedSwitchPreference createObbToggle() {
+        RestrictedSwitchPreference p = new RestrictedSwitchPreference(mSwitchPref.getContext());
+        p.setTitle(R.string.allow_access_to_obb_directory_title);
+        p.setSummary(R.string.allow_access_to_obb_directory_summary);
+
+        p.setOnPreferenceChangeListener((preference, checkedB) -> {
+            var ps = GosPackageState.get(mPackageName);
+            boolean curValue = ps != null && ps.hasFlag(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY);
+
+            if (curValue == (boolean) checkedB) {
+                return true;
+            }
+
+            GosPackageState.edit(mPackageName)
+                    .setFlagsState(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY, (boolean) checkedB)
+                    // storage mount modes can't be updated dynamically
+                    .killUidAfterApply()
+                    .apply();
+
+            return true;
+        });
+
+        return p;
     }
 }
