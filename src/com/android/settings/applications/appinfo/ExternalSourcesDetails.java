@@ -156,6 +156,9 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     private void setupObbToggle() {
         RestrictedSwitchPreference p = mObbPref;
         if (p == null) {
+            if (!GosPackageState.attachableToPackage(mPackageName)) {
+                return;
+            }
             p = createObbToggle();
             mSwitchPref.getParent().addPreference(p);
             mObbPref = p;
