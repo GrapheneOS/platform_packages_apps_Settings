@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="bt_timeout">Turn off Bluetooth automatically</string>
+    <string name="bt_timeout_simple_summary">Automatically turn off Bluetooth after a set amount of time.</string>
+    <string name="bt_timeout_summary">Bluetooth will turn off after <xliff:g id="timeout_description">%1$s</xliff:g> no bluetooth device connected</string>
+</resources>
