@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="auto_reboot_title">Auto reboot</string>
+    <string name="auto_reboot_simple_summary">Automatically reboot the device, if the phone hasn\'t been unlocked within the selected number of hours.</string>
+    <string name="auto_reboot_summary">Automatically reboot the device, if the phone hasn\'t been unlocked within  <xliff:g id="timeout_description">%1$s</xliff:g></string>
+</resources>

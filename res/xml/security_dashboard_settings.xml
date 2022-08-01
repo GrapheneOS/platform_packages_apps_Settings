@@ -90,6 +90,14 @@
             android:persistent="false" />
 
         <com.android.settingslib.RestrictedPreference
+            android:key="auto_reboot"
+            android:title="@string/auto_reboot_title"
+            android:summary="@string/auto_reboot_simple_summary"
+            android:fragment="com.android.settings.security.AutoRebootFragment"
+            settings:controller="com.android.settings.security.AutoRebootPreferenceController"/>
+
+
+        <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"
