@@ -25,7 +25,6 @@ import android.content.pm.GosPackageState;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -183,24 +182,11 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         p.setSummary(R.string.allow_access_to_obb_directory_summary);
 
         p.setOnPreferenceChangeListener((preference, checkedB) -> {
-            boolean checked = ((Boolean) checkedB).booleanValue();
-
-            final int flag = GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY;
-
-            GosPackageState curPs = GosPackageState.get(mPackageName);
-
-            // restart the app in all cases, because storage mount modes can't be updated dynamically
-            if (curPs != null) {
-                int newFlags = checked ? curPs.flags | flag : curPs.flags & (~flag);
-
-                if (newFlags == curPs.flags) {
-                    return true;
-                }
-
-                GosPackageState.set(mPackageName, newFlags, curPs.storageScopes, true);
-            } else {
-                GosPackageState.set(mPackageName, checked ? flag : 0, null, true);
-            }
+            GosPackageState.edit(mPackageName)
+                    .setFlagsState(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY, (boolean) checkedB)
+                    // storage mount modes can't be updated dynamically
+                    .killUidAfterApply()
+                    .apply();
 
             return true;
         });
