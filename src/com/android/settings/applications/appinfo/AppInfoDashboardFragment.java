@@ -216,7 +216,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
         alarmsAndReminders.setPackageName(packageName);
         alarmsAndReminders.setParentFragment(this);
 
+        final AppRelaxHardeningPreferenceController relaxHardening =
+                use(AppRelaxHardeningPreferenceController.class);
+        relaxHardening.setParentFragment(this);
+
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
+                relaxHardening,
                 writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
                 alarmsAndReminders));
 
