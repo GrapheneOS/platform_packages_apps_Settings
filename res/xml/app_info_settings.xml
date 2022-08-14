@@ -158,6 +158,12 @@
         android:title="@string/advanced_apps"
         settings:controller="com.android.settings.applications.appinfo.AdvancedAppInfoPreferenceCategoryController">
 
+        <SwitchPreference
+            android:key="app_relax_hardening"
+            android:title="@string/app_relax_hardening_title"
+            android:summary="@string/app_relax_hardening_summary"
+            settings:controller="com.android.settings.applications.appinfo.AppRelaxHardeningPreferenceController" />
+
         <Preference
             android:key="system_alert_window"
             android:title="@string/draw_overlay"
