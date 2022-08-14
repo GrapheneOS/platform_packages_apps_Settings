@@ -12166,4 +12166,8 @@
 
     <string name="allow_access_to_obb_directory_title">Allow access to Android/obb folder</string>
     <string name="allow_access_to_obb_directory_summary">Required for installation of some large apps (mostly games) that use OBB expansion files</string>
+
+    <string name="app_relax_hardening_title">Exploit protection compatibility mode</string>
+    <string name="app_relax_hardening_summary">Improve compatibility with misbehaving apps by using Android\'s standard address space size and memory allocator</string>
+    <string name="app_hardening_config">Configure hardening</string>
 </resources>
