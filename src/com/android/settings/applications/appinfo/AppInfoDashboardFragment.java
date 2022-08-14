@@ -227,6 +227,15 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 externalSource, acrossProfiles, alarmsAndReminders, longBackgroundTasks));
         advancedAppInfo.setAppEntry(mAppEntry);
 
+        final AppRelaxHardeningPreferenceController relaxHardening =
+                use(AppRelaxHardeningPreferenceController.class);
+        relaxHardening.setParentFragment(this);
+
+        use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
+                relaxHardening,
+                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
+                alarmsAndReminders));
+
         final AppLocalePreferenceController appLocale =
                 use(AppLocalePreferenceController.class);
         appLocale.setParentFragment(this);
