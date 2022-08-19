@@ -91,7 +91,7 @@ public class EnabledNetworkModePreferenceController extends
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
                 || carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)) {
-            visible = false;
+            visible = true;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = false;
         } else if (!isCallStateIdle()) {
@@ -271,6 +271,7 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         void setPreferenceEntries() {
+            boolean lteOnlyUnsupported = false;
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
 
             clearAllEntries();
@@ -286,6 +287,7 @@ public class EnabledNetworkModePreferenceController extends
                             .addFormat(UiOptions.PresentFormat.addGlobalEntry);
                     break;
                 case ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES:
+                    lteOnlyUnsupported = true;
                     uiOptions = uiOptions
                             .setChoices(R.array.enabled_networks_cdma_no_lte_values)
                             .addFormat(UiOptions.PresentFormat.add3gEntry)
@@ -305,6 +307,7 @@ public class EnabledNetworkModePreferenceController extends
                             .addFormat(UiOptions.PresentFormat.add2gEntry);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES:
+                    lteOnlyUnsupported = true;
                     uiOptions = uiOptions
                             .setChoices(R.array.enabled_networks_except_gsm_lte_values)
                             .addFormat(UiOptions.PresentFormat.add3gEntry);
@@ -322,6 +325,7 @@ public class EnabledNetworkModePreferenceController extends
                             .addFormat(UiOptions.PresentFormat.add3gEntry);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_LTE_CHOICES:
+                    lteOnlyUnsupported = true;
                     uiOptions = uiOptions
                             .setChoices(R.array.enabled_networks_except_lte_values)
                             .addFormat(UiOptions.PresentFormat.add3gEntry)
@@ -370,6 +374,11 @@ public class EnabledNetworkModePreferenceController extends
                 throw new IllegalArgumentException(
                         uiOptions.getType().name() + " index error.");
             }
+
+            if (!lteOnlyUnsupported){
+                addLteOnlyEntry();
+            }
+
             // Compose options based on given values and formats.
             IntStream.range(0, formatList.size()).forEach(entryIndex -> {
                 switch (formatList.get(entryIndex)) {
@@ -556,6 +565,9 @@ public class EnabledNetworkModePreferenceController extends
                         break;
                     }
                 case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
+                    setSummary(mShow4gForLTE
+                            ? R.string.network_4G_only : R.string.network_lte_only);
+                    break;
                 case TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA:
                     if (!mIsGlobalCdma) {
                         setSelectedEntry(
@@ -819,6 +831,16 @@ public class EnabledNetworkModePreferenceController extends
         private void add1xEntry(int value) {
             mEntries.add(getResourcesForSubId().getString(R.string.network_1x));
             mEntriesValue.add(value);
+        }
+
+        private void addLteOnlyEntry() {
+            if (mShow4gForLTE) {
+                mEntries.add(mContext.getString(R.string.network_4G_only));
+                mEntriesValue.add(TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY);
+            } else {
+                mEntries.add(mContext.getString(R.string.network_lte_only));
+                mEntriesValue.add(TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY);
+            }
         }
 
         private void addCustomEntry(String name, int value) {
