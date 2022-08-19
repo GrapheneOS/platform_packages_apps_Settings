@@ -50,8 +50,6 @@ enum EnabledNetworks {
 
     // For the case where world mode is enabled.
     PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE = 12;
-
-    ENABLE_NETWORK_4G_ONLY = 13;
 }
 
 // A request for popup menu.
@@ -105,8 +103,6 @@ message UiOptions {
 
         // Append both 5G and LTE network options into popup menu.
         add5gAndLteEntry = 11;
-
-        add4gOnlyEntry = 12;
     }
 
     // Format of popup menu entries.

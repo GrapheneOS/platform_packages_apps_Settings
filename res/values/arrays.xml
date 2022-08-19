@@ -1523,17 +1523,13 @@
         <item>@string/network_3G</item>
         <item>@string/network_2G</item>
     </string-array>
-    <!--ENABLED_NETWORKS_4G_CHOICES-->
     <string-array name="enabled_networks_values" translatable="false">
-        <item>"34"</item>
         <item>"9"</item>
         <item>"0"</item>
         <item>"1"</item>
     </string-array>
 
-   <!--ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES-->
     <string-array name="enabled_networks_except_gsm_values" translatable="false">
-        <item>"34"</item>
         <item>"9"</item>
         <item>"0"</item>
     </string-array>
@@ -1547,9 +1543,7 @@
         <item>"0"</item>
     </string-array>
 
-    <!--ENABLED_NETWORKS_CDMA_CHOICES-->
     <string-array name="enabled_networks_cdma_values" translatable="false">
-        <item>"34"</item>
         <item>"8"</item>
         <item>"4"</item>
         <item>"5"</item>
@@ -1561,16 +1555,12 @@
         <item>"5"</item>
     </string-array>
 
-    <!--ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES-->
     <string-array name="enabled_networks_cdma_only_lte_values" translatable="false">
-        <item>"34"</item>
         <item>"8"</item>
         <item>"10"</item>
     </string-array>
 
-    <!--ENABLED_NETWORKS_TDSCDMA_CHOICES-->
     <string-array name="enabled_networks_tdscdma_values" translatable="false">
-        <item>"34"</item>
         <item>"22"</item>
         <item>"18"</item>
         <item>"1"</item>
@@ -1601,42 +1591,41 @@
 
     <!-- The preferred network modes in Mobile network settings -->
     <string-array name="preferred_network_mode_choices">
-        <item>GSM/WCDMA preferred</item> //0
-        <item>GSM only</item>            //1
-        <item>WCDMA only</item>          //2
-        <item>GSM/WCDMA auto</item>      //3
-        <item>CDMA/EvDo auto</item>      //4
-        <item>CDMA w/o EvDo</item>       //5
-        <item>EvDo only</item>           //6
-        <item>CDMA/EvDo/GSM/WCDMA</item> //7
-        <item>CDMA + LTE/EvDo</item>     //8
-        <item>GSM/WCDMA/LTE</item>       //9
-        <item>LTE/CDMA/EvDo/GSM/WCDMA</item>  //10
-        <item>LTE</item>                      //11
-        <item>LTE / WCDMA</item>              //12
-        <item>TDSCDMA only</item>             //13
-        <item>TDSCDMA/WCDMA</item>            //14
-        <item>LTE/TDSCDMA</item>              //15
-        <item>TDSCDMA/GSM</item>              //16
-        <item>LTE/TDSCDMA/GSM</item>          //17
-        <item>TDSCDMA/GSM/WCDMA</item>        //18
-        <item>LTE/TDSCDMA/WCDMA</item>        //19
-        <item>LTE/TDSCDMA/GSM/WCDMA</item>    //20
-        <item>TDSCDMA/CDMA/EVDO/GSM/WCDMA </item>       //21
-        <item>LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA</item>    //22
-        <item>NR only</item>                            //23
-        <item>NR/LTE</item>                             //24
-        <item>NR/LTE/CDMA/EvDo</item>                   //25
-        <item>NR/LTE/GSM/WCDMA</item>                   //26
+        <item>GSM/WCDMA preferred</item>
+        <item>GSM only</item>
+        <item>WCDMA only</item>
+        <item>GSM/WCDMA auto</item>
+        <item>CDMA/EvDo auto</item>
+        <item>CDMA w/o EvDo</item>
+        <item>EvDo only</item>
+        <item>CDMA/EvDo/GSM/WCDMA</item>
+        <item>CDMA + LTE/EvDo</item>
+        <item>GSM/WCDMA/LTE</item>
+        <item>LTE/CDMA/EvDo/GSM/WCDMA</item>
+        <item>LTE</item>
+        <item>LTE / WCDMA</item>
+        <item>TDSCDMA only</item>
+        <item>TDSCDMA/WCDMA</item>
+        <item>LTE/TDSCDMA</item>
+        <item>TDSCDMA/GSM</item>
+        <item>LTE/TDSCDMA/GSM</item>
+        <item>TDSCDMA/GSM/WCDMA</item>
+        <item>LTE/TDSCDMA/WCDMA</item>
+        <item>LTE/TDSCDMA/GSM/WCDMA</item>
+        <item>TDSCDMA/CDMA/EVDO/GSM/WCDMA </item>
+        <item>LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA</item>
+        <item>NR only</item>
+        <item>NR/LTE</item>
+        <item>NR/LTE/CDMA/EvDo</item>
+        <item>NR/LTE/GSM/WCDMA</item>
         <!-- Global includes NR/LTE/CDMA/EvDo/GSM/WCDMA -->
-        <item>Global</item>                             //27
-        <item>NR/LTE/WCDMA</item>                       //28
-        <item>NR/LTE/TDSCDMA</item>                     //29
-        <item>NR/LTE/TDSCDMA/GSM</item>                 //30
-        <item>NR/LTE/TDSCDMA/WCDMA</item>               //31
-        <item>NR/LTE/TDSCDMA/GSM/WCDMA</item>           //32
-        <item>NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</item> //33
-        <item>LTE Only</item>                           //34
+        <item>Global</item>
+        <item>NR/LTE/WCDMA</item>
+        <item>NR/LTE/TDSCDMA</item>
+        <item>NR/LTE/TDSCDMA/GSM</item>
+        <item>NR/LTE/TDSCDMA/WCDMA</item>
+        <item>NR/LTE/TDSCDMA/GSM/WCDMA</item>
+        <item>NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</item>
     </string-array>
     <!-- The preferred network modes RIL constants, in order of the modes above,
          e.g. the choice "GSM/WCDMA preferred" has the corresponding value "0" -->
@@ -1675,7 +1664,6 @@
         <item>"31"</item>
         <item>"32"</item>
         <item>"33"</item>
-        <item>"34"</item>
     </string-array>
 
     <!-- Choices for CDMA subscription-->
