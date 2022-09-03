@@ -78,7 +78,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_GRANT_ADMIN = 7;
 
     /** Whether to enable the app_copying fragment. */
-    private static final boolean SHOW_APP_COPYING_PREF = false;
+    private static final boolean SHOW_APP_COPYING_PREF = true;
 
     private UserManager mUserManager;
     private UserCapabilities mUserCaps;
@@ -400,7 +400,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
-                removePreference(KEY_APP_COPYING);
             }
 
             // Remove preference KEY_REMOVE_USER if DISALLOW_REMOVE_USER restriction is set
