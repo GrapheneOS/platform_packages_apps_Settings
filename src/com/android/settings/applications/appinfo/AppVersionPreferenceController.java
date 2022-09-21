@@ -22,6 +22,9 @@ import android.text.BidiFormatter;
 
 import com.android.settings.R;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class AppVersionPreferenceController extends AppInfoPreferenceControllerBase {
 
     public AppVersionPreferenceController(Context context, String key) {
@@ -36,7 +39,40 @@ public class AppVersionPreferenceController extends AppInfoPreferenceControllerB
         if (packageInfo == null) {
             return null;
         }
-        return mContext.getString(R.string.version_text,
-                BidiFormatter.getInstance().unicodeWrap(packageInfo.versionName));
+
+        Context ctx = mContext;
+
+        DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+        DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
+
+        String times = null;
+        if (packageInfo.firstInstallTime != 0) {
+            String s = formatDate(packageInfo.firstInstallTime, dateFormat, timeFormat);
+            times = ctx.getString(R.string.app_info_install_time, s);
+        }
+
+        if (packageInfo.lastUpdateTime != 0 && packageInfo.lastUpdateTime != packageInfo.firstInstallTime) {
+            String s = formatDate(packageInfo.lastUpdateTime, dateFormat, timeFormat);
+            String updateTime = ctx.getString(R.string.app_info_update_time, s);
+            if (times != null) {
+                times += '\n' + updateTime;
+            } else {
+                times = updateTime;
+            }
+        }
+
+        return ctx.getString(R.string.version_text,
+                BidiFormatter.getInstance().unicodeWrap(packageInfo.versionName))
+                + "\n\n" + packageInfo.packageName
+                + "\nversionCode " + packageInfo.getLongVersionCode()
+                + "\n\ntargetSdk " + packageInfo.applicationInfo.targetSdkVersion
+                + "\nminSdk " + packageInfo.applicationInfo.minSdkVersion
+                + (times != null ? ("\n\n" + times) : "")
+        ;
+    }
+
+    private static String formatDate(long unixTs, DateFormat dateFormat, DateFormat timeFormat) {
+        Date d = new Date(unixTs);
+        return dateFormat.format(d) + "; " + timeFormat.format(d);
     }
 }
