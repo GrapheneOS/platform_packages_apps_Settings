@@ -61,13 +61,11 @@ public class AppVersionPreferenceController extends AppInfoPreferenceControllerB
             }
         }
 
-        return ctx.getString(R.string.version_text,
-                BidiFormatter.getInstance().unicodeWrap(packageInfo.versionName))
-                + "\n\n" + packageInfo.packageName
-                + "\nversionCode " + packageInfo.getLongVersionCode()
-                + "\n\ntargetSdk " + packageInfo.applicationInfo.targetSdkVersion
-                + "\nminSdk " + packageInfo.applicationInfo.minSdkVersion
-                + (times != null ? ("\n\n" + times) : "")
+        return packageInfo.packageName
+                + "\n" + ctx.getString(R.string.version_text,
+                    BidiFormatter.getInstance().unicodeWrap(packageInfo.versionName))
+                + "\ntargetSdk " + packageInfo.applicationInfo.targetSdkVersion
+                + (times != null ? ("\n" + times) : "")
         ;
     }
 
