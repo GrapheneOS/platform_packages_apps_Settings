@@ -14593,4 +14593,7 @@
     <string name="app_relax_hardening_title">Exploit protection compatibility mode</string>
     <string name="app_relax_hardening_summary">Improve compatibility with misbehaving apps by using Android\'s standard address space size and memory allocator</string>
     <string name="app_hardening_config">Configure hardening</string>
+
+    <string name="app_info_install_time">Installed: %1$s</string>
+    <string name="app_info_update_time">Updated: %1$s</string>
 </resources>
