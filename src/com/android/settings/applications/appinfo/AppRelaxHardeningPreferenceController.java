@@ -30,6 +30,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppInfoWithHeader;
+import com.android.settingslib.applications.AppUtils;
 
 import dalvik.system.VMRuntime;
 
@@ -47,16 +48,13 @@ public class AppRelaxHardeningPreferenceController extends AppInfoPreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        ApplicationInfo ai = mParent.getPackageInfo().applicationInfo;
-
-        String primaryAbi = ai.primaryCpuAbi;
-
-        if (!ai.isSystemApp() && primaryAbi != null && VMRuntime.is64BitAbi(primaryAbi)) {
-            // non-system app that has native 64-bit code
-            return AVAILABLE;
+        if (!AppUtils.isAppInstalled(mAppEntry)) {
+            // not installed for the current user, App info page is still shown in Owner in this case
+            return CONDITIONALLY_UNAVAILABLE;
         }
 
-        return CONDITIONALLY_UNAVAILABLE;
+        ApplicationInfo ai = mParent.getPackageInfo().applicationInfo;
+        return GosPackageState.eligibleForRelaxHardeningFlag(ai) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     private boolean addedDevPreference;
