@@ -63,7 +63,7 @@ public class PsdsServerPreferenceController
             return BasePreferenceController.DISABLED_FOR_USER;
         }
         String device = android.os.Build.HARDWARE;
-        if (!device.equals("oriole") && !device.equals("raven") && !device.equals("bluejay")) {
+        if (!device.equals("oriole") && !device.equals("raven") && !device.equals("bluejay") && !device.equals("panther") && !device.equals("cheetah")) {
             return BasePreferenceController.DISABLED_FOR_USER;
         }
         return BasePreferenceController.AVAILABLE;
