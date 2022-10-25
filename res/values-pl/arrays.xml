@@ -591,4 +591,12 @@
     <item msgid="5065465585332446709">"Po minucie"</item>
     <item msgid="622807566366131941">"Po 5 minutach"</item>
   </string-array>
+
+  <string-array name="wifi_privacy_entries_extended">
+      <item>Randomizowany adres MAC odnawiany przy każdym połączeniu (domyślnie)</item>
+      <item>Randomizowany adres MAC osobny dla każdej sieci</item>
+      <item>Użyj adresu MAC urządzenia</item>
+  </string-array>
+
+
 </resources>
