@@ -6009,7 +6009,7 @@
     <string name="allow_access_to_obb_directory_title">Zezwól na dostęp do folderu Android/obb</string>
     <string name="allow_access_to_obb_directory_summary">Wymagany do instalacji aplikacji zajmujących dużo przestrzeni dyskowej (głównie gier) które używają pliki rozrzerzające OBB</string>
 
-    <string name="app_relax_hardening_title">Trub zgodności ochrony przed exploitami</string>
+    <string name="app_relax_hardening_title">Tryb zgodności ochrony przed exploitami</string>
     <string name="app_relax_hardening_summary">Zwiększ kompatybilność niepoprawnie działających aplikacji używając standardowego mechanizmu Androida alokowania pamięci i zarządzania przestrzenią adresową</string>
     <string name="app_hardening_config">Konfiguruj utwardzanie (hardening)</string>
 
