@@ -6020,4 +6020,50 @@
     <string name="auto_grant_OTHER_SENSORS_permission_summary_on">Czujniki (Sensors) nie są standardowym uprawnieniem Androida, aplikacje bez dostępu mogą nie działać poprawnie.</string>
     <string name="auto_grant_OTHER_SENSORS_permission_summary_off">Gdy aplikacja będzie próbowała uzyskać dostęp do czujników (Sensors), pojawi się prośba o zezwolenie. Należy pamiętać, że niektóre aplikacje mogą wymagać ponownego uruchomienia po zezwoleniu na dostęp do czujników (Sensors).</string>
 
+
+    <!-- Connected devices screen, setting option name to change bluetooth timeout -->
+    <string name="bluetooth_timeout">Czasowy wyłącznik Bluetooth</string>
+
+    <!-- Connected devices screen, setting option summary to change bluetooth timeout -->
+    <string name="bluetooth_timeout_summary">Bluetooth wyłączy się automatycznie za <xliff:g id="timeout_description">%1$s</xliff:g> jeśli nie będą podłączone żadne urządzenia</string>
+    <string name="bluetooth_timeout_summary2">Nie wyłączaj automatycznie Bluetooth'a.</string>
+    <string name="bluetooth_timeout_summary_never">Nigdy</string>
+    <string name="bluetooth_timeout_summary_15secs">15 sekund</string>
+    <string name="bluetooth_timeout_summary_30secs">30 sekund</string>
+    <string name="bluetooth_timeout_summary_1min">1 minuta</string>
+    <string name="bluetooth_timeout_summary_2mins">2 minuty</string>
+    <string name="bluetooth_timeout_summary_5mins">5 minut</string>
+    <string name="bluetooth_timeout_summary_10mins">10 minut</string>
+    <string name="bluetooth_timeout_summary_30mins">30 minut</string>
+    <string name="bluetooth_timeout_summary_1hour">1 godzina</string>
+    <string name="bluetooth_timeout_summary_2hours">2 godziny</string>
+    <string name="bluetooth_timeout_summary_4hours">4 godziny</string>
+    <string name="bluetooth_timeout_summary_8hours">8 godzin</string>
+
+    <!--  screen, setting option name to change wifi timeout -->
+    <string name="wifi_timeout">Czasowy wyłącznik Wi-Fi</string>
+
+    <!--  screen, setting option summary to change wifi timeout -->
+    <string name="wifi_timeout_summary">Automatycznie wyłącz Wi-Fi po określonym czasie.</string>
+    <string name="wifi_timeout_summary1">Wi-Fi wyłączy się za <xliff:g id="timeout_description">%1$s</xliff:g> jeśli nie będzie podłączone do sieci</string>
+    <string name="wifi_timeout_summary2">Wyłączone</string>
+    <string name="wifi_timeout_summary_never">Nigdy</string>
+    <string name="wifi_timeout_summary_15secs">15 sekund</string>
+    <string name="wifi_timeout_summary_30secs">30 sekund</string>
+    <string name="wifi_timeout_summary_1min">1 minuta</string>
+    <string name="wifi_timeout_summary_2mins">2 minuty</string>
+    <string name="wifi_timeout_summary_5mins">5 minut</string>
+    <string name="wifi_timeout_summary_10mins">10 minut</string>
+    <string name="wifi_timeout_summary_30mins">30 minut</string>
+    <string name="wifi_timeout_summary_1hour">1 godzina</string>
+    <string name="wifi_timeout_summary_2hours">2 godziny</string>
+    <string name="wifi_timeout_summary_4hours">4 godziny</string>
+    <string name="wifi_timeout_summary_8hours">8 godzin</string>
+
+
+    <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
+    <string name="bootloader_version">Wersja bootloadera</string>
+
+
+
 </resources>
