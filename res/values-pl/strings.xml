@@ -5963,4 +5963,61 @@
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Nieprawidłowe hasło"</string>
     <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Aby odsłuchać, wyśrodkuj kod QR poniżej"</string>
     <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Nieprawidłowy format kodu QR"</string>
+
+
+
+    <string name="scramble_pin_title">Pomieszany PIN</string>
+    <string name="scramble_pin_summary">Dla zwiększenia bezpieczeństwa miesza klawisze klawiatury PIN podczas wpisywania kodu PIN na ekranie blokady.</string>
+    <string name="deny_new_usb_title">Akcesoria USB</string>
+    <string name="auto_reboot_title">Automatyczny restart</string>
+    <string name="auto_reboot_summary">Automatycznie zrestartuj telefon, jeśli nie zostanie odblokowany przez wybraną liczbę godzin.</string>
+    <string name="deny_new_usb_summary">Obsługa sterowania urządzeniami peryferyjnymi USB, takimi jak urządzenia wejściowe (myszy, klawiatury, joysticki) i pamięci masowe.</string>
+    <string name="keyguard_camera_title">Aparat na ekranie blokady</string>
+    <string name="keyguard_camera_summary">Pozwól na dostęp do aparatu na ekranie blokady</string>
+    <string name="exec_spawn_title">Włącz bezpieczne uruchamianie aplikacji</string>
+    <string name="exec_spawn_summary">Uruchamiaj aplikacje bardziej bezpiecznym sposobem. Uruchamianie aplikacji może potrwać odrobinę dłużej i procesy aplikacji mogą zajmować więcej pamięci.</string>
+    <string name="native_debug_title">Włącz debugowanie natywnego kodu</string>
+    <string name="native_debug_summary">Generuj użyteczne logi / raporty o błędach z awarii i zezwalaj na debugowanie natywnego kodu.</string>
+    <string name="security_settings_fingerprint_settings_screen_lock_category">Blokada ekranu</string>
+    <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_title">Zezwól na odblokowanie czytnikiem linii papilarnych</string>
+    <string name="security_settings_fingerprint_settings_use_fingerprint_unlock_phone_summary">Zezwól na odblokowanie ekranu czytnikiem linii papilarnych. Jeśli to ustawienie jest wyłączone, dalej można używać czytnika linii papilarnych w aplikacjach.</string>
+    <string name="connectivity_check_title">Sprawdzanie połączenia internetowego</string>
+    <string name="connectivity_check_summary">Serwer HTTP używany do sprawdzania stanu połączenia internetowego.</string>
+    <string name="user_settings_send_censored_notifications_to_current">Wyślij powiadomienia do aktualnego użytkownika</string>
+    <string name="user_settings_send_censored_notifications_to_current_summary">Twoje powiadomienia z ekranu blokady zostaną przekierowane do aktualnego użytkownika jeśli w tle jest aktywny inny profil użytkownika.  Wyświetlona zostanie tylko nazwa użytkownika, aplikacji oraz czas powiadomienia.</string>
+
+    <string name="attest_provisioning_title">Serwer udostępniania kluczy atestacyjnych</string>
+    <string name="attest_provisioning_summary">Serwer używany do dostarczania sprzętowych kluczy atestacyjnych</string>
+
+    <string name="psds_server_title">Serwer PSDS</string>
+    <string name="psds_server_summary">Serwer używany do dostarczania informacji wspomagających usługi lokalizacji</string>
+
+    <string name="sandboxed_google_play">Piaskownica (sandbox) Google Play</string>
+    <string name="sandboxed_google_play_work_profile">Piaskownica (sandbox) Google Play (profil służbowy)</string>
+
+    <string name="privileged_euicc_management_title">Włącz uprzywilejowane zarządzanie eSIM</string>
+    <string name="privileged_euicc_management_summary">Wymaga instalacji Google Play w piaskownicy (sandbox)</string>
+
+    <string name="screenshot_timestamp_exif_title">Zapisz znacznik czasu zrzutu ekranu do EXIF</string>
+    <string name="screenshot_timestamp_exif_summary">Włącza dodawanie znacznika czasu (timestamp) do metadanych EXIF zrzutu ekranu.</string>
+
+    <string name="battery_share_description">Ładuj inne urządzenia zbliżając je do tylnej obudowy tego urządzenia.</string>
+    <string name="battery_share">Dzielenie się baterią</string>
+
+    <string name="storage_scopes">Storage Scopes</string>
+
+    <string name="allow_access_to_obb_directory_title">Zezwól na dostęp do folderu Android/obb</string>
+    <string name="allow_access_to_obb_directory_summary">Wymagany do instalacji aplikacji zajmujących dużo przestrzeni dyskowej (głównie gier) które używają pliki rozrzerzające OBB</string>
+
+    <string name="app_relax_hardening_title">Trub zgodności ochrony przed exploitami</string>
+    <string name="app_relax_hardening_summary">Zwiększ kompatybilność niepoprawnie działających aplikacji używając standardowego mechanizmu Androida alokowania pamięci i zarządzania przestrzenią adresową</string>
+    <string name="app_hardening_config">Konfiguruj utwardzanie (hardening)</string>
+
+    <string name="app_info_install_time">Zainstalowano: %1$s</string>
+    <string name="app_info_update_time">Uaktualniono: %1$s</string>
+
+    <string name="auto_grant_OTHER_SENSORS_permission_title">Domyślnie włącz uprawnienie dostępu do czujników (Sensors) dla aplikacji</string>
+    <string name="auto_grant_OTHER_SENSORS_permission_summary_on">Czujniki (Sensors) nie są standardowym uprawnieniem Androida, aplikacje bez dostępu mogą nie działać poprawnie.</string>
+    <string name="auto_grant_OTHER_SENSORS_permission_summary_off">Gdy aplikacja będzie próbowała uzyskać dostęp do czujników (Sensors), pojawi się prośba o zezwolenie. Należy pamiętać, że niektóre aplikacje mogą wymagać ponownego uruchomienia po zezwoleniu na dostęp do czujników (Sensors).</string>
+
 </resources>
