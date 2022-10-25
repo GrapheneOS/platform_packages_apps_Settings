@@ -599,7 +599,7 @@
   </string-array>
 
   <string-array name="deny_new_usb_entries">
-      <item>Zabroń podłączania nowych urządzeń</item>
+      <item>Nie zezwalaj na podłączanie nowych urządzeń USB</item>
       <item>Zezwól na podłączanie nowych urządzeń USB kiedy urządzenie jest odblokowane</item>
       <item>Zawsze zezwalaj na podłączanie nowych urządzeń USB </item>
   </string-array>
