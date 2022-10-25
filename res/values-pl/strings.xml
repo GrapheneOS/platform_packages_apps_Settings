@@ -6022,11 +6022,11 @@
 
 
     <!-- Connected devices screen, setting option name to change bluetooth timeout -->
-    <string name="bluetooth_timeout">Czasowy wyłącznik Bluetooth</string>
+    <string name="bluetooth_timeout">Automatycznie wyłącz Bluetooth</string>
 
     <!-- Connected devices screen, setting option summary to change bluetooth timeout -->
     <string name="bluetooth_timeout_summary">Bluetooth wyłączy się automatycznie za <xliff:g id="timeout_description">%1$s</xliff:g> jeśli nie będą podłączone żadne urządzenia</string>
-    <string name="bluetooth_timeout_summary2">Nie wyłączaj automatycznie Bluetooth'a.</string>
+    <string name="bluetooth_timeout_summary2">Nie wyłączaj automatycznie Bluetooth'a</string>
     <string name="bluetooth_timeout_summary_never">Nigdy</string>
     <string name="bluetooth_timeout_summary_15secs">15 sekund</string>
     <string name="bluetooth_timeout_summary_30secs">30 sekund</string>
@@ -6041,12 +6041,12 @@
     <string name="bluetooth_timeout_summary_8hours">8 godzin</string>
 
     <!--  screen, setting option name to change wifi timeout -->
-    <string name="wifi_timeout">Czasowy wyłącznik Wi-Fi</string>
+    <string name="wifi_timeout">Automatycznie wyłącz Wi-Fi</string>
 
     <!--  screen, setting option summary to change wifi timeout -->
     <string name="wifi_timeout_summary">Automatycznie wyłącz Wi-Fi po określonym czasie.</string>
     <string name="wifi_timeout_summary1">Wi-Fi wyłączy się za <xliff:g id="timeout_description">%1$s</xliff:g> jeśli nie będzie podłączone do sieci</string>
-    <string name="wifi_timeout_summary2">Wyłączone</string>
+    <string name="wifi_timeout_summary2">Nie wyłączaj automatycznie Wi-Fi</string>
     <string name="wifi_timeout_summary_never">Nigdy</string>
     <string name="wifi_timeout_summary_15secs">15 sekund</string>
     <string name="wifi_timeout_summary_30secs">30 sekund</string>
@@ -6064,6 +6064,12 @@
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
     <string name="bootloader_version">Wersja bootloadera</string>
 
+    <!-- LTE only [CHAR LIMIT=100] -->
+    <string name="preferred_network_mode_lte_only_summary">Preferowany tryb sieci: Tylko LTE</string>
+    <!-- Text for Network lte only [CHAR LIMIT=NONE] -->
+    <string name="network_lte_only">Tylko LTE</string>
+    <!-- Text for Network 4g only [CHAR LIMIT=NONE] -->
+    <string name="network_4G_only">Tylko 4G</string>
 
 
 </resources>
