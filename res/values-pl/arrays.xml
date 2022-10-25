@@ -598,5 +598,27 @@
       <item>Użyj adresu MAC urządzenia</item>
   </string-array>
 
+  <string-array name="deny_new_usb_entries">
+      <item>Zabroń podłączania nowych urządzeń</item>
+      <item>Zezwól na podłączanie nowych urządzeń USB kiedy urządzenie jest odblokowane</item>
+      <item>Zawsze zezwalaj na podłączanie nowych urządzeń USB </item>
+  </string-array>
+
+  <!-- Auto reboot settings -->
+  <string-array name="auto_reboot_entries">
+      <item>Wyłączone</item>
+      <item>10 minut</item>
+      <item>30 minut</item>
+      <item>1 godzina</item>
+      <item>2 godziny</item>
+      <item>4 godziny</item>
+      <item>8 godzin</item>
+      <item>12 godzin</item>
+      <item>24 godziny</item>
+      <item>36 godzin</item>
+      <item>48 godzin</item>
+      <item>72 godziny</item>
+  </string-array>
+
 
 </resources>
