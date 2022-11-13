@@ -606,9 +606,10 @@ public class BatteryEntry {
                 iconId = R.drawable.ic_settings_phone_idle;
                 break;
             default:
-                Log.w(TAG, "unknown attribute:" + DebugUtils.constantToString(
-                        BatteryConsumer.class, "POWER_COMPONENT_", powerComponentId));
-                name = null;
+                String fieldName = DebugUtils.constantToString(
+                        BatteryConsumer.class, "POWER_COMPONENT_", powerComponentId);
+                Log.w(TAG, "unknown attribute:" + fieldName);
+                name = context.getResources().getString(R.string.header_category_system) + " (" + fieldName + ")";
                 iconId = R.drawable.ic_power_system;
                 break;
         }
