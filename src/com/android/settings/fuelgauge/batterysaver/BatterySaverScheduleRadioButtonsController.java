@@ -40,7 +40,7 @@ public class BatterySaverScheduleRadioButtonsController {
     public static final String KEY_NO_SCHEDULE = "key_battery_saver_no_schedule";
     public static final String KEY_ROUTINE = "key_battery_saver_routine";
     public static final String KEY_PERCENTAGE = "key_battery_saver_percentage";
-    public static final int TRIGGER_LEVEL_MIN = 10;
+    public static final int TRIGGER_LEVEL_DEFAULT = 10;
 
     private Context mContext;
     private BatterySaverScheduleSeekBarController mSeekBarController;
@@ -82,7 +82,7 @@ public class BatterySaverScheduleRadioButtonsController {
             case KEY_NO_SCHEDULE:
                 break;
             case KEY_PERCENTAGE:
-                triggerLevel = TRIGGER_LEVEL_MIN;
+                triggerLevel = TRIGGER_LEVEL_DEFAULT;
                 confirmationExtras.putBoolean(BatterySaverUtils.EXTRA_CONFIRM_TEXT_ONLY, true);
                 confirmationExtras.putInt(BatterySaverUtils.EXTRA_POWER_SAVE_MODE_TRIGGER,
                         PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
