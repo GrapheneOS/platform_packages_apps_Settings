@@ -182,6 +182,13 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         p.setSummary(R.string.allow_access_to_obb_directory_summary);
 
         p.setOnPreferenceChangeListener((preference, checkedB) -> {
+            var ps = GosPackageState.get(mPackageName);
+            boolean curValue = ps != null && ps.hasFlag(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY);
+
+            if (curValue == (boolean) checkedB) {
+                return true;
+            }
+
             GosPackageState.edit(mPackageName)
                     .setFlagsState(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY, (boolean) checkedB)
                     // storage mount modes can't be updated dynamically
