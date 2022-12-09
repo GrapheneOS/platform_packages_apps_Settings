@@ -3269,6 +3269,7 @@
     <string name="peak_refresh_rate_title">Smooth Display</string>
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
     <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage.</string>
+    <string name="peak_refresh_rate_summary_dynamic">Automatically raises the refresh rate from 60 to %s Hz for some content. Increases battery usage.</string>
     <!-- Display developer settings: Force to the highest refresh rate [CHAR LIMIT=NONE] -->
     <string name="force_high_refresh_rate_toggle">Force peak refresh rate</string>
     <!-- Display developer settings: Force to the highest refresh rate description [CHAR LIMIT=NONE]-->
