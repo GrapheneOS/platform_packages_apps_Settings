@@ -627,6 +627,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || mAppEntry.info.packageName.equals("com.android.inputmethod.latin")
                 || mAppEntry.info.packageName.equals("app.vanadium.webview")
+                || mAppEntry.info.packageName.equals("app.grapheneos.camera")
                 || mAppEntry.info.packageName.equals(GmsCompatApp.PKG_NAME)
                 || mAppEntry.info.packageName.equals(GmsCompatApp.PKG_NAME + ".config")
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
