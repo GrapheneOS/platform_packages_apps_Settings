@@ -183,6 +183,13 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (mPm.getWellbeingPackageName() != null) {
             keepEnabledPackages.add(mPm.getWellbeingPackageName());
         }
+
+        keepEnabledPackages.add("com.android.inputmethod.latin");
+        keepEnabledPackages.add("app.vanadium.webview");
+        keepEnabledPackages.add("app.grapheneos.camera");
+        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME);
+        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME + ".config");
+
         return keepEnabledPackages;
     }
 
