@@ -50,25 +50,17 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mUserCaps.isAdmin()) {
-            return DISABLED_FOR_USER;
-        } else if (mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin()) {
-            return DISABLED_FOR_USER;
-        } else {
-            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-        }
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
+        return false;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ADD_USERS_WHEN_LOCKED, isChecked ? 1 : 0);
+        return false;
     }
 
     @Override

@@ -91,9 +91,7 @@ public class UserCapabilities {
             mCanAddUser = false;
         }
 
-        final boolean canAddUsersWhenLocked = mIsAdmin || Settings.Global.getInt(
-                context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
-        mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked
+        mCanAddGuest = !mIsGuest && !mDisallowAddUser && mIsAdmin
                 && userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST);
 
         mDisallowSwitchUser = userManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
