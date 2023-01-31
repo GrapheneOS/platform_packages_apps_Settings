@@ -29,11 +29,10 @@ public class WebActionCategoryController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isDisableWebActions(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     public static boolean isDisableWebActions(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.ENABLE_EPHEMERAL_FEATURE, 1) == 0;
+        return true;
     }
 }
