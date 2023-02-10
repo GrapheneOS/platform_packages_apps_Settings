@@ -66,6 +66,13 @@
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="force_disable_supl"
+            android:title="@string/force_disable_supl_title"
+            android:summary="@string/force_disable_supl_summary"
+            settings:controller="com.android.settings.location.ForceDisableSuplPrefController"/>
+
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
