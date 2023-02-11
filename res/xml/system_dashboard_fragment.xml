@@ -43,6 +43,17 @@
         android:fragment="com.android.settings.datetime.DateTimeSettings"
         settings:controller="com.android.settings.datetime.DateTimePreferenceController"/>
 
+    <com.android.settingslib.PrimarySwitchPreference
+        android:key="force_disable_backup"
+        android:title="@string/privacy_settings_title"
+        android:icon="@drawable/ic_settings_backup"
+        android:order="-60"
+        settings:controller="com.android.settings.backup.BackupPrefController">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.backup.UserBackupSettingsActivity"/>
+    </com.android.settingslib.PrimarySwitchPreference>
+
     <!-- System updates -->
     <Preference
         android:key="additional_system_update_settings"
