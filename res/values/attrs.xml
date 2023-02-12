@@ -68,6 +68,8 @@
         <attr name="searchable" format="boolean" />
         <!-- Classname of a PreferenceController corresponding to the preference -->
         <attr name="controller" format="string" />
+        <!-- Reference to a BoolSetting. Format: className <space> fieldName -->
+        <attr name="boolSettingField" format="string" />
         <!-- Customized subtitle if it's an unavailable slice -->
         <attr name="unavailableSliceSubtitle" format="string" />
         <!-- Whether or not the preference is for work profile, by default it's false. -->

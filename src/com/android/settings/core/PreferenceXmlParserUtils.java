@@ -68,6 +68,7 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_KEY,
             MetadataFlag.FLAG_NEED_PREF_TYPE,
             MetadataFlag.FLAG_NEED_PREF_CONTROLLER,
+            MetadataFlag.FLAG_NEED_BOOL_SETTING_FIELD,
             MetadataFlag.FLAG_NEED_PREF_TITLE,
             MetadataFlag.FLAG_NEED_PREF_SUMMARY,
             MetadataFlag.FLAG_NEED_PREF_ICON,
@@ -91,11 +92,14 @@ public class PreferenceXmlParserUtils {
         int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
         int FLAG_FOR_WORK = 1 << 12;
         int FLAG_NEED_HIGHLIGHTABLE_MENU_KEY = 1 << 13;
+
+        int FLAG_NEED_BOOL_SETTING_FIELD = 1 << 30;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
     public static final String METADATA_KEY = "key";
     public static final String METADATA_CONTROLLER = "controller";
+    public static final String METADATA_BOOL_SETTING_FIELD = "bool_setting_field";
     public static final String METADATA_TITLE = "title";
     public static final String METADATA_SUMMARY = "summary";
     public static final String METADATA_ICON = "icon";
@@ -225,6 +229,10 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putString(METADATA_CONTROLLER,
                         getController(preferenceAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_BOOL_SETTING_FIELD)) {
+                preferenceMetadata.putString(METADATA_BOOL_SETTING_FIELD,
+                        getBoolSettingField(preferenceAttributes));
+            }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TITLE)) {
                 preferenceMetadata.putString(METADATA_TITLE, getTitle(preferenceAttributes));
             }
@@ -319,6 +327,10 @@ public class PreferenceXmlParserUtils {
 
     private static String getController(TypedArray styledAttributes) {
         return styledAttributes.getString(R.styleable.Preference_controller);
+    }
+
+    private static String getBoolSettingField(TypedArray styledAttributes) {
+        return styledAttributes.getString(R.styleable.Preference_boolSettingField);
     }
 
     private static String getHighlightableMenuKey(TypedArray styledAttributes) {
