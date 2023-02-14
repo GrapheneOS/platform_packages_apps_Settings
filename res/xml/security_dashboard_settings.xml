@@ -49,6 +49,11 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
 
+        <Preference
+            android:key="auto_reboot"
+            android:title="@string/auto_reboot_title"
+            settings:controller="com.android.settings.security.AutoRebootPrefController" />
+
         <SwitchPreference
             android:key="keyguard_camera"
             android:title="@string/keyguard_camera_title"
