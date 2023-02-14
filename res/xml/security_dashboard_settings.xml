@@ -48,7 +48,7 @@
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
-        
+
         <ListPreference
             android:key="auto_reboot"
             android:title="@string/auto_reboot_title"
@@ -82,6 +82,13 @@
             android:title="@string/scramble_pin_title"
             android:summary="@string/scramble_pin_summary"
             android:persistent="false" />
+
+        <SwitchPreference
+            android:key="keyguard_camera"
+            android:title="@string/keyguard_camera_title"
+            android:summary="@string/keyguard_camera_summary"
+            settings:boolSettingField=
+                "android.ext.settings.ExtSettings ALLOW_KEYGUARD_CAMERA" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
