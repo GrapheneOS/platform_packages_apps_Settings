@@ -85,6 +85,13 @@
         android:summary="@string/mic_toggle_description"
         settings:controller="com.android.settings.privacy.MicToggleController"/>
 
+    <SwitchPreference
+        android:key="privacy_auto_grant_OTHER_SENSORS_permission"
+        android:title="@string/auto_grant_OTHER_SENSORS_permission_title"
+        android:summaryOn="@string/auto_grant_OTHER_SENSORS_permission_summary_on"
+        android:summaryOff="@string/auto_grant_OTHER_SENSORS_permission_summary_off"
+        settings:boolSettingField="android.ext.settings.ExtSettings AUTO_GRANT_OTHER_SENSORS_PERMISSION"/>
+
     <!-- Show passwords -->
     <SwitchPreference
         android:key="show_password"
