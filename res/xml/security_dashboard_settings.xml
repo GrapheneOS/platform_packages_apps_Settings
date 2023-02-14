@@ -50,6 +50,12 @@
             settings:keywords="@string/keywords_face_settings" />
 
         <ListPreference
+            android:key="auto_reboot"
+            android:title="@string/auto_reboot_title"
+            android:summary="@string/auto_reboot_summary"
+            settings:controller="com.android.settings.security.AutoRebootPrefController" />
+
+        <ListPreference
             android:key="deny_new_usb"
             android:title="@string/deny_new_usb_title"
             android:summary="@string/deny_new_usb_summary"
