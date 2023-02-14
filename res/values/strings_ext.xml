@@ -11,4 +11,7 @@
 
     <string name="keyguard_camera_title">Allow camera access when the device is locked</string>
 
+    <string name="auto_reboot_title">Auto reboot</string>
+    <string name="auto_reboot_footer">Automatically reboot the device if it hasn\'t been unlocked within the selected duration of time.</string>
+
 </resources>
