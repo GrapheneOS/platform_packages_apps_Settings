@@ -83,12 +83,6 @@
             android:summary="@string/scramble_pin_summary"
             android:persistent="false" />
 
-        <SwitchPreference
-            android:key="keyguard_camera"
-            android:title="@string/keyguard_camera_title"
-            android:summary="@string/keyguard_camera_summary"
-            android:persistent="false" />
-
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
