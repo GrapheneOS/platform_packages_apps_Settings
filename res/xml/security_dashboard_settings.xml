@@ -49,6 +49,12 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
 
+        <SwitchPreference
+            android:key="keyguard_camera"
+            android:title="@string/keyguard_camera_title"
+            settings:boolSettingField=
+                "android.ext.settings.ExtSettings ALLOW_KEYGUARD_CAMERA" />
+
         <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings"
             android:title="@string/security_settings_biometric_preference_title"
