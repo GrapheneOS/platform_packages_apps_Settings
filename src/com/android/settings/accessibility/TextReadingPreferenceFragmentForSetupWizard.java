@@ -44,31 +44,6 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getContext().getString(
-                R.string.accessibility_text_reading_options_title);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                /* description= */ null, icon);
-
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done, () -> {
-            setResult(RESULT_CANCELED);
-            finish();
-        });
-        AccessibilitySetupWizardUtils.setSecondaryButton(getContext(), mixin,
-                R.string.accessibility_text_reading_reset_button_title,
-                () -> showDialog(DIALOG_RESET_SETTINGS)
-        );
-    }
-
-    @Override
-    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-            Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override
