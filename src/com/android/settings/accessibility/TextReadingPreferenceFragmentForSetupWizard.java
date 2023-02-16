@@ -43,22 +43,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        final String title = getContext().getString(
-                R.string.accessibility_text_reading_options_title);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
-        icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
-        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
-                /* description= */ null, icon);
-
         updateResetButtonPadding();
-    }
-
-    @Override
-    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-            Bundle savedInstanceState) {
-        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-        return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
     @Override
