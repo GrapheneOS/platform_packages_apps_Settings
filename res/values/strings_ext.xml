@@ -14,4 +14,7 @@
     <string name="auto_reboot_title">Auto reboot</string>
     <string name="auto_reboot_footer">Automatically reboot the device if it hasn\'t been unlocked within the selected duration of time.</string>
 
+    <string name="screenshot_timestamp_exif_title">Save screenshot timestamp to EXIF</string>
+    <string name="screenshot_timestamp_exif_summary">Enables adding a timestamp to screenshot EXIF metadata</string>
+
 </resources>
