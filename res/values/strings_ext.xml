@@ -25,4 +25,6 @@
     <string name="supl_disabled">Disabled</string>
     <string name="supl_disabled_summary">Will make acquiring location lock significantly slower, especially if PSDS is disabled too</string>
 
+    <string name="scramble_pin_title">Scramble PIN input layout</string>
+
 </resources>
