@@ -82,14 +82,6 @@
         android:summaryOff="@string/auto_grant_OTHER_SENSORS_permission_summary_off"
         settings:boolSettingField="android.ext.settings.ExtSettings AUTO_GRANT_OTHER_SENSORS_PERMISSION"/>
 
-    <!-- Screenshot timestamp EXIF toggle -->
-    <SwitchPreference
-        android:key="privacy_screenshot_timestamp_exif"
-        android:title="@string/screenshot_timestamp_exif_title"
-        android:summary="@string/screenshot_timestamp_exif_summary"
-        android:persistent="false"
-        settings:controller="com.android.settings.privacy.ScreenshotTimestampExifPreferenceController"/>
-
     <!-- Show passwords -->
     <SwitchPreference
         android:key="show_password"
