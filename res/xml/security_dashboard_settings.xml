@@ -75,14 +75,6 @@
             android:summary="@string/native_debug_summary"
             android:persistent="false" />
 
-        <ListPreference
-            android:key="scramble_pin_layout"
-            android:title="@string/scramble_pin_title"
-            android:summary="@string/scramble_pin_summary"
-            android:persistent="false"
-            android:entries="@array/scramble_pin_entries"
-            android:entryValues="@array/scramble_pin_values" />
-
         <SwitchPreference
             android:key="keyguard_camera"
             android:title="@string/keyguard_camera_title"
