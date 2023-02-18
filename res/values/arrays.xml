@@ -224,6 +224,16 @@
         <item>30 minutes</item>
     </string-array>
 
+    <string-array name="scramble_pin_entries">
+        <item>Scramble PIN</item>
+        <item>No PIN scrambling</item>
+    </string-array>
+
+    <string-array name="scramble_pin_values" translatable="false">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
     <string-array name="deny_new_usb_entries">
         <item>Deny new USB peripherals</item>
         <item>Allow new USB peripherals when unlocked</item>
