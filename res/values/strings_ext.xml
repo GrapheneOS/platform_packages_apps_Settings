@@ -14,4 +14,6 @@
     <string name="screenshot_timestamp_exif_title">Save screenshot timestamp to EXIF</string>
     <string name="screenshot_timestamp_exif_summary">Enables adding a timestamp to screenshot EXIF metadata</string>
 
+    <string name="play_screenshot_sound_title">Screenshot capture sound</string>
+
 </resources>

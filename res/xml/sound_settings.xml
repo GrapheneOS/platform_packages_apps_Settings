@@ -225,4 +225,10 @@
         android:fragment="com.android.settings.notification.SoundWorkSettings"
         android:order="100"
         settings:controller="com.android.settings.notification.WorkSoundsPreferenceController"/>
+
+    <!-- Screenshot capture sound -->
+    <SwitchPreference
+        android:key="play_screenshot_sound"
+        android:title="@string/play_screenshot_sound_title"
+        settings:boolSettingField="android.ext.settings.ExtSettings PLAY_SCREENSHOT_SOUND"/>
 </PreferenceScreen>
