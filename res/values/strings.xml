@@ -14571,7 +14571,4 @@
 
     <string name="app_info_install_time">Installed: %1$s</string>
     <string name="app_info_update_time">Updated: %1$s</string>
-
-    <string name="force_disable_supl_title">Force disable Secure User Plane Location (SUPL)</string>
-    <string name="force_disable_supl_summary">Always disable SUPL assisted location support regardless of carrier configuration (does not disable control plane A-GNSS and GrapheneOS does not send IMSI to the SUPL)</string>
 </resources>
