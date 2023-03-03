@@ -18,4 +18,12 @@
     <string name="screenshot_timestamp_exif_title">Save screenshot timestamp to EXIF</string>
     <string name="screenshot_timestamp_exif_summary">Enables adding a timestamp to screenshot EXIF metadata</string>
 
+    <string name="pref_gnss_supl_title">Secure User Plane Location (SUPL)</string>
+    <string name="pref_gnss_supl_footer">A-GNSS (assisted satellite geolocation) based on nearby cell towers.</string>
+
+    <string name="supl_enabled_grapheneos_proxy">GrapheneOS proxy</string>
+    <string name="supl_enabled_standard_server">Standard server</string>
+    <string name="supl_disabled">Off</string>
+    <string name="supl_disabled_summary">Will make acquiring location lock significantly slower, especially if PSDS is turned off too</string>
+
 </resources>
