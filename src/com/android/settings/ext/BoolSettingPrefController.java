@@ -7,31 +7,41 @@ package com.android.settings.ext;
 
 import android.content.Context;
 import android.ext.settings.BoolSetting;
+import android.ext.settings.Setting;
 import android.os.Bundle;
+import android.os.Process;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.core.BasePreferenceController;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_BOOL_SETTING_FIELD;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 
 public class BoolSettingPrefController extends AbstractTogglePrefController
-        implements ExtSettingPrefController<BoolSetting> {
+        implements DefaultLifecycleObserver, Consumer<BoolSetting> {
     private final BoolSetting setting;
-    private final ExtSettingControllerHelper<BoolSetting> helper;
 
     protected BoolSettingPrefController(Context ctx, String key, BoolSetting setting) {
         super(ctx, key);
-        helper = new ExtSettingControllerHelper(ctx, setting);
         this.setting = setting;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return helper.getAvailabilityStatus();
+        if (setting.getScope() != Setting.Scope.PER_USER) {
+            if (!Process.myUserHandle().isSystem()) {
+                return DISABLED_FOR_USER;
+            }
+        }
+        return AVAILABLE;
     }
 
     @Override
@@ -44,6 +54,15 @@ public class BoolSettingPrefController extends AbstractTogglePrefController
         return setting.put(mContext, isChecked);
     }
 
+    private Object observer;
+
+    @Override
+    public void onResume(@NonNull LifecycleOwner owner) {
+        if (setting.canObserveState()) {
+            observer = setting.registerObserver(mContext, this, mContext.getMainThreadHandler());
+        }
+    }
+
     // called by the setting observer
     @Override
     public void accept(BoolSetting boolSetting) {
@@ -53,8 +72,10 @@ public class BoolSettingPrefController extends AbstractTogglePrefController
     }
 
     @Override
-    public final ExtSettingControllerHelper<BoolSetting> getHelper() {
-        return helper;
+    public void onPause(@NonNull LifecycleOwner owner) {
+        if (setting.canObserveState()) {
+            setting.unregisterObserver(mContext, observer);
+        }
     }
 
     // called when PreferenceScreen XML is parsed
