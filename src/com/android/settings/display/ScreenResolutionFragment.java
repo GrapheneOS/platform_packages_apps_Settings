@@ -101,7 +101,6 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
     @Override
     protected void addStaticPreferences(PreferenceScreen screen) {
-        updateIllustrationImage(mImagePreference);
         screen.addPreference(mImagePreference);
 
         final FooterPreference footerPreference = new FooterPreference(screen.getContext());
@@ -223,7 +222,6 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         }
 
         setDisplayMode(width);
-        updateIllustrationImage(mImagePreference);
 
         return true;
     }
