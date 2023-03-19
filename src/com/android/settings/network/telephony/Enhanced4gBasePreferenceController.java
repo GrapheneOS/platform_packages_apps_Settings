@@ -113,8 +113,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         }
 
         final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
-        if ((carrierConfig == null)
-                || carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL)) {
+        if (carrierConfig == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
@@ -212,9 +211,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     private boolean isUserControlAllowed(final PersistableBundle carrierConfig) {
         return isCallStateIdle()
-                && (carrierConfig != null)
-                && carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
+                && (carrierConfig != null);
     }
 
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements

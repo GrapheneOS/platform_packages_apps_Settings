@@ -94,12 +94,6 @@ public class Enhanced4gLteSliceHelper {
     /**
      * Returns Slice object for enhanced_4g_lte settings.
      *
-     * If enhanced 4g LTE is not supported for the current carrier, this method will return slice
-     * with not supported message.
-     *
-     * If enhanced 4g LTE is not editable for the current carrier, this method will return slice
-     * with not editable message.
-     *
      * If enhanced 4g LTE setting can be changed, this method will return the slice to toggle
      * enhanced 4g LTE option with ACTION_ENHANCED_4G_LTE_CHANGED as endItem.
      */
@@ -108,15 +102,6 @@ public class Enhanced4gLteSliceHelper {
 
         if (!SubscriptionManager.isValidSubscriptionId(subId)) {
             Log.d(TAG, "Invalid subscription Id");
-            return null;
-        }
-
-        if (isCarrierConfigManagerKeyEnabled(
-                CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, subId, false)
-                || !isCarrierConfigManagerKeyEnabled(
-                CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, subId,
-                true)) {
-            Log.d(TAG, "Setting is either hidden or not editable");
             return null;
         }
 
