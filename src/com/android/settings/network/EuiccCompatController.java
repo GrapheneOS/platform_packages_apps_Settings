@@ -1,5 +1,6 @@
 package com.android.settings.network;
 
+import android.Manifest;
 import android.annotation.Nullable;
 import android.app.compat.gms.GmsCompat;
 import android.content.BroadcastReceiver;
@@ -10,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.PatternMatcher;
 import android.os.Process;
 import android.os.UserHandle;
+import android.permission.PermissionManager;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -70,8 +72,23 @@ public class EuiccCompatController extends TogglePreferenceController implements
         int state = isChecked && checkDependencies() ?
                 COMPONENT_ENABLED_STATE_ENABLED :
                 COMPONENT_ENABLED_STATE_DISABLED;
+
+        PermissionManager permissionManager = mContext.getSystemService(PermissionManager.class);
+
         try {
             for (String pkg : GmsInfo.EUICC_PACKAGES) {
+                // Previously, Camera permission was auto-granted with the FLAG_PERMISSION_SYSTEM_FIXED,
+                // which made it unchangeable by the user.
+                // Removing FLAG_PERMISSION_USER_FIXED is needed to make sure that the app is always
+                // able to show a permission request dialog after being enabled
+                if (state == COMPONENT_ENABLED_STATE_ENABLED && "com.google.android.euicc".equals(pkg)) {
+                    UserHandle user = mContext.getUser();
+                    String perm = Manifest.permission.CAMERA;
+                    permissionManager.revokeRuntimePermission(pkg, perm, user, null);
+                    int permFlagsToRemove = PackageManager.FLAG_PERMISSION_SYSTEM_FIXED
+                            | PackageManager.FLAG_PERMISSION_USER_FIXED;
+                    permissionManager.updatePermissionFlags(pkg, perm, permFlagsToRemove, 0, user);
+                }
                 packageManager.setApplicationEnabledSetting(pkg, state, 0);
             }
             return true;
