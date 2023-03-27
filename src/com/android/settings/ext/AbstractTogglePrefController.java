@@ -9,7 +9,7 @@ import com.android.settings.core.TogglePreferenceController;
 
 public abstract class AbstractTogglePrefController extends TogglePreferenceController {
 
-    AbstractTogglePrefController(Context ctx, String key) {
+    protected AbstractTogglePrefController(Context ctx, String key) {
         super(ctx, key);
     }
 
