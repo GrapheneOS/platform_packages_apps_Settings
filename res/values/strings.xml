@@ -14552,9 +14552,6 @@
     <string name="sandboxed_google_play">Sandboxed Google Play</string>
     <string name="sandboxed_google_play_work_profile">Sandboxed Google Play (work profile)</string>
 
-    <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
-    <string name="privileged_euicc_management_summary">Requires Sandboxed Google Play installation</string>
-
     <string name="battery_share_description">Charge other devices by placing them on the back of your phone</string>
     <string name="battery_share">Battery share</string>
 
