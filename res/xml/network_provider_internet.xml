@@ -60,7 +60,7 @@
         android:icon="@drawable/ic_sim_card"
         android:order="-14"
         android:summary="@string/privileged_euicc_management_summary"
-        settings:controller="com.android.settings.network.EuiccCompatController"
+        settings:controller="com.android.settings.network.GoogleEuiccLpaController"
         settings:userRestriction="no_config_mobile_networks"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
