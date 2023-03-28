@@ -33,4 +33,7 @@
     <string name="remote_provisioning_enabled_standard_server">Enabled; standard server</string>
     <string name="remote_provisioning_disabled">Disabled</string>
 
+    <string name="clipboard_auto_clear_title">Clipboard auto clear</string>
+    <string name="clipboard_auto_clear_summary">Automatically clear the clipboard after a selected duration of time</string>
+
 </resources>
