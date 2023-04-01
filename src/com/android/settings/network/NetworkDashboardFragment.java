@@ -124,9 +124,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         ConnectivityCheckPreferenceController connectivityCheck =
                 new ConnectivityCheckPreferenceController(context);
         controllers.add(connectivityCheck);
-        AttestProvisioningPreferenceController attestProvisioning =
-                new AttestProvisioningPreferenceController(context);
-        controllers.add(attestProvisioning);
         PsdsServerPreferenceController psdsServer =
                 new PsdsServerPreferenceController(context);
         controllers.add(psdsServer);
