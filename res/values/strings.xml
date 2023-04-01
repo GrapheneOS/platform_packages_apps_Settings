@@ -14543,9 +14543,6 @@
     <string name="user_settings_send_censored_notifications_to_current">Send notifications to current user</string>
     <string name="user_settings_send_censored_notifications_to_current_summary">Your lock screen notifications will be forwarded to the current user if you are active in the background. Only the user\'s name, the app\'s name, and the time received will be shown.</string>
 
-    <string name="attest_provisioning_title">Attestation key provisioning server</string>
-    <string name="attest_provisioning_summary">Server used for provisioning hardware-based attestation keys</string>
-
     <string name="psds_server_title">PSDS server</string>
     <string name="psds_server_summary">Server used for providing satellite information to assist location</string>
 
