@@ -30,4 +30,9 @@
     <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
     <string name="privileged_euicc_management_summary">Requires sandboxed Google Play installation</string>
 
+    <string name="remote_provisioning_title">Attestation key provisioning</string>
+    <string name="remote_provisioning_enabled_grapheneos_proxy">Enabled (GrapheneOS proxy)</string>
+    <string name="remote_provisioning_enabled_google_server">Enabled (Google server)</string>
+    <string name="remote_provisioning_disabled">Disabled</string>
+
 </resources>
