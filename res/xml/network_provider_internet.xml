@@ -138,4 +138,10 @@
         android:summary="@string/summary_placeholder"
         android:order="25"
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
+
+    <Preference
+        android:key="remote_provisioning_settings"
+        android:title="@string/remote_provisioning_title"
+        android:order="35"
+        settings:controller="com.android.settings.network.RemoteProvisioningPrefController" />
 </PreferenceScreen>
