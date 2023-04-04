@@ -89,6 +89,13 @@
         android:summary="@string/screenshot_timestamp_exif_summary"
         settings:boolSettingField="android.ext.settings.ExtSettings SCREENSHOT_TIMESTAMP_EXIF"/>
 
+    <!-- Clipboard auto clear -->
+    <ListPreference
+        android:key="clipboard_auto_clear_timeout"
+        android:title="@string/clipboard_auto_clear_title"
+        android:summary="@string/clipboard_auto_clear_summary"
+        settings:controller="com.android.settings.privacy.ClipboardTimeoutController"/>
+
     <!-- Show passwords -->
     <SwitchPreference
         android:key="show_password"
