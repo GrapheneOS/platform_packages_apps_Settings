@@ -39,4 +39,19 @@
     <string name="remote_provisioning_enabled_google_server">Enabled (Google server)</string>
     <string name="remote_provisioning_disabled">Disabled</string>
 
+    <string name="Google_apps_special_accelerator_access_title">Special access to hardware accelerators for Google apps</string>
+    <string name="Google_apps_special_accelerator_access_summary_granted">Access granted</string>
+    <string name="Google_apps_special_accelerator_access_summary_not_granted">Access not granted</string>
+    <string name="Google_apps_special_accelerator_access_main_switch">Grant special access to hardware accelerators to Google apps</string>
+    <string name="Google_apps_special_accelerator_access_footer">
+"Some Google apps expect to be able to access hardware accelerators in a special, more capable way than regular apps do.
+
+Examples of such apps:
+• Google Camera
+• Google Photos
+• Google Recorder
+
+This setting applies to all users on the device."
+    </string>
+
 </resources>
