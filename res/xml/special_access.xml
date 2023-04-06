@@ -219,4 +219,10 @@
             android:name="classname"
             android:value="com.android.settings.Settings$ChangeNfcTagAppsActivity" />
     </Preference>
+
+    <Preference
+        android:key="Google_apps_special_accelerator_access"
+        android:title="@string/Google_apps_special_accelerator_access_title"
+        android:fragment="com.android.settings.applications.specialaccess.GoogleSpecialAcceleratorAccessFragment"
+        settings:controller="com.android.settings.applications.specialaccess.GoogleSpecialAcceleratorAccessPrefController" />
 </PreferenceScreen>
