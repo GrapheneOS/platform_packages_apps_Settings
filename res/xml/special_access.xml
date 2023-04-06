@@ -167,4 +167,10 @@
         android:key="special_access_more"
         android:title="@string/special_access_more"
         settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
+
+    <Preference
+        android:key="Google_apps_special_accelerator_access"
+        android:title="@string/Google_apps_special_accelerator_access_title"
+        android:fragment="com.android.settings.applications.specialaccess.GoogleSpecialAcceleratorAccessFragment"
+        settings:controller="com.android.settings.applications.specialaccess.GoogleSpecialAcceleratorAccessPrefController" />
 </PreferenceScreen>
