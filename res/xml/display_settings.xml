@@ -178,5 +178,11 @@
             android:key="vr_display_pref"
             android:title="@string/display_vr_pref_title"
             android:fragment="com.android.settings.display.VrDisplayPreferencePicker"/>
+
+        <SwitchPreference
+            android:key="window_ignore_secure"
+            android:title="@string/window_ignore_secure_title"
+            android:summary="@string/window_ignore_secure_summary"
+            settings:boolSettingField="android.ext.settings.ExtSettings WINDOW_IGNORE_SECURE"/>
     </PreferenceCategory>
 </PreferenceScreen>

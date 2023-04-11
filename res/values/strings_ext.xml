@@ -48,4 +48,7 @@ Examples of such apps:
 This setting applies to all users on the device."
     </string>
 
+    <string name="window_ignore_secure_title">Ignore secure window flag</string>
+    <string name="window_ignore_secure_summary">Removes FLAG_SECURE from windows, allowing screenshots and video recordings of the secure content but removes the protections that FLAG_SECURE provides. Requires app restart.</string>
+
 </resources>
