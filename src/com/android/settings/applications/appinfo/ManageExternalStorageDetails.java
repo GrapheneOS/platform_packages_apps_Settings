@@ -16,6 +16,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.AppOpsManager;
+import android.app.StorageScope;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class ManageExternalStorageDetails extends AppInfoWithHeader implements
 
         mMetricsFeatureProvider =
                 FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+
+        addStorageScopesLink();
     }
 
     @Override
@@ -175,5 +178,12 @@ public class ManageExternalStorageDetails extends AppInfoWithHeader implements
         return context.getString(state.isPermissible()
                 ? R.string.app_permission_summary_allowed
                 : R.string.app_permission_summary_not_allowed);
+    }
+
+    private void addStorageScopesLink() {
+        Preference p = new Preference(requireContext());
+        p.setTitle(R.string.storage_scopes);
+        p.setIntent(StorageScope.createConfigActivityIntent(mPackageName));
+        getPreferenceScreen().addPreference(p);
     }
 }
