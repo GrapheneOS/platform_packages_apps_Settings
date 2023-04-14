@@ -178,5 +178,11 @@
             android:key="vr_display_pref"
             android:title="@string/display_vr_pref_title"
             android:fragment="com.android.settings.display.VrDisplayPreferencePicker"/>
+
+        <SwitchPreference
+            android:key="screenshot_secure_windows"
+            android:title="@string/screenshot_secure_windows_title"
+            android:summary="@string/screenshot_secure_windows_summary"
+            settings:boolSettingField="android.ext.settings.ExtSettings SCREENSHOT_SECURE_WINDOWS"/>
     </PreferenceCategory>
 </PreferenceScreen>
