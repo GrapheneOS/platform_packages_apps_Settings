@@ -74,6 +74,7 @@ public class PsdsServerPreferenceController
         ListPreference psdsServerList = new ListPreference(screen.getContext());
         psdsServerList.setKey(KEY_PSDS_SERVER_SETTINGS);
         psdsServerList.setOrder(40);
+        psdsServerList.setIcon(R.drawable.ic_satellite_alt);
         psdsServerList.setTitle(R.string.psds_server_title);
         psdsServerList.setSummary(R.string.psds_server_summary);
         psdsServerList.setEntries(R.array.psds_server_entries);
