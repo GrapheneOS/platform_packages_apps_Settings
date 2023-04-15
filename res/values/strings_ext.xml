@@ -48,4 +48,10 @@ Examples of such apps:
 This setting applies to all users on the device."
     </string>
 
+    <string name="psds_server_title">PSDS server</string>
+    <string name="psds_server_summary">Server used for providing satellite information to assist GNSS location</string>
+    <string name="psds_server_enabled_grapheneos_proxy">Enabled; GrapheneOS proxy</string>
+    <string name="psds_server_enabled_standard_server">Enabled; standard server</string>
+    <string name="psds_server_disabled">Disabled</string>
+
 </resources>

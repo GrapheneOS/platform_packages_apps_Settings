@@ -72,6 +72,12 @@
             android:summary="@string/pref_gnss_supl_summary"
             settings:controller="com.android.settings.location.GnssSuplPrefController"/>
 
+        <ListPreference
+            android:key="psds_server_settings"
+            android:title="@string/psds_server_title"
+            android:summary="@string/psds_server_summary"
+            settings:controller="com.android.settings.location.PsdsServerPreferenceController"/>
+
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
