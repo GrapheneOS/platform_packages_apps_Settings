@@ -48,4 +48,7 @@ Examples of such apps:
 This setting applies to all users on the device."
     </string>
 
+    <!-- Copied from Settings/res/values/strings.xml -->
+    <string name="automatic_storage_manager_text_override">To help free up storage space, storage manager removes photos and videos from your device older than the specified amount of time.</string>
+
 </resources>
