@@ -1211,9 +1211,11 @@ public class UserSettings extends SettingsPreferenceFragment
         boolean canOpenUserDetails =
                 mUserCaps.mIsAdmin || (canSwitchUserNow() && !mUserCaps.mDisallowSwitchUser);
         for (UserInfo user : users) {
-            if (user.isGuest()) {
+            if (user.isGuest() || user.isAdmin()) {
                 // Guest user is added to guest category via updateGuestCategory
                 // and not to user list so skip guest here
+
+                // We'll add the Owner profile at the top after it's sorted
                 continue;
             }
             UserPreference pref;
@@ -1274,6 +1276,48 @@ public class UserSettings extends SettingsPreferenceFragment
 
 
         Collections.sort(userPreferences);
+
+        // Add only the Owner at the top
+        for (UserInfo user : users) {
+            // Only run if the index is the owner profile (admin)
+            if (user.isAdmin()) {
+                UserPreference pref;
+                // If we're currently the owner, use mMePreference ("You (Owner)")
+                if (user.id == UserHandle.myUserId()) {
+                    pref = mMePreference;
+                } else {
+                    pref = new UserPreference(getPrefContext(), null, user.id);
+                    pref.setTitle(user.name);
+                    // Add the pref (profile) to the first index of userPreferences
+                    userPreferences.add(0, pref);
+                    pref.setOnPreferenceClickListener(this);
+                    pref.setEnabled(canOpenUserDetails);
+                    pref.setSelectable(true);
+                    pref.setKey("id=" + user.id);
+                    // Don't need to check if we're admin here, the previous logic
+                    // already did that before getting here
+                    pref.setSummary(R.string.user_admin);
+                }
+
+                if (pref == null) {
+                    continue;
+                }
+
+                // Apply the owner's profile icon if available
+                if (user.iconPath != null) {
+                    if (mUserIcons.get(user.id) == null) {
+                        // Icon not loaded yet, print a placeholder
+                        missingIcons.add(user.id);
+                        pref.setIcon(getEncircledDefaultIcon());
+                    } else {
+                        setPhotoId(pref, user);
+                    }
+                } else {
+                    // Icon not available yet, print a placeholder
+                    pref.setIcon(getEncircledDefaultIcon());
+                }
+            }
+        }
 
         getActivity().invalidateOptionsMenu();
 
