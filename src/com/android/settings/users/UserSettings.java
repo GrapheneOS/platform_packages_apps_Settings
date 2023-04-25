@@ -1273,8 +1273,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
 
-        // Sort list of users by serialNum
-        Collections.sort(userPreferences, UserPreference.SERIAL_NUMBER_COMPARATOR);
+        Collections.sort(userPreferences);
 
         getActivity().invalidateOptionsMenu();
 
