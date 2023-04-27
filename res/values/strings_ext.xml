@@ -48,4 +48,7 @@ Examples of such apps:
 This setting applies to all users on the device."
     </string>
 
+    <string name="screenshot_secure_windows_title">Allow screenshots of secure windows</string>
+    <string name="screenshot_secure_windows_summary">Allows taking screenshots and recordings of windows with FLAG_SECURE</string>
+
 </resources>
