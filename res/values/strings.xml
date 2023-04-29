@@ -821,7 +821,7 @@
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
     <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE] -->
-    <string name="security_dashboard_summary">Screen lock, Find My Device, app security</string>
+    <string name="security_dashboard_summary">Screen lock, app security</string>
     <!-- TODO(b/208624929): Update to an UX approved title and char limit. -->
     <!-- Main Settings screen setting title for the item that takes you to the safety center [CHAR LIMIT=60] -->
     <string name="safety_center_title">Security &amp; privacy</string>
