@@ -32,6 +32,6 @@ public class RemoteProvisioningPrefController extends IntSettingPrefController {
     @Override
     protected void getEntries(Entries entries) {
         entries.add(R.string.remote_provisioning_enabled_grapheneos_proxy, RemoteProvisioningConstants.GRAPHENEOS_PROXY);
-        entries.add(R.string.remote_provisioning_enabled_standard_server, RemoteProvisioningConstants.STANDARD_SERVER);
+        entries.add(R.string.remote_provisioning_enabled_google_server, RemoteProvisioningConstants.STANDARD_SERVER);
     }
 }
