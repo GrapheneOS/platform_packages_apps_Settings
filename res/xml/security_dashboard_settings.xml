@@ -49,10 +49,9 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
 
-        <ListPreference
+        <Preference
             android:key="auto_reboot"
             android:title="@string/auto_reboot_title"
-            android:summary="@string/auto_reboot_summary"
             settings:controller="com.android.settings.security.AutoRebootPrefController" />
 
         <ListPreference
