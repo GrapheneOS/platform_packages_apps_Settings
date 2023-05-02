@@ -88,7 +88,6 @@ public class ConnectivityCheckPreferenceController
         ListPreference captiveList = new ListPreference(screen.getContext());
         captiveList.setKey(KEY_CONNECTIVITY_CHECK_SETTINGS);
         captiveList.setOrder(30);
-        captiveList.setIcon(R.drawable.ic_settings_language);
         captiveList.setTitle(R.string.connectivity_check_title);
         captiveList.setSummary(R.string.connectivity_check_summary);
         captiveList.setEntries(R.array.connectivity_check_entries);
