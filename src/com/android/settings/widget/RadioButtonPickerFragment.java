@@ -50,7 +50,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         SelectorWithWidgetPreference.OnClickListener {
 
     @VisibleForTesting
-    static final String EXTRA_FOR_WORK = "for_work";
+    protected static final String EXTRA_FOR_WORK = "for_work";
     private static final String TAG = "RadioButtonPckrFrgmt";
     @VisibleForTesting
     boolean mAppendStaticPreferences = false;
@@ -154,6 +154,12 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
     }
 
+    protected void addPrefsBeforeList(PreferenceScreen screen) {
+        if (!mAppendStaticPreferences) {
+            addStaticPreferences(screen);
+        }
+    }
+
     public void updateCandidates() {
         mCandidates.clear();
         final List<? extends CandidateInfo> candidateList = getCandidates();
@@ -169,9 +175,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         if (mIllustrationId != 0) {
             addIllustration(screen);
         }
-        if (!mAppendStaticPreferences) {
-            addStaticPreferences(screen);
-        }
+        addPrefsBeforeList(screen);
 
         final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
@@ -199,6 +203,10 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             }
         }
         mayCheckOnlyRadioButton();
+        addPrefsAfterList(screen);
+    }
+
+    protected void addPrefsAfterList(PreferenceScreen screen) {
         if (mAppendStaticPreferences) {
             addStaticPreferences(screen);
         }
