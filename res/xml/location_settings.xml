@@ -66,10 +66,9 @@
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 
-        <ListPreference
+        <Preference
             android:key="gnss_supl"
             android:title="@string/pref_gnss_supl_title"
-            android:summary="@string/pref_gnss_supl_summary"
             settings:controller="com.android.settings.location.GnssSuplPrefController"/>
 
     </PreferenceCategory>
