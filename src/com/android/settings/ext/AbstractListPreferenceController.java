@@ -5,27 +5,42 @@
 
 package com.android.settings.ext;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.UserHandle;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.SparseIntArray;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.utils.CandidateInfoExtra;
+import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractListPreferenceController extends BasePreferenceController
-    implements Preference.OnPreferenceChangeListener {
+    implements DefaultLifecycleObserver {
 
-    private ListPreference preference;
+    private Preference preference;
     private Entries entries;
-    // current preference value is prepended to the baseSummary
-    private CharSequence baseSummary;
+
+    @Nullable
+    public RadioButtonPickerFragment2 fragment;
 
     protected AbstractListPreferenceController(Context ctx, String key) {
         super(ctx, key);
@@ -36,70 +51,53 @@ public abstract class AbstractListPreferenceController extends BasePreferenceCon
     // and setValue() methods are consistent
     protected abstract void getEntries(Entries entries);
 
+    public void getEntriesAsCandidates(ArrayList<CandidateInfo> dst) {
+        Entries e = new Entries(mContext);
+        getEntries(e);
+
+        dst.addAll(e.list);
+    }
+
     protected abstract int getCurrentValue();
     protected abstract boolean setValue(int val);
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        ListPreference p = screen.findPreference(mPreferenceKey);
-        if (p == null) {
-            return;
+    public void updateState(Preference p) {
+        if (entries == null) {
+            entries = new Entries(mContext);
+            getEntries(entries);
         }
 
-        this.preference = p;
-
-        if (p.getEntries() == null) {
-            if (entries == null) {
-                entries = new Entries(mContext);
-                getEntries(entries);
-            }
-
-            baseSummary = p.getSummary();
-
+        if (p != preference) {
             p.setSingleLineTitle(false);
-            p.setEntries(entries.getTitles());
-            p.setEntryValues(entries.getValues());
             p.setPersistent(false);
-            p.setOnPreferenceChangeListener(this);
+            this.preference = p;
         }
 
         updatePreference();
     }
 
     void updatePreference() {
-        ListPreference p = preference;
+        if (fragment != null) {
+            fragment.updateCandidates();
+        }
+
+        Preference p = preference;
         if (p == null) {
             return;
         }
 
         int idx = entries.getIndexForValue(getCurrentValue());
         if (idx >= 0) {
-            p.setValueIndex(idx);
-
-            var summary = new StringBuilder();
-            summary.append("[ ");
-            summary.append(p.getEntries()[idx]);
-            summary.append(" ]");
-            if (baseSummary != null) {
-                summary.append("\n\n");
-                summary.append(baseSummary);
-            }
-            p.setSummary(summary.toString());
+            p.setSummary(entries.list.get(idx).loadLabel());
+        } else {
+            p.setSummary(null);
         }
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
-        int val = Integer.parseInt((String) o);
-        return setValue(val);
     }
 
     public static class Entries {
         private final Context context;
-        private final ArrayList<CharSequence> titles = new ArrayList<>();
-        private final ArrayList<String> values = new ArrayList<>();
+        private final ArrayList<CandidateInfoExtra> list = new ArrayList<>();
         private final SparseIntArray valueToIndexMap = new SparseIntArray();
 
         Entries(Context context) {
@@ -108,6 +106,10 @@ public abstract class AbstractListPreferenceController extends BasePreferenceCon
 
         public void add(@StringRes int title, int value) {
             add(context.getText(title), value);
+        }
+
+        public void add(@StringRes int title, @StringRes int summary, int value) {
+            add(context.getText(title), context.getText(summary), value);
         }
 
         public void add(int duration, TimeUnit timeUnit) {
@@ -120,17 +122,17 @@ public abstract class AbstractListPreferenceController extends BasePreferenceCon
         }
 
         public void add(CharSequence title, int value) {
-            titles.add(title);
-            values.add(Integer.toString(value));
-            valueToIndexMap.put(value, values.size() - 1);
+            add(title, null, value, true);
         }
 
-        public CharSequence[] getTitles() {
-            return titles.toArray(CharSequence[]::new);
+        public void add(CharSequence title, CharSequence summary, int value) {
+            add(title, summary, value, true);
         }
 
-        public String[] getValues() {
-            return values.toArray(String[]::new);
+        public void add(CharSequence title, @Nullable CharSequence summary, int value, boolean enabled) {
+            String prefKey = Integer.toString(value);
+            list.add(new CandidateInfoExtra(title, summary, prefKey, enabled));
+            valueToIndexMap.put(value, list.size() - 1);
         }
 
         public int getIndexForValue(int val) {
@@ -146,5 +148,88 @@ public abstract class AbstractListPreferenceController extends BasePreferenceCon
     @Override
     public int getSliceHighlightMenuRes() {
         return NO_RES;
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+
+        if (this.preference instanceof ListPreference) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+
+        UserHandle workProfileUser = getWorkProfileUser();
+        boolean isForWork = workProfileUser != null;
+
+        RadioButtonPickerFragment2.fillArgs(preference, this, isForWork);
+
+        new SubSettingLauncher(preference.getContext())
+                .setDestination(RadioButtonPickerFragment2.class.getName())
+                .setSourceMetricsCategory(preference.getExtras().getInt(DashboardFragment.CATEGORY,
+                                                                        SettingsEnums.PAGE_UNKNOWN))
+                .setTitleText(preference.getTitle())
+                .setArguments(preference.getExtras())
+                .setUserHandle(workProfileUser)
+                .launch();
+        return true;
+    }
+
+    public void addPrefsBeforeList(RadioButtonPickerFragment2 fragment, PreferenceScreen screen) {
+
+    }
+
+    public void addPrefsAfterList(RadioButtonPickerFragment2 fragment, PreferenceScreen screen) {
+
+    }
+
+    public FooterPreference addFooterPreference(PreferenceScreen screen, @StringRes int text) {
+        Context ctx = screen.getContext();
+        return addFooterPreference(screen, ctx.getText(text), null, null);
+    }
+
+    public FooterPreference addFooterPreference(PreferenceScreen screen,
+                                                @StringRes int text, String learnMoreUrl) {
+        return addFooterPreference(screen, text, R.string.learn_more, learnMoreUrl);
+    }
+
+    public FooterPreference addFooterPreference(
+            PreferenceScreen screen, @StringRes int text,
+            @StringRes int learnMoreText, String learnMoreUrl) {
+        Context ctx = screen.getContext();
+        Runnable learnMoreAction = () -> {
+            var intent = new Intent(Intent.ACTION_VIEW, Uri.parse(learnMoreUrl));
+            ctx.startActivity(intent);
+        };
+        return addFooterPreference(screen, ctx.getText(text),
+                ctx.getText(learnMoreText), learnMoreAction);
+    }
+
+    public FooterPreference addFooterPreference(
+            PreferenceScreen screen, @StringRes int text,
+            @StringRes int learnMoreText, Runnable learnMoreAction) {
+        Context ctx = screen.getContext();
+        return addFooterPreference(screen, ctx.getText(text), ctx.getText(learnMoreText), learnMoreAction);
+    }
+
+    public FooterPreference addFooterPreference(PreferenceScreen screen, CharSequence text,
+                                                @Nullable CharSequence learnMoreText,
+                                                @Nullable Runnable learnMoreAction) {
+        var p = new FooterPreference(screen.getContext());
+        p.setSelectable(false);
+        p.setSummary(text);
+        if (learnMoreText != null) {
+            p.setLearnMoreText(learnMoreText);
+            Objects.requireNonNull(learnMoreAction);
+            p.setLearnMoreAction(v -> learnMoreAction.run());
+        }
+        p.setOrder(Preference.DEFAULT_ORDER);
+        screen.addPreference(p);
+        return p;
+    }
+
+    protected final CharSequence getText(@StringRes int resId) {
+        return mContext.getText(resId);
     }
 }
