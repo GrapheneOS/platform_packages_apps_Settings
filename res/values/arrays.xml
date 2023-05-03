@@ -252,16 +252,6 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="psds_server_entries">
-        <item>GrapheneOS proxy</item>
-        <item>Standard (Google)</item>
-    </string-array>
-
-    <string-array name="psds_server_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
     <!-- Do not translate. -->
     <string-array name="lock_after_timeout_values" translatable="false">
         <!-- Do not translate. -->
