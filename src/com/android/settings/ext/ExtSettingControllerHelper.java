@@ -36,10 +36,6 @@ class ExtSettingControllerHelper<T extends Setting> {
 
     void onResume(ExtSettingPrefController espc) {
         registerObserver(espc);
-
-        if (!setting.canObserveState()) {
-            espc.accept(setting);
-        }
     }
 
     void onPause(ExtSettingPrefController espc) {
