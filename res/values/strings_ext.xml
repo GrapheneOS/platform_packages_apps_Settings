@@ -50,4 +50,15 @@ Examples of such apps:
 This setting applies to all users on the device."
     </string>
 
+    <string name="pref_gnss_psds_title">Predicted Satellite Data Service (PSDS)</string>
+    <string name="gnss_psds_footer">
+"If PSDS is enabled, static PSDS information files will be downloaded periodically to improve location resolution speed and accuracy.
+No query or data is sent to the server. These files contain orbits and statuses of satellites, Earth environmental data and time adjustment information."
+</string>
+    <string name="psds_enabled_grapheneos_server">Enabled (GrapheneOS server)</string>
+    <string name="psds_enabled_qualcomm_server">Enabled (Qualcomm server)</string>
+    <string name="psds_enabled_standard_server">Enabled (standard server)</string>
+    <string name="psds_disabled">Disabled</string>
+    <string name="psds_disabled_summary">Will make acquiring location lock significantly slower, especially if SUPL is disabled too</string>
+
 </resources>
