@@ -91,8 +91,8 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
     @Override
     public void onResume() {
         super.onResume();
-
         helper.onResume(this);
+        refreshMainSwitch();
     }
 
     @Override
