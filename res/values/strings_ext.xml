@@ -61,4 +61,6 @@ No query or data is sent to the server. These files contain orbits and statuses 
     <string name="psds_disabled">Disabled</string>
     <string name="psds_disabled_summary">Will make acquiring location lock significantly slower, especially if SUPL is disabled too</string>
 
+    <string name="contact_scopes">Contact Scopes</string>
+
 </resources>
