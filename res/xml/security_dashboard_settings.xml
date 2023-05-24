@@ -54,14 +54,6 @@
             android:title="@string/auto_reboot_title"
             settings:controller="com.android.settings.security.AutoRebootPrefController" />
 
-        <ListPreference
-            android:key="deny_new_usb"
-            android:title="@string/deny_new_usb_title"
-            android:summary="@string/deny_new_usb_summary"
-            android:persistent="false"
-            android:entries="@array/deny_new_usb_entries"
-            android:entryValues="@array/deny_new_usb_values" />
-
         <SwitchPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
