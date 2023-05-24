@@ -36,6 +36,11 @@
         settings:searchable="false"
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
+    <Preference
+        android:key="bluetooth_auto_off"
+        android:title="@string/bluetooth_auto_off_title"
+        settings:controller="com.android.settings.bluetooth.BluetoothAutoOffPrefController"/>
+
     <com.android.settingslib.widget.FooterPreference
         android:key="bluetooth_screen_footer"
         android:selectable="false"
