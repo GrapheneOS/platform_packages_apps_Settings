@@ -95,4 +95,12 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
     <string name="exec_spawning_title_inner">Use secure app spawning</string>
     <string name="exec_spawning_footer">Launch apps in a more secure way than Android which takes slightly longer and increases memory usage by app processes.</string>
 
+    <string name="native_debugging_title">Native code debugging</string>
+    <string name="native_debugging_title_inner">Allow native code debugging</string>
+    <string name="native_debugging_footer">
+"Native code debugging (ptrace) is needed for generating useful logs from crashes and for debugging native code.
+This feature slightly weakens the app sandbox.
+Disabling native debugging might break some apps, most notably banking apps.
+    </string>
+
 </resources>
