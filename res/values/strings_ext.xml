@@ -84,4 +84,11 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
 "If there are no connected devices, Bluetooth will turn off after the selected timeout."
     </string>
 
+    <string name="deny_new_usb_title">USB peripherals</string>
+    <string name="deny_new_usb_footer">This feature exists to reduce attack surface, especially for a locked device.</string>
+
+    <string name="deny_new_usb_val_disabled">Allow new USB peripherals</string>
+    <string name="deny_new_usb_val_dynamic">Allow new USB peripherals when unlocked</string>
+    <string name="deny_new_usb_val_enabled">Disallow new USB peripherals</string>
+
 </resources>
