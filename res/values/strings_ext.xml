@@ -22,8 +22,7 @@
     <string name="supl_disabled">Disabled</string>
     <string name="supl_disabled_summary">Will make acquiring location lock significantly slower, especially if PSDS is disabled too</string>
 
-    <string name="scramble_pin_title">PIN scrambling</string>
-    <string name="scramble_pin_summary">Controls PIN scrambling option when inputting PIN on screen lock.</string>
+    <string name="scramble_pin_title">Scramble PIN input layout</string>
 
     <string name="privileged_euicc_management_title">Enable privileged eSIM management</string>
     <string name="privileged_euicc_management_summary">Requires sandboxed Google Play installation</string>
