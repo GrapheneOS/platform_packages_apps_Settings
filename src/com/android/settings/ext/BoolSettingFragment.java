@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -65,7 +66,9 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
 
     protected abstract CharSequence getTitle();
 
-    protected abstract CharSequence getMainSwitchTitle();
+    protected CharSequence getMainSwitchTitle() {
+        return getText(R.string.bool_setting_enable);
+    }
 
     protected CharSequence getMainSwitchSummary() {
         return null;
