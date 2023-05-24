@@ -71,4 +71,8 @@ No query or data is sent to the server. These files contain orbits and statuses 
 There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
     </string>
 
+    <string name="bool_setting_enable">Enable</string>
+    <string name="bool_setting_enabled">Enabled</string>
+    <string name="bool_setting_disabled">Disabled</string>
+
 </resources>
