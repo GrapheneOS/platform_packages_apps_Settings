@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 
-class ExtSettingControllerHelper<T extends Setting> {
+public class ExtSettingControllerHelper<T extends Setting> {
     private final Context context;
     private final T setting;
 
@@ -23,11 +23,13 @@ class ExtSettingControllerHelper<T extends Setting> {
         this.setting = setting;
     }
 
+    public static int getGlobalSettingAvailability(Context ctx) {
+        return Process.myUserHandle().isSystem() ? AVAILABLE : DISABLED_FOR_USER;
+    }
+
     int getAvailabilityStatus() {
         if (setting.getScope() != Setting.Scope.PER_USER) {
-            if (!Process.myUserHandle().isSystem()) {
-                return DISABLED_FOR_USER;
-            }
+            return getGlobalSettingAvailability(context);
         }
         return AVAILABLE;
     }
