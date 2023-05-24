@@ -74,7 +74,6 @@
         <SwitchPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
-            android:summary="@string/scramble_pin_summary"
             settings:boolSettingField="android.ext.settings.ExtSettings SCRAMBLE_PIN_LAYOUT" />
 
         <SwitchPreference
