@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="auto_off_never">Never</string>
 
     <string name="bool_setting_enable">Enable</string>
     <string name="bool_setting_enabled">Enabled</string>
