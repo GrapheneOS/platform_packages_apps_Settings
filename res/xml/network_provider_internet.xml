@@ -140,6 +140,12 @@
         settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 
     <Preference
+        android:key="connectivity_checks"
+        android:title="@string/conn_checks_title"
+        android:order="30"
+        settings:controller="com.android.settings.network.ConnectivityChecksPrefController"/>
+
+    <Preference
         android:key="remote_provisioning_settings"
         android:title="@string/remote_provisioning_title"
         android:order="35"
