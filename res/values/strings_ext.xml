@@ -109,6 +109,14 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
     <string name="exec_spawning_title_inner">Use secure app spawning</string>
     <string name="exec_spawning_footer">Launch apps in a more secure way than Android which takes slightly longer and increases memory usage by app processes.</string>
 
+    <string name="native_debugging_title">Native code debugging</string>
+    <string name="native_debugging_main_switch">Block for third-party apps by default</string>
+    <string name="native_debugging_summary_default_blocked">Blocked by default</string>
+    <string name="native_debugging_summary_default_3p_allowed">Allowed for third-party apps by default</string>
+    <string name="native_debugging_footer">
+Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most notably banking apps) use it as a tampering detection tool.
+    </string>
+
     <!-- Title of preference to enable app installs and updates [CHAR LIMIT=40] -->
     <string name="user_app_install">App installs and updates</string>
     <!-- Options for setting app install and updates per user -->
