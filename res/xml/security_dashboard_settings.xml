@@ -59,6 +59,12 @@
             android:title="@string/deny_new_usb_title"
             settings:controller="com.android.settings.security.DenyNewUsbPrefController" />
 
+        <Preference
+            android:key="exec_spawning"
+            android:title="@string/exec_spawning_title"
+            android:fragment="com.android.settings.security.ExecSpawningFragment"
+            settings:controller="com.android.settings.security.ExecSpawningPrefController" />
+
         <SwitchPreference
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
