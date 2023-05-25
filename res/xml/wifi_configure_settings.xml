@@ -34,6 +34,11 @@
         settings:keywords="@string/keywords_wifi_notify_open_networks"
         settings:controller="com.android.settings.wifi.NotifyOpenNetworksPreferenceController"/>
 
+    <Preference
+        android:key="wifi_auto_off"
+        android:title="@string/wifi_auto_off_title"
+        settings:controller="com.android.settings.wifi.WifiAutoOffPrefController"/>
+
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"
