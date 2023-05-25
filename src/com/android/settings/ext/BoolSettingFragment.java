@@ -1,7 +1,9 @@
 package com.android.settings.ext;
 
 import android.content.Context;
+import android.content.Intent;
 import android.ext.settings.BoolSetting;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.preference.PreferenceScreen;
@@ -78,6 +80,13 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
 
     protected FooterPreference makeFooterPref(FooterPreference.Builder builder) {
         return null;
+    }
+
+    protected static void setFooterPrefLearnMoreUri(FooterPreference p, Uri uri) {
+        p.setLearnMoreAction(v -> {
+            var intent = new Intent(Intent.ACTION_VIEW, uri);
+            p.getContext().startActivity(intent);
+        });
     }
 
     protected void onMainSwitchChanged(boolean state) {}
