@@ -190,6 +190,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
         // Replacing WebView is not supported
         keepEnabledPackages.add("app.vanadium.webview");
+
+        // Only bundled camera can handle some of camera intents
+        keepEnabledPackages.add("app.grapheneos.camera");
         return keepEnabledPackages;
     }
 
