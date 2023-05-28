@@ -183,6 +183,10 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (mPm.getWellbeingPackageName() != null) {
             keepEnabledPackages.add(mPm.getWellbeingPackageName());
         }
+
+        // Bundled keyboard, needed for text input in Direct Boot mode if the selected 3rd party
+        // keyboard doesn't support it
+        keepEnabledPackages.add("com.android.inputmethod.latin");
         return keepEnabledPackages;
     }
 
