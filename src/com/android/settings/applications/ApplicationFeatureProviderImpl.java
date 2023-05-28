@@ -193,6 +193,11 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
 
         // Only bundled camera can handle some of camera intents
         keepEnabledPackages.add("app.grapheneos.camera");
+
+        // Disabling GmsCompat app breaks the gmscompat layer
+        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME);
+        // Disabling GmsCompatConfig breaks updates through Apps app
+        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME + ".config");
         return keepEnabledPackages;
     }
 
