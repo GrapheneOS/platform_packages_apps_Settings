@@ -187,6 +187,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         // Bundled keyboard, needed for text input in Direct Boot mode if the selected 3rd party
         // keyboard doesn't support it
         keepEnabledPackages.add("com.android.inputmethod.latin");
+
+        // Replacing WebView is not supported
+        keepEnabledPackages.add("app.vanadium.webview");
         return keepEnabledPackages;
     }
 
