@@ -22,12 +22,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
+import android.ext.PackageId;
 import android.location.LocationManager;
 import android.os.RemoteException;
 import android.os.UserManager;
@@ -183,6 +185,39 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         if (mPm.getWellbeingPackageName() != null) {
             keepEnabledPackages.add(mPm.getWellbeingPackageName());
         }
+
+        ArraySet<String> systemPkgs = new ArraySet<>(new String[] {
+                // Bundled keyboard, needed for text input in Direct Boot mode if the selected 3rd
+                // party keyboard doesn't support it
+                "com.android.inputmethod.latin",
+
+                // Replacing WebView is not supported
+                "app.vanadium.webview",
+
+                // Only bundled camera can handle some of camera intents
+                "app.grapheneos.camera",
+
+                // Disabling GmsCompat app breaks the GmsCompat layer
+                com.android.internal.gmscompat.GmsCompatApp.PKG_NAME,
+
+                // EuiccSupportPixel handles firmware updates of embedded secure element that is
+                // used for eSIM, NFC, Felica etc
+                PackageId.EUICC_SUPPORT_PIXEL_NAME,
+
+                // CameraX extensions break when it's disabled, which breaks apps that use the
+                // CameraX library
+                PackageId.PIXEL_CAMERA_SERVICES_NAME,
+        });
+
+        PackageManager pm = mContext.getPackageManager();
+
+        for (ApplicationInfo ai : pm.getInstalledApplications(PackageManager.MATCH_SYSTEM_ONLY)) {
+            String pkgName = ai.packageName;
+            if (systemPkgs.contains(pkgName)) {
+                keepEnabledPackages.add(pkgName);
+            }
+        }
+
         return keepEnabledPackages;
     }
 
