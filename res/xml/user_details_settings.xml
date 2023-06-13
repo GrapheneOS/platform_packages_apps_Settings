@@ -26,6 +26,10 @@
             android:icon="@drawable/ic_admin_panel_settings"
             android:title="@string/user_grant_admin" />
     <SwitchPreference
+            android:icon="@drawable/ic_sync"
+            android:key="allow_run_in_background"
+            android:title="@string/user_run_in_background" />
+    <SwitchPreference
             android:key="enable_calling"
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />
