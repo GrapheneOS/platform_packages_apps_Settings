@@ -8069,7 +8069,7 @@
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
     <!-- Title of preference to disallow installing apps [CHAR LIMIT=45] -->
-    <string name="user_disallow_install_apps">Disallow installing apps</string>
+    <string name="user_allow_install_apps">Allow installing apps</string>
     <!-- Title of preference to disallow installing apps [CHAR LIMIT=45] -->
     <string name="user_disallow_install_apps_unknown_sources">Disallow installing apps from third party sources</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
