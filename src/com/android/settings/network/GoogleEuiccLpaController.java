@@ -48,6 +48,17 @@ public class GoogleEuiccLpaController extends AbstractTogglePrefController imple
             return DISABLED_FOR_USER;
         }
 
+        boolean isPresent = false;
+        try {
+            var ai = packageManager.getApplicationInfo(GoogleEuicc.LPA_PKG_NAME, 0);
+            isPresent = ai.isSystemApp();
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        if (!isPresent) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         return GoogleEuicc.checkLpaDependencies() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
