@@ -305,7 +305,7 @@ public class DSULoader extends ListActivity {
         }
 
         boolean isSupported() {
-            boolean supported = true;
+            boolean supported = false;
             String cpu = getDeviceCpu();
             if (!mCpuAbi.equals(cpu)) {
                 Slog.i(TAG, mCpuAbi + " != " + cpu);
