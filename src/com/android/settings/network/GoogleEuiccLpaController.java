@@ -1,12 +1,14 @@
 package com.android.settings.network;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.PatternMatcher;
+import android.os.PowerManager;
 import android.os.Process;
 import android.os.UserHandle;
 import android.permission.PermissionManager;
@@ -15,12 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 
 import com.android.internal.util.GoogleEuicc;
+import com.android.settings.R;
 import com.android.settings.ext.AbstractTogglePrefController;
 
-import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
 
 public class GoogleEuiccLpaController extends AbstractTogglePrefController implements DefaultLifecycleObserver {
@@ -70,27 +71,39 @@ public class GoogleEuiccLpaController extends AbstractTogglePrefController imple
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        int state = isChecked && GoogleEuicc.checkLpaDependencies() ?
-                COMPONENT_ENABLED_STATE_ENABLED :
-                COMPONENT_ENABLED_STATE_DISABLED;
+        if (!isChecked) {
+            var b = new AlertDialog.Builder(mContext);
+            b.setMessage(R.string.privileged_euicc_management_restart_to_disable_dialog);
+            b.setPositiveButton(R.string.privileged_euicc_management_restart_button, (dialogInterface, btn) -> {
+                var pm = mContext.getSystemService(PowerManager.class);
+                pm.reboot(null);
+            });
+            b.show();
+            return false;
+        }
+
+        if (!GoogleEuicc.checkLpaDependencies()) {
+            // this is a race condition, toggle hasn't been grayed out yet
+            return false;
+        }
 
         PermissionManager permissionManager = mContext.getSystemService(PermissionManager.class);
 
         try {
+            String pkg = GoogleEuicc.LPA_PKG_NAME;
+
+            UserHandle user = mContext.getUser();
+            String perm = Manifest.permission.CAMERA;
+            permissionManager.revokeRuntimePermission(pkg, perm, user, null);
             // Previously, Camera permission was auto-granted with the FLAG_PERMISSION_SYSTEM_FIXED,
             // which made it unchangeable by the user.
             // Removing FLAG_PERMISSION_USER_FIXED is needed to make sure that the app is always
             // able to show a permission request dialog after being enabled
-            String pkg = GoogleEuicc.LPA_PKG_NAME;
-            if (state == COMPONENT_ENABLED_STATE_ENABLED) {
-                UserHandle user = mContext.getUser();
-                String perm = Manifest.permission.CAMERA;
-                permissionManager.revokeRuntimePermission(pkg, perm, user, null);
-                int permFlagsToRemove = PackageManager.FLAG_PERMISSION_SYSTEM_FIXED
-                        | PackageManager.FLAG_PERMISSION_USER_FIXED;
-                permissionManager.updatePermissionFlags(pkg, perm, permFlagsToRemove, 0, user);
-            }
-            packageManager.setApplicationEnabledSetting(pkg, state, 0);
+            int permFlagsToRemove = PackageManager.FLAG_PERMISSION_SYSTEM_FIXED
+                    | PackageManager.FLAG_PERMISSION_USER_FIXED;
+            permissionManager.updatePermissionFlags(pkg, perm, permFlagsToRemove, 0, user);
+
+            packageManager.setApplicationEnabledSetting(pkg, COMPONENT_ENABLED_STATE_ENABLED, 0);
 
             return true;
         } catch (Exception e) {
