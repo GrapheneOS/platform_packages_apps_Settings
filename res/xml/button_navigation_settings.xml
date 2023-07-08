@@ -37,5 +37,12 @@
         settings:controller="com.android.settings.gestures.ButtonNavigationSettingsAssistController"
     />
 
+    <SwitchPreference
+        android:key="nav_bar_inversion"
+        android:title="@string/nav_bar_inversion_title"
+        android:summary="@string/nav_bar_inversion_summary"
+        settings:controller="com.android.settings.gestures.ButtonNavigationSettingsInversionController"
+    />
+
 </PreferenceScreen>
 
