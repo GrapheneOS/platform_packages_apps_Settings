@@ -104,7 +104,15 @@ public class GoogleEuiccLpaController extends AbstractTogglePrefController imple
             permissionManager.updatePermissionFlags(pkg, perm, permFlagsToRemove, 0, user);
 
             packageManager.setApplicationEnabledSetting(pkg, COMPONENT_ENABLED_STATE_ENABLED, 0);
-
+            {
+                // Google's LPA expects to be enabled at boot, when ACTION_LOCKED_BOOT_COMPLETED
+                // is normally sent.
+                // Upon receiving this broadcast, it performs additional initialization that is
+                // skipped otherwise, see RestoreUiccSlotSettingsOnBootReceiver and CompleteBootService
+                var intent = new Intent(Intent.ACTION_LOCKED_BOOT_COMPLETED);
+                intent.setPackage(pkg);
+                mContext.sendBroadcast(intent);
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
