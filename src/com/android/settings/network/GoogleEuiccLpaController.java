@@ -3,6 +3,7 @@ package com.android.settings.network;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,6 +13,7 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.os.UserHandle;
 import android.permission.PermissionManager;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
@@ -84,6 +86,24 @@ public class GoogleEuiccLpaController extends AbstractTogglePrefController imple
 
         if (!GoogleEuicc.checkLpaDependencies()) {
             // this is a race condition, toggle hasn't been grayed out yet
+            return false;
+        }
+
+        ContentResolver cr = mContext.getContentResolver();
+
+        if (Settings.Global.getInt(cr, Settings.Global.BOOT_COUNT, 0) == 1) {
+            // When BOOT_COUNT is 1, Google's LPA assumes that it was started together with Google's
+            // SetupWizard, and changes its behavior in unwanted ways.
+            //
+            // To avoid this, require a reboot, which will increment BOOT_COUNT
+
+            var b = new AlertDialog.Builder(mContext);
+            b.setMessage(R.string.privileged_euicc_management_restart_due_to_first_boot);
+            b.setPositiveButton(R.string.privileged_euicc_management_restart_button, (dialogInterface, btn) -> {
+                var pm = mContext.getSystemService(PowerManager.class);
+                pm.reboot(null);
+            });
+            b.show();
             return false;
         }
 
