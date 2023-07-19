@@ -65,7 +65,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
     private static final String KEY_APP_COPYING = "app_copying";
     private static final String KEY_DISALLOW_INSTALL_APPS = "disallow_install_apps";
-    private static final String KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES = "disallow_install_apps_unknown_sources";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -96,7 +95,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     Preference mRemoveUserPref;
     private SwitchPreference mInstallAppsPref;
-    private SwitchPreference mInstallAppsUnknownSourcesPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -197,29 +195,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             } else {
                 UserHandle userHandle = UserHandle.of(mUserInfo.id);
                 mUserManager.setUserRestriction(UserManager.DISALLOW_INSTALL_APPS, (Boolean) newValue,
-                        userHandle);
-            }
-        } else if (preference == mInstallAppsUnknownSourcesPref) {
-            if (mUserInfo.isGuest()) {
-                mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, (Boolean) newValue);
-                mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
-
-                // Update the guest's restrictions, if there is a guest
-                // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
-                // on any existing guest rather than do it here with multiple Binder calls.
-                List<UserInfo> users = mUserManager.getUsers(true);
-                for (UserInfo user: users) {
-                    if (user.isGuest()) {
-                        UserHandle userHandle = UserHandle.of(user.id);
-                        for (String key : mDefaultGuestRestrictions.keySet()) {
-                            mUserManager.setUserRestriction(
-                                    key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
-                        }
-                    }
-                }
-            } else {
-                UserHandle userHandle = UserHandle.of(mUserInfo.id);
-                mUserManager.setUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, (Boolean) newValue,
                         userHandle);
             }
         }
@@ -326,7 +301,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
         mInstallAppsPref = findPreference(KEY_DISALLOW_INSTALL_APPS);
-        mInstallAppsUnknownSourcesPref = findPreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -346,7 +320,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
             removePreference(KEY_DISALLOW_INSTALL_APPS);
-            removePreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
@@ -381,15 +354,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     removePreference(KEY_APP_COPYING);
                 }
                 removePreference(KEY_DISALLOW_INSTALL_APPS);
-                removePreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
                 mInstallAppsPref.setChecked(mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_INSTALL_APPS, new UserHandle(userId)));
-                mInstallAppsUnknownSourcesPref.setChecked(mUserManager.hasUserRestriction(
-                        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, new UserHandle(userId)));
             }
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                     UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
@@ -401,7 +371,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
             mAppCopyingPref.setOnPreferenceClickListener(this);
             mInstallAppsPref.setOnPreferenceChangeListener(this);
-            mInstallAppsUnknownSourcesPref.setOnPreferenceChangeListener(this);
         }
     }
 
