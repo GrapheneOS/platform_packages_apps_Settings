@@ -66,7 +66,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_APP_COPYING = "app_copying";
     private static final String KEY_DISALLOW_INSTALL_APPS = "disallow_install_apps";
     private static final String KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES = "disallow_install_apps_unknown_sources";
-    private static final String KEY_DISALLOW_RUN_IN_BACKGROUND = "disallow_run_in_background";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -98,7 +97,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     Preference mRemoveUserPref;
     private SwitchPreference mInstallAppsPref;
     private SwitchPreference mInstallAppsUnknownSourcesPref;
-    private SwitchPreference mRunInBackgroundPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -182,8 +180,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             setUserRestriction(UserManager.DISALLOW_INSTALL_APPS, !((boolean) newValue));
         } else if (preference == mInstallAppsUnknownSourcesPref) {
             setUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, !((boolean) newValue));
-        } else if (preference == mRunInBackgroundPref) {
-            setUserRestriction(UserManager.DISALLOW_RUN_IN_BACKGROUND, !((boolean) newValue));
         }
         return true;
     }
@@ -289,7 +285,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
         mInstallAppsPref = findPreference(KEY_DISALLOW_INSTALL_APPS);
         mInstallAppsUnknownSourcesPref = findPreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
-        mRunInBackgroundPref = findPreference(KEY_DISALLOW_RUN_IN_BACKGROUND);
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -310,7 +305,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_APP_COPYING);
             removePreference(KEY_DISALLOW_INSTALL_APPS);
             removePreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
-            removePreference(KEY_DISALLOW_RUN_IN_BACKGROUND);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
@@ -347,7 +341,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     removePreference(KEY_APP_COPYING);
                 }
                 removePreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
-                removePreference(KEY_DISALLOW_RUN_IN_BACKGROUND);
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
@@ -356,8 +349,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         UserManager.DISALLOW_INSTALL_APPS, new UserHandle(userId)));
                 mInstallAppsUnknownSourcesPref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, new UserHandle(userId)));
-                mRunInBackgroundPref.setChecked(!mUserManager.hasUserRestriction(
-                        UserManager.DISALLOW_RUN_IN_BACKGROUND, new UserHandle(userId)));
             }
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                     UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
@@ -370,7 +361,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mAppCopyingPref.setOnPreferenceClickListener(this);
             mInstallAppsPref.setOnPreferenceChangeListener(this);
             mInstallAppsUnknownSourcesPref.setOnPreferenceChangeListener(this);
-            mRunInBackgroundPref.setOnPreferenceChangeListener(this);
         }
     }
 

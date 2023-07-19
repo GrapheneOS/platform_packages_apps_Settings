@@ -8072,8 +8072,6 @@
     <string name="user_allow_install_apps">Allow installing apps</string>
     <!-- Title of preference to disallow installing apps [CHAR LIMIT=45] -->
     <string name="user_allow_install_apps_unknown_sources">Allow installing apps from third party sources</string>
-    <!-- Title of preference to disallow user running from background [CHAR LIMIT=45] -->
-    <string name="user_allow_run_in_background">Allow running in background</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
     <string name="user_remove_user">Delete user</string>
     <!-- Title for confirmation of turning on calls [CHAR LIMIT=40] -->
