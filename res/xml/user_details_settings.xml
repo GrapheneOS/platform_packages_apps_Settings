@@ -32,7 +32,7 @@
     <SwitchPreference
             android:icon="@drawable/ic_settings_install"
             android:key="disallow_install_apps"
-            android:title="@string/user_allow_install_apps" />
+            android:title="@string/user_disallow_install_apps" />
     <SwitchPreference
             android:icon="@drawable/ic_settings_install"
             android:key="disallow_install_apps_unknown_sources"
