@@ -177,7 +177,28 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
             enableCallsAndSms(false);
         } else if (preference == mInstallAppsPref) {
-            setUserRestriction(UserManager.DISALLOW_INSTALL_APPS, !((boolean) newValue));
+            if (mUserInfo.isGuest()) {
+                mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_INSTALL_APPS, (Boolean) newValue);
+                mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
+
+                // Update the guest's restrictions, if there is a guest
+                // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
+                // on any existing guest rather than do it here with multiple Binder calls.
+                List<UserInfo> users = mUserManager.getUsers(true);
+                for (UserInfo user: users) {
+                    if (user.isGuest()) {
+                        UserHandle userHandle = UserHandle.of(user.id);
+                        for (String key : mDefaultGuestRestrictions.keySet()) {
+                            mUserManager.setUserRestriction(
+                                    key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
+                        }
+                    }
+                }
+            } else {
+                UserHandle userHandle = UserHandle.of(mUserInfo.id);
+                mUserManager.setUserRestriction(UserManager.DISALLOW_INSTALL_APPS, (Boolean) newValue,
+                        userHandle);
+            }
         } else if (preference == mInstallAppsUnknownSourcesPref) {
             if (mUserInfo.isGuest()) {
                 mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, (Boolean) newValue);
@@ -350,8 +371,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
                 mPhonePref.setChecked(
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
-                mInstallAppsPref.setChecked(
-                        !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_INSTALL_APPS));
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
                         : com.android.settingslib.R.string.guest_exit_guest);
@@ -361,12 +380,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 if (!SHOW_APP_COPYING_PREF) {
                     removePreference(KEY_APP_COPYING);
                 }
+                removePreference(KEY_DISALLOW_INSTALL_APPS);
                 removePreference(KEY_DISALLOW_INSTALL_APPS_UNKNOWN_SOURCES);
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
-                mInstallAppsPref.setChecked(!mUserManager.hasUserRestriction(
+                mInstallAppsPref.setChecked(mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_INSTALL_APPS, new UserHandle(userId)));
                 mInstallAppsUnknownSourcesPref.setChecked(mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, new UserHandle(userId)));
