@@ -533,25 +533,4 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         //  return true so there will be no setup prompt dialog shown to the user anymore.
         return isSecondaryUser(mUserInfo) && !mUserInfo.isInitialized();
     }
-
-    private void setUserRestriction(String userManagerKey, boolean enabled) {
-        if (mUserInfo.isGuest()) {
-            mDefaultGuestRestrictions.putBoolean(userManagerKey, enabled);
-            mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
-
-            List<UserInfo> users = mUserManager.getUsers(true);
-            for (UserInfo user: users) {
-                if (user.isGuest()) {
-                    UserHandle userHandle = UserHandle.of(user.id);
-                    for (String key : mDefaultGuestRestrictions.keySet()) {
-                        mUserManager.setUserRestriction(
-                                key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
-                    }
-                }
-            }
-        } else {
-            UserHandle userHandle = UserHandle.of(mUserInfo.id);
-            mUserManager.setUserRestriction(userManagerKey, enabled, userHandle);
-        }
-    }
 }
