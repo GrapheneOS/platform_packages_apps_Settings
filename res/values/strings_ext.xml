@@ -107,4 +107,15 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
     <string name="exec_spawning_title_inner">Use secure app spawning</string>
     <string name="exec_spawning_footer">Launch apps in a more secure way than Android which takes slightly longer and increases memory usage by app processes.</string>
 
+    <!-- Title of preference to enable app installs and updates [CHAR LIMIT=40] -->
+    <string name="user_app_install">App installs and updates</string>
+    <!-- Options for setting app install and updates per user -->
+    <string name="user_app_install_enabled">Enabled</string>
+    <string name="user_app_install_enabled_first_party_sources">Enabled for first party sources</string>
+    <string name="user_app_install_disabled">Disabled</string>
+    <!-- Description for options for setting app installs and updates per user -->
+    <string name="user_app_install_enabled_desc">Enable app installs and updates</string>
+    <string name="user_app_install_enabled_first_party_sources_desc">Enable app installs and updates from first party sources only</string>
+    <string name="user_app_install_disabled_desc">Disable app installs and updates</string>
+
 </resources>
