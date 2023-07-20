@@ -42,7 +42,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -64,6 +63,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
     private static final String KEY_APP_COPYING = "app_copying";
+
+    private static final String KEY_APP_INSTALLS = "app_installs";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -93,6 +94,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     Preference mAppCopyingPref;
     @VisibleForTesting
     Preference mRemoveUserPref;
+    Preference mAppsInstallsPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -126,6 +128,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (mGuestUserAutoCreated) {
             mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
         }
+        mAppsInstallsPref.setSummary(UserAppsInstallSettings.getDescription(
+                requireContext(), userRestrictions));
     }
 
     @Override
@@ -158,6 +162,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == mAppCopyingPref) {
             openAppCopyingScreen();
+            return true;
+        } else if (preference == mAppsInstallsPref) {
+            UserAppsInstallSettings.launch(preference, mUserInfo.id);
             return true;
         }
         return false;
@@ -274,6 +281,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
+        mAppsInstallsPref = findPreference(KEY_APP_INSTALLS);
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -292,6 +300,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_REMOVE_USER);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
+            removePreference(KEY_APP_INSTALLS);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
@@ -332,6 +341,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
 
             mRemoveUserPref.setOnPreferenceClickListener(this);
+            mAppsInstallsPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
             mAppCopyingPref.setOnPreferenceClickListener(this);
