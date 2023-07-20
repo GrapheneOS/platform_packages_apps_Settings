@@ -34,6 +34,10 @@
             android:icon="@drawable/ic_lock_closed"
             android:title="@string/user_restrictions_title" />
     <com.android.settingslib.RestrictedPreference
+            android:key="app_installs"
+            android:icon="@drawable/ic_settings_install"
+            android:title="@string/user_app_install" />
+    <com.android.settingslib.RestrictedPreference
             android:key="app_copying"
             android:icon="@drawable/ic_apps"
             android:title="@string/user_copy_apps_menu_title" />
