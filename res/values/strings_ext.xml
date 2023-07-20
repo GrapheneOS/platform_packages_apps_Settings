@@ -103,4 +103,15 @@ This feature slightly weakens the app sandbox.
 Disabling native debugging might break some apps, most notably banking apps.
     </string>
 
+    <!-- Title of preference to enable app installs and updates [CHAR LIMIT=40] -->
+    <string name="user_app_install">App installs and updates</string>
+    <!-- Options for setting app install and updates per user -->
+    <string name="user_app_install_enabled">Enabled</string>
+    <string name="user_app_install_enabled_first_party_sources">Enabled for first party sources</string>
+    <string name="user_app_install_disabled">Disabled</string>
+    <!-- Description for options for setting app installs and updates per user -->
+    <string name="user_app_install_enabled_desc">Enable app installs and updates</string>
+    <string name="user_app_install_enabled_first_party_sources_desc">Enable app installs and updates from first party sources only</string>
+    <string name="user_app_install_disabled_desc">Disable app installs and updates</string>
+
 </resources>
