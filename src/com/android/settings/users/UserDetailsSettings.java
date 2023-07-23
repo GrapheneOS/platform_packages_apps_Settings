@@ -97,7 +97,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
     UserInfo mUserInfo;
-    private Bundle mDefaultGuestRestrictions;
+    private UserRestrictions userRestrictions;
 
     @Override
     public int getMetricsCategory() {
@@ -267,6 +267,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         boolean isNewUser =
                 arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false);
         mUserInfo = mUserManager.getUserInfo(userId);
+        userRestrictions = new UserRestrictions(mUserManager, mUserInfo);
 
         mSwitchUserPref = findPreference(KEY_SWITCH_USER);
         mPhonePref = findPreference(KEY_ENABLE_TELEPHONY);
@@ -307,14 +308,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 removePreference(KEY_APP_AND_CONTENT_ACCESS);
             }
 
+            mPhonePref.setChecked(!userRestrictions.isSet(UserManager.DISALLOW_OUTGOING_CALLS));
             if (mUserInfo.isGuest()) {
                 // These are not for an existing user, just general Guest settings.
                 // Default title is for calling and SMS. Change to calling-only here
                 // TODO(b/191483069): These settings can't be changed unless guest user exists
                 mPhonePref.setTitle(R.string.user_enable_calling);
-                mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
-                mPhonePref.setChecked(
-                        !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
                         : com.android.settingslib.R.string.guest_exit_guest);
@@ -325,8 +324,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     removePreference(KEY_APP_COPYING);
                 }
             } else {
-                mPhonePref.setChecked(!mUserManager.hasUserRestriction(
-                        UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
             }
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
@@ -396,31 +393,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void enableCallsAndSms(boolean enabled) {
         mPhonePref.setChecked(enabled);
-        if (mUserInfo.isGuest()) {
-            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
-            // SMS is always disabled for guest
-            mDefaultGuestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
-            mUserManager.setDefaultGuestRestrictions(mDefaultGuestRestrictions);
-
-            // Update the guest's restrictions, if there is a guest
-            // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
-            // on any existing guest rather than do it here with multiple Binder calls.
-            List<UserInfo> users = mUserManager.getAliveUsers();
-            for (UserInfo user : users) {
-                if (user.isGuest()) {
-                    UserHandle userHandle = UserHandle.of(user.id);
-                    for (String key : mDefaultGuestRestrictions.keySet()) {
-                        mUserManager.setUserRestriction(
-                                key, mDefaultGuestRestrictions.getBoolean(key), userHandle);
-                    }
-                }
-            }
-        } else {
-            UserHandle userHandle = UserHandle.of(mUserInfo.id);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled,
-                    userHandle);
-            mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
-        }
+        userRestrictions.set(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
+        // SMS is always disabled for guest
+        userRestrictions.set(UserManager.DISALLOW_SMS, mUserInfo.isGuest() || !enabled);
     }
 
     private void removeUser() {
