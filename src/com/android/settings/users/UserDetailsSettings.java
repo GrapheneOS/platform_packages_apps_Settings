@@ -101,6 +101,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
     UserInfo mUserInfo;
+    private UserRestrictions userRestrictions;
 
     @Override
     public int getMetricsCategory() {
@@ -337,6 +338,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         boolean isNewUser =
                 arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false);
         mUserInfo = mUserManager.getUserInfo(userId);
+        userRestrictions = new UserRestrictions(mUserManager, mUserInfo);
 
         mSwitchUserPref = findPreference(KEY_SWITCH_USER);
         mPhonePref = findPreference(KEY_ENABLE_TELEPHONY);
@@ -385,6 +387,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 removePreference(KEY_APP_AND_CONTENT_ACCESS);
             }
 
+            mPhonePref.setChecked(!userRestrictions.isSet(UserManager.DISALLOW_OUTGOING_CALLS));
             if (mUserInfo.isGuest()) {
                 removePreference(KEY_ENABLE_TELEPHONY);
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
@@ -397,8 +400,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     removePreference(KEY_APP_COPYING);
                 }
             } else {
-                mPhonePref.setChecked(!mUserManager.hasUserRestriction(
-                        UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
             }
 
@@ -470,9 +471,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void enableCallsAndSms(boolean enabled) {
         mPhonePref.setChecked(enabled);
-        UserHandle userHandle = UserHandle.of(mUserInfo.id);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS, !enabled, userHandle);
-        mUserManager.setUserRestriction(UserManager.DISALLOW_SMS, !enabled, userHandle);
+        userRestrictions.set(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
+        // SMS is always disabled for guest
+        userRestrictions.set(UserManager.DISALLOW_SMS, mUserInfo.isGuest() || !enabled);
     }
 
     /**
