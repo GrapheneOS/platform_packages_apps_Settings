@@ -137,6 +137,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         }
         mAppsInstallsPref.setSummary(UserAppsInstallSettings.getDescription(
                 requireContext(), userRestrictions));
+        mAppCopyingPref.setEnabled(!userRestrictions.isSet(UserManager.DISALLOW_INSTALL_APPS));
     }
 
     @Override
