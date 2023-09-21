@@ -116,5 +116,7 @@ Disabling native debugging might break some apps, most notably banking apps.
     <string name="user_app_install_disabled_desc">Disable app installs and updates</string>
     <!-- Title of preference to enable running in background [CHAR LIMIT=40] -->
     <string name="user_run_in_background">Allow running in background</string>
+    <!-- Title of preference to enable configuring private DNS and other connectivity settings on secondary users -->
+    <string name="user_private_dns">Allow configuring Private DNS</string>
 
 </resources>
