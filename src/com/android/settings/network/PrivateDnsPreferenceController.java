@@ -90,6 +90,13 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         }
         final UserManager userManager = mContext.getSystemService(UserManager.class);
         if (userManager.isGuestUser()) return DISABLED_FOR_USER;
+        {
+            var userHandle = android.os.Process.myUserHandle();
+            String key = UserManager.DISALLOW_CONFIG_PRIVATE_DNS;
+            if (!userHandle.isSystem() && userManager.hasUserRestriction(key, userHandle)) {
+                return DISABLED_FOR_USER;
+            }
+        }
         return AVAILABLE;
     }
 

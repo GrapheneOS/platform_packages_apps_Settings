@@ -23,6 +23,17 @@ public class ConnectivityChecksPrefController extends IntSettingPrefController {
         if (hasUserManagerRestriction()) {
             return DISABLED_FOR_USER;
         }
+        // ExtSettings.CONNECTIVITY_CHECKS uses sysprop, hence the availability is originally
+        // disabled for user when not in system user. Check for the UserManager.DISALLOW_CONFIG_PRIVATE_DNS
+        // whether to hide the settings or not.
+        if (super.getAvailabilityStatus() == DISABLED_FOR_USER) {
+            UserManager userManager = mContext.getSystemService(UserManager.class);
+            var userHandle = android.os.Process.myUserHandle();
+            String key = UserManager.DISALLOW_CONFIG_PRIVATE_DNS;
+            if (!userHandle.isSystem() && userManager.hasUserRestriction(key, userHandle)) {
+                return DISABLED_FOR_USER;
+            }
+        }
         return AVAILABLE;
     }
 
