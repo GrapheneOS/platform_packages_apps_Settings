@@ -215,6 +215,12 @@
         android:title="@string/exploit_protection_category_title"
         settings:controller="com.android.settings.applications.appinfo.AppExploitProtectionPrefCategoryController">
 
+        <SwitchPreference
+            android:key="aep_compat_mode"
+            android:title="@string/aep_compat_mode_title"
+            android:summary="@string/aep_compat_mode_summary"
+            settings:controller="com.android.settings.applications.appinfo.AppExploitProtectionCompatModePrefController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->
