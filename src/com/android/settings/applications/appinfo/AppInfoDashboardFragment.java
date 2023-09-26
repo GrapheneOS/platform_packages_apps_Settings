@@ -233,6 +233,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         aepCategory.setAppEntry(mAppEntry);
 
         AppInfoPreferenceControllerBase[] aepPrefControllers = {
+                prepare(AppExploitProtectionCompatModePrefController.class),
         };
 
         aepCategory.setChildren(Arrays.asList(aepPrefControllers));
