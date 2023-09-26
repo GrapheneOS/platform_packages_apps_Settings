@@ -2,17 +2,18 @@ package com.android.settings.security;
 
 import android.ext.settings.BoolSetting;
 import android.ext.settings.ExtSettings;
-import android.net.Uri;
 
 import com.android.settings.R;
-import com.android.settings.ext.BoolSettingFragment;
+import com.android.settings.ext.AppPrefUtils;
+import com.android.settings.ext.DefaultOfPerAppSettingFragment;
 import com.android.settingslib.widget.FooterPreference;
 
-public class NativeDebuggingFragment extends BoolSettingFragment {
+public class NativeDebuggingFragment extends DefaultOfPerAppSettingFragment {
 
     @Override
     protected BoolSetting getSetting() {
-        return ExtSettings.NATIVE_DEBUGGING;
+        invertSetting = true;
+        return ExtSettings.ALLOW_NATIVE_DEBUG_BY_DEFAULT;
     }
 
     @Override
@@ -22,11 +23,12 @@ public class NativeDebuggingFragment extends BoolSettingFragment {
 
     @Override
     protected CharSequence getMainSwitchTitle() {
-        return getText(R.string.native_debugging_title_inner);
+        return getText(R.string.native_debugging_main_switch);
     }
 
     @Override
     protected FooterPreference makeFooterPref(FooterPreference.Builder builder) {
-        return builder.setTitle(R.string.native_debugging_footer).build();
+        String text = AppPrefUtils.getFooterForDefaultHardeningSetting(requireContext(), R.string.native_debugging_footer);
+        return builder.setTitle(text).build();
     }
 }
