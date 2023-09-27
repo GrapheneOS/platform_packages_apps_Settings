@@ -18,6 +18,7 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
     private static final String TAG = BoolSettingFragment.class.getSimpleName();
 
     protected SwitchPreference mainSwitch;
+    protected boolean invertSetting;
 
     private ExtSettingControllerHelper<BoolSetting> helper;
 
@@ -41,6 +42,10 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
 
         mainSwitch.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean state = (boolean) newValue;
+
+            if (invertSetting) {
+                state = !state;
+            }
 
             if (!getSetting().put(requireContext(), state)) {
                 return false;
@@ -92,7 +97,11 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
     protected void onMainSwitchChanged(boolean state) {}
 
     private void refreshMainSwitch() {
-        mainSwitch.setChecked(getSetting().get(requireContext()));
+        boolean state = getSetting().get(requireContext());
+        if (invertSetting) {
+            state = !state;
+        }
+        mainSwitch.setChecked(state);
 
         CharSequence mainSwitchSummary = getMainSwitchSummary();
         if (mainSwitchSummary != null) {
