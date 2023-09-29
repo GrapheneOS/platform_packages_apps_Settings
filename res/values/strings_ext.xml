@@ -122,4 +122,7 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
     <!-- Title of preference to enable running in background [CHAR LIMIT=40] -->
     <string name="user_run_in_background">Allow running in background</string>
 
+    <string name="app_exploit_protection_default_value_warning">"Warning: enabling this setting might cause some apps to stop working.</string>
+
+    <string name="summary_of_default_of_per_app_setting">Default value can be overridden per-app from the App info screen</string>
 </resources>
