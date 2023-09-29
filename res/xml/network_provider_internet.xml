@@ -130,4 +130,10 @@
         android:title="@string/remote_provisioning_title"
         android:order="35"
         settings:controller="com.android.settings.network.RemoteProvisioningPrefController" />
+    
+    <Preference
+        android:key="widevine_provisioning_settings"
+        android:title="@string/widevine_provisioning_title"
+        android:order="40"
+        settings:controller="com.android.settings.network.WidevineProvisioningPrefController" />
 </PreferenceScreen>
