@@ -117,6 +117,11 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
 Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most notably banking apps) use it as a tampering detection tool.
     </string>
 
+    <string name="widevine_provisioning_title">Widevine provisioning</string>
+    <string name="widevine_provisioning_enabled_grapheneos_proxy">GrapheneOS proxy</string>
+    <string name="widevine_provisioning_enabled_google_server">Google server</string>
+    <string name="widevine_provisioning_footer">The provisioned certificate will be used for accessing DRM protected content.</string>
+
     <!-- Title of preference to enable app installs and updates [CHAR LIMIT=40] -->
     <string name="user_app_install">App installs and updates</string>
     <!-- Options for setting app install and updates per user -->
