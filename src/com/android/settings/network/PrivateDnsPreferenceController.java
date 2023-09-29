@@ -46,6 +46,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.ext.ExtSettingControllerHelper;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -88,9 +89,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         if (!mContext.getResources().getBoolean(R.bool.config_show_private_dns_settings)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        final UserManager userManager = mContext.getSystemService(UserManager.class);
-        if (userManager.isGuestUser()) return DISABLED_FOR_USER;
-        return AVAILABLE;
+        return ExtSettingControllerHelper.getGlobalSettingAvailability(mContext);
     }
 
     @Override
