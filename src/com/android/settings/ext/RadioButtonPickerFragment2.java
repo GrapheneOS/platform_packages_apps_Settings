@@ -99,8 +99,7 @@ public class RadioButtonPickerFragment2 extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
-        return requireActivity().getIntent().getIntExtra(
-                MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, METRICS_CATEGORY_UNKNOWN);
+        return METRICS_CATEGORY_UNKNOWN;
     }
 
     @Override
