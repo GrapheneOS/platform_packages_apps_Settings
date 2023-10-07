@@ -65,6 +65,11 @@
             android:fragment="com.android.settings.security.ExecSpawningFragment"
             settings:controller="com.android.settings.security.ExecSpawningPrefController" />
 
+        <SwitchPreference
+            android:key="allow_automatic_per_app_epcm"
+            android:title="@string/allow_automatic_per_app_epcm"
+            settings:boolSettingField="android.ext.settings.ExtSettings ALLOW_AUTOMATIC_PKG_HARDENING_CONFIG" />
+
         <Preference
             android:key="native_debugging"
             android:title="@string/native_debugging_title"
