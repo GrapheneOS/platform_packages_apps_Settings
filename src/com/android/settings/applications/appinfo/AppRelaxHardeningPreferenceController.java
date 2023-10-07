@@ -19,6 +19,9 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.GosPackageState;
+import android.ext.compat.ExtAppCompat;
+import android.ext.compat.PkgHardeningConfig;
+import android.ext.settings.ExtSettings;
 import android.os.Bundle;
 import android.provider.Settings;
 
@@ -27,6 +30,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.os.Zygote;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -63,12 +67,32 @@ public class AppRelaxHardeningPreferenceController extends AppInfoPreferenceCont
     public void updateState(Preference preference) {
         super.updateState(preference);
 
+        final String pkgName = getPackageName();
+
+        var toggle = (SwitchPreference) preference;
+
+        if (ExtSettings.ALLOW_AUTOMATIC_PKG_HARDENING_CONFIG.get(mContext)) {
+            PkgHardeningConfig c = ExtAppCompat.getHardeningConfig(pkgName, mContext.getPackageManager());
+            if (c != null) {
+                int zygoteFlags = Zygote.DISABLE_HARDENED_MALLOC | Zygote.ENABLE_COMPAT_VA_39_BIT;
+                // at least one of the flags is set
+                if ((c.zygoteFlags() & zygoteFlags) != 0) {
+                    toggle.setEnabled(false);
+                    toggle.setChecked(true);
+                    toggle.setSummary(R.string.epcm_automatically_enabled);
+                    return;
+                }
+            }
+        } else if (!toggle.isEnabled()) {
+            mParent.requireActivity().recreate();
+        }
+
         final int flags = GosPackageState.FLAG_DISABLE_HARDENED_MALLOC | GosPackageState.FLAG_ENABLE_COMPAT_VA_39_BIT;
 
-        GosPackageState ps = GosPackageState.get(getPackageName());
+        GosPackageState ps = GosPackageState.get(pkgName);
         boolean checked = ps != null && ps.hasFlags(flags);
 
-        ((SwitchPreference) preference).setChecked(checked);
+        toggle.setChecked(checked);
 
         if (!devMode || addedDevPreference || getAvailabilityStatus() != AVAILABLE) {
             return;
