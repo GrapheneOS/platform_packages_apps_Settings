@@ -101,6 +101,7 @@ android_library {
         "Settings-change-ids",
         "androidx.room_room-runtime",
         "SystemUIUnfoldLib",
+        "ReverseWirelessCharging"
     ],
 
     plugins: ["androidx.room_room-compiler-plugin"],
