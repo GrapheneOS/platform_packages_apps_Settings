@@ -146,6 +146,7 @@ public class UserAppsInstallSettings extends RadioButtonPickerFragment {
                 return true;
             case INSTALL_DISABLED:
                 userRestrictions.set(UserManager.DISALLOW_INSTALL_APPS, true);
+                userRestrictions.set(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
                 return true;
             default:
                 return false;
