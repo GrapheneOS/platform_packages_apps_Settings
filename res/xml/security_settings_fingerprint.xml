@@ -32,8 +32,7 @@
     <PreferenceCategory
         android:key="security_settings_fingerprint_unlock_category"
         android:title="@string/security_settings_fingerprint_settings_preferences_category"
-        settings:controller="com.android.settings.biometrics.fingerprint.FingerprintUnlockCategoryController"
-        settings:isPreferenceVisible="false">
+        settings:controller="com.android.settings.biometrics.fingerprint.FingerprintUnlockCategoryController">
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="security_settings_require_screen_on_to_auth"
@@ -41,6 +40,13 @@
             android:summary="@string/security_settings_require_screen_on_to_auth_description"
             settings:keywords="@string/security_settings_require_screen_on_to_auth_keywords"
             settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="fingerprint_enable_keyguard_toggle"
+            android:title="@string/keyguard_fingerprint_title"
+            android:summary="@string/keyguard_fingerprint_summary"
+            settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsKeyguardPreferenceController" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
