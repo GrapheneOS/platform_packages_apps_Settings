@@ -118,8 +118,10 @@ Disabling native debugging might break some apps, most notably banking apps.
     <!-- Title of preference to enable running in background [CHAR LIMIT=40] -->
     <string name="user_run_in_background">Allow running in background</string>
 
-    <string name="allow_automatic_per_app_epcm">
-"Allow automatically enabling “Exploit protection compatibility mode” for apps that are known to need it"
+    <string name="allow_automatic_per_app_epcm_title">Automatic exploit protection compatibility mode</string>
+
+    <string name="allow_automatic_per_app_epcm_summary">
+"Allow automatically enabling “Exploit protection compatibility mode” for apps that are known to need it."
     </string>
 
     <string name="epcm_automatically_enabled">
