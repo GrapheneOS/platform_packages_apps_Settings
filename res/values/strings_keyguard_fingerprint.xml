@@ -1,0 +1,4 @@
+<resources>
+    <string name="keyguard_fingerprint_title">Use for screen unlocking</string>
+    <string name="keyguard_fingerprint_summary">When disabled, fingerprint unlock can still be used in apps</string>
+</resources>
