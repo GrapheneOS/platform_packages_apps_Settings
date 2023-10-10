@@ -137,16 +137,23 @@ public class UserAppsInstallSettings extends RadioButtonPickerFragment {
 
         switch (key) {
             case INSTALL_ENABLED:
+                if (userRestrictions.userInfo.isGuest()) {
+                    return false;
+                }
                 userRestrictions.set(UserManager.DISALLOW_INSTALL_APPS, false);
                 userRestrictions.set(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, false);
                 return true;
             case INSTALL_FIRST_PARTY_ENABLED:
                 userRestrictions.set(UserManager.DISALLOW_INSTALL_APPS, false);
-                userRestrictions.set(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
+                if (!userRestrictions.userInfo.isGuest()) {
+                    userRestrictions.set(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
+                }
                 return true;
             case INSTALL_DISABLED:
                 userRestrictions.set(UserManager.DISALLOW_INSTALL_APPS, true);
-                userRestrictions.set(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
+                if (!userRestrictions.userInfo.isGuest()) {
+                    userRestrictions.set(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, true);
+                }
                 return true;
             default:
                 return false;
