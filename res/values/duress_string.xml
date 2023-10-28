@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="duress_lock_title">Duress Lock</string>
+    <string name="keywords_duress_password">Duress Lock, Duress PIN, Duress Password</string>
+    <string name="enter_duress_pin">Enter duress pin</string>
+    <string name="re_enter_duress_pin">Re-enter duress pin</string>
+    <string name="enter_duress_password">Enter duress password</string>
+    <string name="re_enter_duress_password">Re-Enter duress password</string>
+
+    <string name="choose_duress_password_title">Choose a new Duress Lock</string>
+    <string name="update_or_remove_duress_password_title">Update/remove existing Duress Lock</string>
+
+    <string name="duress_pin_and_password_exist">PIN &amp; Password</string>
+    <string name="added_a_duress_pin_and_password">None</string>
+
+    <string name="duress_descriptions">Duress mode will wipe the device data encryption keys. Duress mode does not erase the presence of GrapheneOS on the device. After duress mode has been triggered by the user, the device data will become unrecover and device won\'t be usable without a complete wipe from recovery.</string>
+    <string name="duress_title">Add duress configuration?</string>
+    <string name="delete_duress_title">Delete duress configuration?</string>
+    <string name="delete_duress_descriptions">Duress feature allows you to quickly wipe your data encryption keys without unlocking your phone, making it impossible to recover the data stored in the device.</string>
+
+    <string name="add_a_lock_screen_first">Add a screen lock first</string>
+</resources>
