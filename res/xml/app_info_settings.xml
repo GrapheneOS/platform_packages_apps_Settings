@@ -227,6 +227,11 @@
             settings:controller="com.android.settings.applications.appinfo.AppHardenedMallocPrefController" />
 
         <Preference
+            android:key="memory_tagging"
+            android:title="@string/aep_memtag"
+            settings:controller="com.android.settings.applications.appinfo.AppMemtagPrefController" />
+
+        <Preference
             android:key="extended_va_space"
             android:title="@string/aep_ext_va_space"
             settings:controller="com.android.settings.applications.appinfo.AppExtendedVaSpacePrefController" />
