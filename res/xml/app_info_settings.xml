@@ -210,6 +210,13 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="exploit_protection"
+        android:title="@string/exploit_protection_category_title"
+        settings:controller="com.android.settings.applications.appinfo.AppExploitProtectionPrefCategoryController">
+
+    </PreferenceCategory>
+
     <!-- App installer info -->
     <PreferenceCategory
         android:key="app_installer"

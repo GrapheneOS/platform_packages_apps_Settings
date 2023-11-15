@@ -228,9 +228,24 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 externalSource, acrossProfiles, alarmsAndReminders, longBackgroundTasks));
         advancedAppInfo.setAppEntry(mAppEntry);
 
+        final AppExploitProtectionPrefCategoryController aepCategory =
+                use(AppExploitProtectionPrefCategoryController.class);
+        aepCategory.setAppEntry(mAppEntry);
+
+        AppInfoPreferenceControllerBase[] aepPrefControllers = {
+        };
+
+        aepCategory.setChildren(Arrays.asList(aepPrefControllers));
+
         final AppLocalePreferenceController appLocale =
                 use(AppLocalePreferenceController.class);
         appLocale.setParentFragment(this);
+    }
+
+    private <T extends AppInfoPreferenceControllerBase> AppInfoPreferenceControllerBase prepare(Class<T> cls) {
+        T res = use(cls);
+        res.setParentFragment(this);
+        return res;
     }
 
     @Override
