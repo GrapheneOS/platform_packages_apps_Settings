@@ -231,6 +231,11 @@
             android:title="@string/aep_ext_va_space"
             settings:controller="com.android.settings.applications.appinfo.AppExtendedVaSpacePrefController" />
 
+        <Preference
+            android:key="native_debug"
+            android:title="@string/native_debugging_title"
+            settings:controller="com.android.settings.applications.appinfo.AppNativeDebuggingPrefController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->
