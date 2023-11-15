@@ -72,6 +72,12 @@
             settings:boolSettingField="android.ext.settings.ExtSettings ALLOW_DISABLING_HARDENING_VIA_APP_COMPAT_CONFIG" />
 
         <Preference
+            android:key="force_app_memtag"
+            android:title="@string/memtag_in_3p_apps_title"
+            android:fragment="com.android.settings.security.ForceAppMemtagFragment"
+            settings:controller="com.android.settings.security.ForceAppMemtagPrefController" />
+
+        <Preference
             android:key="native_debugging"
             android:title="@string/native_debugging_title"
             android:fragment="com.android.settings.security.NativeDebuggingFragment"
