@@ -5048,5 +5048,22 @@
                 android:value="@string/menu_key_apps"/>
         </activity>
 
+        <activity
+            android:name="Settings$AppMemtagActivity"
+            android:permission="android.permission.WRITE_SECURE_SETTINGS"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.settings.OPEN_APP_MEMTAG_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.appinfo.AppMemtagFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity>
+
     </application>
 </manifest>
