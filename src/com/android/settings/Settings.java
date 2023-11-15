@@ -518,4 +518,6 @@ public class Settings extends SettingsActivity {
     public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class AppNativeDebuggingActivity extends SettingsActivity {}
+
+    public static class AppMemtagActivity extends SettingsActivity {}
 }
