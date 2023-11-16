@@ -226,6 +226,11 @@
             android:title="@string/aep_hmalloc"
             settings:controller="com.android.settings.applications.appinfo.AppHardenedMallocPrefController" />
 
+        <Preference
+            android:key="extended_va_space"
+            android:title="@string/aep_ext_va_space"
+            settings:controller="com.android.settings.applications.appinfo.AppExtendedVaSpacePrefController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->
