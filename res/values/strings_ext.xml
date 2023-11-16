@@ -121,7 +121,7 @@ Disabling native debugging might break some apps, most notably banking apps.
     <string name="allow_automatic_per_app_epcm_title">Automatic exploit protection compatibility mode</string>
 
     <string name="allow_automatic_per_app_epcm_summary">
-"Allow automatically enabling “Exploit protection compatibility mode” for apps that are known to need it."
+"Allow automatically disabling exploit protections for apps that are known to need it"
     </string>
 
     <string name="app_exploit_protection_default_value_warning">"Warning: enabling this setting might cause some apps to stop working.</string>
