@@ -221,6 +221,11 @@
             android:summary="@string/aep_compat_mode_summary"
             settings:controller="com.android.settings.applications.appinfo.AppExploitProtectionCompatModePrefController" />
 
+        <Preference
+            android:key="hardened_malloc"
+            android:title="@string/aep_hmalloc"
+            settings:controller="com.android.settings.applications.appinfo.AppHardenedMallocPrefController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->
