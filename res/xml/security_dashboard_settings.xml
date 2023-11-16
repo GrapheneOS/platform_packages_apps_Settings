@@ -69,7 +69,7 @@
             android:key="allow_automatic_per_app_epcm"
             android:title="@string/allow_automatic_per_app_epcm_title"
             android:summary="@string/allow_automatic_per_app_epcm_summary"
-            settings:boolSettingField="android.ext.settings.ExtSettings ALLOW_AUTOMATIC_PKG_HARDENING_CONFIG" />
+            settings:boolSettingField="android.ext.settings.ExtSettings ALLOW_DISABLING_HARDENING_VIA_APP_COMPAT_CONFIG" />
 
         <Preference
             android:key="native_debugging"
