@@ -31,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.os.Zygote;
-import com.android.internal.util.PackageSpec;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -73,7 +72,7 @@ public class AppRelaxHardeningPreferenceController extends AppInfoPreferenceCont
         var toggle = (SwitchPreference) preference;
 
         if (ExtSettings.ALLOW_AUTOMATIC_PKG_HARDENING_CONFIG.get(mContext)) {
-            PkgHardeningConfig c = ExtAppCompat.getHardeningConfig(pkgName, () -> PackageSpec.getValidator(mContext.getPackageManager()));
+            PkgHardeningConfig c = ExtAppCompat.getHardeningConfig(pkgName, mContext.getPackageManager());
             if (c != null) {
                 int zygoteFlags = Zygote.DISABLE_HARDENED_MALLOC | Zygote.ENABLE_COMPAT_VA_39_BIT;
                 // at least one of the flags is automatically set
