@@ -5,13 +5,16 @@
 
 package com.android.settings.ext;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.ext.settings.Setting;
 import android.os.Process;
+import android.provider.Settings;
 
 import java.util.function.Consumer;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 
 public class ExtSettingControllerHelper<T extends Setting> {
@@ -25,6 +28,14 @@ public class ExtSettingControllerHelper<T extends Setting> {
 
     public static int getGlobalSettingAvailability(Context ctx) {
         return Process.myUserHandle().isSystem() ? AVAILABLE : DISABLED_FOR_USER;
+    }
+
+    public static int getDevModeSettingAvailability(Context ctx) {
+        ContentResolver cr = ctx.getContentResolver();
+        String key = Settings.Global.DEVELOPMENT_SETTINGS_ENABLED;
+
+        return (Settings.Global.getInt(cr, key, 0) == 0) ?
+            CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     int getAvailabilityStatus() {
