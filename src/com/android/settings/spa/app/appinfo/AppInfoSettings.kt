@@ -34,6 +34,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
+import com.android.settings.applications.appinfo.AppClipboardPreference
 import com.android.settings.applications.appinfo.AppExtendedVaSpacePreference
 import com.android.settings.applications.appinfo.AppHardenedMallocPreference
 import com.android.settings.applications.appinfo.AppMemtagPreference
@@ -159,6 +160,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppLocalePreference(app)
         AppOpenByDefaultPreference(app)
         DefaultAppShortcuts(app)
+        AppClipboardPreference(app)
         AppLogcatPreference(app)
 
         Category(title = stringResource(R.string.unused_apps_category)) {

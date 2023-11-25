@@ -160,4 +160,10 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
     <string name="usbc_port_charging_only_when_locked_afu_summary">Doesn’t apply to connections that were made before locking or first unlock</string>
     <string name="usbc_port_on_title">On</string>
 
+    <string name="dvr_default_privacy_setting">Default value can be changed in the Privacy section</string>
+
+    <string name="clipboard_title">Clipboard</string>
+    <string name="clipboard_footer">"Manage this app\'s access to clipboard content. If this is set to Blocked, the app cannot access clipboard content set by other apps."</string>
+    <string name="clipboard_ir_preinstalled_app">Clipboard setting is not supported for a preinstalled app</string>
+
 </resources>
