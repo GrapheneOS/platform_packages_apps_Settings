@@ -166,4 +166,7 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
     <string name="clipboard_footer">"Manage this app\'s access to clipboard content. If this is set to Blocked, the app cannot access clipboard content set by other apps."</string>
     <string name="clipboard_ir_preinstalled_app">Clipboard setting is not supported for a preinstalled app</string>
 
+    <string name="clipboard_toggle_title">Block clipboard access</string>
+    <string name="clipboard_toggle_summary">For apps. If this setting is on, a foreground app may still access clipboard content set by itself.</string>
+
 </resources>
