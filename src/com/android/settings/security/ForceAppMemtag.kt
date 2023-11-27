@@ -16,7 +16,7 @@ class ForceAppMemtagPrefController(ctx: Context, key: String) :
     override fun getAvailabilityStatus() = if (isSupported) AVAILABLE else UNSUPPORTED_ON_DEVICE
 
     override fun getSummaryOn() = resText(R.string.memtag_in_3p_apps_enabled_by_default)
-    override fun getSummaryOff() = resText(R.string.memtag_in_3p_apps_enabled_with_exceptions)
+    override fun getSummaryOff() = resText(R.string.memtag_in_3p_apps_disabled_by_default)
 }
 
 class ForceAppMemtagFragment : BoolSettingFragment() {
