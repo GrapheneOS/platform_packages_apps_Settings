@@ -99,6 +99,13 @@
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_biometric_settings" />
+
+        <SwitchPreference
+            android:key="show_system_process_crash_notifs"
+            android:title="@string/show_system_process_crash_notifs_title"
+            android:summary="@string/show_system_process_crash_notifs_summary"
+            settings:boolSettingField=
+                "android.ext.settings.ExtSettings SHOW_SYSTEM_PROCESS_CRASH_NOTIFICATIONS" />
     </PreferenceCategory>
 
     <Preference
