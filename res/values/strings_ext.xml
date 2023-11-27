@@ -139,4 +139,8 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
     <string name="app_exploit_protection_default_value_warning">"Warning: enabling this setting might cause some apps to stop working.</string>
 
     <string name="summary_of_default_of_per_app_setting">Default value can be overridden per-app from the App info screen</string>
+
+    <string name="show_system_process_crash_notifs_title">Notify about system process crashes</string>
+    <string name="show_system_process_crash_notifs_summary">Such crashes may indicate exploitation attempts</string>
+
 </resources>
