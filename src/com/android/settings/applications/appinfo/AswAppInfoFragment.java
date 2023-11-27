@@ -7,7 +7,6 @@ import android.ext.settings.app.AppSwitch;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 
@@ -54,7 +53,20 @@ public abstract class AswAppInfoFragment<T extends AppSwitch>
         def.isChecked = isDefault;
         def.isEnabled = !isImmutable;
         if (def.isEnabled) {
-            def.summary = getSummaryForDefaultValueReason(defaultSi.getDefaultValueReason());
+            int dvr = defaultSi.getDefaultValueReason();
+            CharSequence summary = getSummaryForDefaultValueReason(dvr);
+            if (summary == null) {
+                summary = switch (dvr) {
+                    case AppSwitch.DVR_APP_COMPAT_CONFIG_HARDENING_OPT_IN ->
+                        getText(R.string.aep_dvr_compat_config_hardening_opt_in);
+                    case AppSwitch.DVR_APP_COMPAT_CONFIG_HARDENING_OPT_OUT -> {
+                        var s = defaultValue ? adapter.getOnTitle() : adapter.getOffTitle();
+                        yield getString(R.string.aep_dvr_compat_config_hardening_opt_out, s.toString());
+                    }
+                    default -> null;
+                };
+            }
+            def.summary = summary;
         }
 
         var enabled = createEntry(ID_ON, adapter.getOnTitle());
