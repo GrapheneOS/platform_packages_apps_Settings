@@ -34,14 +34,6 @@ class AppHardenedMallocFragment : AswExploitProtectionFragment<AswUseHardenedMal
         return getText(id)
     }
 
-    override fun getSummaryForDefaultValueReason(dvr: Int): CharSequence? {
-        val id = when (dvr) {
-            AppSwitch.DVR_PACKAGE_COMPAT_CONFIG_OPT_OUT -> R.string.aep_hmalloc_dvr_compat_config_opt_out
-            else -> return null
-        }
-        return getText(id)
-    }
-
     override fun updateFooter(fp: FooterPreference) {
         fp.setTitle(R.string.aep_hmalloc_footer)
         setLearnMoreLink(fp, "https://grapheneos.org/features#exploit-mitigations")
