@@ -13,7 +13,16 @@ class ForceAppMemtagPrefController(ctx: Context, key: String) :
         BoolSettingFragmentPrefController(ctx, key, ExtSettings.FORCE_APP_MEMTAG_BY_DEFAULT) {
 
     private val isSupported = Zygote.nativeSupportsMemoryTagging()
-    override fun getAvailabilityStatus() = if (isSupported) AVAILABLE else UNSUPPORTED_ON_DEVICE
+
+    override fun getAvailabilityStatus(): Int {
+        var res = super.getAvailabilityStatus()
+
+        if (res == AVAILABLE && !isSupported) {
+            res = UNSUPPORTED_ON_DEVICE
+        }
+
+        return res
+    }
 
     override fun getSummaryOn() = resText(R.string.memtag_in_3p_apps_enabled_by_default)
     override fun getSummaryOff() = resText(R.string.memtag_in_3p_apps_disabled_by_default)
