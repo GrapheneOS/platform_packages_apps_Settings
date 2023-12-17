@@ -169,4 +169,11 @@
         android:summary="@string/show_clip_access_notification_summary"
         settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"/>
 
+    <!-- Screencapture detection -->
+    <SwitchPreference
+        android:key="allow_screencapture_detection"
+        android:title="@string/allow_screencapture_detection"
+        android:summary="@string/allow_screencapture_detection_summary"
+        settings:boolSettingField="android.ext.settings.ExtSettings ALLOW_SCREENCAPTURE_DETECTION"/>
+
 </PreferenceScreen>
