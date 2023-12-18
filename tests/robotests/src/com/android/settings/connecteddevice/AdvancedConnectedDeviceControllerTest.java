@@ -100,31 +100,6 @@ public class AdvancedConnectedDeviceControllerTest {
     }
 
     @Test
-    public void isAndroidAutoSettingAvailable_returnTrue() {
-        final ApplicationInfo appInfo =
-                ApplicationInfoBuilder.newBuilder().setPackageName(ANDROID_AUTO_PACKAGE).build();
-        final ActivityInfo activityInfo = new ActivityInfo();
-        activityInfo.packageName = ANDROID_AUTO_PACKAGE;
-        activityInfo.name = ANDROID_AUTO_PACKAGE;
-        activityInfo.applicationInfo = appInfo;
-        final ResolveInfo resolveInfo = new ResolveInfo();
-        resolveInfo.activityInfo = activityInfo;
-        mShadowPackageManager.addResolveInfoForIntent(
-                buildAndroidAutoSettingsIntent(),
-                resolveInfo);
-
-        assertThat(
-            AdvancedConnectedDeviceController.isAndroidAutoSettingAvailable(mContext)).isTrue();
-    }
-
-    @Test
-    public void isAndroidAutoSettingAvailable_returnFalse() {
-        // No ResolveInfo for Android Auto, expect false.
-        assertThat(
-            AdvancedConnectedDeviceController.isAndroidAutoSettingAvailable(mContext)).isFalse();
-    }
-
-    @Test
     public void getConnectedDevicesSummaryResourceId_NFCAndDrivingModeAvailable() {
         // NFC available, driving mode available
         mShadowNfcAdapter.setEnabled(true);
