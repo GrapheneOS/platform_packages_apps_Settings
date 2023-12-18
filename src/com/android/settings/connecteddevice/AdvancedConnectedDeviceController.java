@@ -34,7 +34,6 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
 
     private static final String DRIVING_MODE_SETTINGS_ENABLED =
             "gearhead:driving_mode_settings_enabled";
-    private static final String GEARHEAD_PACKAGE = "com.google.android.projection.gearhead";
 
     public AdvancedConnectedDeviceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -59,20 +58,13 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
                 new NfcPreferenceController(context, NfcPreferenceController.KEY_TOGGLE_NFC);
 
         return getConnectedDevicesSummaryResourceId(nfcPreferenceController,
-                isDrivingModeAvailable(context), isAndroidAutoSettingAvailable(context));
+                isDrivingModeAvailable(context), false);
     }
 
     @VisibleForTesting
     static boolean isDrivingModeAvailable(Context context) {
         return Settings.System.
                 getInt(context.getContentResolver(), DRIVING_MODE_SETTINGS_ENABLED, 0) == 1;
-    }
-
-    @VisibleForTesting
-    static boolean isAndroidAutoSettingAvailable(Context context) {
-        final Intent intent = new Intent(IA_SETTINGS_ACTION);
-        intent.setPackage(GEARHEAD_PACKAGE);
-        return intent.resolveActivity(context.getPackageManager()) != null;
     }
 
     @VisibleForTesting
