@@ -169,4 +169,11 @@
         android:summary="@string/show_clip_access_notification_summary"
         settings:controller="com.android.settings.privacy.ShowClipAccessNotificationPreferenceController"/>
 
+    <!-- Screenshot FLAG_SECURE -->
+    <SwitchPreference
+        android:key="allow_screenshot_secure"
+        android:title="@string/allow_screenshot_secure"
+        android:summary="@string/allow_screenshot_secure_summary"
+        settings:boolSettingField="android.ext.settings.ExtSettings ALLOW_SCREENSHOT_SECURE"/>
+
 </PreferenceScreen>
