@@ -5023,6 +5023,12 @@
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <provider
+            android:name="com.android.settings.SetupDesignConfigProvider"
+            android:authorities="com.google.android.setupwizard.partner"
+            android:directBootAware="true"
+            android:exported="true" />
+
         <!-- [b/197780098] Disable eager initialization of Jetpack libraries. -->
         <provider
             android:name="androidx.startup.InitializationProvider"
