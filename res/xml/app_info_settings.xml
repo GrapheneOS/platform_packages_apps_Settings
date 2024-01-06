@@ -144,6 +144,11 @@
         android:title="@string/sms_application_title"
         android:summary="@string/summary_placeholder" />
 
+    <Preference
+        android:key="view_logs"
+        android:title="@string/view_logs"
+        settings:controller="com.android.settings.applications.appinfo.AppLogcatPrefController" />
+
     <PreferenceCategory
         android:key="app_hibernation_info"
         android:title="@string/unused_apps_category"
