@@ -133,6 +133,7 @@
     <uses-permission android:name="android.permission.CUSTOMIZE_SYSTEM_UI" />
     <uses-permission android:name="android.permission.REMAP_MODIFIER_KEYS" />
     <uses-permission android:name="android.permission.ACCESS_GPU_SERVICE" />
+    <uses-permission android:name="app.grapheneos.logviewer.SHOW_LOGCAT" />
 
     <application
             android:name=".SettingsApplication"
