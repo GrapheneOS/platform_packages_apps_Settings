@@ -148,4 +148,6 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
     <string name="show_system_process_crash_notifs_title">Notify about system process crashes</string>
     <string name="show_system_process_crash_notifs_summary">Such crashes may indicate exploitation attempts</string>
 
+    <string name="view_logs">View logs</string>
+
 </resources>
