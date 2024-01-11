@@ -201,6 +201,7 @@ public class SettingsGateway {
     public static final String[] ENTRY_FRAGMENTS = {
             com.android.settings.applications.appinfo.AppNativeDebuggingFragment.class.getName(),
             com.android.settings.applications.appinfo.AppMemtagFragment.class.getName(),
+            com.android.settings.applications.appinfo.AppHardenedMallocFragment.class.getName(),
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             BluetoothPairingDetail.class.getName(),
