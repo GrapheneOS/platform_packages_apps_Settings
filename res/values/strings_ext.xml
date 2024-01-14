@@ -138,6 +138,6 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
 
     <string name="view_logs">View logs</string>
 
-    <string name="bluetooth_allow_input_device">Allow input device</string>
+    <string name="bluetooth_allow_input_device">Allow input from this device</string>
 
 </resources>
