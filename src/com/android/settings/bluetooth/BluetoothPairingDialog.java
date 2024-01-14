@@ -52,6 +52,7 @@ public class BluetoothPairingDialog extends FragmentActivity {
                         BluetoothDevice.ERROR);
                 if (bondState == BluetoothDevice.BOND_BONDED ||
                         bondState == BluetoothDevice.BOND_NONE) {
+                    mBluetoothPairingController.onDialogDismissed(bondState == BluetoothDevice.BOND_BONDED);
                     dismiss();
                 }
             } else if (BluetoothDevice.ACTION_PAIRING_CANCEL.equals(action)) {

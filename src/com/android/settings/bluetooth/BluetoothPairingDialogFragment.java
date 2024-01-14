@@ -341,6 +341,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         TextView messagePairing = (TextView) view.findViewById(R.id.pairing_code_message);
         CheckBox contactSharing = (CheckBox) view.findViewById(
                 R.id.phonebook_sharing_message_confirm_pin);
+        CheckBox hidEnabled = (CheckBox) view.findViewById(R.id.hid_enabled_confirm);
         contactSharing.setText(getString(R.string.bluetooth_pairing_shares_phonebook));
 
         contactSharing.setVisibility(
@@ -348,6 +349,12 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         mPairingController.setContactSharingState();
         contactSharing.setChecked(mPairingController.getContactSharingState());
         contactSharing.setOnCheckedChangeListener(mPairingController);
+
+        hidEnabled.setText(getString(R.string.bluetooth_allow_input_device));
+        hidEnabled.setVisibility(
+            mPairingController.isHidDevice() ? View.VISIBLE : View.GONE);
+        hidEnabled.setChecked(mPairingController.getHidEnabledState());
+        hidEnabled.setOnCheckedChangeListener(mPairingController);
 
         messagePairing.setVisibility(mPairingController.isDisplayPairingKeyVariant()
                 ? View.VISIBLE : View.GONE);

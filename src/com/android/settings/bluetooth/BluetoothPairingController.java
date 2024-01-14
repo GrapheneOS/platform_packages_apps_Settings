@@ -15,8 +15,13 @@
  */
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.BluetoothProfile.CONNECTION_POLICY_ALLOWED;
+import static android.bluetooth.BluetoothProfile.CONNECTION_POLICY_FORBIDDEN;
+
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothHidHost;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
@@ -73,6 +78,22 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private boolean mIsLeAudio;
     private boolean mIsLeContactSharingEnabled;
     private boolean mIsLateBonding;
+    private boolean mIsHid = false;
+    private boolean mIsHidEnabled = false;
+    private BluetoothHidHost mBluetoothHidHost;
+
+    // These callbacks run on the main thread.
+    private final class HidHostServiceListener
+            implements BluetoothProfile.ServiceListener {
+
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mBluetoothHidHost = (BluetoothHidHost) proxy;
+        }
+
+        public void onServiceDisconnected(int profile) {
+            mBluetoothHidHost = null;
+        }
+    }
 
     /**
      * Creates an instance of a BluetoothPairingController.
@@ -84,6 +105,9 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     public BluetoothPairingController(Intent intent, Context context) {
         mBluetoothManager = Utils.getLocalBtManager(context);
         mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+        BluetoothAdapter.getDefaultAdapter().getProfileProxy(context, new HidHostServiceListener(),
+                BluetoothProfile.HID_HOST);
 
         String message = "";
         if (mBluetoothManager == null) {
@@ -123,10 +147,21 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
                     + mIsLeContactSharingEnabled + " isCooridnatedSetMember "
                     + mIsCoordinatedSetMember);
         }
+
+        BluetoothClass bluetoothClass = mDevice.getBluetoothClass();
+        if (bluetoothClass != null) {
+            mIsHid = bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HID);
+        }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView != null) {
+            if (buttonView.getId() == R.id.hid_enabled_confirm) {
+                mIsHidEnabled = isChecked;
+                return;
+            }
+        }
         if (isChecked) {
             mPbapAllowed = true;
         } else {
@@ -224,6 +259,21 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     @VisibleForTesting
     boolean isLeContactSharingEnabled() {
         return mIsLeContactSharingEnabled;
+    }
+
+    public boolean isHidDevice() {
+        return mIsHid;
+    }
+
+    public boolean getHidEnabledState() {
+        return mIsHidEnabled;
+    }
+
+    public void onDialogDismissed(boolean success) {
+        if (success) {
+            mBluetoothHidHost.setConnectionPolicy(mDevice,
+                    mIsHidEnabled ? CONNECTION_POLICY_ALLOWED : CONNECTION_POLICY_FORBIDDEN);
+        }
     }
 
     /**
