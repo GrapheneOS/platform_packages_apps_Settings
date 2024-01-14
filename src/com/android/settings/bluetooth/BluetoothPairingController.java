@@ -79,7 +79,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private boolean mIsLeContactSharingEnabled;
     private boolean mIsLateBonding;
     private boolean mIsHid = false;
-    private boolean mIsHidEnabled = false;
+    private boolean mIsHidEnabled = true;
     private BluetoothHidHost mBluetoothHidHost;
 
     // These callbacks run on the main thread.
