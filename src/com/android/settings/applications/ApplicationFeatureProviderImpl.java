@@ -22,6 +22,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
@@ -185,23 +186,33 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             keepEnabledPackages.add(mPm.getWellbeingPackageName());
         }
 
-        // Bundled keyboard, needed for text input in Direct Boot mode if the selected 3rd party
-        // keyboard doesn't support it
-        keepEnabledPackages.add("com.android.inputmethod.latin");
+        ArraySet<String> systemPkgs = new ArraySet<>(new String[] {
+                // Bundled keyboard, needed for text input in Direct Boot mode if the selected 3rd
+                // party keyboard doesn't support it
+                "com.android.inputmethod.latin",
 
-        // Replacing WebView is not supported
-        keepEnabledPackages.add("app.vanadium.webview");
+                // Replacing WebView is not supported
+                "app.vanadium.webview",
 
-        // Only bundled camera can handle some of camera intents
-        keepEnabledPackages.add("app.grapheneos.camera");
+                // Only bundled camera can handle some of camera intents
+                "app.grapheneos.camera",
 
-        // Disabling GmsCompat app breaks the gmscompat layer
-        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME);
-        // Disabling GmsCompatConfig breaks updates through Apps app
-        keepEnabledPackages.add(com.android.internal.gmscompat.GmsCompatApp.PKG_NAME + ".config");
+                // Disabling GmsCompat app breaks the GmsCompat layer
+                com.android.internal.gmscompat.GmsCompatApp.PKG_NAME,
 
-        // EuiccSupportPixel handles firmware updates of embedded secure element that is used for eSIM, NFC, Felica etc
-        keepEnabledPackages.add(GoogleEuicc.EUICC_SUPPORT_PIXEL_PKG_NAME);
+                // EuiccSupportPixel handles firmware updates of embedded secure element that is
+                // used for eSIM, NFC, Felica etc
+                GoogleEuicc.EUICC_SUPPORT_PIXEL_PKG_NAME,
+        });
+
+        PackageManager pm = mContext.getPackageManager();
+
+        for (ApplicationInfo ai : pm.getInstalledApplications(PackageManager.MATCH_SYSTEM_ONLY)) {
+            String pkgName = ai.packageName;
+            if (systemPkgs.contains(pkgName)) {
+                keepEnabledPackages.add(pkgName);
+            }
+        }
 
         return keepEnabledPackages;
     }
