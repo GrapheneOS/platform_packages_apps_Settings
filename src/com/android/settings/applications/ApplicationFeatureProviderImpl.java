@@ -29,6 +29,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.pm.UserInfo;
+import android.ext.PackageId;
 import android.location.LocationManager;
 import android.os.RemoteException;
 import android.os.UserManager;
@@ -203,6 +204,10 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
                 // EuiccSupportPixel handles firmware updates of embedded secure element that is
                 // used for eSIM, NFC, Felica etc
                 GoogleEuicc.EUICC_SUPPORT_PIXEL_PKG_NAME,
+
+                // CameraX extensions break when it's disabled, which breaks apps that use the
+                // CameraX library
+                PackageId.PIXEL_CAMERA_SERVICES_NAME,
         });
 
         PackageManager pm = mContext.getPackageManager();
