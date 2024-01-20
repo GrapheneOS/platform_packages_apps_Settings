@@ -271,8 +271,10 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
     public void onDialogDismissed(boolean success) {
         if (success) {
-            mBluetoothHidHost.setConnectionPolicy(mDevice,
-                    mIsHidEnabled ? CONNECTION_POLICY_ALLOWED : CONNECTION_POLICY_FORBIDDEN);
+            if (mIsHid) {
+                mBluetoothHidHost.setConnectionPolicy(mDevice,
+                        mIsHidEnabled ? CONNECTION_POLICY_ALLOWED : CONNECTION_POLICY_FORBIDDEN);
+            }
         }
     }
 
