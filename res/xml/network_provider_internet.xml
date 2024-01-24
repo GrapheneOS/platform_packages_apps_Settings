@@ -56,6 +56,14 @@
         settings:searchable="@bool/config_show_sim_info"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
+        android:key="google_euicc_lpa"
+        android:title="@string/g_euicc_lpa_title"
+        android:icon="@drawable/ic_sim_card"
+        android:order="-14"
+        settings:controller="com.android.settings.network.GoogleEuiccLpaController"
+        settings:userRestriction="no_config_mobile_networks"/>
+
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="airplane_mode"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
