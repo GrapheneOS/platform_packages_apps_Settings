@@ -28,4 +28,22 @@
 
     <string name="scramble_pin_title">Scramble PIN input layout</string>
 
+    <string name="g_euicc_lpa_title">eSIM support</string>
+    <string name="g_euicc_lpa_enable_dialog_msg">
+A device restart is required to enable this setting.
+    </string>
+    <string name="g_euicc_lpa_disable_dialog_title">Warning</string>
+    <string name="g_euicc_lpa_disable_dialog_msg">
+"Turning off eSIM support will break the following functionality:
+
+• adding new eSIMs
+• turning existing eSIMs on or off
+• removing eSIMs, including from the lock screen (e.g. when eSIM is locked with a forgotten PIN)
+• wiping eSIMs during factory reset
+
+Device will be automatically restarted."
+    </string>
+    <string name="g_euicc_lpa_restart_button">Restart</string>
+    <string name="g_euicc_lpa_proceed_button">Proceed</string>
+
 </resources>
