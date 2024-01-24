@@ -56,11 +56,10 @@
         settings:searchable="@bool/config_show_sim_info"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
-        android:key="privileged_euicc_management"
-        android:title="@string/privileged_euicc_management_title"
+        android:key="google_euicc_lpa"
+        android:title="@string/g_euicc_lpa_title"
         android:icon="@drawable/ic_sim_card"
         android:order="-14"
-        android:summary="@string/privileged_euicc_management_summary"
         settings:controller="com.android.settings.network.GoogleEuiccLpaController"
         settings:userRestriction="no_config_mobile_networks"/>
 
