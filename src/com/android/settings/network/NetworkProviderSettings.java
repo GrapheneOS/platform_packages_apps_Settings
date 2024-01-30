@@ -251,8 +251,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     /**
      * Mobile networks list for provider model
      */
-    private static final String PREF_KEY_PROVIDER_MOBILE_NETWORK = "provider_model_mobile_network";
-    private NetworkMobileProviderController mNetworkMobileProviderController;
+    static final String PREF_KEY_PROVIDER_MOBILE_NETWORK = "provider_model_mobile_network";
+    NetworkMobileProviderController mNetworkMobileProviderController;
 
     /**
      * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
