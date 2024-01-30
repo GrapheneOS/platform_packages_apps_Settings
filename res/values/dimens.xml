@@ -441,4 +441,9 @@
     <dimen name="screen_flash_color_button_inner_circle_size">42dp</dimen>
     <dimen name="screen_flash_color_button_inner_circle_padding">3dp</dimen>
     <dimen name="screen_flash_color_button_inner_circle_stroke">1dp</dimen>
+
+    <!-- Setup wizard related -->
+    <dimen name="sud_progress_bar_margin_top">
+        @dimen/sud_progress_bar_margin_top_material_you
+    </dimen>
 </resources>
