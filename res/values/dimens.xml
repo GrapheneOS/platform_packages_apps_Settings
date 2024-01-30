@@ -466,4 +466,9 @@
 
     <!-- An arbitrarily large number to make the max size fit the parent -->
     <dimen name="animation_max_size">1000dp</dimen>
+
+    <!-- Setup wizard related -->
+    <dimen name="sud_progress_bar_margin_top">
+        @dimen/sud_progress_bar_margin_top_material_you
+    </dimen>
 </resources>
