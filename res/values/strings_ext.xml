@@ -118,8 +118,8 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
     </string>
 
     <string name="widevine_provisioning_title">Widevine provisioning</string>
-    <string name="widevine_provisioning_enabled_grapheneos_proxy">Enabled (GrapheneOS proxy)</string>
-    <string name="widevine_provisioning_enabled_google_server">Enabled (Google server)</string>
+    <string name="widevine_provisioning_enabled_grapheneos_proxy">GrapheneOS proxy</string>
+    <string name="widevine_provisioning_enabled_google_server">Google server</string>
     <string name="widevine_provisioning_footer">The provisioned certificate will be used for accessing DRM protected content.</string>
 
     <!-- Title of preference to enable app installs and updates [CHAR LIMIT=40] -->
