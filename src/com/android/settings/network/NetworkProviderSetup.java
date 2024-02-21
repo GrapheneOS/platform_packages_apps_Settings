@@ -1,12 +1,12 @@
 package com.android.settings.network;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,17 +57,23 @@ public class NetworkProviderSetup extends NetworkProviderSettings {
         return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
+    private static void maybeSetVisible(@Nullable Preference p, boolean visible) {
+        if (p != null) {
+            p.setVisible(visible);
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mConfigureWifiSettingsPreference.setVisible(false);
-        mDataUsagePreference.setVisible(false);
-        mAirplaneModeMsgPreference.setVisible(false);
-        mResetInternetPreference.setVisible(false);
-        findPreference(PREF_KEY_WIFI_TOGGLE).setVisible(false);
+        maybeSetVisible(mConfigureWifiSettingsPreference, false);
+        maybeSetVisible(mDataUsagePreference, false);
+        maybeSetVisible(mAirplaneModeMsgPreference, false);
+        maybeSetVisible(mResetInternetPreference, false);
+        maybeSetVisible(findPreference(PREF_KEY_WIFI_TOGGLE), false);
         if (isSetupWizardModeWifi) {
-            findPreference(PREF_KEY_CONNECTED_ETHERNET_NETWORK).setVisible(false);
-            findPreference(PREF_KEY_PROVIDER_MOBILE_NETWORK).setVisible(false);
+            maybeSetVisible(findPreference(PREF_KEY_CONNECTED_ETHERNET_NETWORK), false);
+            maybeSetVisible(findPreference(PREF_KEY_PROVIDER_MOBILE_NETWORK), false);
             if (mNetworkMobileProviderController != null) {
                 mNetworkMobileProviderController.hidePreference(true, false);
             }
