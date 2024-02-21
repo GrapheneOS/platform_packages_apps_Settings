@@ -40,20 +40,17 @@ public class InternetSetupActivity extends SettingsActivity implements ButtonBar
         return false;
     }
 
+    private static final String FRAGMENT_CLASS_NAME = NetworkProviderSetup.class.getName();
+
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, FRAGMENT_CLASS_NAME);
         return modIntent;
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        return NetworkProviderSetup.class.getName().equals(fragmentName);
-    }
-
-    // TODO: inline this
-    Class<? extends PreferenceFragmentCompat> getFragmentClass() {
-        return NetworkProviderSetup.class;
+        return FRAGMENT_CLASS_NAME.equals(fragmentName);
     }
 }
