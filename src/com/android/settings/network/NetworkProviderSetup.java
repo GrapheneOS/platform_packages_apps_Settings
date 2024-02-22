@@ -70,7 +70,6 @@ public class NetworkProviderSetup extends NetworkProviderSettings {
         maybeSetVisible(mDataUsagePreference, false);
         maybeSetVisible(mAirplaneModeMsgPreference, false);
         maybeSetVisible(mResetInternetPreference, false);
-        maybeSetVisible(findPreference(PREF_KEY_WIFI_TOGGLE), false);
         if (isSetupWizardModeWifi) {
             maybeSetVisible(findPreference(PREF_KEY_CONNECTED_ETHERNET_NETWORK), false);
             maybeSetVisible(findPreference(PREF_KEY_PROVIDER_MOBILE_NETWORK), false);
