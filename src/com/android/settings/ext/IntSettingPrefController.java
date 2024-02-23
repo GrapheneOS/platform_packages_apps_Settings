@@ -35,7 +35,7 @@ public abstract class IntSettingPrefController extends AbstractListPreferenceCon
     }
 
     @Override
-    protected final boolean setValue(int val) {
+    protected boolean setValue(int val) {
         return setting.put(mContext, val);
     }
 
