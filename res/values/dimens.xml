@@ -471,4 +471,6 @@
     <dimen name="sud_progress_bar_margin_top">
         @dimen/sud_progress_bar_margin_top_material_you
     </dimen>
+    <dimen name="setup_design_card_view_intrinsic_height">0dp</dimen>
+    <dimen name="setup_design_card_view_intrinsic_width">0dp</dimen>
 </resources>

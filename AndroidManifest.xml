@@ -5038,7 +5038,7 @@
         </activity-alias>
 
         <provider
-            android:name="com.android.settings.SetupDesignConfigProvider"
+            android:name="com.android.settings.sudconfig.SudConfigProvider"
             android:authorities="com.google.android.setupwizard.partner"
             android:directBootAware="true"
             android:exported="true" />
