@@ -153,10 +153,10 @@ Native code debugging (ptrace) slightly weakens the app sandbox. Some apps (most
     <string name="usbc_port_title">USB-C port</string>
     <string name="usbc_port_off_title">Off</string>
     <string name="usbc_port_off_summary">Charging through USB-C port when device is off remains allowed</string>
-    <string name="usbc_port_charging_only_title">Charging only</string>
-    <string name="usbc_port_charging_only_when_locked_title">Charging only when locked</string>
+    <string name="usbc_port_charging_only_title">Charging-only</string>
+    <string name="usbc_port_charging_only_when_locked_title">Charging-only when locked</string>
     <string name="usbc_port_charging_only_when_locked_summary">Doesn’t apply to connections that were made before locking</string>
-    <string name="usbc_port_charging_only_when_locked_afu_title">Charging only when locked, except before first unlock</string>
+    <string name="usbc_port_charging_only_when_locked_afu_title">Charging-only when locked, except before first unlock</string>
     <string name="usbc_port_charging_only_when_locked_afu_summary">Doesn’t apply to connections that were made before locking or first unlock</string>
     <string name="usbc_port_on_title">On</string>
 
