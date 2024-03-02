@@ -172,6 +172,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         }
 
         Category(title = stringResource(R.string.exploit_protection_category_title)) {
+            AppExploitProtectionCompatModeSwitchPreference(app, packageInfoPresenter)
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {
