@@ -6,6 +6,8 @@ import android.content.pm.GosPackageState
 import android.ext.settings.app.AppSwitch
 import androidx.annotation.StringRes
 import com.android.settings.R
+import com.android.settings.SettingsPreferenceFragment
+import kotlin.reflect.KClass
 
 abstract class AswAdapter<T : AppSwitch>(val context: Context, val userId: Int = context.userId) {
     abstract fun getAppSwitch(): T
@@ -35,4 +37,6 @@ abstract class AswAdapter<T : AppSwitch>(val context: Context, val userId: Int =
     protected fun getText(@StringRes id: Int): CharSequence = context.getText(id)
 
     protected fun getString(@StringRes id: Int): String = context.getString(id)
+
+    abstract fun getDetailFragmentClass(): KClass<out SettingsPreferenceFragment>
 }
