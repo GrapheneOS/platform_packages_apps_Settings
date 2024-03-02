@@ -33,6 +33,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
+import com.android.settings.applications.appinfo.AppExtendedVaSpacePreference
 import com.android.settings.applications.appinfo.AppHardenedMallocPreference
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
@@ -167,6 +168,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         Category(title = stringResource(R.string.exploit_protection_category_title)) {
             AppExploitProtectionCompatModeSwitchPreference(app, packageInfoPresenter)
             AppHardenedMallocPreference(app)
+            AppExtendedVaSpacePreference(app)
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {
