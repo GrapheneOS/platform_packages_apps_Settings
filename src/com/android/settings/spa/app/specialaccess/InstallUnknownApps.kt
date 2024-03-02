@@ -23,10 +23,18 @@ import android.app.AppOpsManager.MODE_DEFAULT
 import android.app.AppOpsManager.OP_REQUEST_INSTALL_PACKAGES
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.content.pm.GosPackageState
+import android.content.pm.PackageInfo
 import android.os.UserManager
 import androidx.compose.runtime.Composable
 import com.android.settings.R
 import com.android.settingslib.spa.livedata.observeAsCallback
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
+import com.android.settingslib.spa.framework.compose.stateOf
+import com.android.settingslib.spa.widget.preference.SwitchPreference
+import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.userId
@@ -44,7 +52,26 @@ object InstallUnknownAppsListProvider : TogglePermissionAppListProvider {
 data class InstallUnknownAppsRecord(
     override val app: ApplicationInfo,
     val appOpsController: AppOpsController,
-) : AppRecord
+) : AppRecord {
+    val isObbFlagSet = mutableStateOf(isObbFlagSet())
+
+    fun isObbFlagSet(): Boolean {
+        return GosPackageState.get(app.packageName)?.hasFlag(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY) == true
+    }
+
+    fun setObbFlagState(state: Boolean): Boolean {
+        GosPackageState.edit(app.packageName).run {
+            setFlagsState(GosPackageState.FLAG_ALLOW_ACCESS_TO_OBB_DIRECTORY, state)
+            killUidAfterApply()
+            if (apply()) {
+                isObbFlagSet.value = state
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+}
 
 class InstallUnknownAppsListModel(private val context: Context) :
     TogglePermissionAppListModel<InstallUnknownAppsRecord> {
@@ -88,6 +115,24 @@ class InstallUnknownAppsListModel(private val context: Context) :
 
     override fun setAllowed(record: InstallUnknownAppsRecord, newAllowed: Boolean) {
         record.appOpsController.setAllowed(newAllowed)
+        if (!newAllowed) {
+            record.setObbFlagState(false)
+        }
+    }
+
+    @Composable
+    override fun extContent(record: InstallUnknownAppsRecord, pkgInfo: PackageInfo) {
+        SwitchPreference(object : SwitchPreferenceModel {
+            override val title = stringResource(R.string.allow_access_to_obb_directory_title)
+            override val summary = stateOf(stringResource(R.string.allow_access_to_obb_directory_summary))
+
+            override val changeable = record.appOpsController.isAllowed.observeAsState(false)
+            override val checked = record.isObbFlagSet
+            override val onCheckedChange = { newChecked: Boolean ->
+                record.setObbFlagState(newChecked)
+                Unit
+            }
+        })
     }
 
     companion object {
