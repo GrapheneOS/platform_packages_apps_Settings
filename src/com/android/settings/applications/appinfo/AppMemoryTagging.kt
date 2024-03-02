@@ -1,10 +1,14 @@
 package com.android.settings.applications.appinfo
 
 import android.content.Context
-import android.ext.settings.app.AswUseMemoryTagging
+import android.content.pm.ApplicationInfo
 import android.ext.settings.app.AppSwitch
+import android.ext.settings.app.AswUseMemoryTagging
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.android.internal.os.Zygote
 import com.android.settings.R
+import com.android.settings.spa.app.appinfo.AswPreference
 import com.android.settingslib.widget.FooterPreference
 
 class AswAdapterUseMemoryTagging(ctx: Context) : AswAdapter<AswUseMemoryTagging>(ctx) {
@@ -12,15 +16,28 @@ class AswAdapterUseMemoryTagging(ctx: Context) : AswAdapter<AswUseMemoryTagging>
     override fun getAppSwitch() = AswUseMemoryTagging.I
 
     override fun getAswTitle() = getText(R.string.aep_memtag)
+
+    override fun getDetailFragmentClass() = AppMemtagFragment::class
 }
+
+private val isMemoryTaggingSupported = Zygote.nativeSupportsMemoryTagging()
 
 class AppMemtagPrefController(ctx: Context, key: String) :
         AswPrefController<AswUseMemoryTagging>(ctx, key, AswAdapterUseMemoryTagging(ctx)) {
 
     override fun getDetailFragmentClass() = AppMemtagFragment::class.java
 
-    private val isSupported = Zygote.nativeSupportsMemoryTagging()
-    override fun getAvailabilityStatus() = if (isSupported) AVAILABLE else UNSUPPORTED_ON_DEVICE
+    override fun getAvailabilityStatus() = if (isMemoryTaggingSupported) AVAILABLE else UNSUPPORTED_ON_DEVICE
+}
+
+@Composable
+fun AppMemtagPreference(app: ApplicationInfo) {
+    if (!isMemoryTaggingSupported) {
+        return
+    }
+
+    val context = LocalContext.current
+    AswPreference(context, app, AswAdapterUseMemoryTagging(context))
 }
 
 class AppMemtagFragment : AswExploitProtectionFragment<AswUseMemoryTagging>() {
