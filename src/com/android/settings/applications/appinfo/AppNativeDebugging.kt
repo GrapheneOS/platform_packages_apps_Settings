@@ -1,9 +1,13 @@
 package com.android.settings.applications.appinfo
 
 import android.content.Context
-import android.ext.settings.app.AswDenyNativeDebug
+import android.content.pm.ApplicationInfo
 import android.ext.settings.app.AppSwitch
+import android.ext.settings.app.AswDenyNativeDebug
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.android.settings.R
+import com.android.settings.spa.app.appinfo.AswPreference
 import com.android.settingslib.widget.FooterPreference
 
 class AswAdapterNativeDebugging(ctx: Context) : AswAdapter<AswDenyNativeDebug>(ctx) {
@@ -14,12 +18,20 @@ class AswAdapterNativeDebugging(ctx: Context) : AswAdapter<AswDenyNativeDebug>(c
 
     override fun getOnTitle() = getText(R.string.aep_blocked)
     override fun getOffTitle() = getText(R.string.aep_allowed)
+
+    override fun getDetailFragmentClass() = AppNativeDebuggingFragment::class
 }
 
 class AppNativeDebuggingPrefController(ctx: Context, key: String) :
         AswPrefController<AswDenyNativeDebug>(ctx, key, AswAdapterNativeDebugging(ctx)) {
 
     override fun getDetailFragmentClass() = AppNativeDebuggingFragment::class.java
+}
+
+@Composable
+fun AppNativeDebuggingPreference(app: ApplicationInfo) {
+    val context = LocalContext.current
+    AswPreference(context, app, AswAdapterNativeDebugging(context))
 }
 
 class AppNativeDebuggingFragment : AswExploitProtectionFragment<AswDenyNativeDebug>() {
