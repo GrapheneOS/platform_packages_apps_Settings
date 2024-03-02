@@ -1,9 +1,13 @@
 package com.android.settings.applications.appinfo
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.ext.settings.app.AppSwitch
 import android.ext.settings.app.AswUseHardenedMalloc
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.android.settings.R
+import com.android.settings.spa.app.appinfo.AswPreference
 import com.android.settingslib.widget.FooterPreference
 
 class AswAdapterUseHardenedMalloc(ctx: Context) : AswAdapter<AswUseHardenedMalloc>(ctx) {
@@ -11,12 +15,20 @@ class AswAdapterUseHardenedMalloc(ctx: Context) : AswAdapter<AswUseHardenedMallo
     override fun getAppSwitch() = AswUseHardenedMalloc.I
 
     override fun getAswTitle() = getText(R.string.aep_hmalloc)
+
+    override fun getDetailFragmentClass() = AppHardenedMallocFragment::class
 }
 
 class AppHardenedMallocPrefController(ctx: Context, key: String) :
         AswPrefController<AswUseHardenedMalloc>(ctx, key, AswAdapterUseHardenedMalloc(ctx)) {
 
     override fun getDetailFragmentClass() = AppHardenedMallocFragment::class.java
+}
+
+@Composable
+fun AppHardenedMallocPreference(app: ApplicationInfo) {
+    val context = LocalContext.current
+    AswPreference(context, app, AswAdapterUseHardenedMalloc(context))
 }
 
 class AppHardenedMallocFragment : AswExploitProtectionFragment<AswUseHardenedMalloc>() {
