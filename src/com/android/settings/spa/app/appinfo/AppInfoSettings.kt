@@ -36,6 +36,7 @@ import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppExtendedVaSpacePreference
 import com.android.settings.applications.appinfo.AppHardenedMallocPreference
+import com.android.settings.applications.appinfo.AppMemtagPreference
 import com.android.settings.applications.appinfo.AppNativeDebuggingPreference
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.flags.Flags
@@ -177,6 +178,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         Category(title = stringResource(R.string.exploit_protection_category_title)) {
             AppExploitProtectionCompatModeSwitchPreference(app, packageInfoPresenter)
             AppHardenedMallocPreference(app)
+            AppMemtagPreference(app)
             AppExtendedVaSpacePreference(app)
             AppNativeDebuggingPreference(app)
         }
