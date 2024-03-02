@@ -147,6 +147,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         AppLocalePreference(app)
         AppOpenByDefaultPreference(app)
         DefaultAppShortcuts(app)
+        AppLogcatPreference(app)
 
         Category(title = stringResource(R.string.unused_apps_category)) {
             HibernationSwitchPreference(app)
