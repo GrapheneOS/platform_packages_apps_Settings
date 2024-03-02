@@ -2616,6 +2616,11 @@
                 android:resource="@string/suggestion_additional_fingerprints_summary" />
         </activity>
 
+        <activity android:name=".passwordDuress.DuressPasswordUi"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+
         <activity-alias android:name=".SetupFingerprintSuggestionActivity"
             android:enabled="false"
             android:exported="true"
