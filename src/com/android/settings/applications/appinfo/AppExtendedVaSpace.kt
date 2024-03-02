@@ -1,10 +1,15 @@
 package com.android.settings.applications.appinfo
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.ext.settings.app.AppSwitch
 import android.ext.settings.app.AswUseExtendedVaSpace
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.android.settings.R
+import com.android.settings.core.BasePreferenceController
 import com.android.settings.ext.ExtSettingControllerHelper
+import com.android.settings.spa.app.appinfo.AswPreference
 import com.android.settingslib.widget.FooterPreference
 
 class AswAdapterUseExtendedVaSpace(ctx: Context) : AswAdapter<AswUseExtendedVaSpace>(ctx) {
@@ -12,6 +17,8 @@ class AswAdapterUseExtendedVaSpace(ctx: Context) : AswAdapter<AswUseExtendedVaSp
     override fun getAppSwitch() = AswUseExtendedVaSpace.I
 
     override fun getAswTitle() = getText(R.string.aep_ext_va_space)
+
+    override fun getDetailFragmentClass() = AppExtendedVaSpaceFragment::class
 }
 
 class AppExtendedVaSpacePrefController(ctx: Context, key: String) :
@@ -20,6 +27,16 @@ class AppExtendedVaSpacePrefController(ctx: Context, key: String) :
     override fun getDetailFragmentClass() = AppExtendedVaSpaceFragment::class.java
 
     override fun getAvailabilityStatus() = ExtSettingControllerHelper.getDevModeSettingAvailability(mContext)
+}
+
+@Composable
+fun AppExtendedVaSpacePreference(app: ApplicationInfo) {
+    val context = LocalContext.current
+    if (ExtSettingControllerHelper.getDevModeSettingAvailability(context) != BasePreferenceController.AVAILABLE) {
+        return
+    }
+
+    AswPreference(context, app, AswAdapterUseExtendedVaSpace(context))
 }
 
 class AppExtendedVaSpaceFragment : AswExploitProtectionFragment<AswUseExtendedVaSpace>() {
