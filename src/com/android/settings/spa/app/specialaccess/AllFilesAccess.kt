@@ -18,10 +18,17 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.app.StorageScope
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.pm.PackageInfo
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.spa.widget.preference.Preference
+import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -50,5 +57,18 @@ class AllFilesAccessListModel(context: Context) : AppOpPermissionListModel(conte
             else -> SettingsEnums.APP_SPECIAL_PERMISSION_MANAGE_EXT_STRG_DENY
         }
         featureFactory.metricsFeatureProvider.action(context, category, "")
+    }
+
+    @Composable
+    override fun extContent(record: AppOpPermissionRecord, pkgInfo: PackageInfo) {
+        val context = LocalContext.current
+
+        Preference(object : PreferenceModel {
+            override val title = stringResource(R.string.storage_scopes)
+            override val onClick = {
+                val i = StorageScope.createConfigActivityIntent(pkgInfo.packageName)
+                context.startActivity(i)
+            }
+        })
     }
 }
