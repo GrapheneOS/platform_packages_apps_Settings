@@ -37,6 +37,7 @@ fun Context.startUninstallActivity(
 
     val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri).apply {
         putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, forAllUsers)
+        putExtra(Intent.EXTRA_UNINSTALL_SHOW_MORE_OPTIONS_BUTTON, false)
     }
     startActivityAsUser(intent, userHandle)
 }
