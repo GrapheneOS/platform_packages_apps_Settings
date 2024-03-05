@@ -17,14 +17,4 @@ fun AswPreference(context: Context, app: ApplicationInfo, adapter: AswAdapter<ou
         return
     }
 
-    Preference(object : PreferenceModel {
-        override val title = adapter.getAswTitle().toString()
-        override val summary = stateOf(adapter.getPreferenceSummary(app).toString())
-        override val onClick = {
-            AppInfoDashboardFragment.startAppInfoFragment(
-                adapter.getDetailFragmentClass().java,
-                app, context, AppInfoSettingsProvider.METRICS_CATEGORY,
-            )
-        }
-    })
 }
