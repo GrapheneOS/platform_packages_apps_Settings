@@ -29,10 +29,9 @@ import android.os.UserManager
 import androidx.compose.runtime.Composable
 import com.android.settings.R
 import com.android.settingslib.spa.livedata.observeAsCallback
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.android.settingslib.spa.framework.compose.stateOf
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spaprivileged.model.app.AppOpsController
@@ -122,12 +121,17 @@ class InstallUnknownAppsListModel(private val context: Context) :
 
     @Composable
     override fun extContent(record: InstallUnknownAppsRecord, pkgInfo: PackageInfo) {
+        val context = LocalContext.current
+
         SwitchPreference(object : SwitchPreferenceModel {
             override val title = stringResource(R.string.allow_access_to_obb_directory_title)
-            override val summary = stateOf(stringResource(R.string.allow_access_to_obb_directory_summary))
+            override val summary = {
+                context.getString(R.string.allow_access_to_obb_directory_summary)
+            }
 
-            override val changeable = record.appOpsController.isAllowed.observeAsState(false)
-            override val checked = record.isObbFlagSet
+            override val checked = {
+                record.isObbFlagSet.value
+            }
             override val onCheckedChange = { newChecked: Boolean ->
                 record.setObbFlagState(newChecked)
                 Unit
