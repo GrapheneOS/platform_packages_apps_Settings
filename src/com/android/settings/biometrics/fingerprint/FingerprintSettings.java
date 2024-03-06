@@ -639,7 +639,8 @@ public class FingerprintSettings extends SubSettings {
 
         private void updateFingerprintUnlockCategoryVisibility() {
             final boolean mFingerprintUnlockCategoryAvailable =
-                    mFingerprintUnlockCategoryPreferenceController.isAvailable();
+                    mFingerprintUnlockCategoryPreferenceController != null &&
+                            mFingerprintUnlockCategoryPreferenceController.isAvailable();
             if (mFingerprintUnlockCategory.isVisible() != mFingerprintUnlockCategoryAvailable) {
                 mFingerprintUnlockCategory.setVisible(
                         mFingerprintUnlockCategoryAvailable);
@@ -650,9 +651,13 @@ public class FingerprintSettings extends SubSettings {
 
         private void setupFingerprintUnlockCategoryPreferences() {
             mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
-            mRequireScreenOnToAuthPreference.setVisible(mRequireScreenOnToAuthPreferenceController.isAvailable());
+            mRequireScreenOnToAuthPreference.setVisible(
+                    mRequireScreenOnToAuthPreferenceController != null &&
+                            mRequireScreenOnToAuthPreferenceController.isAvailable()
+            );
             mRequireScreenOnToAuthPreference.setChecked(
-                    mRequireScreenOnToAuthPreferenceController.isChecked());
+                    mRequireScreenOnToAuthPreferenceController != null &&
+                            mRequireScreenOnToAuthPreferenceController.isChecked());
             mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
                     (preference, newValue) -> {
                         final boolean isChecked = ((TwoStatePreference) preference).isChecked();
@@ -904,7 +909,7 @@ public class FingerprintSettings extends SubSettings {
                     mFingerprintUnlockCategoryPreferenceController =
                     (FingerprintUnlockCategoryController) controller;
                 } else if (controller.getPreferenceKey() == KEY_REQUIRE_SCREEN_ON_TO_AUTH) {
-            mRequireScreenOnToAuthPreferenceController =
+                    mRequireScreenOnToAuthPreferenceController =
                     (FingerprintSettingsRequireScreenOnToAuthPreferenceController)
                             controller;
                     }
