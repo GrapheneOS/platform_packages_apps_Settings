@@ -39,6 +39,7 @@ import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
@@ -91,7 +92,9 @@ class PackageInfoPresenter(
         intent.action != Intent.ACTION_PACKAGE_REMOVED ||
             intent.getBooleanExtra(Intent.EXTRA_ARCHIVAL, false)
 
-    val flow: StateFlow<PackageInfo?> = merge(flowOf(null), appChangeFlow)
+    val manualRefreshFlow = MutableStateFlow<Any?>(null)
+
+    val flow: StateFlow<PackageInfo?> = merge(flowOf(null), appChangeFlow, manualRefreshFlow)
         .map { getPackageInfo() }
         .stateIn(coroutineScope + Dispatchers.Default, SharingStarted.Eagerly, null)
 
