@@ -173,12 +173,11 @@ public class FingerprintSettings extends SubSettings {
             if (manager == null || !manager.isHardwareDetected()) {
                 return null;
             }
+
+            controllers.add(new FingerprintUnlockCategoryController(context,
+                    KEY_FINGERPRINT_UNLOCK_CATEGORY));
+
             if (manager.isPowerbuttonFps()) {
-                controllers.add(
-                        new FingerprintUnlockCategoryController(
-                                context,
-                                KEY_FINGERPRINT_UNLOCK_CATEGORY
-                        ));
                 controllers.add(
                         new FingerprintSettingsRequireScreenOnToAuthPreferenceController(
                                 context,
@@ -187,6 +186,8 @@ public class FingerprintSettings extends SubSettings {
             }
             controllers.add(new FingerprintsEnrolledCategoryPreferenceController(context,
                     KEY_FINGERPRINTS_ENROLLED_CATEGORY));
+            controllers.add(new FingerprintSettingsKeyguardPreferenceController(context,
+                    KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE));
             return controllers;
         }
 
@@ -650,15 +651,19 @@ public class FingerprintSettings extends SubSettings {
 
         private void setupFingerprintUnlockCategoryPreferences() {
             mRequireScreenOnToAuthPreference = findPreference(KEY_REQUIRE_SCREEN_ON_TO_AUTH);
-            mRequireScreenOnToAuthPreference.setVisible(mRequireScreenOnToAuthPreferenceController.isAvailable());
-            mRequireScreenOnToAuthPreference.setChecked(
-                    mRequireScreenOnToAuthPreferenceController.isChecked());
-            mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
-                    (preference, newValue) -> {
-                        final boolean isChecked = ((TwoStatePreference) preference).isChecked();
-                        mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
-                        return true;
-                    });
+            if (mRequireScreenOnToAuthPreferenceController != null) {
+                mRequireScreenOnToAuthPreference.setVisible(mRequireScreenOnToAuthPreferenceController.isAvailable());
+                mRequireScreenOnToAuthPreference.setChecked(
+                        mRequireScreenOnToAuthPreferenceController.isChecked());
+                mRequireScreenOnToAuthPreference.setOnPreferenceChangeListener(
+                        (preference, newValue) -> {
+                            final boolean isChecked = ((TwoStatePreference) preference).isChecked();
+                            mRequireScreenOnToAuthPreferenceController.setChecked(!isChecked);
+                            return true;
+                        });
+            } else {
+                mRequireScreenOnToAuthPreference.setVisible(false);
+            }
 
             RestrictedSwitchPreference keyguardFingerprintPref = findPreference(KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
             keyguardFingerprintPref.setChecked(mFingerprintKeyguardController.isChecked());
@@ -902,17 +907,16 @@ public class FingerprintSettings extends SubSettings {
             for (AbstractPreferenceController controller : controllers) {
                 if (controller.getPreferenceKey() == KEY_FINGERPRINT_UNLOCK_CATEGORY) {
                     mFingerprintUnlockCategoryPreferenceController =
-                    (FingerprintUnlockCategoryController) controller;
+                        (FingerprintUnlockCategoryController) controller;
                 } else if (controller.getPreferenceKey() == KEY_REQUIRE_SCREEN_ON_TO_AUTH) {
-            mRequireScreenOnToAuthPreferenceController =
-                    (FingerprintSettingsRequireScreenOnToAuthPreferenceController)
-                            controller;
-                    }
-
+                    mRequireScreenOnToAuthPreferenceController =
+                        (FingerprintSettingsRequireScreenOnToAuthPreferenceController) controller;
+                } else if (controller.getPreferenceKey() == KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE) {
+                    mFingerprintKeyguardController =
+                        (FingerprintSettingsKeyguardPreferenceController) controller;
+                }
             }
-            mFingerprintKeyguardController = new FingerprintSettingsKeyguardPreferenceController(
-                context, KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE);
-            controllers.add(mFingerprintKeyguardController);
+
             return controllers;
         }
 
