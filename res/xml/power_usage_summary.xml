@@ -57,7 +57,7 @@
         android:summary="@string/battery_percentage_description"
         settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="battery_share"
         android:title="@string/battery_share"
         android:summary="@string/battery_share_description"
