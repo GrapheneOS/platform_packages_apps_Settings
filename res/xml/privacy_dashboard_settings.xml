@@ -93,7 +93,7 @@
         settings:boolSettingField="android.ext.settings.ExtSettings AUTO_GRANT_OTHER_SENSORS_PERMISSION"/>
 
     <!-- Screenshot timestamp EXIF toggle -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="privacy_screenshot_timestamp_exif"
         android:title="@string/screenshot_timestamp_exif_title"
         android:summary="@string/screenshot_timestamp_exif_summary"
