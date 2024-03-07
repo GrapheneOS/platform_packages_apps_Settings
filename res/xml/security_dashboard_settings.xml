@@ -88,7 +88,7 @@
             android:fragment="com.android.settings.security.NativeDebuggingFragment"
             settings:controller="com.android.settings.security.NativeDebuggingPrefController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="scramble_pin_layout"
             android:title="@string/scramble_pin_title"
             settings:boolSettingField="android.ext.settings.ExtSettings SCRAMBLE_PIN_LAYOUT" />
