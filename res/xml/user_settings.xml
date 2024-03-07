@@ -100,7 +100,7 @@
         android:fragment="com.android.settings.users.TimeoutToDockUserSettings"
         settings:controller="com.android.settings.users.TimeoutToDockUserPreferenceController"/>
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
             android:key="user_settings_send_censored_notifications_to_current"
             android:title="@string/user_settings_send_censored_notifications_to_current"
             android:summary="@string/user_settings_send_censored_notifications_to_current_summary"
