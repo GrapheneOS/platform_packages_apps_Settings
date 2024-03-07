@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -17,7 +17,7 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
 
     private static final String TAG = BoolSettingFragment.class.getSimpleName();
 
-    protected SwitchPreference mainSwitch;
+    protected SwitchPreferenceCompat mainSwitch;
     protected boolean invertSetting;
 
     private ExtSettingControllerHelper<BoolSetting> helper;
@@ -34,7 +34,7 @@ public abstract class BoolSettingFragment extends DashboardFragment implements E
 
         PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(ctx);
 
-        var mainSwitch = new SwitchPreference(ctx);
+        var mainSwitch = new SwitchPreferenceCompat(ctx);
         mainSwitch.setTitle(getMainSwitchTitle());
 
         this.mainSwitch = mainSwitch;
