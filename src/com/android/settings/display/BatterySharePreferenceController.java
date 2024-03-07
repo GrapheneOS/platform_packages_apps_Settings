@@ -9,7 +9,7 @@ import android.os.BatteryManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import com.android.internal.R;
 import com.android.settings.core.BasePreferenceController;
@@ -66,7 +66,7 @@ public class BatterySharePreferenceController extends BasePreferenceController i
         if (mPreference == null) return;
         boolean enabled = !isPlugged(mContext) && wirelessCharger.isRtxSupported();
         mPreference.setEnabled(enabled);
-        ((SwitchPreference) mPreference).setChecked(wirelessCharger.isRtxModeOn());
+        ((TwoStatePreference) mPreference).setChecked(wirelessCharger.isRtxModeOn());
     }
 
     @Override
