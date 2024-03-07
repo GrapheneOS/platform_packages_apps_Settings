@@ -105,7 +105,7 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_biometric_settings" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="show_system_process_crash_notifs"
             android:title="@string/show_system_process_crash_notifs_title"
             android:summary="@string/show_system_process_crash_notifs_summary"
