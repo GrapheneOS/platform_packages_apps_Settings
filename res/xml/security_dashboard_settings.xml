@@ -70,7 +70,7 @@
             android:fragment="com.android.settings.security.ExecSpawningFragment"
             settings:controller="com.android.settings.security.ExecSpawningPrefController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="allow_automatic_per_app_epcm"
             android:title="@string/allow_automatic_per_app_epcm_title"
             android:summary="@string/allow_automatic_per_app_epcm_summary"
