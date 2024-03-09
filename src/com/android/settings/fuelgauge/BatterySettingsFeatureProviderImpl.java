@@ -27,12 +27,12 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
 
     @Override
     public boolean isManufactureDateAvailable(Context context, long manufactureDateMs) {
-        return manufactureDateMs > 1_500_000_000_000L; // July 2017
+        return manufactureDateMs > 1_609_459_200_000L; // 2021-01-01
     }
 
     @Override
     public boolean isFirstUseDateAvailable(Context context, long firstUseDateMs) {
-        return firstUseDateMs > 1_500_000_000_000L; // July 2017
+        return firstUseDateMs > 1_609_459_200_000L; // 2021-01-01
     }
 
     @Override
