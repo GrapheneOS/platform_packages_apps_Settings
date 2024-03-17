@@ -30,7 +30,6 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="screen_pinning_settings_screen_footer"
-        android:title="@string/screen_pinning_description"
         settings:searchable="false" />
 
 </PreferenceScreen>
