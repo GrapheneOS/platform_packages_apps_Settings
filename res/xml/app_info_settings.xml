@@ -145,11 +145,6 @@
         android:summary="@string/summary_placeholder" />
 
     <Preference
-        android:key="clipboard"
-        android:title="@string/clipboard_title"
-        settings:controller="com.android.settings.applications.appinfo.AppClipboardPreferenceController" />
-
-    <Preference
         android:key="view_logs"
         android:title="@string/view_logs"
         settings:controller="com.android.settings.applications.appinfo.AppLogcatPrefController" />
