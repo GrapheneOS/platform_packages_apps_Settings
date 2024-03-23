@@ -22,12 +22,6 @@ class AswAdapterDenyClipboardRead(ctx: Context) : AswAdapter<AswDenyClipboardRea
     override fun getDetailFragmentClass() = AppClipboardFragment::class
 }
 
-class AppClipboardPreferenceController(ctx: Context, key: String) :
-        AswPrefController<AswDenyClipboardRead>(ctx, key, AswAdapterDenyClipboardRead(ctx)) {
-
-    override fun getDetailFragmentClass() = AppClipboardFragment::class.java
-}
-
 @Composable
 fun AppClipboardPreference(app: ApplicationInfo) {
     val context = LocalContext.current
