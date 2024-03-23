@@ -486,4 +486,6 @@ public class Settings extends SettingsActivity {
     public static class AppMemtagActivity extends SettingsActivity {}
 
     public static class AppHardenedMallocActivity extends SettingsActivity {}
+
+    public static class AppClipboardActivity extends SettingsActivity {}
 }

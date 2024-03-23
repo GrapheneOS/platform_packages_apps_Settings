@@ -162,6 +162,13 @@
         android:summary="@string/content_capture_summary"
         settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
 
+    <!-- Clipboard toggle -->
+    <SwitchPreferenceCompat
+        android:key="privacy_clipboard_toggle"
+        android:title="@string/clipboard_toggle_title"
+        android:summary="@string/clipboard_toggle_summary"
+        settings:boolSettingField="android.ext.settings.ExtSettings DENY_CLIPBOARD_READ_BY_DEFAULT"/>
+
     <!-- Clipboard access notifications -->
     <SwitchPreferenceCompat
         android:key="show_clip_access_notification"
