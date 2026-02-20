@@ -610,6 +610,11 @@
             android:title="@string/disable_screen_share_protections_for_apps_and_notifications"
             android:summary="@string/disable_screen_share_protections_for_apps_and_notifications_summary" />
 
+        <SwitchPreferenceCompat
+            android:key="force_screenshot_secure_windows"
+            android:title="@string/force_screenshot_secure_windows"
+            android:summary="@string/force_screenshot_secure_windows_summary" />
+
         <Preference
             android:key="asst_importance_reset"
             android:title="@string/asst_importance_reset_title"
