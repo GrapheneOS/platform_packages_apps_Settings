@@ -39,7 +39,6 @@ public class PrivacyControlsFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new CameraToggleController(context, CAMERA_KEY));
         controllers.add(new MicToggleController(context, MIC_KEY));
-        controllers.add(new ShowClipAccessNotificationPreferenceController(context));
         return controllers;
     }
 

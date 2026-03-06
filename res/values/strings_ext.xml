@@ -340,4 +340,29 @@ May cause unreliable service. Use at your own risk.
     <string name="cert_transparency_dl_footer">"Certificate Transparency (CT) is an Internet standard designed to enhance the security of digital certificates. It requires Certificate Authorities (CAs) to submit all issued certificates to a public log that records them, increasing transparency and accountability in the certificate issuance process.
 
 By maintaining a verifiable record of all certificates, CT makes it significantly harder for malicious actors to forge certificates or for CAs to mistakenly issue them. This helps protect apps from man-in-the-middle attacks and other security threats."</string>
+    <string name="app_clipboard_read_title">Clipboard access</string>
+    <string name="app_clipboard_read_summary">Control how apps access the clipboard and whether access messages are shown</string>
+    <string name="app_clipboard_read_intro">Choose when apps can read clipboard items and whether to show a message when they do.</string>
+    <string name="app_clipboard_read_messages_category_title">Messages</string>
+    <string name="app_clipboard_read_app_access_category_title">App access</string>
+    <string name="app_default_clipboard_read_main_switch_title">Allow apps to read the clipboard</string>
+    <string name="app_default_clipboard_read_main_switch_summary">This setting applies to third-party apps across all users. When off, apps can read only items they copied or items you paste into them. Some apps may not work correctly.</string>
+    <string name="app_clipboard_read_apps_title">Manage app access</string>
+    <string name="app_clipboard_read_apps_summary">Choose which apps can read items copied by other apps without you using Paste</string>
+    <string name="app_default_clipboard_read_footer">"Apps can always read the current clipboard item if they copied it.
+
+For compatibility, apps can still see clipboard metadata, such as whether an item exists, its type, and when it was copied. Enabled accessibility services that can view and interact with screen content can initiate Paste actions and may access pasted content. Some apps and system features, including your default input method, can always read clipboard items regardless of these settings."</string>
+    <string name="app_clipboard_read_allowed">Allow</string>
+    <string name="app_clipboard_read_blocked">Paste only</string>
+    <string name="app_clipboard_read_dvr_default_setting">Follow system clipboard access setting</string>
+    <string name="app_clipboard_read_ir_is_system_app">This setting does not apply to system apps</string>
+    <string name="app_clipboard_read_ir_is_default_ime">Your default input method always has clipboard access</string>
+    <string name="app_clipboard_read_footer">"Warning: Using Paste only may cause this app to stop working. This setting controls whether the app can read clipboard items from other apps such as text, images, and links.
+
+When set to Allow, this app can read clipboard items while in use. When set to Paste only, it can read the current item if it copied it. It can read other items from other apps only when you use Paste.
+
+For compatibility, this app can still see clipboard metadata, such as whether an item exists, its type, and when it was copied. Enabled accessibility services that can view and interact with screen content can initiate Paste actions in this app and may access pasted content."</string>
+    <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting and temporary Paste access are shared among these apps:
+%1$s"</string>
+
 </resources>
