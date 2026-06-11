@@ -23,6 +23,10 @@ object AswAdapterUseExtendedVaSpace : AswAdapter<AswUseExtendedVaSpace>() {
 
 @Composable
 fun AppExtendedVaSpacePreference(app: ApplicationInfo) {
+    if (!AswUseExtendedVaSpace.isAvailable()) {
+        return
+    }
+
     val context = LocalContext.current
     if (ExtSettingControllerHelper.getDevModeSettingAvailability(context) != BasePreferenceController.AVAILABLE) {
         return
@@ -39,6 +43,7 @@ class AppExtendedVaSpaceFragment : AswExploitProtectionFragment<AswUseExtendedVa
         val id = when (ir) {
             AppSwitch.IR_REQUIRED_BY_HARDENED_MALLOC -> R.string.aep_ext_va_space_ir_hardened_malloc
             AppSwitch.IR_NON_64_BIT_NATIVE_CODE -> R.string.aep_ext_va_space_ir_32_bit_native_code
+            AppSwitch.IR_REQUIRED_BY_ZYGOTE_SPAWNING -> R.string.aep_ext_va_space_ir_zygote_spawning
             else -> return null
         }
         return getText(id)
@@ -49,10 +54,9 @@ class AppExtendedVaSpaceFragment : AswExploitProtectionFragment<AswUseExtendedVa
     }
 }
 
-
 class ExtendedVaSpaceAppListPrefController(context: Context, preferenceKey: String) :
     AswAppListPrefController(context, preferenceKey, AswAdapterUseExtendedVaSpace) {
 
-    override fun getAvailabilityStatus() = ExtSettingControllerHelper
-        .getDevModeSettingAvailability(mContext)
+    override fun getAvailabilityStatus() = if (AswUseExtendedVaSpace.isAvailable())
+        ExtSettingControllerHelper.getDevModeSettingAvailability(mContext) else UNSUPPORTED_ON_DEVICE
 }
