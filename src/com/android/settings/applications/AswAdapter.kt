@@ -9,6 +9,7 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.applications.appinfo.RadioButtonAppInfoFragment
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
 import com.android.settings.spa.app.appinfo.AswAppListPageProvider
