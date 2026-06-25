@@ -124,12 +124,6 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
 "If there are no connected devices, Bluetooth will turn off after the selected timeout."
     </string>
 
-    <string name="exec_spawning_title">Secure app spawning</string>
-    <string name="exec_spawning_title_inner">Use secure app spawning</string>
-    <string name="exec_spawning_reboot_dialog">A device restart is required to change this setting.</string>
-    <string name="exec_spawning_reboot_dialog_btn_restart">Restart</string>
-    <string name="exec_spawning_footer">Launch apps in a more secure way than Android which takes slightly longer and increases memory usage by app processes.</string>
-
     <string name="widevine_provisioning_title">Widevine provisioning</string>
     <string name="widevine_provisioning_enabled_grapheneos_proxy">GrapheneOS proxy</string>
     <string name="widevine_provisioning_enabled_google_server">Google server</string>
