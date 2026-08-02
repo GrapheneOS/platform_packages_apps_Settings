@@ -17,18 +17,17 @@
 package com.android.settings.development.bluetooth
 
 import android.app.Application
-import android.content.Context
-import android.os.PowerManager
+import android.os.SystemProperties
 import androidx.fragment.app.testing.FragmentScenario
+import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController
 import com.android.settingslib.development.DevelopmentSettingsEnabler
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows
 
 @RunWith(RobolectricTestRunner::class)
 class BluetoothDevelopmentSettingsFragmentTest {
@@ -69,16 +68,24 @@ class BluetoothDevelopmentSettingsFragmentTest {
     }
 
     @Test
-    fun onRebootDialogConfirmed_callsPowerManagerReboot() {
-        val powerManager = mock(PowerManager::class.java)
-        val shadowApplication = Shadows.shadowOf(context)
-        shadowApplication.setSystemService(Context.POWER_SERVICE, powerManager)
+    fun onRebootDialogConfirmed_updatesA2dpOffloadProperty() {
+        val property = "persist.bluetooth.a2dp_offload.disabled"
+        val leAudioProperty = "persist.bluetooth.leaudio_offload.disabled"
+        SystemProperties.set(property, "false")
+        SystemProperties.set(leAudioProperty, "false")
+        try {
+            FragmentScenario.launch(BluetoothDevelopmentSettingsFragment::class.java).onFragment {
+                attachedFragment ->
+                val controller =
+                    attachedFragment.use(BluetoothA2dpHwOffloadPreferenceController::class.java)
+                controller?.onPreferenceChange(mock(Preference::class.java), true)
+                attachedFragment.onRebootDialogConfirmed()
 
-        FragmentScenario.launch(BluetoothDevelopmentSettingsFragment::class.java).onFragment {
-            attachedFragment ->
-            attachedFragment.onRebootDialogConfirmed()
-
-            verify(powerManager).reboot(null)
+                assertThat(SystemProperties.getBoolean(property, false)).isTrue()
+            }
+        } finally {
+            SystemProperties.set(property, "false")
+            SystemProperties.set(leAudioProperty, "false")
         }
     }
 }
