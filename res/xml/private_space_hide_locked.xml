@@ -35,6 +35,12 @@
         android:selectable="false"
         settings:searchable="false" />
 
+    <Preference
+        android:key="private_space_hide_discoverability_warning"
+        android:summary="@string/private_space_hide_discoverability_warning"
+        android:selectable="false"
+        settings:searchable="false" />
+
     <PreferenceCategory
         android:key="private_space_access"
         android:title="@string/private_space_access_header"

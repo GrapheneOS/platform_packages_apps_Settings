@@ -29,6 +29,8 @@
     <string name="sandboxed_google_play">Sandboxed Google Play</string>
     <string name="sandboxed_google_play_work_profile">Sandboxed Google Play (work profile)</string>
 
+    <string name="private_space_hide_discoverability_warning">Hiding private space doesn’t conceal that you have one. Other parts of the system may reveal the presence of a private space.</string>
+
     <string name="user_settings_send_censored_notifications_to_current">Send notifications to current user</string>
     <string name="user_settings_send_censored_notifications_to_current_summary">Your lock screen notifications will be forwarded to the current user if you are active in the background. Only the user\'s name, the app\'s name, and the time received will be shown.</string>
 
