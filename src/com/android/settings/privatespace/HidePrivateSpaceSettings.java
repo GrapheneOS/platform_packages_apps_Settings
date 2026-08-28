@@ -35,6 +35,8 @@ import com.android.settingslib.widget.IllustrationPreference;
 public class HidePrivateSpaceSettings extends DashboardFragment {
     private static final String TAG = "HidePrivateSpaceSettings";
     private static final int IMPORTANT_FOR_ACCESSIBILITY_ITEM_COUNT = 5;
+    private static final String PRIVATE_SPACE_HIDE_ILLUSTRATION_KEY =
+            "private_space_hide_illustration";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -80,6 +82,9 @@ public class HidePrivateSpaceSettings extends DashboardFragment {
     @Override
     public void onResume() {
         super.onResume();
+        final IllustrationPreference illustrationPreference =
+                getPreferenceScreen().findPreference(PRIVATE_SPACE_HIDE_ILLUSTRATION_KEY);
+        illustrationPreference.applyDynamicColor();
     }
 
     @Override
