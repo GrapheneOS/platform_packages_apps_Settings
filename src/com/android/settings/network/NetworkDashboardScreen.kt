@@ -79,6 +79,7 @@ open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvide
             } else {
                 +AirplaneModePreference() order -5
             }
+            +AirplaneModeAuthenticationPreference() order -4
             if (Flags.catalystRestrictBackgroundParentEntry()) +DataSaverScreen.KEY order 10
         }
 
