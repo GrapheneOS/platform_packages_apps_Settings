@@ -201,7 +201,7 @@ class PackageInfoPresenter(
         }
     }
 
-    /* stops application without durable effects of the full-scale "forec stop" */
+    /* stops application without durable effects of the full-scale "force stop" */
     fun stopPackage() {
         requireAuthAndExecute {
             coroutineScope.launch(Dispatchers.Default) {
