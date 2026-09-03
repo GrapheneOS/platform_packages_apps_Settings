@@ -106,6 +106,8 @@ public class SettingsApplication extends Application {
             ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
         }
 
+        com.android.settings.display.DisplayColorModeFixup.run(this);
+
         if (getUserId() == android.os.UserHandle.USER_SYSTEM) {
             com.android.settings.users.UserRestrictions.fixupPrivateSpaceRestrictions(this);
             com.android.settingslib.utils.ThreadUtils.postOnBackgroundThread(() -> {
