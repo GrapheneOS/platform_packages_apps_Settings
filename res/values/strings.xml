@@ -15641,4 +15641,7 @@
     <!-- Search keywords for Human interface device access setting -->
     <string name="keywords_access_hid">hid, human, access, device</string>
     <!-- Access HID end -->
+    <string name="hide_navigation_handle_title">Hide navigation bar hint</string>
+    <string name="hide_navigation_handle_summary">Hide the gesture navigation bar hint line shown at the bottom of the screen</string>
+    <string name="hide_navigation_handle_category_title">Navigation bar hint</string>
 </resources>
