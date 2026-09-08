@@ -12362,13 +12362,6 @@
 
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation, swipe</string>
-    
-    <!-- Title for setting category that is used to toggle displaying or hiding the navigation hint (pill). [CHAR LIMIT=60] -->
-    <string name="hide_navigation_handle_category_title">Navigation hint</string>
-    <!-- Title text for hiding the navigation hint (pill). [CHAR LIMIT=60] -->
-    <string name="hide_navigation_handle_title">Hide navigation hint</string>
-    <!-- Summary text for hiding the navigation hint (pill). [CHAR LIMIT=NONE] -->
-    <string name="hide_navigation_handle_summary">Hide the gesture navigation hint (pill) shown at the bottom of the screen</string>
 
     <!-- Title for setting category that is shown to enable invoking digital assistant with swipe. [CHAR LIMIT=60] -->
     <string name="assistant_gesture_category_title">Digital assistant</string>

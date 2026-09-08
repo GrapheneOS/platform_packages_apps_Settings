@@ -340,4 +340,11 @@ May cause unreliable service. Use at your own risk.
     <string name="cert_transparency_dl_footer">"Certificate Transparency (CT) is an Internet standard designed to enhance the security of digital certificates. It requires Certificate Authorities (CAs) to submit all issued certificates to a public log that records them, increasing transparency and accountability in the certificate issuance process.
 
 By maintaining a verifiable record of all certificates, CT makes it significantly harder for malicious actors to forge certificates or for CAs to mistakenly issue them. This helps protect apps from man-in-the-middle attacks and other security threats."</string>
+
+    <!-- Title for setting category in gesture navigation settings that is used to toggle displaying or hiding the navigation hint (pill). [CHAR LIMIT=60] -->
+    <string name="hide_navigation_handle_category_title">Navigation hint</string>
+    <!-- Title text for hiding the navigation hint (pill). [CHAR LIMIT=60] -->
+    <string name="hide_navigation_handle_title">Hide navigation hint</string>
+    <!-- Summary text for hiding the navigation hint (pill). [CHAR LIMIT=NONE] -->
+    <string name="hide_navigation_handle_summary">Hide the gesture navigation hint (pill) shown at the bottom of the screen</string>
 </resources>
