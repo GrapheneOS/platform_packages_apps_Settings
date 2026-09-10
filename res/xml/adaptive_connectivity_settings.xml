@@ -44,5 +44,6 @@
         android:key="adaptive_connectivity_mobile_network_enabled"
         android:title="@string/adaptive_connectivity_mobile_network_switch_title"
         android:summary="@string/adaptive_connectivity_mobile_network_switch_summary"
+        settings:searchable="@bool/config_show_adaptive_connectivity"
         settings:isPreferenceVisible="false"/>
 </PreferenceScreen>

@@ -65,7 +65,8 @@ open class AdaptiveConnectivityScreen : PreferenceScreenMixin {
                         context,
                         subscriptionManager,
                     )
-            if (!shouldHideMobileNetworkToggle) {
+            if (context.resources.getBoolean(R.bool.config_show_adaptive_connectivity) &&
+                !shouldHideMobileNetworkToggle) {
                 +AdaptiveMobileNetworkTogglePreference()
             }
         }

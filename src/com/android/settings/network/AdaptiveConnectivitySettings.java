@@ -34,6 +34,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -65,8 +66,7 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return context.getResources().getBoolean(
-                            R.bool.config_show_adaptive_connectivity);
+                    return Utils.isMobileDataCapable(context);
                 }
             };
 
@@ -98,7 +98,8 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
                 subscriptionManager != null
                         && SubscriptionUtil.hasSubscriptionForMobileNetworkToggleDisable(
                                 getContext(), subscriptionManager);
-        if (!shouldHideMobileNetworkToggle) {
+        if (getContext().getResources().getBoolean(R.bool.config_show_adaptive_connectivity)
+                && !shouldHideMobileNetworkToggle) {
             setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
         }
     }

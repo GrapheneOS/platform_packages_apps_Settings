@@ -42,8 +42,7 @@ public class AdaptiveConnectivityPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Utils.isMobileDataCapable(mContext)
-                || !mContext.getResources().getBoolean(R.bool.config_show_adaptive_connectivity)) {
+        if (!Utils.isMobileDataCapable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
         return AVAILABLE;

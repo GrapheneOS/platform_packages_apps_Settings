@@ -330,7 +330,7 @@ public class AdaptiveConnectivitySettingsTest {
   }
 
   @Test
-  public void onCreatePreferences_mobileToggleShownForCarrier() {
+  public void onCreatePreferences_mobileToggleHiddenWithoutVendorSupport() {
       FragmentScenario<AdaptiveConnectivitySettings> scenario =
           FragmentScenario.launchInContainer(AdaptiveConnectivitySettings.class);
 
@@ -344,7 +344,7 @@ public class AdaptiveConnectivitySettingsTest {
           Preference legacyTogglePreference = fragment.findPreference(
               ADAPTIVE_CONNECTIVITY_ENABLED);
 
-          assertThat(mobileNetworkPreference.isVisible()).isTrue();
+          assertThat(mobileNetworkPreference.isVisible()).isFalse();
           assertThat(wifiPreference.isVisible()).isTrue();
           assertThat(summaryPreference.isVisible()).isFalse();
           assertThat(legacyTogglePreference.isVisible()).isFalse();
