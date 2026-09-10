@@ -18,16 +18,15 @@ package com.android.settings.development.bluetooth
 
 import android.app.Application
 import android.os.SystemProperties
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController
+import com.android.settingslib.core.AbstractPreferenceController
 import com.android.settingslib.development.DevelopmentSettingsEnabler
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 class BluetoothDevelopmentSettingsFragmentTest {
@@ -74,15 +73,18 @@ class BluetoothDevelopmentSettingsFragmentTest {
         SystemProperties.set(property, "false")
         SystemProperties.set(leAudioProperty, "false")
         try {
-            FragmentScenario.launch(BluetoothDevelopmentSettingsFragment::class.java).onFragment {
-                attachedFragment ->
-                val controller =
-                    attachedFragment.use(BluetoothA2dpHwOffloadPreferenceController::class.java)
-                controller?.onPreferenceChange(mock(Preference::class.java), true)
-                attachedFragment.onRebootDialogConfirmed()
+            val fragment = BluetoothDevelopmentSettingsFragment()
+            val controller = BluetoothA2dpHwOffloadPreferenceController(context, fragment)
+            ReflectionHelpers.setField(controller, "mChanged", true)
+            val preferenceControllers:
+                MutableMap<Class<*>, List<AbstractPreferenceController>> =
+                ReflectionHelpers.getField(fragment, "mPreferenceControllers")
+            preferenceControllers[BluetoothA2dpHwOffloadPreferenceController::class.java] =
+                listOf(controller)
 
-                assertThat(SystemProperties.getBoolean(property, false)).isTrue()
-            }
+            fragment.onRebootDialogConfirmed()
+
+            assertThat(SystemProperties.getBoolean(property, false)).isTrue()
         } finally {
             SystemProperties.set(property, "false")
             SystemProperties.set(leAudioProperty, "false")
