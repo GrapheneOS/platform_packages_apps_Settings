@@ -237,6 +237,7 @@ public class SettingsGateway {
             com.android.settings.applications.AppStorageDynCodeLoadingFragment.class.getName(),
             com.android.settings.applications.AppManagePlayIntegrityApiFragment.class.getName(),
             com.android.settings.applications.AppExecSpawningFragment.class.getName(),
+            com.android.settings.applications.AppStrictLeakBlockingFragment.class.getName(),
             com.android.settings.safetycenter.ExploitProtectionFragment.class.getName(),
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),

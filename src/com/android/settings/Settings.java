@@ -694,6 +694,8 @@ public class Settings extends SettingsActivity {
 
     public static class AppNativeDebuggingActivity extends SettingsActivity {}
 
+    public static class AppStrictLeakBlockingActivity extends SettingsActivity {}
+
     public static class AppStorageDynCodeLoadingActivity extends SettingsActivity {}
 
     public static class AppManagePlayIntegrityApiActivity extends SettingsActivity {}

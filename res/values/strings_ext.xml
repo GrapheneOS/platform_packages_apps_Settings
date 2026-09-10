@@ -342,4 +342,10 @@ May cause unreliable service. Use at your own risk.
     <string name="cert_transparency_dl_footer">"Certificate Transparency (CT) is an Internet standard designed to enhance the security of digital certificates. It requires Certificate Authorities (CAs) to submit all issued certificates to a public log that records them, increasing transparency and accountability in the certificate issuance process.
 
 By maintaining a verifiable record of all certificates, CT makes it significantly harder for malicious actors to forge certificates or for CAs to mistakenly issue them. This helps protect apps from man-in-the-middle attacks and other security threats."</string>
+
+    <string name="app_strict_leak_blocking_title">Strict leak blocking</string>
+    <string name="app_strict_leak_blocking_ir_system_app">Strict leak blocking is always disabled for system components</string>
+    <string name="app_strict_leak_blocking_confirm_disable_warning_msg">This setting will allow the app to bypass strict VPNs and user network interface isolation.</string>
+    <string name="app_strict_leak_blocking_notif_toggle_title">Show notifications about blocked bypass attempts</string>
+    <string name="app_strict_leak_blocking_footer">Strict leak blocking prevents use of networking functionality that can bypass strict VPNs and user network interface isolation.</string>
 </resources>
