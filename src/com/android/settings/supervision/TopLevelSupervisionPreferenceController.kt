@@ -15,18 +15,15 @@
  */
 package com.android.settings.supervision
 
-import android.app.supervision.flags.Flags
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE
-import com.android.settings.Utils
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.supervision.shared.getSupervisionAppInstallActivityInfo
-import com.android.settings.supervision.shared.hasNecessarySupervisionComponent
+import com.android.settings.supervision.shared.isSupervisionSupportedOnDevice
 
 /** Controller for the top level Supervision settings Preference item. */
 class TopLevelSupervisionPreferenceController(context: Context, key: String) :
@@ -55,17 +52,6 @@ class TopLevelSupervisionPreferenceController(context: Context, key: String) :
     override fun getAvailabilityStatus(): Int {
         // Hide the supervision entry in settings if the necessary supervision component is not
         // available and can't be fixed by user.
-        val hasNecessarySupervisionComponent =
-            mContext.hasNecessarySupervisionComponent(matchAll = true)
-        if (
-            !Flags.enableSupervisionSettingsScreen() ||
-                (!hasNecessarySupervisionComponent &&
-                    mContext.getSupervisionAppInstallActivityInfo() == null) ||
-                Utils.shouldHideSupervisionInDemoMode(mContext)
-        ) {
-            return UNSUPPORTED_ON_DEVICE
-        }
-
-        return AVAILABLE
+        return if (mContext.isSupervisionSupportedOnDevice()) AVAILABLE else UNSUPPORTED_ON_DEVICE
     }
 }

@@ -33,6 +33,7 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.util.Log
+import com.android.settings.Utils
 import com.android.settings.supervision.ipc.SupervisionMessengerClient.Companion.SUPERVISION_MESSENGER_SERVICE_BIND_ACTION
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
@@ -98,6 +99,17 @@ fun Context.getSupervisionAppInstallActivityInfo(): ActivityInfo? {
         ?.firstOrNull()
         ?.activityInfo
 }
+
+/**
+ * Returns whether the device supports supervision: the supervision settings UI is enabled, and
+ * either the necessary supervision component is available or it can be installed by the user,
+ * and the device is not in demo mode.
+ */
+fun Context.isSupervisionSupportedOnDevice(): Boolean =
+    Flags.enableSupervisionSettingsScreen() &&
+        (hasNecessarySupervisionComponent(matchAll = true) ||
+            getSupervisionAppInstallActivityInfo() != null) &&
+        !Utils.shouldHideSupervisionInDemoMode(this)
 
 /**
  * Returns the package names of the supervision apps.
