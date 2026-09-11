@@ -364,7 +364,7 @@ For compatibility, apps can still see clipboard metadata, such as whether an ite
 When set to Allow, this app can read clipboard items while in use. When set to Paste only, it can read the current item if it copied it. It can read other items from other apps only when you use Paste.
 
 For compatibility, this app can still see clipboard metadata, such as whether an item exists, its type, and when it was copied. Enabled accessibility services that can view and interact with screen content can initiate Paste actions in this app and may access pasted content."</string>
-    <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting and temporary Paste access are shared among these apps:
+    <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
 %1$s"</string>
 
 </resources>
