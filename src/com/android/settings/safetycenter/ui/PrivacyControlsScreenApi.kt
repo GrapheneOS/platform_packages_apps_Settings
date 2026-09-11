@@ -43,6 +43,8 @@ class PrivacyControlsScreenApi :
         subpageRegistryKey = SafetyCenterSubpageRegistry.PRIVACY_CONTROLS_SUBPAGE_KEY,
     ) {
 
+    override fun hasCompleteHierarchy() = false
+
     init {
         // Camera Access toggle
         preference(

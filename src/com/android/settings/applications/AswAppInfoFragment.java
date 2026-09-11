@@ -139,7 +139,7 @@ public abstract class AswAppInfoFragment<T extends AppSwitch>
 
         if (notifTogglePref != null) {
             notifTogglePref.isChecked = adapter.getAppSwitch().isNotificationEnabled(ps);
-            notifTogglePref.isEnabled = state;
+            notifTogglePref.isEnabled = adapter.isNotificationToggleEnabled(state);
         }
 
         return new Entry[] { def, enabled, disabled };

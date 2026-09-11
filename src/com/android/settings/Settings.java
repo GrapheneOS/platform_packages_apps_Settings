@@ -698,6 +698,8 @@ public class Settings extends SettingsActivity {
 
     public static class AppManagePlayIntegrityApiActivity extends SettingsActivity {}
 
+    public static class AppClipboardReadActivity extends SettingsActivity {}
+
     public static class ExploitProtectionActivity extends SettingsActivity {}
 
     public static class NotificationBundlesActivity extends SettingsActivity { /* empty */ }

@@ -210,6 +210,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         Category(title = stringResource(R.string.advanced_apps)) {
             com.android.settings.applications.AppManagePlayIntegrityApiPreference(app)
+            com.android.settings.applications.AppClipboardReadPreference(app)
             if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
                 ComputerControlAutomationAppListProvider.InfoPageEntryItem(app)
             }
