@@ -23,6 +23,12 @@ object AswAdapterClipboardRead : AswAdapter<AswAllowClipboardRead>() {
     override fun getOnTitle(ctx: Context) = ctx.getText(R.string.app_clipboard_read_allowed)
     override fun getOffTitle(ctx: Context) = ctx.getText(R.string.app_clipboard_read_blocked)
 
+    override fun getNotificationToggleTitle(ctx: Context) =
+        ctx.getText(R.string.show_clip_access_denial_notification)
+    override fun getNotificationToggleSummary(ctx: Context) =
+        ctx.getText(R.string.show_clip_access_denial_notification_summary)
+    override fun isNotificationToggleEnabled(appSwitchState: Boolean) = !appSwitchState
+
     override fun getDetailFragmentClass() = AppClipboardReadFragment::class
 }
 
