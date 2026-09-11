@@ -79,8 +79,10 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
 
     override fun isAvailable(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
 
+    // TODO this screen is unavailable on GrapheneOS already, it's probably a bug that it's being
+    //  indexed and shown in search when `indexable` is `true`
     override val indexable
-        get() = true
+        get() = false
 
     override val highlightMenuKey: Int
         get() = R.string.menu_key_supervision

@@ -72,8 +72,10 @@ class SupervisionPinManagementScreen :
     override val screenTitle: Int
         get() = R.string.supervision_pin_management_screen_title
 
+    // TODO this screen is unavailable on GrapheneOS already, it's probably a bug that it's being
+    //  indexed and shown in search when `indexable` is `true`
     override val indexable
-        get() = true
+        get() = false
 
     override val keywords: Int
         get() = R.string.supervision_pin_management_preference_keywords

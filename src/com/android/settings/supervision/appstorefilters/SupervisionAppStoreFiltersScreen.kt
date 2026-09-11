@@ -62,8 +62,10 @@ open class SupervisionAppStoreFiltersScreen :
     override val title: Int
         get() = R.string.supervision_app_store_filters_title
 
+    // TODO this screen is unavailable on GrapheneOS already, it's probably a bug that it's being
+    //  indexed and shown in search when `indexable` is `true`
     override val indexable: Boolean
-        get() = true
+        get() = false
 
     override val keywords: Int
         get() = R.string.supervision_app_store_filters_keywords
