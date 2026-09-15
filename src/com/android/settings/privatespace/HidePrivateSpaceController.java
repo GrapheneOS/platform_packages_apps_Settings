@@ -60,11 +60,26 @@ public class HidePrivateSpaceController extends TogglePreferenceController {
         mPrivateSpaceMaintainer.setHidePrivateSpaceEntryPointSetting(
                 isChecked ? HIDE_PRIVATE_SPACE_ENTRY_POINT_ENABLED_VAL
                         : HIDE_PRIVATE_SPACE_ENTRY_POINT_DISABLED_VAL);
+        if (isChecked) {
+            showAlertDialog();
+        }
         return true;
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
         return 0;
+    }
+
+    private void showAlertDialog() {
+        new AlertDialog.Builder(mContext)
+                .setTitle(R.string.private_space_hide_dialog_title)
+                .setMessage(R.string.private_space_hide_dialog_message)
+                .setPositiveButton(
+                        R.string.private_space_hide_dialog_button,
+                        (DialogInterface dialog, int which) -> {
+                            dialog.dismiss();
+                        })
+                .show();
     }
 }

@@ -18,6 +18,12 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/private_space_hide_page_title">
 
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="private_space_hide_illustration"
+        settings:searchable="false"
+        settings:lottie_rawRes="@raw/private_space_hide_when_locked_illustration"
+        settings:controller="com.android.settings.privatespace.HidePrivateSpaceIllustrationController"/>
+
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="hide_when_locked"
         android:title="@string/private_space_hide_when_locked"
@@ -28,5 +34,39 @@
         android:summary="@string/private_space_hide_page_summary"
         android:selectable="false"
         settings:searchable="false" />
+
+    <Preference
+        android:key="private_space_hide_discoverability_warning"
+        android:summary="@string/private_space_hide_discoverability_warning"
+        android:selectable="false"
+        settings:searchable="false" />
+
+    <PreferenceCategory
+        android:key="private_space_access"
+        android:title="@string/private_space_access_header"
+        settings:controller="com.android.settings.privatespace.HidePrivateSpaceCategoryController">
+
+        <Preference
+        android:key="search_when_locked_footer"
+        android:icon="@drawable/counter_1_24dp"
+        android:title="@string/private_space_search_description"
+        android:selectable="false"
+        settings:searchable="false" />
+
+        <Preference
+            android:key="tap_tile_footer"
+            android:icon="@drawable/counter_2_24dp"
+            android:title="@string/private_space_tap_tile_description"
+            android:selectable="false"
+            settings:searchable="false" />
+
+        <Preference
+            android:key="unlock_profile_footer"
+            android:icon="@drawable/counter_3_24dp"
+            android:title="@string/private_space_unlock_description"
+            android:selectable="false"
+            settings:searchable="false" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

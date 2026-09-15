@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/app_clipboard_read_title">
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/app_clipboard_read_intro"
+        settings:searchable="false" />
+
+    <PreferenceCategory
+        android:key="clipboard_access_messages"
+        android:title="@string/app_clipboard_read_messages_category_title">
+
+        <SwitchPreferenceCompat
+            android:key="show_clip_access_notification"
+            android:title="@string/show_clip_access_notification"
+            android:summary="@string/show_clip_access_notification_summary"
+            settings:controller=
+                "com.android.settings.privacy.ShowClipAccessNotificationPreferenceController" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="clipboard_app_access"
+        android:title="@string/app_clipboard_read_app_access_category_title">
+
+        <SwitchPreferenceCompat
+            android:key="app_default_clipboard_read"
+            android:title="@string/app_default_clipboard_read_main_switch_title"
+            android:summary="@string/app_default_clipboard_read_main_switch_summary"
+            settings:boolSettingField=
+                "android.ext.settings.ExtSettings ALLOW_CLIPBOARD_READ_BY_DEFAULT" />
+
+        <Preference
+            android:key="app_clipboard_read_app_list"
+            android:title="@string/app_clipboard_read_apps_title"
+            android:summary="@string/app_clipboard_read_apps_summary"
+            settings:controller=
+                "com.android.settings.applications.ClipboardReadAppListPrefController" />
+
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="app_clipboard_read_footer"
+        android:title="@string/app_default_clipboard_read_footer"
+        settings:searchable="false" />
+
+</PreferenceScreen>

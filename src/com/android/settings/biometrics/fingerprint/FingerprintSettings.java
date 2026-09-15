@@ -304,6 +304,8 @@ public class FingerprintSettings extends SubSettings {
                 "biometrics_authentication_requested";
         private static final String KEY_BIOMETRICS_USE_FINGERPRINT_TO_CATEGORY =
                 "biometric_settings_use_fingerprint_to";
+        private static final String KEY_GK_PW_HANDLE =
+                "gk_pw_handle";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
@@ -365,6 +367,7 @@ public class FingerprintSettings extends SubSettings {
         private boolean mLaunchedBiometricSecondFactorPinActivity;
 
         private long mChallenge;
+        private long mGkPwHandle;
 
         private static final String TAG_AUTHENTICATE_SIDECAR = "authenticate_sidecar";
         private static final String TAG_REMOVAL_SIDECAR = "removal_sidecar";
@@ -668,6 +671,7 @@ public class FingerprintSettings extends SubSettings {
                         mHasFirstEnrolled);
                 mBiometricsAuthenticationRequested = savedInstanceState.getBoolean(
                         KEY_BIOMETRICS_AUTHENTICATION_REQUESTED);
+                mGkPwHandle = savedInstanceState.getLong(KEY_GK_PW_HANDLE);
             }
 
             // (mLaunchedConfirm or mIsEnrolling) means that we are waiting an activity result.
@@ -1241,6 +1245,7 @@ public class FingerprintSettings extends SubSettings {
             outState.putBoolean(KEY_HAS_RUN_CHALLENGE_INVOKER, mHasRunChallengeInvoker);
             outState.putBoolean(KEY_BIOMETRICS_AUTHENTICATION_REQUESTED,
                     mBiometricsAuthenticationRequested);
+            outState.putLong(KEY_GK_PW_HANDLE, mGkPwHandle);
         }
 
         @Override
@@ -1422,6 +1427,7 @@ public class FingerprintSettings extends SubSettings {
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                     runChallengeGeneratedInvokers();
                     if (BiometricUtils.containsGatekeeperPasswordHandle(data)) {
+                        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
                         final Utils.BiometricStatus biometricAuthStatus =
                                 Utils.requestBiometricAuthenticationForMandatoryBiometrics(
                                         getActivity(),
@@ -1430,9 +1436,9 @@ public class FingerprintSettings extends SubSettings {
                         if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                             Utils.launchBiometricPromptForMandatoryBiometrics(this,
                                     BIOMETRIC_AUTH_REQUEST,
-                                    mUserId, true /* hideBackground */, data);
+                                    mUserId, true /* hideBackground */);
                         } else {
-                            handleAuthenticationSuccessful(data);
+                            handleAuthenticationSuccessful(mGkPwHandle);
                         }
                         if (data.hasExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)) {
                             mUserPassword = data.getParcelableExtra(
@@ -1496,7 +1502,11 @@ public class FingerprintSettings extends SubSettings {
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 mBiometricsAuthenticationRequested = false;
                 if (resultCode == RESULT_OK) {
-                    handleAuthenticationSuccessful(data);
+                    if (mGkPwHandle == 0L) {
+                        Log.e(TAG, "Gatekeeper password not set.");
+                    } else {
+                        handleAuthenticationSuccessful(mGkPwHandle);
+                    }
                 } else {
                     if (resultCode
                             == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
@@ -1578,7 +1588,7 @@ public class FingerprintSettings extends SubSettings {
             }
         }
 
-        private void handleAuthenticationSuccessful(Intent data) {
+        private void handleAuthenticationSuccessful(long gkPwHandle) {
             if (!mHasFirstEnrolled && !mIsEnrolling) {
                 final Activity activity = getActivity();
                 if (activity != null) {
@@ -1593,8 +1603,7 @@ public class FingerprintSettings extends SubSettings {
                 // Token and challenge will be updated later through the activity result
                 // of AUTO_ADD_FIRST_FINGERPRINT_REQUEST.
                 mIsEnrolling = true;
-                addFirstFingerprint(
-                        BiometricUtils.getGatekeeperPasswordHandle(data));
+                addFirstFingerprint(gkPwHandle);
             } else {
                 mFingerprintManager.generateChallenge(mUserId,
                         (sensorId, userId, challenge) -> {
@@ -1608,10 +1617,10 @@ public class FingerprintSettings extends SubSettings {
                             final GatekeeperPasswordProvider provider =
                                     new GatekeeperPasswordProvider(
                                             new LockPatternUtils(activity));
-                            mToken = provider.requestGatekeeperHat(data, challenge,
+                            mToken = provider.requestGatekeeperHat(gkPwHandle, challenge,
                                     mUserId);
                             mChallenge = challenge;
-                            provider.removeGatekeeperPasswordHandle(data, false);
+                            provider.removeGatekeeperPasswordHandle(gkPwHandle);
                             updateAddPreference();
                         });
             }

@@ -6448,5 +6448,21 @@
                 android:value="@string/menu_key_apps"/>
         </activity>
 
+        <activity
+            android:name=".Settings$AppClipboardReadActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.settings.OPEN_APP_CLIPBOARD_READ_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.AppClipboardReadFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_apps"/>
+        </activity>
+
     </application>
 </manifest>
