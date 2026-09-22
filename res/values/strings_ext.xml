@@ -359,13 +359,13 @@ By maintaining a verifiable record of all certificates, CT makes it significantl
 
 For compatibility, apps can still see clipboard metadata, such as whether an item exists, its type, and when it was copied. Enabled accessibility services that can view and interact with screen content can initiate Paste actions and may access pasted content. Some apps and system features, including your default input method, can always read clipboard items regardless of these settings."</string>
     <string name="app_clipboard_read_allowed">Allow</string>
+    <string name="app_clipboard_read_allowed_summary">This app can read clipboard items from other apps while in use</string>
     <string name="app_clipboard_read_blocked">Paste only</string>
+    <string name="app_clipboard_read_blocked_summary">This app can read only items it copied or items you paste into it</string>
     <string name="app_clipboard_read_dvr_default_setting">Follow system clipboard access setting</string>
     <string name="app_clipboard_read_ir_is_system_app">This setting does not apply to system apps</string>
     <string name="app_clipboard_read_ir_is_default_ime">Your default input method always has clipboard access</string>
     <string name="app_clipboard_read_footer">"Warning: Using Paste only may cause this app to stop working. This setting controls whether the app can read clipboard items from other apps such as text, images, and links.
-
-When set to Allow, this app can read clipboard items while in use. When set to Paste only, it can read the current item if it copied it. It can read other items from other apps only when you use Paste.
 
 For compatibility, this app can still see clipboard metadata, such as whether an item exists, its type, and when it was copied. Enabled accessibility services that can view and interact with screen content can initiate Paste actions in this app and may access pasted content."</string>
     <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
