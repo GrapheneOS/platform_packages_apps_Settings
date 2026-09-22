@@ -18,6 +18,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/automatic_sim_lock_protection">
 
+    <SwitchPreferenceCompat
+        android:key="sim_scramble_pin_layout"
+        android:title="@string/scramble_pin_title"
+        settings:boolSettingField="android.ext.settings.ExtSettings SCRAMBLE_SIM_PIN_LAYOUT" />
+
     <PreferenceCategory
         android:title="@string/first_sim_card_slot_title"
         android:key="category_first_sim_card_slot">
