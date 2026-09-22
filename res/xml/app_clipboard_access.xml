@@ -25,12 +25,11 @@
         android:key="clipboard_app_access"
         android:title="@string/app_clipboard_read_app_access_category_title">
 
-        <SwitchPreferenceCompat
+        <Preference
             android:key="app_default_clipboard_read"
-            android:title="@string/app_default_clipboard_read_main_switch_title"
-            android:summary="@string/app_default_clipboard_read_main_switch_summary"
-            settings:boolSettingField=
-                "android.ext.settings.ExtSettings ALLOW_CLIPBOARD_READ_BY_DEFAULT" />
+            android:title="@string/app_default_clipboard_read_title"
+            settings:controller=
+                "com.android.settings.applications.AppDefaultClipboardReadPrefController" />
 
         <Preference
             android:key="app_clipboard_read_app_list"

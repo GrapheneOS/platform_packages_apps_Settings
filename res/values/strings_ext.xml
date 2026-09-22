@@ -347,8 +347,10 @@ By maintaining a verifiable record of all certificates, CT makes it significantl
     <string name="app_clipboard_read_intro">Choose when apps can read clipboard items and whether to show messages when access succeeds or is blocked.</string>
     <string name="app_clipboard_read_messages_category_title">Messages</string>
     <string name="app_clipboard_read_app_access_category_title">App access</string>
-    <string name="app_default_clipboard_read_main_switch_title">Allow apps to read the clipboard</string>
-    <string name="app_default_clipboard_read_main_switch_summary">This setting applies to third-party apps across all users. When off, apps can read only items they copied or items you paste into them. Some apps may not work correctly.</string>
+    <string name="app_default_clipboard_read_title">Default access for third-party apps</string>
+    <string name="app_default_clipboard_read_description">Choose the clipboard access used by default for third-party apps. This default applies across all users on this device.</string>
+    <string name="app_default_clipboard_read_allowed_summary">Third-party apps can read clipboard items from other apps while in use.</string>
+    <string name="app_default_clipboard_read_blocked_summary">Third-party apps can read only items they copied or items you paste into them.</string>
     <string name="show_clip_access_denial_notification">Show when clipboard access is blocked</string>
     <string name="show_clip_access_denial_notification_summary">Show a message when an app is prevented from reading clipboard content</string>
     <string name="app_clipboard_read_apps_title">Manage app access</string>
