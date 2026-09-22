@@ -57,6 +57,10 @@ class AppClipboardReadFragment : AswAppInfoFragment<AswAllowClipboardRead>() {
         return getText(id)
     }
 
+    override fun getOnSummary() = getText(R.string.app_clipboard_read_allowed_summary)
+
+    override fun getOffSummary() = getText(R.string.app_clipboard_read_blocked_summary)
+
     override fun getSummaryForImmutabilityReason(ir: Int): CharSequence? {
         val id = when (ir) {
             AppSwitch.IR_IS_SYSTEM_APP -> R.string.app_clipboard_read_ir_is_system_app
