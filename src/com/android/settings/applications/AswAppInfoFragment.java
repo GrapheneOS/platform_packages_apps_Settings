@@ -115,10 +115,12 @@ public abstract class AswAppInfoFragment<T extends AppSwitch>
         var enabled = createEntry(ID_ON, adapter.getOnTitle(ctx));
         enabled.isChecked = !isDefault && state;
         enabled.isEnabled = enabled.isChecked || !isImmutable;
+        enabled.summary = getOnSummary();
 
         var disabled = createEntry(ID_OFF, adapter.getOffTitle(ctx));
         disabled.isChecked = !isDefault && !state;
         disabled.isEnabled = disabled.isChecked || !isImmutable;
+        disabled.summary = getOffSummary();
 
         if (isImmutable) {
             int immutabilityReason = si.getImmutabilityReason();
@@ -167,6 +169,16 @@ public abstract class AswAppInfoFragment<T extends AppSwitch>
 
     @Nullable
     protected CharSequence getSummaryForDefaultValueReason(int dvr) {
+        return null;
+    }
+
+    @Nullable
+    protected CharSequence getOnSummary() {
+        return null;
+    }
+
+    @Nullable
+    protected CharSequence getOffSummary() {
         return null;
     }
 
