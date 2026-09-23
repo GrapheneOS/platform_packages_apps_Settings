@@ -35,6 +35,19 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="hide_navigation_handle_category"
+        android:persistent="false"
+        android:title="@string/hide_navigation_handle_category_title">
+
+        <SwitchPreferenceCompat
+            android:key="hide_navigation_handle"
+            android:title="@string/hide_navigation_handle_title"
+            android:summary="@string/hide_navigation_handle_summary"
+            settings:controller="com.android.settings.gestures.HideNavigationHandleController"
+        />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="assistant_gesture_category"
         android:persistent="false"
         android:title="@string/assistant_gesture_category_title">
