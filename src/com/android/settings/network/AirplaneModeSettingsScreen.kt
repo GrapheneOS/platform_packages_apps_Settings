@@ -101,6 +101,7 @@ open class AirplaneModeSettingsScreen(context: Context) :
     }
 
     override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
         if (isEntryPoint(context)) {
             airplaneModeObserver?.let {
                 storage.removeObserver(AirplaneModePreference.KEY, it)
