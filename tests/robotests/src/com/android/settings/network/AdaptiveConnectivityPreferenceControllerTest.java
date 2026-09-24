@@ -75,11 +75,11 @@ public class AdaptiveConnectivityPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_notSupportAdaptiveConnectivity_shouldReturnFalse() {
+    public void isAvailable_mobileOptimizationNotSupported_shouldReturnTrue() {
         when(mResources.getBoolean(R.bool.config_show_adaptive_connectivity))
                 .thenReturn(false);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
