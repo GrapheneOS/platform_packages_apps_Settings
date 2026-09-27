@@ -371,4 +371,6 @@ For compatibility, this app can still see clipboard metadata, such as whether an
     <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
 %1$s"</string>
 
+    <string name="power_menu_quick_settings_hint">To open the power menu, swipe down twice from the top of the screen and tap the power button.</string>
+
 </resources>

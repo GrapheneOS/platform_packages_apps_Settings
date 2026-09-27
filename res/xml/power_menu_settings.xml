@@ -52,7 +52,7 @@
 
     <com.android.settingslib.widget.FooterPreference
         android:key="power_menu_power_volume_up_hint"
-        android:title="@string/power_menu_power_volume_up_hint"
+        android:title="@string/power_menu_quick_settings_hint"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.LongPressPowerFooterPreferenceController"/>
 </PreferenceScreen>

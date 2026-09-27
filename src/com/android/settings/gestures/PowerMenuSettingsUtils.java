@@ -31,10 +31,6 @@ final class PowerMenuSettingsUtils {
     private static final String POWER_BUTTON_LONG_PRESS_SETTING =
             Settings.Global.POWER_BUTTON_LONG_PRESS;
 
-    /** Setting storing the current behaviour of key chord power + volume up. */
-    private static final String KEY_CHORD_POWER_VOLUME_UP_SETTING =
-            Settings.Global.KEY_CHORD_POWER_VOLUME_UP;
-
     /**
      * Value used for long press power button behaviour when long press power for Assistant is
      * disabled.
@@ -45,17 +41,8 @@ final class PowerMenuSettingsUtils {
     static final int POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE =
             com.android.internal.R.integer.config_longPressOnPowerBehavior;
 
-    /**
-     * Value used for key chord power + volume up behaviour when long press power for Assistant is
-     * disabled.
-     */
-    private static final int KEY_CHORD_POWER_VOLUME_UP_DEFAULT_VALUE_RESOURCE =
-            com.android.internal.R.integer.config_keyChordPowerVolumeUp;
-
     static final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1; // a.k.a., Power Menu
     static final int LONG_PRESS_POWER_ASSISTANT_VALUE = 5; // Settings.Secure.ASSISTANT
-
-    private static final int KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS = 2;
 
     private static final Uri POWER_BUTTON_LONG_PRESS_URI =
             Settings.Global.getUriFor(POWER_BUTTON_LONG_PRESS_SETTING);
@@ -94,36 +81,17 @@ final class PowerMenuSettingsUtils {
     }
 
     public static boolean setLongPressPowerForAssistant(Context context) {
-        if (Settings.Global.putInt(
+        return Settings.Global.putInt(
                 context.getContentResolver(),
                 POWER_BUTTON_LONG_PRESS_SETTING,
-                LONG_PRESS_POWER_ASSISTANT_VALUE)) {
-            // Make power + volume up buttons to open the power menu
-            Settings.Global.putInt(
-                    context.getContentResolver(),
-                    KEY_CHORD_POWER_VOLUME_UP_SETTING,
-                    KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS);
-            return true;
-        }
-        return false;
+                LONG_PRESS_POWER_ASSISTANT_VALUE);
     }
 
     public static boolean setLongPressPowerForPowerMenu(Context context) {
-        if (Settings.Global.putInt(
+        return Settings.Global.putInt(
                 context.getContentResolver(),
                 POWER_BUTTON_LONG_PRESS_SETTING,
-                LONG_PRESS_POWER_GLOBAL_ACTIONS)) {
-            // We restore power + volume up buttons to the default action.
-            int keyChordDefaultValue =
-                    context.getResources()
-                            .getInteger(KEY_CHORD_POWER_VOLUME_UP_DEFAULT_VALUE_RESOURCE);
-            Settings.Global.putInt(
-                    context.getContentResolver(),
-                    KEY_CHORD_POWER_VOLUME_UP_SETTING,
-                    keyChordDefaultValue);
-            return true;
-        }
-        return false;
+                LONG_PRESS_POWER_GLOBAL_ACTIONS);
     }
 
     private final Context mContext;
