@@ -18,7 +18,6 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.net.Uri;
-import android.text.TextUtils;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -56,18 +55,7 @@ public class LongPressPowerFooterPreferenceController extends BasePreferenceCont
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        CharSequence footerHintText = mContext.getString(R.string.power_menu_power_volume_up_hint);
-        // If the device supports hush gesture, we need to tell the user where to find the setting.
-        if (mContext.getResources()
-                .getBoolean(com.android.internal.R.bool.config_volumeHushGestureEnabled)) {
-            footerHintText =
-                    TextUtils.concat(
-                            footerHintText,
-                            "\n\n",
-                            mContext.getString(R.string.power_menu_power_prevent_ringing_hint));
-        }
-
-        preference.setSummary(footerHintText);
+        preference.setSummary(R.string.power_menu_quick_settings_hint);
         preference.setVisible(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(mContext));
     }
 

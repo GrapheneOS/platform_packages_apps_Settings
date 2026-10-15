@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Application;
 import android.content.res.Resources;
-import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -87,29 +86,24 @@ public class LongPressPowerFooterPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_hushGestureEnabled_includesPreventRingingHint() {
+    public void updateState_hushGestureEnabled_showsQuickSettingsHint() {
         when(mResources.getBoolean(com.android.internal.R.bool.config_volumeHushGestureEnabled))
                 .thenReturn(true);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary().toString())
-                .isEqualTo(
-                        TextUtils.concat(
-                                mContext.getString(R.string.power_menu_power_volume_up_hint),
-                                "\n\n",
-                                mContext.getString(
-                                        R.string.power_menu_power_prevent_ringing_hint)));
+                .isEqualTo(mContext.getString(R.string.power_menu_quick_settings_hint));
     }
 
     @Test
-    public void updateState_hushGestureDisabled_doesNotIncludePreventRingingHint() {
+    public void updateState_hushGestureDisabled_showsQuickSettingsHint() {
         when(mResources.getBoolean(com.android.internal.R.bool.config_volumeHushGestureEnabled))
                 .thenReturn(false);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary().toString())
-                .isEqualTo(mContext.getString(R.string.power_menu_power_volume_up_hint));
+                .isEqualTo(mContext.getString(R.string.power_menu_quick_settings_hint));
     }
 }

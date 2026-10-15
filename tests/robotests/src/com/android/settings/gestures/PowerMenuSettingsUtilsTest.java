@@ -129,13 +129,16 @@ public class PowerMenuSettingsUtilsTest {
     }
 
     @Test
-    public void setLongPressPowerForAssistant_updatesKeyChordValueToPowerMenu() throws Exception {
-        PowerMenuSettingsUtils.setLongPressPowerForAssistant(mContext);
-        assertThat(
-                        Settings.Global.getInt(
-                                mContext.getContentResolver(),
-                                Settings.Global.KEY_CHORD_POWER_VOLUME_UP))
-                .isEqualTo(2);
+    public void setLongPressPowerForAssistant_preservesKeyChord() {
+        for (String value : new String[] {null, "0", "1", "2"}) {
+            Settings.Global.putString(mContext.getContentResolver(),
+                    Settings.Global.KEY_CHORD_POWER_VOLUME_UP, value);
+
+            assertThat(PowerMenuSettingsUtils.setLongPressPowerForAssistant(mContext)).isTrue();
+
+            assertThat(Settings.Global.getString(mContext.getContentResolver(),
+                    Settings.Global.KEY_CHORD_POWER_VOLUME_UP)).isEqualTo(value);
+        }
     }
 
     @Test
@@ -151,16 +154,16 @@ public class PowerMenuSettingsUtilsTest {
     }
 
     @Test
-    public void setLongPressPowerForPowerMenu_updatesKeyChordValueToDefault() throws Exception {
-        when(mResources.getInteger(com.android.internal.R.integer.config_keyChordPowerVolumeUp))
-                .thenReturn(1);
+    public void setLongPressPowerForPowerMenu_preservesKeyChord() {
+        for (String value : new String[] {null, "0", "1", "2"}) {
+            Settings.Global.putString(mContext.getContentResolver(),
+                    Settings.Global.KEY_CHORD_POWER_VOLUME_UP, value);
+            PowerMenuSettingsUtils.setLongPressPowerForAssistant(mContext);
 
-        PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(mContext);
+            assertThat(PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(mContext)).isTrue();
 
-        assertThat(
-                        Settings.Global.getInt(
-                                mContext.getContentResolver(),
-                                Settings.Global.KEY_CHORD_POWER_VOLUME_UP))
-                .isEqualTo(1);
+            assertThat(Settings.Global.getString(mContext.getContentResolver(),
+                    Settings.Global.KEY_CHORD_POWER_VOLUME_UP)).isEqualTo(value);
+        }
     }
 }
