@@ -20,11 +20,13 @@ import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_AIRPLANE_TOGGLE
 import android.content.Context
 import android.content.Intent
+import android.ext.settings.ExtSettings
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import androidx.annotation.DrawableRes
+import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.settings.AirplaneModeEnabler
 import com.android.settings.R
@@ -59,6 +61,14 @@ open class AirplaneModePreference :
     PreferenceLifecycleProvider,
     PreferenceRestrictionMixin {
 
+    @VisibleForTesting
+    internal var authenticationHelper: AirplaneModeAuthenticationHelper? = null
+
+    @VisibleForTesting
+    internal var isAuthenticationRequired: (Context) -> Boolean = {
+        ExtSettings.REQUIRE_AUTHENTICATION_TO_DISABLE_AIRPLANE_MODE.get(it)
+    }
+
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_airplanemode_active
 
@@ -86,8 +96,14 @@ open class AirplaneModePreference :
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) =
         when {
+            value != true && isAuthenticationRequired(context) -> ReadWritePermit.DISALLOW
             isSatelliteOn(context) || isInEcmMode(context) -> ReadWritePermit.DISALLOW
             else -> ReadWritePermit.ALLOW
         }
@@ -102,7 +118,7 @@ open class AirplaneModePreference :
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         context.requirePreference<Preference>(key).onPreferenceChangeListener =
-            Preference.OnPreferenceChangeListener { _: Preference, _: Any ->
+            Preference.OnPreferenceChangeListener { _: Preference, newValue: Any ->
                 if (isInEcmMode(context)) {
                     showEcmDialog(context)
                     return@OnPreferenceChangeListener false
@@ -111,9 +127,33 @@ open class AirplaneModePreference :
                     showSatelliteDialog(context)
                     return@OnPreferenceChangeListener false
                 }
+                if (newValue == false && isAuthenticationRequired(context)) {
+                    val store = context.getKeyValueStore(KEY)
+                        ?: return@OnPreferenceChangeListener false
+                    if (store.getBoolean(KEY) != true) {
+                        return@OnPreferenceChangeListener false
+                    }
+                    getAuthenticationHelper(context).runAfterAuthentication {
+                        if (store.getBoolean(KEY) == true) {
+                            store.setBoolean(KEY, false)
+                        }
+                    }
+                    return@OnPreferenceChangeListener false
+                }
                 return@OnPreferenceChangeListener true
             }
     }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        authenticationHelper?.cancel()
+        authenticationHelper = null
+    }
+
+    private fun getAuthenticationHelper(context: Context): AirplaneModeAuthenticationHelper =
+        authenticationHelper ?: AirplaneModeAuthenticationHelper(context).also {
+            authenticationHelper = it
+        }
 
     override fun onActivityResult(
         context: PreferenceLifecycleContext,

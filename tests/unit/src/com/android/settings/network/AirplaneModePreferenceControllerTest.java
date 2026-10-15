@@ -23,7 +23,9 @@ import static com.android.settings.flags.Flags.FLAG_CATALYST_NETWORK_PROVIDER_AN
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,6 +33,7 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.ext.settings.ExtSettings;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -46,6 +49,7 @@ import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -65,6 +69,8 @@ public class AirplaneModePreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private AirplaneModeEnabler mAirplaneModeEnabler;
+    @Mock
+    private AirplaneModeAuthenticationHelper mAuthenticationHelper;
     private Context mContext;
     private ContentResolver mResolver;
     private PreferenceManager mPreferenceManager;
@@ -86,6 +92,8 @@ public class AirplaneModePreferenceControllerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = new AirplaneModePreferenceController(mContext,
                 AirplaneModePreference.KEY);
+        mController.setAuthenticationHelper(mAuthenticationHelper);
+        ExtSettings.REQUIRE_AUTHENTICATION_TO_DISABLE_AIRPLANE_MODE.put(mContext, false);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
@@ -93,6 +101,11 @@ public class AirplaneModePreferenceControllerTest {
         mPreference.setKey(AirplaneModePreference.KEY);
         mScreen.addPreference(mPreference);
         mController.setFragment(null);
+    }
+
+    @After
+    public void tearDown() {
+        ExtSettings.REQUIRE_AUTHENTICATION_TO_DISABLE_AIRPLANE_MODE.put(mContext, false);
     }
 
     @Test
@@ -144,6 +157,34 @@ public class AirplaneModePreferenceControllerTest {
 
         // Set to OFF
         assertThat(mController.setChecked(false)).isTrue();
+    }
+
+    @Test
+    public void setChecked_turningOffWithAuthenticationRequired_waitsForSuccess() {
+        mController.setAirplaneModeEnabler(mAirplaneModeEnabler);
+        when(mAirplaneModeEnabler.isAirplaneModeOn()).thenReturn(true);
+        ExtSettings.REQUIRE_AUTHENTICATION_TO_DISABLE_AIRPLANE_MODE.put(mContext, true);
+        doAnswer(invocation -> {
+            ((Runnable) invocation.getArgument(0)).run();
+            return null;
+        }).when(mAuthenticationHelper).runAfterAuthentication(any());
+
+        assertThat(mController.setChecked(false)).isFalse();
+
+        verify(mAuthenticationHelper).runAfterAuthentication(any());
+        verify(mAirplaneModeEnabler).setAirplaneMode(false);
+    }
+
+    @Test
+    public void setChecked_turningOffAndAuthenticationCancelled_keepsAirplaneModeEnabled() {
+        mController.setAirplaneModeEnabler(mAirplaneModeEnabler);
+        when(mAirplaneModeEnabler.isAirplaneModeOn()).thenReturn(true);
+        ExtSettings.REQUIRE_AUTHENTICATION_TO_DISABLE_AIRPLANE_MODE.put(mContext, true);
+
+        assertThat(mController.setChecked(false)).isFalse();
+
+        verify(mAuthenticationHelper).runAfterAuthentication(any());
+        verify(mAirplaneModeEnabler, never()).setAirplaneMode(false);
     }
 
     @Test

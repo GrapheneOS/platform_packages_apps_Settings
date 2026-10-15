@@ -40,6 +40,10 @@
 
     <string name="keyguard_camera_title">Allow camera access when locked</string>
 
+    <string name="airplane_mode_authentication_title">Confirm turning off airplane mode</string>
+    <string name="airplane_mode_authentication_setting_title">Require authentication to turn off airplane mode</string>
+    <string name="airplane_mode_authentication_summary">Use the system authentication prompt before turning off airplane mode</string>
+
     <string name="auto_reboot_title">Auto reboot</string>
     <string name="auto_reboot_footer">Automatically reboot the device if it hasn\'t been unlocked within the selected duration of time.</string>
 
