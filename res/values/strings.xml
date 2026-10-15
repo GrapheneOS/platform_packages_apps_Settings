@@ -14229,6 +14229,16 @@
     <!-- Developer settings: Summary for disable app and notification screen share protections summary [CHAR LIMIT=150] -->
     <string name="disable_screen_share_protections_for_apps_and_notifications_summary">Turn off system protections for sensitive app content for upcoming screen share sessions</string>
 
+    <!-- Developer settings: Title for enabling screenshots in all apps [CHAR LIMIT=50] -->
+    <string name="force_screenshot_secure_windows">Enable screenshots in all apps</string>
+    <!-- Developer settings: Summary for enabling screenshots in all apps [CHAR LIMIT=150] -->
+    <string name="force_screenshot_secure_windows_summary">Allow screenshots in apps that normally prevent them</string>
+
+    <!-- Developer settings: Title for enabling screen recording in all apps [CHAR LIMIT=50] -->
+    <string name="force_screen_record_secure_windows">Enable screen recording in all apps</string>
+    <!-- Developer settings: Summary for enabling screen recording in all apps [CHAR LIMIT=150] -->
+    <string name="force_screen_record_secure_windows_summary">Allow the system screen recorder to record apps that normally prevent it</string>
+
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
     <!-- Title of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=50]-->
