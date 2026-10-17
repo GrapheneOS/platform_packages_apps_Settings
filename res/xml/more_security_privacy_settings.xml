@@ -110,6 +110,12 @@
             android:summary="@string/screenshot_timestamp_exif_summary"
             settings:boolSettingField="android.ext.settings.ExtSettings SCREENSHOT_TIMESTAMP_EXIF"/>
 
+        <SwitchPreferenceCompat
+            android:key="privacy_block_screenshot_detection"
+            android:title="@string/block_screenshot_detection_title"
+            android:summary="@string/block_screenshot_detection_summary"
+            settings:boolSettingField="android.ext.settings.ExtSettings BLOCK_SCREENSHOT_DETECTION"/>
+
         <!-- Allow software fallback for camera extensions -->
         <SwitchPreferenceCompat
             android:key="privacy_camera_extensions_fallback"
