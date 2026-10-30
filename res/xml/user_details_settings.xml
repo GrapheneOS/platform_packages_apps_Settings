@@ -33,6 +33,10 @@
             android:key="enable_calling"
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />
+    <SwitchPreferenceCompat
+            android:key="enable_network"
+            android:icon="@drawable/ic_globe"
+            android:title="@string/user_enable_network" />
     <com.android.settingslib.RestrictedPreference
             android:key="app_and_content_access"
             android:icon="@drawable/ic_lock_closed"

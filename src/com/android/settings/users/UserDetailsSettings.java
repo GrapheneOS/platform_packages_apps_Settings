@@ -77,6 +77,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY_CALLING = "enable_calling";
+    private static final String KEY_ENABLE_NETWORK = "enable_network";
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_GRANT_ADMIN = "user_grant_admin";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
@@ -124,6 +125,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     TwoStatePreference mGrantAdminPref;
     Preference mAppsInstallsPref;
     private SwitchPreferenceCompat mRunInBackgroundPref;
+    private SwitchPreferenceCompat mNetworkPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -239,6 +241,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 showDialog(DIALOG_CONFIRM_GRANT_ADMIN);
             }
             return false;
+        } else if (preference == mNetworkPref) {
+            userRestrictions.set(UserManager.DISALLOW_NETWORK, !((boolean) newValue));
+            return true;
         } else if (preference == mRunInBackgroundPref) {
             userRestrictions.set(UserManager.DISALLOW_RUN_IN_BACKGROUND, !((boolean) newValue));
             return true;
@@ -429,6 +434,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         mSwitchUserPref = findPreference(KEY_SWITCH_USER);
         mPhonePref = findPreference(KEY_ENABLE_TELEPHONY_CALLING);
+        mNetworkPref = findPreference(KEY_ENABLE_NETWORK);
+        mNetworkPref.setVisible(mUserManager.isAdminUser() && !mUserInfo.isMain());
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
         mAppCopyingPref = findPreference(KEY_APP_COPYING);
@@ -495,6 +502,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_APP_COPYING);
             removePreference(KEY_APP_INSTALLS);
             removePreference(KEY_RUN_IN_BACKGROUND);
+            removePreference(KEY_ENABLE_NETWORK);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY_CALLING);
@@ -519,11 +527,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                     removePreference(KEY_APP_COPYING);
                 }
                 removePreference(KEY_RUN_IN_BACKGROUND);
+                removePreference(KEY_ENABLE_NETWORK);
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRunInBackgroundPref.setChecked(!userRestrictions.isSet(
                         UserManager.DISALLOW_RUN_IN_BACKGROUND));
+                mNetworkPref.setChecked(!userRestrictions.isSet(UserManager.DISALLOW_NETWORK));
             }
 
             // Remove preference KEY_REMOVE_USER if DISALLOW_REMOVE_USER restriction is set
@@ -538,6 +548,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
             mAppCopyingPref.setOnPreferenceClickListener(this);
             mRunInBackgroundPref.setOnPreferenceChangeListener(this);
+            mNetworkPref.setOnPreferenceChangeListener(this);
         }
     }
 

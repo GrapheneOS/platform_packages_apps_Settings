@@ -144,6 +144,9 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
     <!-- Title of preference to enable running in background [CHAR LIMIT=40] -->
     <string name="user_run_in_background">Allow running in background</string>
 
+    <!-- Title of the per-user network access toggle. -->
+    <string name="user_enable_network">Allow network access</string>
+
     <string name="allow_automatic_per_app_epcm_title">Automatic exploit protection compatibility mode</string>
 
     <string name="allow_automatic_per_app_epcm_summary">
