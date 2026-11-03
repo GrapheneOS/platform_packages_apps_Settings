@@ -110,6 +110,12 @@
             android:summary="@string/screenshot_timestamp_exif_summary"
             settings:boolSettingField="android.ext.settings.ExtSettings SCREENSHOT_TIMESTAMP_EXIF"/>
 
+        <SwitchPreferenceCompat
+            android:key="privacy_clear_recents_on_reboot"
+            android:title="@string/clear_recents_on_reboot_title"
+            android:summary="@string/clear_recents_on_reboot_summary"
+            settings:boolSettingField="android.ext.settings.ExtSettings CLEAR_RECENTS_ON_REBOOT"/>
+
         <!-- Allow software fallback for camera extensions -->
         <SwitchPreferenceCompat
             android:key="privacy_camera_extensions_fallback"
