@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -147,8 +148,67 @@ public class SettingsSliceProvider extends SliceProvider {
     private boolean mFirstSliceBound;
 
     public SettingsSliceProvider() {
-        super(READ_SEARCH_INDEXABLES);
+        super();
         Log.d(TAG, "init");
+    }
+
+    @Override
+    public Bundle call(@NonNull String method, @Nullable String arg, @Nullable Bundle extras) {
+        final Context context = getContext();
+        if (extras != null) {
+            extras.setClassLoader(getClass().getClassLoader());
+        }
+        if (context != null && ("bind_slice".equals(method) || "map_slice".equals(method))) {
+            checkAndGrantCallingPermissions(context, method, extras);
+        }
+        return super.call(method, arg, extras);
+    }
+
+    /**
+     * Grants access to the slice requested by a bind or map call to all packages sharing the calling
+     * UID if the caller has {@link android.Manifest.permission#READ_SEARCH_INDEXABLES} and does not
+     * already have slice permission.
+     */
+    private void checkAndGrantCallingPermissions(Context context, String method, Bundle extras) {
+        if (extras == null) {
+            return;
+        }
+        Uri uri = null;
+        if ("bind_slice".equals(method)) {
+            uri = extras.getParcelable("slice_uri");
+        } else if ("map_slice".equals(method)) {
+            final Intent intent = extras.getParcelable("slice_intent");
+            if (intent != null) {
+                try {
+                    uri = onMapIntentToUri(intent);
+                } catch (UnsupportedOperationException e) {
+                    Log.w(TAG, "Unable to map slice intent to uri", e);
+                }
+            }
+        }
+        if (uri == null) {
+            return;
+        }
+        final int pid = Binder.getCallingPid();
+        final int uid = Binder.getCallingUid();
+        final SliceManager sliceManager = context.getSystemService(SliceManager.class);
+        if (sliceManager == null) {
+            return;
+        }
+        if (sliceManager.checkSlicePermission(uri, pid, uid) == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        if (context.checkPermission(READ_SEARCH_INDEXABLES, pid, uid)
+                == PackageManager.PERMISSION_GRANTED) {
+            final String[] packages = context.getPackageManager().getPackagesForUid(uid);
+            if (packages != null) {
+                for (String pkg : packages) {
+                    sliceManager.grantSlicePermission(pkg, uri);
+                }
+                context.getContentResolver().notifyChange(uri, null);
+            }
+        }
     }
 
     @Override
