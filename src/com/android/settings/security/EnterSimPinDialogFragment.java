@@ -19,6 +19,8 @@ package com.android.settings.security;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -38,6 +40,7 @@ import com.android.settings.R;
 public class EnterSimPinDialogFragment extends DialogFragment {
     private static final String KEY_TITLE = "dialog_title";
     private static final String KEY_MESSAGE = "dialog_message";
+    private static final String KEY_HINT = "dialog_hint";
     private static final String KEY_REMAINING_ATTEMPTS = "remaining_attempts";
 
     private static final String TAG = "SimPinDialog";
@@ -60,16 +63,17 @@ public class EnterSimPinDialogFragment extends DialogFragment {
     }
 
     private static EnterSimPinDialogFragment createFragmentWithArgs(int dialogTitleResource,
-            int dialogMessageResource) {
+            int dialogMessageResource, int hintResource) {
         return createFragmentWithArgs(dialogTitleResource,
-                dialogMessageResource, /* attemptsRemaining= */0);
+                dialogMessageResource, hintResource, /* attemptsRemaining= */0);
     }
 
     private static EnterSimPinDialogFragment createFragmentWithArgs(int dialogTitleResource,
-            int dialogMessageResource, int attemptsRemaining) {
+            int dialogMessageResource, int hintResource, int attemptsRemaining) {
         Bundle args = new Bundle();
         args.putInt(KEY_TITLE, dialogTitleResource);
         args.putInt(KEY_MESSAGE, dialogMessageResource);
+        args.putInt(KEY_HINT, hintResource);
         args.putInt(KEY_REMAINING_ATTEMPTS, attemptsRemaining);
 
         EnterSimPinDialogFragment fragment = new EnterSimPinDialogFragment();
@@ -84,7 +88,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      */
     static EnterSimPinDialogFragment newEnterCurrentPin() {
         return createFragmentWithArgs(R.string.provide_current_sim_pin_title,
-                R.string.provide_current_sim_pin);
+                R.string.provide_current_sim_pin, R.string.enter_current_sim_pin_hint);
     }
 
     /**
@@ -95,7 +99,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      */
     static EnterSimPinDialogFragment newEnterCurrentPinWithHint() {
         return createFragmentWithArgs(R.string.provide_current_sim_pin_title,
-                R.string.sim_invalid_pin_hint);
+                R.string.sim_invalid_pin_hint, R.string.enter_current_sim_pin_hint);
     }
 
     /**
@@ -106,7 +110,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
     static EnterSimPinDialogFragment newEnterCurrentPin(int numAttemptsRemaining) {
         return createFragmentWithArgs(R.string.provide_current_sim_pin_title,
                 R.string.enter_current_sim_pin_after_mismatch,
-                numAttemptsRemaining);
+                R.string.enter_current_sim_pin_hint, numAttemptsRemaining);
     }
 
     /**
@@ -115,7 +119,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      */
     static EnterSimPinDialogFragment newEnterNewPin() {
         return createFragmentWithArgs(R.string.provide_new_sim_pin_title,
-                R.string.sim_enter_new);
+                R.string.sim_enter_new, R.string.provide_new_sim_pin_title);
     }
 
     /**
@@ -125,7 +129,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      */
     static EnterSimPinDialogFragment newEnterNewPinWithHint() {
         return createFragmentWithArgs(R.string.provide_new_sim_pin_title,
-                R.string.sim_invalid_pin_hint);
+                R.string.sim_invalid_pin_hint, R.string.provide_new_sim_pin_title);
     }
 
     /**
@@ -134,7 +138,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      */
     static EnterSimPinDialogFragment newConfirmNewPin() {
         return createFragmentWithArgs(R.string.confirm_new_sim_pin_title,
-                R.string.sim_reenter_new);
+                R.string.sim_reenter_new, R.string.confirm_new_sim_pin_title);
     }
 
     /**
@@ -143,8 +147,8 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      * @return a dialog instance.
      */
     static EnterSimPinDialogFragment newConfirmNewPinAfterMismatch() {
-        return createFragmentWithArgs(R.string.provide_new_sim_pin_title,
-                R.string.confirm_new_sim_pin_after_mismatch);
+        return createFragmentWithArgs(R.string.confirm_new_sim_pin_title,
+                R.string.confirm_new_sim_pin_after_mismatch, R.string.confirm_new_sim_pin_title);
     }
 
     /**
@@ -154,7 +158,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
      */
     static EnterSimPinDialogFragment newConfirmNewPinInstanceWithHint() {
         return createFragmentWithArgs(R.string.confirm_new_sim_pin_title,
-                R.string.sim_invalid_pin_hint);
+                R.string.sim_invalid_pin_hint, R.string.confirm_new_sim_pin_title);
     }
 
     @Override
@@ -164,6 +168,7 @@ public class EnterSimPinDialogFragment extends DialogFragment {
         int dialogTitleResource = args.getInt(KEY_TITLE);
         int mDialogMessageResource = args.getInt(KEY_MESSAGE);
         int mAttemptsRemaining = args.getInt(KEY_REMAINING_ATTEMPTS);
+        int hintResource = args.getInt(KEY_HINT);
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
@@ -181,7 +186,11 @@ public class EnterSimPinDialogFragment extends DialogFragment {
                     mAttemptsRemaining));
         }
 
-        builder.setView(R.layout.dialog_provide_sim_pin_entry);
+        View view = LayoutInflater.from(builder.getContext()).inflate(
+                R.layout.dialog_provide_sim_pin_entry, null);
+        EditText pinInput = view.findViewById(R.id.current_sim_pin);
+        pinInput.setHint(hintResource);
+        builder.setView(view);
         return builder.create();
     }
 
