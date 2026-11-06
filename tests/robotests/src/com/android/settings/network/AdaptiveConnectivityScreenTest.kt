@@ -34,6 +34,7 @@ import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
+import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
@@ -61,12 +62,14 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     @Test override fun migration() {}
 
     @Test
-    fun getPreferenceHierarchy_flagEnabled_returnsHierarchyWithNestedToggle() {
+    fun getPreferenceHierarchy_mobileOptimizationDisabled_returnsOnlyWifiToggle() {
+        whenever(mockResources.getBoolean(R.bool.config_show_adaptive_connectivity))
+            .thenReturn(false)
         val hierarchy: PreferenceHierarchy =
             preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNull()
         assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNotNull()
-        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNotNull()
+        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNull()
     }
 
     @Test
@@ -82,7 +85,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
             assertSwitchPreferenceCompatVisibility(
                 ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED,
                 fragment,
-                true,
+                false,
             )
         }
     }
@@ -106,6 +109,11 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
 
     @Test
     fun flagEnabled_onAdaptiveMobileNetworkSwitchClick_shouldUpdateSetting() {
+        assumeTrue(
+            ApplicationProvider.getApplicationContext<Context>().resources.getBoolean(
+                R.bool.config_show_adaptive_connectivity,
+            ),
+        )
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment: AdaptiveConnectivitySettings ->
             this.fragment = fragment
@@ -133,6 +141,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
 
     @Test
     fun getPreferenceHierarchy_mobileToggleHiddenForCarrier_mobileNetworkToggleIsHidden() {
+        whenever(mockResources.getBoolean(R.bool.config_show_adaptive_connectivity)).thenReturn(true)
         val subId = 1
         val carrierId = 1234
         val subscriptionInfo = mock<SubscriptionInfo>()
@@ -164,6 +173,7 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
 
     @Test
     fun getPreferenceHierarchy_mobileToggleShownForCarrier_mobileNetworkToggleIsShown() {
+        whenever(mockResources.getBoolean(R.bool.config_show_adaptive_connectivity)).thenReturn(true)
         val subId = 1
         val carrierId = 1234
         val disabledCarrierId = 5678
