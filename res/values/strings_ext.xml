@@ -371,4 +371,25 @@ For compatibility, this app can still see clipboard metadata, such as whether an
     <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
 %1$s"</string>
 
+    <string name="app_screen_capture_default">Default (app decides)</string>
+    <string name="app_screen_capture_default_summary">The app can protect sensitive screens, for example a password field, from capture</string>
+    <string name="app_screen_capture_allowed">Allow</string>
+    <string name="app_screen_capture_blocked">Block</string>
+    <string name="app_screenshots_title">Screenshots</string>
+    <string name="app_screenshots_allowed_summary">Your screenshots include screens this app protects from capture. Its preview in recent apps stays hidden.</string>
+    <string name="app_screenshots_blocked_summary">This app is left out of your screenshots and its preview in recent apps is hidden</string>
+    <string name="app_screenshot_detection_title">Let app detect screenshots</string>
+    <string name="app_screenshot_detection_summary">The app can be notified when you take a screenshot while it\'s open</string>
+    <string name="app_screenshots_footer">"Screenshots of protected screens can contain passwords, messages or other private data. Anyone with access to your screenshots can see it.
+
+These settings apply to screenshots you take. When detection is off, the app isn't notified about screenshots and isn't named in the screenshot notice."</string>
+    <string name="app_screen_recording_title">Screen recording</string>
+    <string name="app_screen_recording_allowed_summary">Screen recording and screen sharing include screens this app protects from capture</string>
+    <string name="app_screen_recording_blocked_summary">This app is hidden from screen recording and screen sharing</string>
+    <string name="app_screen_recording_detection_title">Let app detect screen recording</string>
+    <string name="app_screen_recording_detection_summary">The app can be notified when it\'s visible in a screen recording or screen share</string>
+    <string name="app_screen_recording_footer">"Recordings of protected screens can contain passwords, messages or other private data. The recording app and anyone you share the recording with can see it.
+
+Changes take effect the next time you start recording or sharing your screen."</string>
+
 </resources>
