@@ -25,6 +25,8 @@ import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_HARDWAR
 import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_OPEN;
 import static android.provider.Settings.Secure.DEVICE_STATE_ROTATION_LOCK_LOCKED;
 
+import static com.android.settings.testutils.DeviceStateAutoRotateSettingTestUtils.setDeviceStateRotationLockEnabled;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -38,6 +40,7 @@ import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -47,12 +50,16 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowRotationPolicy.class})
 public class DeviceStateAutoRotateDetailsFragmentTest {
+    private static final String PAGE_KEY = "device_state_auto_rotate_pref_screen";
+
     private static final DeviceState DEVICE_STATE_FOLDED = new DeviceState(
             new DeviceState.Configuration.Builder(/* identifier= */ 0, "FOLDED")
                     .setSystemProperties(Set.of(
@@ -140,6 +147,34 @@ public class DeviceStateAutoRotateDetailsFragmentTest {
                 mFragment.createPreferenceControllers(mContext);
 
         assertThat(preferenceControllers).isEmpty();
+    }
+
+    @Test
+    public void getNonIndexableKeys_deviceStateRotationDisabled_containsPageKey() {
+        ShadowRotationPolicy.setRotationSupported(true);
+        setDeviceStateRotationLockEnabled(/* enable= */ false, mResources, mDeviceStateManager);
+
+        final List<String> keys = DeviceStateAutoRotateDetailsFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(PAGE_KEY);
+    }
+
+    @Test
+    public void getNonIndexableKeys_deviceStateRotationEnabled_doesNotContainPageKey() {
+        ShadowRotationPolicy.setRotationSupported(true);
+        setDeviceStateRotationLockEnabled(/* enable= */ true, mResources, mDeviceStateManager);
+        enableDeviceStateSettableRotationStates(
+                new String[]{DEVICE_STATE_FOLDED.getIdentifier() + ":"
+                        + DEVICE_STATE_ROTATION_LOCK_LOCKED,
+                        DEVICE_STATE_UNFOLDED.getIdentifier() + ":"
+                                + DEVICE_STATE_ROTATION_LOCK_LOCKED},
+                new String[]{"Folded", "Unfolded"});
+
+        final List<String> keys = DeviceStateAutoRotateDetailsFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+
+        assertThat(keys).doesNotContain(PAGE_KEY);
     }
 
     private void enableDeviceStateSettableRotationStates(String[] settableStates,

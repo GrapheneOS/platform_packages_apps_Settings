@@ -67,6 +67,15 @@ public class DeviceStateAutoRotateDetailsFragment extends DashboardFragment {
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.device_state_auto_rotate_settings) {
 
+                // The page is empty and can't be opened from Settings without device state
+                // based auto-rotation, so don't show it in search results.
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return DeviceStateAutoRotationHelper.isDeviceStateRotationEnabled(context)
+                            || DeviceStateAutoRotationHelper
+                                    .isDeviceStateRotationEnabledForA11y(context);
+                }
+
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
