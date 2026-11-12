@@ -177,6 +177,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             AppOpenByDefaultPreference(app)
             DefaultAppShortcuts(app)
             AppLogcatPreference(app)
+            com.android.settings.applications.AppVpnDisguisePreference(app)
         }
 
         if (com.android.window.flags.Flags.virtualGamepadOverride()) {

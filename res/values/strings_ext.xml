@@ -371,4 +371,9 @@ For compatibility, this app can still see clipboard metadata, such as whether an
     <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
 %1$s"</string>
 
+    <string name="vpn_disguise">Disguise VPN as a Wi-Fi or mobile network</string>
+    <string name="vpn_disguise_enabled">VPN disguised</string>
+    <string name="vpn_disguise_enabled_for_nonsystem">VPN disguised for non-system apps</string>
+    <string name="vpn_disguise_disabled">VPN not disguised</string>
+    <string name="vpn_disguise_footer">VPN can be reported to the apps as a normal network</string>
 </resources>
