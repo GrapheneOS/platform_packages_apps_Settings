@@ -371,4 +371,11 @@ For compatibility, this app can still see clipboard metadata, such as whether an
     <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
 %1$s"</string>
 
+    <string name="vpn_notifications_title">Notifications</string>
+    <string name="legacy_vpn_warning_title">Warn when a legacy VPN is started</string>
+    <string name="legacy_vpn_warning_summary">Use of legacy VPNs is strongly discouraged. VPNs that don\'t use the modern VpnService API have reduced leak blocking, can adversely affect networking in other users and are subject to state corruption issues. Legacy VPNs are kept only for compatibility reasons.</string>
+    <string name="legacy_vpn_dialog_title">Create legacy VPN?</string>
+    <string name="legacy_vpn_dialog_message">Continuing will allow you to create a legacy VPN, which is strongly discouraged. VPNs that don\'t use the modern VpnService API have reduced leak blocking, can adversely affect networking in other users and are subject to state corruption issues. Legacy VPNs are kept only for compatibility reasons.</string>
+    <string name="legacy_vpn_dialog_positive">Continue</string>
+    <string name="legacy_vpn_editor_warning">This editor is for a legacy VPN, use of which is strongly discouraged. VPNs that don\'t use the modern VpnService API have reduced leak blocking, can adversely affect networking in other users and are subject to state corruption issues. Legacy VPNs are kept only for compatibility reasons.</string>
 </resources>
