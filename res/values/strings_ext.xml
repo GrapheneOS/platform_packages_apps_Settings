@@ -371,4 +371,7 @@ For compatibility, this app can still see clipboard metadata, such as whether an
     <string name="app_clipboard_read_shared_uid_warning">"The clipboard access setting, blocked access message setting, and temporary Paste access are shared among these apps:
 %1$s"</string>
 
+    <string name="user_reorder_title">Reorder users</string>
+    <string name="user_reorder_reset">Reset to alphabetical order</string>
+
 </resources>
