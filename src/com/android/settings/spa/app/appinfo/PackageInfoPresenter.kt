@@ -221,6 +221,9 @@ class PackageInfoPresenter(
             flags =
                 PackageManager.MATCH_ANY_USER.toLong() or
                     PackageManager.MATCH_DISABLED_COMPONENTS.toLong() or
+                    PackageManager.GET_SIGNING_CERTIFICATES.toLong() or
+                    PackageManager.CACHE_SIGNING_CERTIFICATE_DIGESTS or
+                    PackageManager.GET_PLAY_STORE_SOURCE_STAMP_STATE or
                     PackageManager.GET_PERMISSIONS.toLong() or
                     if (isArchivingEnabled()) PackageManager.MATCH_ARCHIVED_PACKAGES else 0,
             userId = userId,
