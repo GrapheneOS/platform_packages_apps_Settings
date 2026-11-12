@@ -62,8 +62,9 @@ open class SupervisionAppStoreFiltersScreen :
     override val title: Int
         get() = R.string.supervision_app_store_filters_title
 
+    // unavailable on GrapheneOS, see SupervisionDashboardScreen.indexable
     override val indexable: Boolean
-        get() = true
+        get() = false
 
     override val keywords: Int
         get() = R.string.supervision_app_store_filters_keywords

@@ -79,7 +79,7 @@ class SupervisionAppStoreFiltersScreenTest {
 
     @Test
     fun isIndexable() {
-        assertThat(supervisionAppStoreFiltersScreen.indexable).isTrue()
+        assertThat(supervisionAppStoreFiltersScreen.indexable).isFalse()
     }
 
     @Test

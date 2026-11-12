@@ -92,7 +92,7 @@ class SupervisionWebContentFiltersSearchSupportedAppsScreenTest {
 
     @Test
     fun isIndexable() {
-        assertThat(searchSupportedAppsScreen.indexable).isTrue()
+        assertThat(searchSupportedAppsScreen.indexable).isFalse()
     }
 
     @Test
