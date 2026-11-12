@@ -10,11 +10,13 @@ import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spaprivileged.model.app.hasFlag
 import com.android.settingslib.spaprivileged.model.app.userHandle
 import com.android.settingslib.spaprivileged.model.app.userId
 
 @Composable
 fun AppContactScopesPreference(app: ApplicationInfo) {
+    if (!app.hasFlag(ApplicationInfo.FLAG_INSTALLED)) return
     val pkgName = app.packageName
     if (!GosPackageState.get(pkgName, app.userId).hasFlag(GosPackageStateFlag.CONTACT_SCOPES_ENABLED)) {
         return
