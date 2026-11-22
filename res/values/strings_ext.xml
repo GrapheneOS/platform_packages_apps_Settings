@@ -126,6 +126,9 @@ There are HTTP, HTTPS, DNS, DNS-over-TLS and DNS-over-HTTPS connectivity checks.
 "If there are no connected devices, Bluetooth will turn off after the selected timeout."
     </string>
 
+    <string name="nfc_auto_off_title">Turn off NFC automatically</string>
+    <string name="nfc_auto_off_footer">If NFC is turned on, it will be automatically turned off after the selected timeout. Using NFC does not restart the timer.</string>
+
     <string name="widevine_provisioning_title">Widevine provisioning</string>
     <string name="widevine_provisioning_enabled_grapheneos_proxy">GrapheneOS proxy</string>
     <string name="widevine_provisioning_enabled_google_server">Google server</string>
