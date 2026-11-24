@@ -2663,7 +2663,7 @@
     <!-- Title for the preference to share a network with other users on the same device [CHAR LIMIT=30] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
     <string name="wifi_share_preference_title">Share network</string>
     <!-- Summary for the preference to share a network with other users on the same device [CHAR LIMIT=NONE] [SCREENSHOT=screen/6x7tHLfZ8WWmPeb] -->
-    <string name="wifi_share_preference_summary">Other users on this device can access this network</string>
+    <string name="wifi_share_preference_summary">Shared networks are device encrypted and available to all users. Unshared networks are credential encrypted and available only to you after first unlock. Established connections are always usable globally</string>
     <!-- Alert dialog title, informing the user to switch to the conflicting shared network which already has the desired share toggle value. [CHAR LIMIT=30] [SCREENSHOT=screen/A4k2sHWVQnPFW2o] -->
     <string name="wifi_share_conflict_dialog_title">Switch to shared network?</string>
     <!-- Alert dialog summary, informing the user to switch to the conflicting shared network which already has the desired share toggle value. [CHAR LIMIT=NONE] [SCREENSHOT=screen/A4k2sHWVQnPFW2o] -->
