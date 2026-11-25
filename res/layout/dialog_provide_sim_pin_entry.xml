@@ -27,6 +27,5 @@
         android:layout_height="wrap_content"
         android:inputType="numberPassword"
         android:maxLines="1"
-        android:minHeight="48dp"
-        android:hint="@string/enter_current_sim_pin_hint" />
+        android:minHeight="48dp" />
 </LinearLayout>
