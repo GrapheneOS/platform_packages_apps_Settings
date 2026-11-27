@@ -30,6 +30,10 @@
             android:key="allow_run_in_background"
             android:title="@string/user_run_in_background" />
     <SwitchPreferenceCompat
+            android:icon="@drawable/ic_globe"
+            android:key="allow_network_access"
+            android:title="@string/user_allow_network_access" />
+    <SwitchPreferenceCompat
             android:key="enable_calling"
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />

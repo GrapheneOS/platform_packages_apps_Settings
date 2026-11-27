@@ -84,6 +84,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private static final String KEY_APP_INSTALLS = "app_installs";
     private static final String KEY_RUN_IN_BACKGROUND = "allow_run_in_background";
+    private static final String KEY_NETWORK_ACCESS = "allow_network_access";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -124,6 +125,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     TwoStatePreference mGrantAdminPref;
     Preference mAppsInstallsPref;
     private SwitchPreferenceCompat mRunInBackgroundPref;
+    private SwitchPreferenceCompat mNetworkAccessPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
@@ -241,6 +243,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             return false;
         } else if (preference == mRunInBackgroundPref) {
             userRestrictions.set(UserManager.DISALLOW_RUN_IN_BACKGROUND, !((boolean) newValue));
+            return true;
+        } else if (preference == mNetworkAccessPref) {
+            userRestrictions.set(UserManager.DISALLOW_NETWORK_ACCESS, !((boolean) newValue));
             return true;
         }
 
@@ -437,6 +442,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mGrantAdminPref.setChecked(mUserInfo.isAdmin());
         mAppsInstallsPref = findPreference(KEY_APP_INSTALLS);
         mRunInBackgroundPref = findPreference(KEY_RUN_IN_BACKGROUND);
+        mNetworkAccessPref = findPreference(KEY_NETWORK_ACCESS);
 
         mSwitchUserPref.setVisible(mUserCaps.mUserSwitchingUiEnabled
                 && UserHandle.myUserId() != mUserInfo.id);
@@ -495,6 +501,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_APP_COPYING);
             removePreference(KEY_APP_INSTALLS);
             removePreference(KEY_RUN_IN_BACKGROUND);
+            removePreference(KEY_NETWORK_ACCESS);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY_CALLING);
@@ -526,6 +533,14 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         UserManager.DISALLOW_RUN_IN_BACKGROUND));
             }
 
+            // Guest restrictions are already applied. Let's not show this for that case.
+            if (mUserInfo.isGuest() || mUserInfo.isMain()) {
+                removePreference(KEY_NETWORK_ACCESS);
+            } else {
+                mNetworkAccessPref.setChecked(!userRestrictions.isSet(
+                        UserManager.DISALLOW_NETWORK_ACCESS));
+            }
+
             // Remove preference KEY_REMOVE_USER if DISALLOW_REMOVE_USER restriction is set
             // on the current user or the user selected in user details settings is a main user.
             if (isRemoveUserDisallowed(context) || mUserInfo.isMain()) {
@@ -538,6 +553,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
             mAppCopyingPref.setOnPreferenceClickListener(this);
             mRunInBackgroundPref.setOnPreferenceChangeListener(this);
+            mNetworkAccessPref.setOnPreferenceChangeListener(this);
         }
     }
 

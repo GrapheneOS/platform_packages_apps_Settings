@@ -70,6 +70,7 @@ public final class UserRestrictions {
     public static final ArraySet<String> INHERITED_PRIVATE_SPACE_RESTRICTIONS = new ArraySet(Arrays.asList(
             UserManager.DISALLOW_INSTALL_APPS,
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+            UserManager.DISALLOW_NETWORK_ACCESS,
             UserManager.DISALLOW_OUTGOING_CALLS,
             // Private space is automatically stopped when its parent is stopped as of Android 16 QPR2.
             // Inherit the restriction in case this changes in the future.
