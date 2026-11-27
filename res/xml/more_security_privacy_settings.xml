@@ -142,6 +142,12 @@
             android:fragment="com.android.settings.network.telephony.CellularSecuritySettingsFragment"
             settings:controller="com.android.settings.network.CellularSecurityPreferenceController"
             settings:searchable="false"/>
+
+	<Preference
+	    android:key="vpn_disguise"
+            android:title="@string/vpn_disguise"
+            android:fragment="com.android.settings.applications.AppDefaultVpnDisguiseFragment"
+            settings:controller="com.android.settings.applications.AppDefaultVpnDisguisePrefController" />
     </PreferenceCategory>
 
     <!-- Security section. -->

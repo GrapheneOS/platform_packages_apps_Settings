@@ -157,6 +157,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                     com.android.settings.applications.AswAdapterManagePlayIntegrityApi.makeAppListPageProvider(),
                     com.android.settings.applications.AswAdapterUseExecSpawning.makeAppListPageProvider(),
                     com.android.settings.applications.AswAdapterClipboardRead.makeAppListPageProvider(),
+                    com.android.settings.applications.AswAdapterVpnDisguise.makeAppListPageProvider(),
                     com.android.settings.network.telephony.carriersettingsoverride.CarrierSettingsOverridesProvider,
                 )
             )
