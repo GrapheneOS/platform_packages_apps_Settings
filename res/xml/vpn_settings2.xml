@@ -15,10 +15,24 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/vpn_title">
     <PreferenceCategory
+        android:order="0"
         android:key="advanced_vpn_group"/>
 
     <PreferenceCategory
+        android:order="1"
         android:key="vpn_group"/>
+
+    <PreferenceCategory
+        android:key="vpn_notifications"
+        android:order="2"
+        android:title="@string/vpn_notifications_title">
+        <SwitchPreferenceCompat
+            android:key="legacy_vpn_warning"
+            android:title="@string/legacy_vpn_warning_title"
+            android:summary="@string/legacy_vpn_warning_summary"
+            settings:boolSettingField="android.ext.settings.ExtSettings LEGACY_VPN_WARNING"/>
+    </PreferenceCategory>
 </PreferenceScreen>

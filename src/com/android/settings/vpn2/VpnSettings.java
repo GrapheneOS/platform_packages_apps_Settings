@@ -23,6 +23,7 @@ import android.annotation.UiThread;
 import android.annotation.WorkerThread;
 import android.app.Activity;
 import android.app.AppOpsManager;
+import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +55,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
@@ -93,6 +96,7 @@ public class VpnSettings extends RestrictedDashboardFragment implements
     private static final int RESCAN_INTERVAL_MS = 1000;
     private static final String ADVANCED_VPN_GROUP_KEY = "advanced_vpn_group";
     private static final String VPN_GROUP_KEY = "vpn_group";
+    private static final String VPN_NOTIFICATIONS_KEY = "vpn_notifications";
 
     private static final NetworkRequest VPN_REQUEST = new NetworkRequest.Builder()
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
@@ -184,17 +188,42 @@ public class VpnSettings extends RestrictedDashboardFragment implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Generate a new key. Here we just use the current time.
         if (item.getItemId() == R.id.vpn_create) {
-            long millis = System.currentTimeMillis();
-            while (mLegacyVpnPreferences.containsKey(Long.toHexString(millis))) {
-                ++millis;
+            var manager = getChildFragmentManager();
+            if (!manager.isStateSaved()
+                    && manager.findFragmentByTag(LegacyVpnWarningDialog.TAG) == null) {
+                new LegacyVpnWarningDialog().showNow(manager, LegacyVpnWarningDialog.TAG);
             }
-            VpnProfile profile = new VpnProfile(Long.toHexString(millis));
-            ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createLegacyVpn() {
+        // Generate a new key. Here we just use the current time.
+        long millis = System.currentTimeMillis();
+        while (mLegacyVpnPreferences.containsKey(Long.toHexString(millis))) {
+            ++millis;
+        }
+        VpnProfile profile = new VpnProfile(Long.toHexString(millis));
+        ConfigDialogFragment.show(this, profile, true /* editing */, false /* exists */);
+    }
+
+    public static class LegacyVpnWarningDialog extends DialogFragment {
+        private static final String TAG = "legacy_vpn_warning_dialog";
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.legacy_vpn_dialog_title)
+                    .setMessage(R.string.legacy_vpn_dialog_message)
+                    .setPositiveButton(R.string.legacy_vpn_dialog_positive, (dialog, which) -> {
+                        ((VpnSettings) requireParentFragment()).createLegacyVpn();
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .create();
+        }
     }
 
     @Override
@@ -395,6 +424,9 @@ public class VpnSettings extends RestrictedDashboardFragment implements
 
         // Show all new preferences on the screen
         for (Preference pref : updates) {
+            // Note that vpnGroup here is the root PreferenceScreen, not the "vpn_group"
+            // PreferenceCategory.
+            pref.setOrder(0);
             vpnGroup.addPreference(pref);
         }
     }
@@ -445,6 +477,9 @@ public class VpnSettings extends RestrictedDashboardFragment implements
         // added to the preference screen.
         for (int i = vpnGroup.getPreferenceCount() - 1; i >= 0; i--) {
             Preference p = vpnGroup.getPreference(i);
+            if (VPN_NOTIFICATIONS_KEY.equals(p.getKey())) {
+                continue;
+            }
             if (updates.contains(p)) {
                 updates.remove(p);
             } else {
