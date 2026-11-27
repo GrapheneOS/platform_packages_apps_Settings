@@ -32,8 +32,11 @@ import com.android.settings.supervision.SupervisionDashboardActivity
 import com.android.settings.supervision.SupervisionSupportedAppPreference
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settings.supervision.ipc.SupportedApp
+import com.android.settings.supervision.shared.isSupervisionSupportedOnDevice
 import com.android.settings.supervision.shared.widget.NonIndexablePreferenceCategory
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -69,7 +72,10 @@ class SupervisionWebContentFiltersActivity :
 
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
-open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, PreferenceLifecycleProvider {
+open class SupervisionWebContentFiltersScreen :
+    PreferenceScreenMixin,
+    PreferenceLifecycleProvider,
+    PreferenceAvailabilityProvider {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     private var supervisionClient: SupervisionMessengerClient? = null
@@ -85,6 +91,13 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
 
     override val indexable
         get() = true
+
+    override val availabilityDescription =
+        "The device must support supervision: the necessary supervision component must be available or installable by the user, and the device must not be in demo mode."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
+    override fun isAvailable(context: Context) = context.isSupervisionSupportedOnDevice()
 
     override val keywords: Int
         get() = R.string.supervision_web_content_filters_keywords
