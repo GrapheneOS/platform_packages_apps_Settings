@@ -45,7 +45,7 @@ abstract class AswAdapter<T : AppSwitch> {
 
     open fun getShortAswTitle(ctx: Context) = getAswTitle(ctx)
 
-    fun getDefaultTitle(ctx: Context, isOn: Boolean): CharSequence {
+    open fun getDefaultTitle(ctx: Context, isOn: Boolean): CharSequence {
         return ctx.getString(R.string.aep_default,
             if (isOn) getOnTitle(ctx) else getOffTitle(ctx)
         )
