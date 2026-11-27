@@ -43,6 +43,15 @@
     <string name="auto_reboot_title">Auto reboot</string>
     <string name="auto_reboot_footer">Automatically reboot the device if it hasn\'t been unlocked within the selected duration of time.</string>
 
+    <string name="lock_action_title">Reboot or shut down on lock</string>
+    <string name="lock_action_summary">Reboot or shut down the device when the power button is pressed to turn off the screen. Calls, downloads and other background activity will be interrupted.</string>
+    <string name="lock_action_type_title">Action when locked</string>
+    <string name="lock_action_reboot_title">Reboot</string>
+    <string name="lock_action_reboot_summary">Restart the device. It will ask for your screen lock when it starts.</string>
+    <string name="lock_action_shutdown_title">Shut down</string>
+    <string name="lock_action_shutdown_summary">Power off the device. It will ask for your screen lock after you turn it back on.</string>
+    <string name="lock_action_footer">This applies when the power button is pressed to turn off the screen while the device has been unlocked since it started. It does nothing before the first unlock or if no screen lock is set. Turning this off requires confirming your screen lock.</string>
+
     <string name="screenshot_timestamp_exif_title">Save screenshot timestamp to EXIF</string>
     <string name="screenshot_timestamp_exif_summary">Enables adding a timestamp to screenshot EXIF metadata</string>
 
