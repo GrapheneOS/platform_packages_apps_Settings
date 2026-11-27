@@ -386,6 +386,25 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
+    @Config(shadows = {ShadowSmsApplication.class})
+    public void getKeepEnabledPackages_shouldContainBluetoothStack() {
+        ShadowSmsApplication.setDefaultSmsApplication(
+                new ComponentName("com.android.test.defaultsms", "receiver"));
+        when(mTelecomManager.getDefaultDialerPackage()).thenReturn("com.android.test.dialer");
+
+        // Spy the real context to mock LocationManager.
+        Context spyContext = spy(RuntimeEnvironment.application);
+        when(spyContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);
+        when(spyContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
+
+        ReflectionHelpers.setField(mProvider, "mContext", spyContext);
+
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
+
+        assertThat(allowlist).contains("com.android.bluetooth");
+    }
+
+    @Test
     public void getKeepEnabledPackages_shouldContainWebViewPackage() {
         final String testWebViewPackageName = "com.android.webview";
         when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())

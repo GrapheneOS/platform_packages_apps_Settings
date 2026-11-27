@@ -208,6 +208,13 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         // Keep Package Installer enabled.
         keepEnabledPackages.add(mContext.getString(R.string.config_package_installer_package_name));
 
+        // system_server fails to start when the Bluetooth app is disabled
+        final String bluetoothPackage =
+                mContext.getString(android.R.string.config_systemBluetoothStack);
+        if (!TextUtils.isEmpty(bluetoothPackage)) {
+            keepEnabledPackages.add(bluetoothPackage);
+        }
+
         if (mPm.getWellbeingPackageName() != null) {
             keepEnabledPackages.add(mPm.getWellbeingPackageName());
         }
