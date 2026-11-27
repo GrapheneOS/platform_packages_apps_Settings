@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.ext.settings.ExtSettings;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.telephony.TelephonyManager;
@@ -71,6 +72,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     private Fragment mFragment;
     private AirplaneModeEnabler mAirplaneModeEnabler;
+    private AirplaneModeAuthenticationHelper mAuthenticationHelper;
     private TwoStatePreference mAirplaneModePreference;
     private SatelliteRepository mSatelliteRepository;
     @VisibleForTesting
@@ -91,6 +93,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     @VisibleForTesting
     void setAirplaneModeEnabler(AirplaneModeEnabler airplaneModeEnabler) {
         mAirplaneModeEnabler = airplaneModeEnabler;
+    }
+
+    @VisibleForTesting
+    void setAuthenticationHelper(AirplaneModeAuthenticationHelper authenticationHelper) {
+        mAuthenticationHelper = authenticationHelper;
     }
 
     @Override
@@ -181,6 +188,9 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public void onDestroy() {
+        if (mAuthenticationHelper != null) {
+            mAuthenticationHelper.cancel();
+        }
         if (isAvailable()) {
             mAirplaneModeEnabler.close();
         }
@@ -205,10 +215,26 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         if (isChecked() == isChecked || mIsSatelliteOn.get()) {
             return false;
         }
+        if (!isChecked
+                && ExtSettings.REQUIRE_AUTHENTICATION_TO_DISABLE_AIRPLANE_MODE.get(mContext)) {
+            getAuthenticationHelper().runAfterAuthentication(() -> {
+                if (isAvailable() && isChecked()) {
+                    mAirplaneModeEnabler.setAirplaneMode(false);
+                }
+            });
+            return false;
+        }
         if (isAvailable()) {
             mAirplaneModeEnabler.setAirplaneMode(isChecked);
         }
         return true;
+    }
+
+    private AirplaneModeAuthenticationHelper getAuthenticationHelper() {
+        if (mAuthenticationHelper == null) {
+            mAuthenticationHelper = new AirplaneModeAuthenticationHelper(mContext);
+        }
+        return mAuthenticationHelper;
     }
 
     @Override

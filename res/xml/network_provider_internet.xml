@@ -72,6 +72,14 @@
         settings:controller="com.android.settings.network.AirplaneModePreferenceController"
         settings:userRestriction="no_airplane_mode"/>
 
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="require_authentication_to_disable_airplane_mode"
+        android:title="@string/airplane_mode_authentication_setting_title"
+        android:summary="@string/airplane_mode_authentication_summary"
+        android:order="-4"
+        settings:controller="com.android.settings.network.AirplaneModeAuthenticationPreferenceController"
+        settings:userRestriction="no_airplane_mode"/>
+
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.network.tether.TetherSettings"
         android:key="tether_settings"

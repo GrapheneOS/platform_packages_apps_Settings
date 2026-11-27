@@ -61,9 +61,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
@@ -151,7 +153,7 @@ class AirplaneModePreferenceTest {
     fun getWritePermit_satelliteOn_disallow() {
         SatelliteRepository.setIsSessionStartedForTesting(true)
 
-        val permit = airplaneModePreference.getWritePermit(context, 0, 0)
+        val permit = airplaneModePreference.getWritePermit(context, true, 0, 0)
 
         assertThat(permit).isEqualTo(ReadWritePermit.DISALLOW)
     }
@@ -161,14 +163,41 @@ class AirplaneModePreferenceTest {
         shadowOf(context.getSystemService(TelephonyManager::class.java))
             .setEmergencyCallbackMode(true)
 
-        val permit = airplaneModePreference.getWritePermit(context, 0, 0)
+        val permit = airplaneModePreference.getWritePermit(context, true, 0, 0)
 
         assertThat(permit).isEqualTo(ReadWritePermit.DISALLOW)
     }
 
     @Test
+    fun getWritePermit_authenticationRequired_disallowMetadataWrite() {
+        airplaneModePreference.isAuthenticationRequired = { true }
+
+        val permit = airplaneModePreference.getWritePermit(context, false, 0, 0)
+
+        assertThat(permit).isEqualTo(ReadWritePermit.DISALLOW)
+    }
+
+    @Test
+    fun getWritePermit_authenticationRequired_disallowsUnknownMetadataWrite() {
+        airplaneModePreference.isAuthenticationRequired = { true }
+
+        val permit = airplaneModePreference.getWritePermit(context, null, 0, 0)
+
+        assertThat(permit).isEqualTo(ReadWritePermit.DISALLOW)
+    }
+
+    @Test
+    fun getWritePermit_authenticationRequired_allowsEnablingAirplaneMode() {
+        airplaneModePreference.isAuthenticationRequired = { true }
+
+        val permit = airplaneModePreference.getWritePermit(context, true, 0, 0)
+
+        assertThat(permit).isEqualTo(ReadWritePermit.ALLOW)
+    }
+
+    @Test
     fun getWritePermit_allow() {
-        val permit = airplaneModePreference.getWritePermit(context, 0, 0)
+        val permit = airplaneModePreference.getWritePermit(context, true, 0, 0)
 
         assertThat(permit).isEqualTo(ReadWritePermit.ALLOW)
     }
@@ -235,6 +264,97 @@ class AirplaneModePreferenceTest {
         verify(mockContext).requirePreference<Preference>(AirplaneModePreference.KEY)
         verify(mockContext).getSystemService(TelephonyManager::class.java)
         verifyNoMoreInteractions(mockContext)
+    }
+
+    @Test
+    fun onCreate_turningOffWithAuthenticationRequired_waitsForSuccess() {
+        val mockPreference = mock<Preference>()
+        val mockStore =
+            mock<KeyValueStore> {
+                on { getBoolean(AirplaneModePreference.KEY) } doReturn true
+            }
+        val mockHelper = mock<AirplaneModeAuthenticationHelper>()
+        val mockContext =
+            mock<PreferenceLifecycleContext> {
+                on { requirePreference<Preference>(AirplaneModePreference.KEY) } doReturn
+                    mockPreference
+                on { getKeyValueStore(AirplaneModePreference.KEY) } doReturn mockStore
+            }
+        airplaneModePreference.authenticationHelper = mockHelper
+        airplaneModePreference.isAuthenticationRequired = { true }
+
+        airplaneModePreference.onCreate(mockContext)
+        val listener = argumentCaptor<OnPreferenceChangeListener>()
+        verify(mockPreference).onPreferenceChangeListener = listener.capture()
+        val result = listener.lastValue.onPreferenceChange(mockPreference, false)
+
+        assertThat(result).isFalse()
+        verify(mockHelper).runAfterAuthentication(any())
+        verify(mockStore, never()).setBoolean(AirplaneModePreference.KEY, false)
+    }
+
+    @Test
+    fun onCreate_turningOffWithAuthenticationRequiredAndMissingStore_failsClosed() {
+        val mockPreference = mock<Preference>()
+        val mockHelper = mock<AirplaneModeAuthenticationHelper>()
+        val mockContext =
+            mock<PreferenceLifecycleContext> {
+                on { requirePreference<Preference>(AirplaneModePreference.KEY) } doReturn
+                    mockPreference
+                on { getKeyValueStore(AirplaneModePreference.KEY) } doReturn null
+            }
+        airplaneModePreference.authenticationHelper = mockHelper
+        airplaneModePreference.isAuthenticationRequired = { true }
+
+        airplaneModePreference.onCreate(mockContext)
+        val listener = argumentCaptor<OnPreferenceChangeListener>()
+        verify(mockPreference).onPreferenceChangeListener = listener.capture()
+
+        assertThat(listener.lastValue.onPreferenceChange(mockPreference, false)).isFalse()
+        verify(mockHelper, never()).runAfterAuthentication(any())
+    }
+
+    @Test
+    fun onCreate_turningOffAfterAuthentication_writesFalse() {
+        val mockPreference = mock<Preference>()
+        val mockStore =
+            mock<KeyValueStore> {
+                on { getBoolean(AirplaneModePreference.KEY) } doReturn true
+            }
+        val mockHelper = mock<AirplaneModeAuthenticationHelper>()
+        val mockContext =
+            mock<PreferenceLifecycleContext> {
+                on { requirePreference<Preference>(AirplaneModePreference.KEY) } doReturn
+                    mockPreference
+                on { getKeyValueStore(AirplaneModePreference.KEY) } doReturn mockStore
+            }
+        airplaneModePreference.authenticationHelper = mockHelper
+        airplaneModePreference.isAuthenticationRequired = { true }
+        mockHelper.stub {
+            on { runAfterAuthentication(any()) } doAnswer {
+                it.getArgument<Runnable>(0).run()
+                Unit
+            }
+        }
+
+        airplaneModePreference.onCreate(mockContext)
+        val listener = argumentCaptor<OnPreferenceChangeListener>()
+        verify(mockPreference).onPreferenceChangeListener = listener.capture()
+        val result = listener.lastValue.onPreferenceChange(mockPreference, false)
+
+        assertThat(result).isFalse()
+        verify(mockStore).setBoolean(AirplaneModePreference.KEY, false)
+    }
+
+    @Test
+    fun onDestroy_cancelsAndReleasesAuthenticationHelper() {
+        val mockHelper = mock<AirplaneModeAuthenticationHelper>()
+        airplaneModePreference.authenticationHelper = mockHelper
+
+        airplaneModePreference.onDestroy(mock())
+
+        verify(mockHelper).cancel()
+        assertThat(airplaneModePreference.authenticationHelper).isNull()
     }
 
     @Test

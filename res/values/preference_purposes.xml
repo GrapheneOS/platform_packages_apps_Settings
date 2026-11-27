@@ -71,6 +71,7 @@
     <string name="adaptive_connectivity_purpose" translatable="false">Allows users to manage adaptive connectivity features, such as automatically switching between Wi-Fi and mobile networks to ensure connection stability or optimize battery life.</string>
     <string name="adaptive_connectivity_mobile_network_enabled_purpose" translatable="false">Whether to automatically select the best network connection to extend battery life.</string>
     <string name="adaptive_connectivity_wifi_enabled_purpose" translatable="false">Whether to automatically switch to the mobile network when the Wi-Fi connection is poor or unavailable.</string>
+    <string name="airplane_mode_authentication_purpose" translatable="false">Whether fresh system authentication is required before airplane mode can be turned off.</string>
     <string name="airplane_mode_footer_purpose" translatable="false">airplane_mode_footer</string>
     <string name="airplane_mode_settings_airplane_mode_on_purpose" translatable="false">Whether or not airplane mode is currently enabled, which disables wireless communications.</string>
     <string name="airplane_mode_settings_purpose" translatable="false">Describes the page within settings where Airplane Mode can be toggled and related options can be configured.</string>
