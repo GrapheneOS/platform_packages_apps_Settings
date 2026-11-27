@@ -678,7 +678,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
 
             // (force) enable MAC randomization on new credentials
             wifiConfiguration.setMacRandomizationSetting(
-                    WifiConfiguration.RANDOMIZATION_PERSISTENT);
+                    WifiConfiguration.RANDOMIZATION_ALWAYS);
             mWifiManager.save(wifiConfiguration, mSaveListener);
         }
     }
