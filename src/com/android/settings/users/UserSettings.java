@@ -105,7 +105,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -160,6 +159,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
+    private static final int MENU_REORDER_USERS = Menu.FIRST + 1;
 
     private static final IntentFilter USER_REMOVED_INTENT_FILTER;
 
@@ -535,6 +535,10 @@ public class UserSettings extends SettingsPreferenceFragment
             removeThisUser.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
             applyRemoveUserAdminRestriction(removeThisUser);
         }
+        if (UserReorderFragment.canReorderUsers(mUserCaps, mUserManager)) {
+            menu.add(0, MENU_REORDER_USERS, pos++, R.string.user_reorder_title)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -563,6 +567,13 @@ public class UserSettings extends SettingsPreferenceFragment
         final int itemId = item.getItemId();
         if (itemId == MENU_REMOVE_USER) {
             onRemoveUserClicked(UserHandle.myUserId());
+            return true;
+        } else if (itemId == MENU_REORDER_USERS) {
+            new SubSettingLauncher(getContext())
+                    .setDestination(UserReorderFragment.class.getName())
+                    .setTitleRes(R.string.user_reorder_title)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -1348,6 +1359,8 @@ public class UserSettings extends SettingsPreferenceFragment
         // e.g. Managed profiles appear under Accounts Settings instead
         users = mUserManager.getAliveUsers().stream()
                 .filter(UserInfo::isUiSwitchableHumanUser)
+                // current user is still added first and the user being created last
+                .sorted(UserReorderFragment.getUserComparator(context))
                 .collect(Collectors.toList());
 
         final ArrayList<Integer> missingIcons = new ArrayList<>();
@@ -1434,9 +1447,6 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setIcon(getEncircledDefaultIcon());
             userPreferences.add(pref);
         }
-
-        // Sort list of users by serialNum
-        Collections.sort(userPreferences, UserPreference.SERIAL_NUMBER_COMPARATOR);
 
         getActivity().invalidateOptionsMenu();
 
