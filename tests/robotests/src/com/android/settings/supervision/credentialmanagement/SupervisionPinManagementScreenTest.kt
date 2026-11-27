@@ -139,7 +139,7 @@ class SupervisionPinManagementScreenTest {
 
     @Test
     fun isIndexable() {
-        assertThat(supervisionPinManagementScreen.indexable).isTrue()
+        assertThat(supervisionPinManagementScreen.indexable).isFalse()
     }
 
     @Test

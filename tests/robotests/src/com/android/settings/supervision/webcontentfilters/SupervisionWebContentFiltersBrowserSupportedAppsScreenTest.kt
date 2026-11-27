@@ -112,7 +112,7 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
 
     @Test
     fun isIndexable() {
-        assertThat(browserSupportedAppsScreen.indexable).isTrue()
+        assertThat(browserSupportedAppsScreen.indexable).isFalse()
     }
 
     @Test

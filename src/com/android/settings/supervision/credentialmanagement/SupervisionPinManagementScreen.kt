@@ -72,8 +72,9 @@ class SupervisionPinManagementScreen :
     override val screenTitle: Int
         get() = R.string.supervision_pin_management_screen_title
 
+    // unavailable on GrapheneOS, see SupervisionDashboardScreen.indexable
     override val indexable
-        get() = true
+        get() = false
 
     override val keywords: Int
         get() = R.string.supervision_pin_management_preference_keywords

@@ -83,8 +83,9 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override val title: Int
         get() = R.string.supervision_web_content_filters_title
 
+    // unavailable on GrapheneOS, see SupervisionDashboardScreen.indexable
     override val indexable
-        get() = true
+        get() = false
 
     override val keywords: Int
         get() = R.string.supervision_web_content_filters_keywords
